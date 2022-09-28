@@ -624,19 +624,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Inholland account\\.nuget\\packages\\": {}
+    "C:\\Users\\Mylo Bronkhorst\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Inholland account\\Documents\\GitKraken\\Repos\\Groep1_NoSQL_GardenGroup\\GardenGroupServicedeskApp\\GardenGroupModel\\GardenGroupModel.csproj",
+      "projectUniqueName": "C:\\Users\\Mylo Bronkhorst\\Documents\\Gitkraken\\repos\\Project\\Groep1_NoSQL_GardenGroup\\GardenGroupServicedeskApp\\GardenGroupModel\\GardenGroupModel.csproj",
       "projectName": "GardenGroupModel",
-      "projectPath": "C:\\Users\\Inholland account\\Documents\\GitKraken\\Repos\\Groep1_NoSQL_GardenGroup\\GardenGroupServicedeskApp\\GardenGroupModel\\GardenGroupModel.csproj",
-      "packagesPath": "C:\\Users\\Inholland account\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Inholland account\\Documents\\GitKraken\\Repos\\Groep1_NoSQL_GardenGroup\\GardenGroupServicedeskApp\\GardenGroupModel\\obj\\",
+      "projectPath": "C:\\Users\\Mylo Bronkhorst\\Documents\\Gitkraken\\repos\\Project\\Groep1_NoSQL_GardenGroup\\GardenGroupServicedeskApp\\GardenGroupModel\\GardenGroupModel.csproj",
+      "packagesPath": "C:\\Users\\Mylo Bronkhorst\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Mylo Bronkhorst\\Documents\\Gitkraken\\repos\\Project\\Groep1_NoSQL_GardenGroup\\GardenGroupServicedeskApp\\GardenGroupModel\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Inholland account\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Mylo Bronkhorst\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
