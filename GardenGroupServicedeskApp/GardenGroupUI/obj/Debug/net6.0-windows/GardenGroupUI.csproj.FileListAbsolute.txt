@@ -45,3 +45,5 @@ C:\Users\Inholland account\Documents\GitKraken\Repos\Groep1_NoSQL_GardenGroup\Ga
 C:\Users\Inholland account\Documents\GitKraken\Repos\Groep1_NoSQL_GardenGroup\GardenGroupServicedeskApp\GardenGroupUI\obj\Debug\net6.0-windows\GardenGroupUI.pdb
 C:\Users\Inholland account\Documents\GitKraken\Repos\Groep1_NoSQL_GardenGroup\GardenGroupServicedeskApp\GardenGroupUI\obj\Debug\net6.0-windows\GardenGroupUI.genruntimeconfig.cache
 C:\Users\Inholland account\Documents\GitKraken\Repos\Groep1_NoSQL_GardenGroup\GardenGroupServicedeskApp\GardenGroupUI\obj\Debug\net6.0-windows\ref\GardenGroupUI.dll
+C:\Users\Inholland account\Documents\GitKraken\Repos\Groep1_NoSQL_GardenGroup\GardenGroupServicedeskApp\GardenGroupUI\obj\Debug\net6.0-windows\TestWindow.g.cs
+C:\Users\Inholland account\Documents\GitKraken\Repos\Groep1_NoSQL_GardenGroup\GardenGroupServicedeskApp\GardenGroupUI\obj\Debug\net6.0-windows\TestWindow.baml
