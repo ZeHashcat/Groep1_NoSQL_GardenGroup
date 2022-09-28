@@ -7,4 +7,25 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="BootupLogo.png" />
+    <None Remove="ShrekFace.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GardenGroupLogic\GardenGroupLogic.csproj" />
+    <ProjectReference Include="..\GardenGroupModel\GardenGroupModel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="BootupLogo.png" />
+    <Resource Include="ShrekFace.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+	  <Content Include="Shrek.ttf">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+  </ItemGroup>
+
 </Project>

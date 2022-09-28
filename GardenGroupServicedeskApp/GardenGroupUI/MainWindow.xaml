@@ -1,12 +1,83 @@
-﻿<Window x:Class="GardenGroupUI.MainWindow"
+﻿<Window x:Name="shrekDeskManager" x:Class="GardenGroupUI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GardenGroupUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="ShrekDesk° Manager" Height="450" Width="800" ResizeMode="NoResize" Topmost="True" Icon="/ShrekFace.png" Background="DarkSeaGreen">
+
+    <Grid x:Name="gridMain">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="633"/>
+            <ColumnDefinition Width="127*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="113*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+
+        <Image x:Name="imageLogo" HorizontalAlignment="Left" Height="140" VerticalAlignment="Center" Width="997" Source="/BootupLogo.png" Margin="5,5,0,5"/>
+
+        <TabControl x:Name="tabControlAppManager" Grid.Row="1" Margin="7,0,2,22" Grid.RowSpan="2">
+            <TabItem Header="Options">
+                <Grid Background="BlanchedAlmond">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="145*"/>
+                        <ColumnDefinition Width="61*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.ColumnSpan="2">
+                        <Label Content="Name">
+                            <Label.Background>
+                                <SolidColorBrush Color="Beige"/>
+                            </Label.Background>
+                        </Label>
+                        <Label Content="Resolution">
+                            <Label.Background>
+                                <SolidColorBrush Color="SaddleBrown" Opacity="0.78" />
+                            </Label.Background>
+                        </Label>
+                        <Label Content="Fullscreen"/>
+                        <Label Content="Theme">
+                            <Label.Background>
+                                <SolidColorBrush Color="SaddleBrown" Opacity="0.78" />
+                            </Label.Background>
+                        </Label>
+                        <Label Content="Shrekify"/>
+                        <Label Content=" ">
+                            <Label.Background>
+                                <SolidColorBrush Color="SaddleBrown" Opacity="0.78" />
+                            </Label.Background>
+                        </Label>
+
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <Label Content="Option"/>
+                        <ComboBox Opacity="0.5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="183" Height="26"/>
+                        <ComboBox Opacity="0.5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="183" Height="26"/>
+                        <ComboBox Opacity="0.5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="183" Height="26"/>
+                        <ComboBox  Opacity="0.5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="183" Height="26"/>
+                    </StackPanel>
+
+                    <Label x:Name="labelBigShrekDesk" FontFamily="./#Shrek" FontSize="90" Content="ShrekDesk" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="108" Width="598" Opacity="0.1" Grid.ColumnSpan="2" Margin="10,0,0,0"/>
+
+                    
+                </Grid>
+            </TabItem>
+            <TabItem Header="Connection String Manager" Opacity="0.1">
+                <Grid Background="BlanchedAlmond"/>
+            </TabItem>
+        </TabControl>
+
+        <Button x:Name="buttonLaunch" FontFamily="./#Shrek" Background="IndianRed" Foreground="GhostWhite" Grid.Column="1" Content="Launch" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Bottom" Height="33" Width="98" Margin="0,0,0,10" Grid.RowSpan="2" Click="buttonLaunch_Click"/>
+
+        <CheckBox Content="Show ShrekDesk° Manager on launch?" HorizontalAlignment="Left" Grid.Row="3" Margin="3,0,0,1" VerticalAlignment="Center" IsChecked="True"/>
+
+        <TextBlock FontFamily="Courier" Grid.Column="1" HorizontalAlignment="Center" Height="167" Margin="0,31,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="119"><Run Text="ShrekDesk° "/><Run Language="en-gb" Text="is"/><Run Text=" brought to you by"/><Run Text=":"/><LineBreak/><Run/><LineBreak/><Run Text="Luuk Bakkum"/><LineBreak/><Run/><LineBreak/><Run Text="Floortje Tjeertjes"/><LineBreak/><Run/><LineBreak/><Run Text="Sem de Redelijkheid"/><LineBreak/><Run/><LineBreak/><Run Text="Mylo Bronkhorst"/><LineBreak/><Run/></TextBlock>
+
+        <Label   FontFamily="./#Shrek" Foreground="Green"  FontSize="32"  Grid.Column="1" Content="Groep" Margin="0,15,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="42" Width="119" Cursor="No"/>
+        <Label   FontFamily="./#Shrek" Foreground="Green"  FontSize="70"  Grid.Column="1" Content="1" Margin="0,60,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="90" Width="43" Cursor="No"/>
 
     </Grid>
 </Window>

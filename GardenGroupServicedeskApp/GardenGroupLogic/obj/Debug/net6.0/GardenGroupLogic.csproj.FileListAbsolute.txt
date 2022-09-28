@@ -1,0 +1,17 @@
+C:\Users\Inholland account\Documents\GitKraken\Repos\Groep1_NoSQL_GardenGroup\GardenGroupServicedeskApp\GardenGroupLogic\bin\Debug\net6.0\GardenGroupLogic.deps.json
+C:\Users\Inholland account\Documents\GitKraken\Repos\Groep1_NoSQL_GardenGroup\GardenGroupServicedeskApp\GardenGroupLogic\bin\Debug\net6.0\GardenGroupLogic.dll
+C:\Users\Inholland account\Documents\GitKraken\Repos\Groep1_NoSQL_GardenGroup\GardenGroupServicedeskApp\GardenGroupLogic\bin\Debug\net6.0\GardenGroupLogic.pdb
+C:\Users\Inholland account\Documents\GitKraken\Repos\Groep1_NoSQL_GardenGroup\GardenGroupServicedeskApp\GardenGroupLogic\bin\Debug\net6.0\GardenGroupDAL.dll
+C:\Users\Inholland account\Documents\GitKraken\Repos\Groep1_NoSQL_GardenGroup\GardenGroupServicedeskApp\GardenGroupLogic\bin\Debug\net6.0\GardenGroupModel.dll
+C:\Users\Inholland account\Documents\GitKraken\Repos\Groep1_NoSQL_GardenGroup\GardenGroupServicedeskApp\GardenGroupLogic\bin\Debug\net6.0\GardenGroupDAL.pdb
+C:\Users\Inholland account\Documents\GitKraken\Repos\Groep1_NoSQL_GardenGroup\GardenGroupServicedeskApp\GardenGroupLogic\bin\Debug\net6.0\GardenGroupModel.pdb
+C:\Users\Inholland account\Documents\GitKraken\Repos\Groep1_NoSQL_GardenGroup\GardenGroupServicedeskApp\GardenGroupLogic\obj\Debug\net6.0\GardenGroupLogic.csproj.AssemblyReference.cache
+C:\Users\Inholland account\Documents\GitKraken\Repos\Groep1_NoSQL_GardenGroup\GardenGroupServicedeskApp\GardenGroupLogic\obj\Debug\net6.0\GardenGroupLogic.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Inholland account\Documents\GitKraken\Repos\Groep1_NoSQL_GardenGroup\GardenGroupServicedeskApp\GardenGroupLogic\obj\Debug\net6.0\GardenGroupLogic.AssemblyInfoInputs.cache
+C:\Users\Inholland account\Documents\GitKraken\Repos\Groep1_NoSQL_GardenGroup\GardenGroupServicedeskApp\GardenGroupLogic\obj\Debug\net6.0\GardenGroupLogic.AssemblyInfo.cs
+C:\Users\Inholland account\Documents\GitKraken\Repos\Groep1_NoSQL_GardenGroup\GardenGroupServicedeskApp\GardenGroupLogic\obj\Debug\net6.0\GardenGroupLogic.csproj.CoreCompileInputs.cache
+C:\Users\Inholland account\Documents\GitKraken\Repos\Groep1_NoSQL_GardenGroup\GardenGroupServicedeskApp\GardenGroupLogic\obj\Debug\net6.0\GardenGroupLogic.csproj.CopyComplete
+C:\Users\Inholland account\Documents\GitKraken\Repos\Groep1_NoSQL_GardenGroup\GardenGroupServicedeskApp\GardenGroupLogic\obj\Debug\net6.0\GardenGroupLogic.dll
+C:\Users\Inholland account\Documents\GitKraken\Repos\Groep1_NoSQL_GardenGroup\GardenGroupServicedeskApp\GardenGroupLogic\obj\Debug\net6.0\refint\GardenGroupLogic.dll
+C:\Users\Inholland account\Documents\GitKraken\Repos\Groep1_NoSQL_GardenGroup\GardenGroupServicedeskApp\GardenGroupLogic\obj\Debug\net6.0\GardenGroupLogic.pdb
+C:\Users\Inholland account\Documents\GitKraken\Repos\Groep1_NoSQL_GardenGroup\GardenGroupServicedeskApp\GardenGroupLogic\obj\Debug\net6.0\ref\GardenGroupLogic.dll
