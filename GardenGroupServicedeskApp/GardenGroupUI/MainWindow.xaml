@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GardenGroupUI"
         mc:Ignorable="d"
-        Title="ShrekDesk98° Manager" Height="450" Width="800" ResizeMode="NoResize" Topmost="True" Icon="/ShrekFace.png" Background="DarkSeaGreen">
+        Title="ShrekDesk98° Manager" Height="450" Width="800" ResizeMode="NoResize" Topmost="True" Icon="/ShrekIconTransparent.png" Background="DarkSeaGreen">
 
     <Grid x:Name="gridMain">
         <Grid.ColumnDefinitions>
@@ -85,7 +85,7 @@
 
         <Label   FontFamily="./#Shrek" Opacity="0.7" Foreground="LimeGreen"  FontSize="32"  Grid.Column="1" Content="Groep" Margin="24,15,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="42" Width="119" Cursor="No"/>
         <Label   FontFamily="./#Shrek" Opacity="0.7" Foreground="LimeGreen"  FontSize="70"  Grid.Column="1" Content="1" Margin="62,60,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="90" Width="43" Cursor="No"/>
-        <Label   FontFamily="Courier New" FontWeight="DemiBold" Opacity="0.7" Foreground="DarkRed"  FontSize="30"  Grid.Column="1" Content="INFVT2A" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="42" Width="141" Cursor="No" Grid.Row="1" Margin="10,0,0,0"/>
+        <Label   FontFamily="Courier New" FontWeight="DemiBold" Opacity="0.15" Foreground="DarkRed"  FontSize="30"  Grid.Column="1" Content="INFVT2A" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="42" Width="141" Cursor="No" Grid.Row="1" Margin="10,0,0,0"/>
 
 
 

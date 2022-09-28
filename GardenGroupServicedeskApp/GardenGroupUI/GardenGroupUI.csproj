@@ -9,7 +9,9 @@
 
   <ItemGroup>
     <None Remove="BootupLogo.png" />
+    <None Remove="donkey.png" />
     <None Remove="ShrekFace.png" />
+    <None Remove="ShrekIconTransparent.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,7 +21,9 @@
 
   <ItemGroup>
     <Resource Include="BootupLogo.png" />
+    <Resource Include="donkey.png" />
     <Resource Include="ShrekFace.png" />
+    <Resource Include="ShrekIconTransparent.png" />
   </ItemGroup>
 
   <ItemGroup>
