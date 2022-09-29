@@ -13,6 +13,7 @@ namespace GardenGroupModel
         private const double resolution_Y_Min = 720;
         private const string section = "Graphical";
         private WindowSize windowSize;
+        //NOTE: This array could be more in scope. <<---`-`/\/\`-`(REMINDER)
         private WindowSize[] predefinedWindowSizes;
         private bool fullscreen = false;
         private IniFile settingsIni = new IniFile("Settings");
