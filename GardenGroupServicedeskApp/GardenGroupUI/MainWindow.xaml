@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GardenGroupUI"
         mc:Ignorable="d"
-        Title="ShrekDesk98° Manager" Height="450" Width="800" ResizeMode="NoResize" Topmost="True" Icon="/ShrekIconTransparent.png" Background="DarkSeaGreen">
+        Title="ShrekDesk98° Manager" BorderBrush="DarkOliveGreen" BorderThickness="2" Height="470" Width="810" ResizeMode="NoResize" Topmost="True" Icon="/ShrekIconTransparent.png" Background="DarkSeaGreen">
 
     <Grid x:Name="gridMain">
         <Grid.ColumnDefinitions>
@@ -25,8 +25,8 @@
             <TabItem Header="Options">
                 <Grid Background="BlanchedAlmond">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="145*"/>
-                        <ColumnDefinition Width="61*"/>
+                        <ColumnDefinition Width="468*"/>
+                        <ColumnDefinition Width="137*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.ColumnSpan="2">
                         <Label Content="Name" FontFamily="Courier New">
@@ -34,19 +34,19 @@
                                 <SolidColorBrush Color="Beige"/>
                             </Label.Background>
                         </Label>
-                        <Label Content="Resolution" FontFamily="Courier New">
+                        <Label Content="Aspect Ratio" FontFamily="Courier New">
                             <Label.Background>
                                 <SolidColorBrush Color="SaddleBrown" Opacity="0.78" />
                             </Label.Background>
                         </Label>
-                        <Label Content="Fullscreen" FontFamily="Courier New"/>
-                        <Label Content="Theme" FontFamily="Courier New">
+                        <Label Content="Resolution" FontFamily="Courier New"/>
+                        <Label Content="Fullscreen" FontFamily="Courier New">
                             <Label.Background>
                                 <SolidColorBrush Color="SaddleBrown" Opacity="0.78" />
                             </Label.Background>
                         </Label>
-                        <Label Content="Shrekify" FontFamily="Courier New"/>
-                        <Label Content=" ">
+                        <Label Content="Theme" FontFamily="Courier New"/>
+                        <Label Content="Shrekify">
                             <Label.Background>
                                 <SolidColorBrush Color="SaddleBrown" Opacity="0.78" />
                             </Label.Background>
@@ -61,7 +61,7 @@
                         <ComboBox FontFamily="Courier New" Opacity="0.5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="183" Height="24"/>
                     </StackPanel>
 
-                    <Label x:Name="labelBigShrekDesk" FontFamily="./#Shrek" FontSize="90" Content="ShrekDesk" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="108" Width="598" Opacity="0.1" Grid.ColumnSpan="2" Margin="10,0,0,0"/>
+                    <Label x:Name="labelBigShrekDesk" FontFamily="./#Shrek" FontSize="70" Content="ShrekDesk98" HorizontalAlignment="Left" VerticalAlignment="Center" Height="84" Width="608" Opacity="0.1" Grid.ColumnSpan="2"/>
 
 
                 </Grid>
@@ -71,15 +71,16 @@
             </TabItem>
         </TabControl>
 
-        <Label Grid.Column="1" Opacity="0.6" Background="DarkOliveGreen" HorizontalAlignment="Left" VerticalAlignment="Center" Height="140" Width="155" Margin="5,0,0,0"/>
 
-        <Label Grid.Column="1" Opacity="0.6" Background="DarkOliveGreen" HorizontalAlignment="Left" Margin="5,0,0,3" Grid.Row="2" VerticalAlignment="Center" Height="47" Width="155"/>
+        <Label BorderBrush="BurlyWood" BorderThickness="3" Grid.Column="1" Opacity="0.9" Background="IndianRed" HorizontalAlignment="Left" VerticalAlignment="Center" Height="140" Width="155" Margin="5,0,0,0"/>
+
+        <Label BorderBrush="SaddleBrown" BorderThickness="1.8" Grid.Column="1" Opacity="0.6" Background="DarkOliveGreen" HorizontalAlignment="Left" Margin="5,0,0,3" Grid.Row="2" VerticalAlignment="Center" Height="47" Width="155"/>
 
         <Button x:Name="buttonLaunch" FontFamily="./#Shrek" Background="IndianRed" Foreground="GhostWhite" Grid.Column="1" Content="Launch" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Height="33" Width="98" Margin="35,0,0,0" Click="buttonLaunch_Click"/>
 
         <CheckBox FontFamily="Courier New" Content="Show ShrekDesk98° Manager on launch?" HorizontalAlignment="Left" Grid.Row="2" Margin="3,0,0,3" VerticalAlignment="Bottom" IsChecked="True" Height="15" Width="279"/>
 
-        <Label Grid.Column="1" Opacity="0.6" Background="DarkOliveGreen" HorizontalAlignment="Left" Margin="5,21,0,40" Grid.Row="1" VerticalAlignment="Top" Height="160" Width="155"/>
+        <Label BorderBrush="BurlyWood" BorderThickness="3" Grid.Column="1" Opacity="0.9" Background="IndianRed" HorizontalAlignment="Left" Margin="5,21,0,40" Grid.Row="1" VerticalAlignment="Top" Height="160" Width="155"/>
 
         <TextBlock FontFamily="Courier New"  Grid.Column="1" HorizontalAlignment="Left" Height="141" Margin="10,31,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="147"><Run Text="ShrekDesk98° "/><Run Language="en-gb" Text="is"/><Run Text=" brought to you by"/><Run Text=":"/><LineBreak/><Run/><LineBreak/><Run Text="Luuk Bakkum"/><LineBreak/><Run/><LineBreak/><Run Text="Floortje Tjeertjes"/><LineBreak/><Run/><LineBreak/><Run Text="Sem de Redelijkheid"/><LineBreak/><Run/><LineBreak/><Run Text="Mylo Bronkhorst"/><LineBreak/><Run/></TextBlock>
 
