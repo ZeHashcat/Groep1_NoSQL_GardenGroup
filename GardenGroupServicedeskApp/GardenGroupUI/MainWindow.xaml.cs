@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MongoDB.Driver;
+using MongoDB.Bson;
 using GardenGroupModel;
 //using GardenGroupLogic; Commented out because of a lack of classes. Will need later tho.
 
@@ -55,6 +56,33 @@ namespace GardenGroupUI
             //NOTE: Code below will eventually lead into Login.
             //ENTRY_POINT: Replace below with your own window. <<---`-`/\/\`-`(IMPORTANT)
             TestWindow testWindow = new TestWindow();
+
+            var database = client.GetDatabase("foo");
+
+            var collection = database.GetCollection<BsonDocument>("bar");
+
+            var document = new BsonDocument
+            {
+                { "name", "MongoDBnew" },
+                { "type", "Database" },
+                { "count", 2 },
+                { "info", new BsonDocument
+                {
+                    { "x", 205 },
+                    { "y", 100 }
+                }
+                }
+            };
+            
+            try
+            {
+                collection.InsertOne(document);
+            }catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
+
             testWindow.Show();
             this.Hide();
         }
