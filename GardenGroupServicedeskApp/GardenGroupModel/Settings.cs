@@ -43,17 +43,14 @@ namespace GardenGroupModel
             string resolutionY = "Resolution_Y";
             string automaticMode = "AUTO";
 
-            //EXPLANATION: Check if keys exist and if they are both set to auto.
             if (settingsIni.KeyExists(resolutionX, section) && settingsIni.KeyExists(resolutionY, section))
             {
-                //EXPLANATION: Get resolution from .ini
                 string iniResolutionX = settingsIni.Read(resolutionX, section);
                 string iniResolutionY = settingsIni.Read(resolutionY, section);
 
                 //EXPLANATION: Check if .ini values are numeric and within primary screen boundaries and above minimum.
                 if (iniResolutionX.All(char.IsDigit) && iniResolutionY.All(char.IsDigit) && double.Parse(iniResolutionX) <= windowSize.ResolutionX && double.Parse(iniResolutionY) <= windowSize.ResolutionY && double.Parse(iniResolutionX) >= resolution_X_Min && double.Parse(iniResolutionY) >= resolution_Y_Min)
                 {
-                    //EXPLANATION: Set resolution from .ini
                     windowSize.ResolutionX = double.Parse(iniResolutionX);
                     windowSize.ResolutionY = double.Parse(iniResolutionY);
                     return;
@@ -64,7 +61,6 @@ namespace GardenGroupModel
                 }
                 //EXPLANATION: If above if statements fail, the only case should be that one value == "auto".
             }
-            //EXPLANATION: Make both values auto.
             settingsIni.Write(resolutionX, automaticMode, section);
             settingsIni.Write(resolutionY, automaticMode, section);
         }
