@@ -55,7 +55,9 @@ namespace GardenGroupUI
             //NOTE: Code below will eventually lead into Login.
             //ENTRY_POINT: Replace below with your own window. <<---`-`/\/\`-`(IMPORTANT)
             TestWindow testWindow = new TestWindow();
-            testWindow.Show();
+            //testWindow.Show();
+            Login login = new Login();
+            login.Show();
             this.Hide();
         }
     }

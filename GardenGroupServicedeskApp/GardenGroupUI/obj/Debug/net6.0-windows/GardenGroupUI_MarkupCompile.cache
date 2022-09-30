@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Inholland account\Documents\GitKraken\Repos\Groep1_NoSQL_GardenGroup\GardenGroupServicedeskApp\GardenGroupUI\obj\Debug\net6.0-windows\
+C:\Users\Luukb\source\repos\Groep1_NoSQL_GardenGroup\GardenGroupServicedeskApp\GardenGroupUI\obj\Debug\net6.0-windows\
 GardenGroupUI
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-C:\Users\Inholland account\Documents\GitKraken\Repos\Groep1_NoSQL_GardenGroup\GardenGroupServicedeskApp\GardenGroupUI\App.xaml
-2-1052857179
+C:\Users\Luukb\source\repos\Groep1_NoSQL_GardenGroup\GardenGroupServicedeskApp\GardenGroupUI\App.xaml
+4-393774119
 1-273454765
-4-903369406
-203-103997354
-mainwindow.xaml;TestWindow.xaml;
+6-58228075
+203-892490693
+LoginWindow.xaml;MainWindow.xaml;ResetPasswordWindow.xaml;TestWindow.xaml;
 
 False
 
