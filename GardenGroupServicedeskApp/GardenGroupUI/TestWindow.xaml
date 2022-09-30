@@ -32,13 +32,16 @@
             <Button x:Name="buttonSetCollection" Content="Set" HorizontalAlignment="Right" Width="46" Margin="0,5,15,0" Click="buttonSetCollection_Click"/>
         </StackPanel>
         <StackPanel Grid.Row="1" Margin="0,142,0,0" Grid.RowSpan="2">
-            <Label Content="Create a Test  User:" HorizontalAlignment="Left" Grid.Row="1" Grid.RowSpan="2" Width="114"/>
-            <Button x:Name="buttonCreateUser" Content="Create User" HorizontalAlignment="Center" Height="37" VerticalAlignment="Center" Margin="0,25,0,0" Click="buttonCreateUser_Click"/>
+            <Label Content="Create a Test User:" HorizontalAlignment="Left" Grid.Row="1" Grid.RowSpan="2" Width="114"/>
+            <Button x:Name="buttonCreateUser" Content="Create User" HorizontalAlignment="Center" Height="37" VerticalAlignment="Center" Margin="0,15,0,0" Click="buttonCreateUser_Click"/>
+            <Label Content="Create a Test Role:" HorizontalAlignment="Left" Grid.Row="1" Grid.RowSpan="2" Width="114"/>
+            <Button x:Name="buttonCreateRole" Content="Create Role" HorizontalAlignment="Center" Height="37" VerticalAlignment="Center" Margin="0,15,0,0" Click="buttonCreateRole_Click"/>
         </StackPanel>
         <TextBlock x:Name="textBlockDocumentOutput" Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Height="434" Grid.RowSpan="3" Width="267"/>
         <StackPanel Grid.Column="1">
             <Label Content="Find document in collection:"/>
             <Button x:Name="buttonFindUser" Content="Find User Mylo " HorizontalAlignment="Center" Height="31" Width="104" Click="buttonFindUser_Click"/>
+            <Button x:Name="buttonFindRole" Content="Find Role Employee " HorizontalAlignment="Center" Height="31" Width="123" Margin="0,5,0,0" Click="buttonFindRole_Click"/>
         </StackPanel>
     </Grid>
 </Window>
