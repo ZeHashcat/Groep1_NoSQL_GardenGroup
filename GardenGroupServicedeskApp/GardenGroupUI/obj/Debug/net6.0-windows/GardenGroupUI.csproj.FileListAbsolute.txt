@@ -96,3 +96,5 @@ C:\Users\Mylo Bronkhorst\Documents\Gitkraken\repos\Project\Groep1_NoSQL_GardenGr
 C:\Users\Mylo Bronkhorst\Documents\Gitkraken\repos\Project\Groep1_NoSQL_GardenGroup\GardenGroupServicedeskApp\GardenGroupUI\obj\Debug\net6.0-windows\GardenGroupUI.pdb
 C:\Users\Mylo Bronkhorst\Documents\Gitkraken\repos\Project\Groep1_NoSQL_GardenGroup\GardenGroupServicedeskApp\GardenGroupUI\obj\Debug\net6.0-windows\GardenGroupUI.genruntimeconfig.cache
 C:\Users\Mylo Bronkhorst\Documents\Gitkraken\repos\Project\Groep1_NoSQL_GardenGroup\GardenGroupServicedeskApp\GardenGroupUI\obj\Debug\net6.0-windows\ref\GardenGroupUI.dll
+C:\Users\Mylo Bronkhorst\Documents\Gitkraken\repos\Project\Groep1_NoSQL_GardenGroup\GardenGroupServicedeskApp\GardenGroupUI\obj\Debug\net6.0-windows\CreateUser.g.cs
+C:\Users\Mylo Bronkhorst\Documents\Gitkraken\repos\Project\Groep1_NoSQL_GardenGroup\GardenGroupServicedeskApp\GardenGroupUI\obj\Debug\net6.0-windows\CreateUser.baml

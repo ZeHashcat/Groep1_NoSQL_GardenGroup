@@ -39,8 +39,7 @@ namespace GardenGroupUI
                 { "Last Name", new BsonString("Bronkhorst") },
                 { "Password", new BsonString("thisIsTotallyHashedRn") }, //NOTE: <----Should already be hashed and salted at this point.
                 { "Acount_isConnected", new BsonBoolean(false) }, //NOTE: Not gonna need this, just to illustrate the bool.
-                { "Role", new BsonString("Sudo") //NOTE*: A clear system for privileges is needed, See "NOTE*:" Below.
-                },
+                { "Role", new BsonString("Sudo") }, //NOTE*: A clear system for privileges is needed, See "NOTE*:" Below.
                 { "Teams", new BsonDocument
                     {
                         { "Team1", new BsonInt32(3) },
