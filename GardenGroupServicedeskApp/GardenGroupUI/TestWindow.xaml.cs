@@ -139,7 +139,7 @@ namespace GardenGroupUI
         {
             try
             {
-                FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("_id", "12345"); //EXPLANATION: Filters documents on key "_id" with value "12345" only, a collection must be set at this point.
+                FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("_id", "Employee"); //EXPLANATION: Filters documents on key "_id" with value "12345" only, a collection must be set at this point.
                 BsonDocument document = collection.Find(filter).First(); //EXPLANATION: Finds and returns first document with filter applied. since it filters on an unique id this will only ever return one document.
                 textBlockDocumentOutput.Text = document.ToString();
             }
