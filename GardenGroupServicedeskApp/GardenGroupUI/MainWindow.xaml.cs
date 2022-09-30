@@ -36,53 +36,22 @@ namespace GardenGroupUI
         //NOTE: Move these 2 strings somewhere more relevant, not as globals here I guess.
         //NOTE: Possibly have a config menu where it is possible to select/add/remove connectionstrings. ADDENDUM: Definitely*
         private string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-        private string name = "\"G.G.\" Datacenter-01 - Frankfurt (MongoDB)";
 
         //QOUTE: "Typically you only create one MongoClient instance for a given cluster and use it across your application." 
         // - https://mongodb.github.io/mongo-csharp-driver/2.17/getting_started/quick_tour/
-        
-        
+
+        MongoClient client;
 
         public MainWindow()
         {
+            client = Client.ClientSetup(connectionString);
             InitializeComponent();
         }
 
         private void buttonLaunch_Click(object sender, RoutedEventArgs e)
         {
-            //QUESTION: Is there not an inbuild function that does what ClientSetup does? <<---`-`/\/\`-`(REMINDER)
-            MongoClient client = Client.ClientSetup(connectionString, name);
-            //NOTE: Look into WPF pages, maybe only one window is needed.
-            //NOTE: Code below will eventually lead into Login.
-            //ENTRY_POINT: Replace below with your own window. <<---`-`/\/\`-`(IMPORTANT)
-            TestWindow testWindow = new TestWindow();
-
-            var database = client.GetDatabase("foo");
-
-            var collection = database.GetCollection<BsonDocument>("bar");
-
-            var document = new BsonDocument
-            {
-                { "name", "MongoDBnew" },
-                { "type", "Database" },
-                { "count", 2 },
-                { "info", new BsonDocument
-                {
-                    { "x", 205 },
-                    { "y", 100 }
-                }
-                }
-            };
             
-            try
-            {
-                collection.InsertOne(document);
-            }catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            
-
+            TestWindow testWindow = new TestWindow(client);
             testWindow.Show();
             this.Hide();
         }

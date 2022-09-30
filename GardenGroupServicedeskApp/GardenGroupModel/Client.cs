@@ -10,7 +10,7 @@ namespace GardenGroupModel
     //Is there not an inbuild function that does what ClientSetup does? <<---`-`/\/\`-`(REMINDER)
     public static class Client
     {
-        public static MongoClient ClientSetup(string connectionString, string name)
+        public static MongoClient ClientSetup(string connectionString)
         {
             MongoClientSettings settings = MongoClientSettings.FromConnectionString(connectionString);
             settings.ServerApi = new ServerApi(ServerApiVersion.V1);
