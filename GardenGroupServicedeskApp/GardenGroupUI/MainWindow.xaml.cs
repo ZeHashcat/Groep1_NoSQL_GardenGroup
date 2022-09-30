@@ -40,7 +40,7 @@ namespace GardenGroupUI
         //QOUTE: "Typically you only create one MongoClient instance for a given cluster and use it across your application." 
         // - https://mongodb.github.io/mongo-csharp-driver/2.17/getting_started/quick_tour/
         
-        
+        Settings settings = new Settings(SystemParameters.PrimaryScreenWidth, SystemParameters.PrimaryScreenHeight);
 
         public MainWindow()
         {
@@ -59,6 +59,11 @@ namespace GardenGroupUI
             Login login = new Login();
             login.Show();
             this.Hide();
+        }
+
+        private void DetectResolution()
+        {
+            
         }
     }
 }

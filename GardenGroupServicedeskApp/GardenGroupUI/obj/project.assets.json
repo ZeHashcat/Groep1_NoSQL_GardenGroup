@@ -713,19 +713,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Luukb\\.nuget\\packages\\": {}
+    "C:\\Users\\Mylo Bronkhorst\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Luukb\\source\\repos\\Groep1_NoSQL_GardenGroup\\GardenGroupServicedeskApp\\GardenGroupUI\\GardenGroupUI.csproj",
+      "projectUniqueName": "C:\\Users\\Mylo Bronkhorst\\Documents\\Gitkraken\\repos\\Project\\Groep1_NoSQL_GardenGroup\\GardenGroupServicedeskApp\\GardenGroupUI\\GardenGroupUI.csproj",
       "projectName": "GardenGroupUI",
-      "projectPath": "C:\\Users\\Luukb\\source\\repos\\Groep1_NoSQL_GardenGroup\\GardenGroupServicedeskApp\\GardenGroupUI\\GardenGroupUI.csproj",
-      "packagesPath": "C:\\Users\\Luukb\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Luukb\\source\\repos\\Groep1_NoSQL_GardenGroup\\GardenGroupServicedeskApp\\GardenGroupUI\\obj\\",
+      "projectPath": "C:\\Users\\Mylo Bronkhorst\\Documents\\Gitkraken\\repos\\Project\\Groep1_NoSQL_GardenGroup\\GardenGroupServicedeskApp\\GardenGroupUI\\GardenGroupUI.csproj",
+      "packagesPath": "C:\\Users\\Mylo Bronkhorst\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Mylo Bronkhorst\\Documents\\Gitkraken\\repos\\Project\\Groep1_NoSQL_GardenGroup\\GardenGroupServicedeskApp\\GardenGroupUI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Luukb\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Mylo Bronkhorst\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -739,11 +739,11 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "projectReferences": {
-            "C:\\Users\\Luukb\\source\\repos\\Groep1_NoSQL_GardenGroup\\GardenGroupServicedeskApp\\GardenGroupLogic\\GardenGroupLogic.csproj": {
-              "projectPath": "C:\\Users\\Luukb\\source\\repos\\Groep1_NoSQL_GardenGroup\\GardenGroupServicedeskApp\\GardenGroupLogic\\GardenGroupLogic.csproj"
+            "C:\\Users\\Mylo Bronkhorst\\Documents\\Gitkraken\\repos\\Project\\Groep1_NoSQL_GardenGroup\\GardenGroupServicedeskApp\\GardenGroupLogic\\GardenGroupLogic.csproj": {
+              "projectPath": "C:\\Users\\Mylo Bronkhorst\\Documents\\Gitkraken\\repos\\Project\\Groep1_NoSQL_GardenGroup\\GardenGroupServicedeskApp\\GardenGroupLogic\\GardenGroupLogic.csproj"
             },
-            "C:\\Users\\Luukb\\source\\repos\\Groep1_NoSQL_GardenGroup\\GardenGroupServicedeskApp\\GardenGroupModel\\GardenGroupModel.csproj": {
-              "projectPath": "C:\\Users\\Luukb\\source\\repos\\Groep1_NoSQL_GardenGroup\\GardenGroupServicedeskApp\\GardenGroupModel\\GardenGroupModel.csproj"
+            "C:\\Users\\Mylo Bronkhorst\\Documents\\Gitkraken\\repos\\Project\\Groep1_NoSQL_GardenGroup\\GardenGroupServicedeskApp\\GardenGroupModel\\GardenGroupModel.csproj": {
+              "projectPath": "C:\\Users\\Mylo Bronkhorst\\Documents\\Gitkraken\\repos\\Project\\Groep1_NoSQL_GardenGroup\\GardenGroupServicedeskApp\\GardenGroupModel\\GardenGroupModel.csproj"
             }
           }
         }

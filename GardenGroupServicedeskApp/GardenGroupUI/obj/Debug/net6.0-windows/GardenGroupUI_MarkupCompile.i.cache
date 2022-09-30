@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\Mylo Bronkhorst\Documents\Gitkraken\repos\Project\Groep1_NoSQL_GardenGroup\GardenGroupServicedeskApp\GardenGroupUI\App.xaml
-2-1051807643
+4-393774119
 1-273454765
-6-373020640
-203-1833250409
-MainWindow.xaml;TestWindow.xaml;
+8471071155
+203851007765
+LoginWindow.xaml;MainWindow.xaml;ResetPasswordWindow.xaml;TestWindow.xaml;
 
 False
 
