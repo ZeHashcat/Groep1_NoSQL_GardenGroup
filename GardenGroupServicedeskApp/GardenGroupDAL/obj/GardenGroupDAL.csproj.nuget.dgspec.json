@@ -76,7 +76,7 @@
         "projectName": "GardenGroupModel",
         "projectPath": "C:\\Users\\Luukb\\source\\repos\\Groep1_NoSQL_GardenGroup\\GardenGroupServicedeskApp\\GardenGroupModel\\GardenGroupModel.csproj",
         "packagesPath": "C:\\Users\\Luukb\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Luukb\\Source\\Repos\\Groep1_NoSQL_GardenGroup\\GardenGroupServicedeskApp\\GardenGroupModel\\obj\\",
+        "outputPath": "C:\\Users\\Luukb\\source\\repos\\Groep1_NoSQL_GardenGroup\\GardenGroupServicedeskApp\\GardenGroupModel\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Luukb\\AppData\\Roaming\\NuGet\\NuGet.Config",

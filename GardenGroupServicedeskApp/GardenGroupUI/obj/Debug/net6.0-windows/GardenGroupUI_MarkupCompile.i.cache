@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\Luukb\source\repos\Groep1_NoSQL_GardenGroup\GardenGroupServicedeskApp\GardenGroupUI\App.xaml
-4-393774119
+5927763614
 1-273454765
-8471071155
+9511616197
 203-892490693
-LoginWindow.xaml;MainWindow.xaml;ResetPasswordWindow.xaml;TestWindow.xaml;
+AddUserWindow.xaml;LoginWindow.xaml;MainWindow.xaml;ResetPasswordWindow.xaml;TestWindow.xaml;
 
-False
+True
 
