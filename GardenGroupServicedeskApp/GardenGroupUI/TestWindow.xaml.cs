@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MongoDB.Driver;
 using MongoDB.Bson;
+using GardenGroupModel;
 
 namespace GardenGroupUI
 {
@@ -28,26 +29,9 @@ namespace GardenGroupUI
         //NOTE: ↓↓↓↓↓-I think this establishes a connection with a collection within the database.
         private IMongoCollection<BsonDocument> collection = null;
 
-        //EXPLANATION: This is just an example to show how to create a BsonDocument, you can leave away the new Bson<class>() on each line and input the variable directy.
-        //NOTE: could potentially lead to problems where multiple types of Bson<class> are possible and it picks the wrong one.
-        //NOTE: For example, { "_id", 1 } should work, since it accepts variables as a BsonValue which should automatically convert it to an BsonInt32.
-        private BsonDocument user = new BsonDocument
-            {
-                { "_id", new BsonInt32(1) }, //EXPLANATION: <--- Leave this out and it will assign an _id automatically, not sure what pro's and cons are for auto and manual.
-                { "User Id", new BsonInt32(12345) }, //EXPLANATION: <----Actual employeenumber
-                { "First Name", new BsonString("Mylo") },
-                { "Last Name", new BsonString("Bronkhorst") },
-                { "Password", new BsonString("thisIsTotallyHashedRn") }, //NOTE: <----Should already be hashed and salted at this point.
-                { "Acount_isConnected", new BsonBoolean(false) }, //NOTE: Not gonna need this, just to illustrate the bool.
-                { "Role", new BsonString("Sudo") }, //NOTE*: A clear system for privileges is needed, See "NOTE*:" Below.
-                { "Teams", new BsonDocument
-                    {
-                        { "Team1", new BsonInt32(3) },
-                        { "Team2", new BsonInt32(7) },
-                        //NOTE: etc.
-                    }
-                }
-            };
+        private User userClass = new User(new BsonKeyValuePair("_id", 1), new BsonKeyValuePair("UserName", "ZeHashcat"), new BsonKeyValuePair("Password", "thisIsTotallyHashedRn"), new BsonKeyValuePair("First Name", "Mylo"), new BsonKeyValuePair("Last Name", "Bronkhorst"), new BsonKeyValuePair("Role", "Sudo"), new BsonKeyValuePair("E-Mail", "NietMijnEmail@Email.com"), new BsonKeyValuePair("Phone Number", 0644345598), new BsonKeyValuePair("Location", "Hoofddorp"));
+
+        private BsonDocument user;
 
         //NOTE*: I had the idea to hardcode the "Sudo" role into this app and have roles such as admin, employee and user defined as docs in the database.
         //NOTE*: There should always be at least one Sudo role user in the entire database. Only a Sudo role user may CRUD itself and other Sudo's.
@@ -78,6 +62,7 @@ namespace GardenGroupUI
         {
             this.client = client; // Client is given from MainWindow
             InitializeComponent();
+            user = CreateUserDocument();
         }
 
         private void buttonSetDatabase_Click(object sender, RoutedEventArgs e)
@@ -85,6 +70,28 @@ namespace GardenGroupUI
             string databaseName = textBoxSetDatabase.Text;
             labelCurrentDatabase.Content = databaseName;
             database = client.GetDatabase(databaseName);        //NOTE: Doing this establishes a connection with the database I think.   
+        }
+
+        private BsonDocument CreateUserDocument()
+        {
+            //EXPLANATION: This is just an example to show how to create a BsonDocument, you can leave away the new Bson<class>() on each line and input the variable directy.
+            //NOTE: could potentially lead to problems where multiple types of Bson<class> are possible and it picks the wrong one.
+            //NOTE: For example, { "_id", 1 } should work, since it accepts variables as a BsonValue which should automatically convert it to an BsonInt32.
+
+            BsonDocument user = new BsonDocument
+            {
+                { userClass.Id.Key , userClass.Id.Value }, //EXPLANATION: <--- Leave this out and it will assign an _id automatically, not sure what pro's and cons are for auto and manual.
+                { userClass.UserName.Key, userClass.UserName.Value }, //EXPLANATION: <----Actual employeenumber
+                { userClass.Password.Key, userClass.Password.Value },
+                { userClass.FirstName.Key, userClass.FirstName.Value },
+                { userClass.LastName.Key, userClass.LastName.Value},
+                { userClass.Role.Key, userClass.Role.Value },
+                { userClass.Email.Key, userClass.Email.Value },
+                { userClass.PhoneNumber.Key, userClass.PhoneNumber.Value },
+                { userClass.Location.Key, userClass.Location.Value },
+            };
+
+            return user;
         }
 
         private void buttonSetCollection_Click(object sender, RoutedEventArgs e)
