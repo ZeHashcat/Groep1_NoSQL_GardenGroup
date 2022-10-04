@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="TestWindow" Height="450" Width="800">
     <Grid>
-        
+        <DockPanel>
+            <Frame Name="frmMainContent"
+         Source="CRUD.xaml"
+         NavigationUIVisibility="Hidden"/>
+        </DockPanel>
     </Grid>
 </Window>
