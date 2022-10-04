@@ -15,8 +15,8 @@
         <Label Content="Licensed to: The Garden Group" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="22" FontFamily="Arial Rounded MT Bold" Width="345" Margin="0,25,0,0"/>
         <Button x:Name="GoToUserManagementBtn" Content="User Management" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,60,0,0" FontFamily="Arial Rounded MT Bold" FontSize="16" Height="25" Width="185"/>
         <Button x:Name="GoToUserManagementBtn_Copy" Content="User Management" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,60,0,0" FontFamily="Arial Rounded MT Bold" FontSize="16" Height="30" Width="240"/>
-        <Button x:Name="GoToUserManagementBtn_Copy1" Content="User Management" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,60,241,0" FontFamily="Arial Rounded MT Bold" FontSize="16" Height="30" Width="240"/>
-        <Button x:Name="GoToUserManagementBtn_Copy2" Content="User Management" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,60,481,0" FontFamily="Arial Rounded MT Bold" FontSize="16" Height="30" Width="240"/>
+        <Button x:Name="GoToUserManagementBtn_Copy1" Content="User Management" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,60,238,0" FontFamily="Arial Rounded MT Bold" FontSize="16" Height="30" Width="240"/>
+        <Button x:Name="GoToUserManagementBtn_Copy2" Content="User Management" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,60,478,0" FontFamily="Arial Rounded MT Bold" FontSize="16" Height="30" Width="240"/>
         <Label Content="Create New User" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="22" FontFamily="Arial Black" Margin="75,90,0,0"/>
         <Label Content="First name:" HorizontalAlignment="Left" Margin="75,135,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label Content="Last name:" HorizontalAlignment="Left" Margin="75,160,0,0" VerticalAlignment="Top" FontSize="14"/>
@@ -28,16 +28,16 @@
         <Button x:Name="CancelUserAddButton" Content="Cancel" HorizontalAlignment="Left" Margin="250,0,0,5" VerticalAlignment="Bottom" FontSize="16" UseLayoutRounding="False" Height="44" Width="144" Background="#FF4583FF" Foreground="White" Click="CancelUserAddButton_Click"/>
         <Button x:Name="AddUserButton" Content="Add User" HorizontalAlignment="Right" Margin="0,0,250,5" VerticalAlignment="Bottom" FontSize="16" UseLayoutRounding="False" Height="44" Width="144" Foreground="White" Background="#FF4583FF" Click="AddUserButton_Click"/>
         <CheckBox Content="yes, a password e-mail will be send to the user" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,70,60" FontSize="14"/>
-        <TextBox HorizontalAlignment="Left" Margin="211,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="330"/>
+        <TextBox HorizontalAlignment="Left" Margin="211,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="330"/>
         <TextBox HorizontalAlignment="Left" Margin="211,168,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="330"/>
         <TextBox HorizontalAlignment="Left" Margin="211,26,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="330"/>
-        <TextBox HorizontalAlignment="Left" Margin="211,79,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="330"/>
+        <TextBox HorizontalAlignment="Left" Margin="211,76,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="330"/>
         <TextBox HorizontalAlignment="Left" Margin="211,302,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="330"/>
         <TextBox HorizontalAlignment="Left" Margin="211,328,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="330"/>
         <Label Content="Username:" HorizontalAlignment="Left" Margin="75,297,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label Content="Password:" HorizontalAlignment="Left" Margin="75,323,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <ComboBox HorizontalAlignment="Left" Margin="212,191,0,0" VerticalAlignment="Top" Width="326"/>
-        <ComboBox HorizontalAlignment="Left" Margin="211,129,0,0" VerticalAlignment="Center" Width="326"/>
+        <ComboBox HorizontalAlignment="Left" Margin="211,191,0,0" VerticalAlignment="Top" Width="330"/>
+        <ComboBox HorizontalAlignment="Left" Margin="211,269,0,0" VerticalAlignment="Top" Width="330"/>
 
     </Grid>
 </Window>
