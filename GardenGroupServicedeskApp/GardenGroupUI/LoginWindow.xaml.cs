@@ -24,6 +24,8 @@ namespace GardenGroupUI
         public Login()
         {
             InitializeComponent();
+            //Load window in the center.
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
 
         //-------------------------------------------------------------------------------------
