@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace GardenGroupUI
 {
     /// <summary>
-    /// Interaction logic for TestWindow.xaml
+    /// Interaction logic for AppWindow.xaml
     /// </summary>
-    public partial class TestWindow : Window
+    public partial class AppWindow : Window
     {
-        public TestWindow()
+        public AppWindow()
         {
             InitializeComponent();
         }
