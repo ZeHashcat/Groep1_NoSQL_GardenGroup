@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Threading;
 using MongoDB.Driver;
 using GardenGroupModel;
 //using GardenGroupLogic; Commented out because of a lack of classes. Will need later tho.
@@ -54,11 +55,10 @@ namespace GardenGroupUI
             //NOTE: Look into WPF pages, maybe only one window is needed.
             //NOTE: Code below will eventually lead into Login.
             //ENTRY_POINT: Replace below with your own window. <<---`-`/\/\`-`(IMPORTANT)
-            TestWindow testWindow = new TestWindow();
-            //testWindow.Show();
-            Login login = new Login();
-            login.Show();
-            this.Hide();
+            AppWindow appWindow = new AppWindow(client);
+            Application.Current.MainWindow = appWindow;
+            appWindow.Show();
+            this.Close();
         }
 
         private void DetectResolution()

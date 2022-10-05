@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MongoDB.Driver;
 
 namespace GardenGroupUI
 {
@@ -19,9 +20,20 @@ namespace GardenGroupUI
     /// </summary>
     public partial class AppWindow : Window
     {
-        public AppWindow()
+        private MongoClient client;
+
+        public AppWindow(MongoClient client)
         {
+            this.client = client;
             InitializeComponent();
+            frameContent.Source = new Uri("MainPage.xaml", UriKind.Relative);
+        }
+
+        public MongoClient Client { get { return client; } }
+
+        private void buttonClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

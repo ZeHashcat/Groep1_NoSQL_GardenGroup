@@ -6,17 +6,5 @@
         xmlns:local="clr-namespace:GardenGroupUI"
         mc:Ignorable="d"
         Title="ShrekDesk98°" Height="450" Width="800" Icon="/ShrekIconTransparent.png">
-    <Grid>
-        <TabControl Margin="10,20,10,10">
-            <TabItem Header="Dashboard">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-            <TabItem Header="Incident Management">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-            <TabItem Header="Manager Management">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-        </TabControl>
-    </Grid>
+    
 </Window>

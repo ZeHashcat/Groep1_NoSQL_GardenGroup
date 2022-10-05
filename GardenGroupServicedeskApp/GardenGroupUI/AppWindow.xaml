@@ -5,8 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GardenGroupUI"
         mc:Ignorable="d"
-        Title="AppWindow" Height="450" Width="800">
+        Title="ShrekDesk98°" Height="450" Width="800">
     <Grid>
-        
+        <Button x:Name="buttonClose" Content="X" HorizontalAlignment="Right" VerticalAlignment="Top" Background="#FFFF0404" Foreground="#FFFBFBFB" FontFamily="Arial Black" FontSize="14" Height="22" Width="24" Margin="0,10,10,0" Click="buttonClose_Click"/>
+        <Frame Name="frameContent" 
+           Source="{Binding}"
+           NavigationUIVisibility="Hidden"/>
     </Grid>
+    
+
 </Window>
