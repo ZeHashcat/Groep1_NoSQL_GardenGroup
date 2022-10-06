@@ -11,7 +11,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using GardenGroupLogic;
 using GardenGroupModel;
+using MongoDB.Driver;
+using MongoDB.Bson;
 //using GardenGroupLogic;
 
 namespace GardenGroupUI
@@ -21,10 +24,18 @@ namespace GardenGroupUI
     /// </summary>
     public partial class Login : Window
     {
-        public Login()
+        private MongoClient client;
+
+        public Login(MongoClient client)
         {
+            this.client = client;
             InitializeComponent();
+            //Load window in the center.
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
+
+        private string username;
+        private string password;
 
         //-------------------------------------------------------------------------------------
         //-------------------------------------------------------------------------------------
@@ -38,6 +49,11 @@ namespace GardenGroupUI
             {
 
             }*/
+            username = loginUsernameTextBox.Text;
+            password = loginPasswordBox.Password;
+            LoginService loginService = new LoginService();
+            loginService.CheckLogin(username, password, client);
+
         }
 
         //-------------------------------------------------------------------------------------
