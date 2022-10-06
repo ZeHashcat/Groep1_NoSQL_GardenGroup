@@ -11,7 +11,7 @@ using MongoDB.Driver;
 
 namespace GardenGroupDAL
 {
-    public class LoginDAO
+    public class UserDAO
     {
         private IMongoCollection<BsonDocument> collection = null;
         private IMongoDatabase database = null;

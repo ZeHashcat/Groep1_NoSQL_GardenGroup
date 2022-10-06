@@ -10,12 +10,18 @@
     <Compile Update="LoginPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="LoginPasswordResetPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="ResetPasswordWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="LoginPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="LoginPasswordResetPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="mainwindow.xaml">

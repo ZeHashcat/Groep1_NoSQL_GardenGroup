@@ -46,8 +46,8 @@ namespace GardenGroupUI
             }*/
             username = loginUsernameTextBox.Text;
             password = loginPasswordBox.Password;
-            LoginLogic loginLogic = new LoginLogic();
-            loginLogic.CheckLogin(username, password);
+            UserLogic loginLogic = new UserLogic();
+            //loginLogic.CheckLogin(username, password);
 
         }
 
@@ -57,6 +57,7 @@ namespace GardenGroupUI
         //Close login window.
         private void loginCloseButton_Click(object sender, RoutedEventArgs e)
         {
+            //NOTE: This method can be removed, the close button now resides in AppWindow.
             //this.Close();
         }
 
@@ -78,8 +79,8 @@ namespace GardenGroupUI
         private void LoginForgotLoginButton_Click(object sender, RoutedEventArgs e)
         {
             //this.Hide();
-            ResetPasswordWindow resetPassword = new ResetPasswordWindow();
-            resetPassword.ShowDialog();
+            //ResetPasswordWindow resetPassword = new ResetPasswordWindow();
+            //resetPassword.ShowDialog();
             //this.Close();
         }
     }
