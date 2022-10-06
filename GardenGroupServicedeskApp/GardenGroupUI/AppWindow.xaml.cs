@@ -24,6 +24,7 @@ namespace GardenGroupUI
         public AppWindow()
         {
             InitializeComponent();
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             frameContent.Source = new Uri("AppMainPage.xaml", UriKind.Relative);
         }
 

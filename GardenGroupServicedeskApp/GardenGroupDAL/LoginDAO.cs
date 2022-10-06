@@ -50,10 +50,13 @@ namespace GardenGroupDAL
             {
                 throw new Exception("Data could not be retrieved from the database. Please try again, error: " + ex.Message);
             }
-            
+
             //Gewenste uitput = password (username is al bekend).
 
             //Moet ik ook nog een ROLE meegeven? of pas nadat het gevalideerd is. Kan dubbele code vermijden om gewoon meteen op te halen.
+            //ANSWER: Nee, maar nadat het wachtwoord is gevalideerd en voordat het juiste scherm tevoorschijn komt moet eigenlijk een singleton van user("UserInstance.cs" in model) worden geinstantieerd die dan de ingelogde gebruiker representeert.
+            //NOTE: Dus in de bovenstaande stap is dan ook een query vanuit het login gedeelte nodig waarin de User die zojuist is gevalideerd wordt opgehaald uit de DB en in zijn geheel wordt meegegeven aan de initiatie van de van "UserInstance".
+            
         }
 
         // \/\/Waarschijnlijk niet nodig\/\/ \\

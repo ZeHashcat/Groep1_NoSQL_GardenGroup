@@ -9,7 +9,7 @@ using System.Security.Cryptography;
 
 namespace GardenGroupLogic
 {
-    public class PasswordService
+    public class PasswordLogic
     {
 
         /*The salt generation is as the example in the question.You can convert text to byte arrays using Encoding.UTF8.GetBytes(string). 
@@ -18,7 +18,7 @@ namespace GardenGroupLogic
         //Password must be hased
         //Save new password
 
-        public static byte[] GetSaltHashedPassowrd(byte[] password, byte[] salt)
+        public static byte[] GetSaltHashedPassword(byte[] password, byte[] salt)
         {
             HashAlgorithm algorithm = new SHA256Managed();
 

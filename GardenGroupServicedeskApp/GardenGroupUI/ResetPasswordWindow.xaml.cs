@@ -82,8 +82,8 @@ namespace GardenGroupUI
                 MessageBox.Show("Congratulations. Your new password has been saved.");
 
                 this.Hide();
-                Login login = new Login();
-                login.ShowDialog();
+                //Login login = new Login();
+                //login.ShowDialog();
                 this.Close();
             }
             else

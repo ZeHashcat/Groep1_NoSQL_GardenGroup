@@ -45,6 +45,7 @@ namespace GardenGroupUI
 
         public MainWindow()
         {
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
         }
 

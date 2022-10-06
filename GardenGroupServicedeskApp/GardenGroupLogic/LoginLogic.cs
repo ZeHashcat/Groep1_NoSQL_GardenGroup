@@ -9,15 +9,16 @@ using MongoDB.Driver;
 
 namespace GardenGroupLogic
 {
-    public class LoginService
+    public class LoginLogic
     {
         private LoginDAO loginDAO;
 
-        public LoginService()
+        public LoginLogic()
         {
             loginDAO = new LoginDAO();
 
         }
+
         public bool CheckLogin(string username, string password, MongoClient client)
         {
             string passwordDB = loginDAO.GetPassword(username, client);
