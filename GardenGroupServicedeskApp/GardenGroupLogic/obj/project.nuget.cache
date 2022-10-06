@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "GZfKK2RA3YgXtvPyJ1hlPe0FLhYPc1haatWw79Q/4EgvZsFsL9k85+LlG1AC05EuOONgw8VlzMBL2nnbt5uoWQ==",
+  "dgSpecHash": "yCYaCi1b2qNxy+4AVXDueJdjH4XewyKgHmW+bJCujM4WDjLd9x96y1AzLtChzodsk30IczvTmVgMHjK4nfTVhg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Luukb\\source\\repos\\Groep1_NoSQL_GardenGroup\\GardenGroupServicedeskApp\\GardenGroupLogic\\GardenGroupLogic.csproj",
+  "projectFilePath": "C:\\Users\\Luukb\\source\\repos\\Groep1_NoSQL_GardenGroupNieuw\\GardenGroupServicedeskApp\\GardenGroupLogic\\GardenGroupLogic.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Luukb\\.nuget\\packages\\dnsclient\\1.6.1\\dnsclient.1.6.1.nupkg.sha512",
     "C:\\Users\\Luukb\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
