@@ -11,17 +11,25 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MongoDB.Driver;
 
 namespace GardenGroupUI
 {
     /// <summary>
-    /// Interaction logic for TestWindow.xaml
+    /// Interaction logic for AppWindow.xaml
     /// </summary>
-    public partial class TestWindow : Window
+    public partial class AppWindow : Window
     {
-        public TestWindow()
+
+        public AppWindow()
         {
             InitializeComponent();
+            frameContent.Source = new Uri("AppMainPage.xaml", UriKind.Relative);
+        }
+
+        private void buttonClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
