@@ -20,16 +20,12 @@ namespace GardenGroupUI
     /// </summary>
     public partial class AppWindow : Window
     {
-        private MongoClient client;
 
-        public AppWindow(MongoClient client)
+        public AppWindow()
         {
-            this.client = client;
             InitializeComponent();
-            frameContent.Source = new Uri("MainPage.xaml", UriKind.Relative);
+            frameContent.Source = new Uri("AppMainPage.xaml", UriKind.Relative);
         }
-
-        public MongoClient Client { get { return client; } }
 
         private void buttonClose_Click(object sender, RoutedEventArgs e)
         {

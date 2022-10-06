@@ -20,14 +20,12 @@ namespace GardenGroupUI
     /// <summary>
     /// Interaction logic for MainPage.xaml
     /// </summary>
-    public partial class MainPage : Page
+    public partial class AppMainPage : Page
     {
         AppWindow appWindow = (AppWindow)Application.Current.MainWindow;
-        MongoClient mongoClient;
         
-        public MainPage()
+        public AppMainPage()
         {
-                mongoClient = appWindow.Client;
                 InitializeComponent();
         }
     }
