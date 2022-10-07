@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-10-07T16:28:53.444Z" agent="5.0 (Windows)" etag="WK-m68thvQ_Ox4wPY2xN" version="20.4.0" type="github">
+<mxfile host="app.diagrams.net" modified="2022-10-07T16:30:50.579Z" agent="5.0 (Windows)" etag="Zm3RjeZzNktTnxk-AyBV" version="20.4.0" type="github">
   <diagram id="4bthDYppY-dah1H3mGTE" name="Pagina-1">
-    <mxGraphModel dx="1422" dy="790" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2370" dy="1317" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -172,10 +172,10 @@
         <mxCell id="7pABPfw_jYTxYj795POy-54" value="Read (Boolean)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#000000;" parent="7pABPfw_jYTxYj795POy-26" vertex="1">
           <mxGeometry x="35" y="40" width="130" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="7pABPfw_jYTxYj795POy-55" value="Write (Boolean)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#000000;" parent="7pABPfw_jYTxYj795POy-26" vertex="1">
+        <mxCell id="7pABPfw_jYTxYj795POy-56" value="Update (Boolean)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#000000;" parent="7pABPfw_jYTxYj795POy-26" vertex="1">
           <mxGeometry x="35" y="60" width="130" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="7pABPfw_jYTxYj795POy-56" value="Update (Boolean)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#000000;" parent="7pABPfw_jYTxYj795POy-26" vertex="1">
+        <mxCell id="7pABPfw_jYTxYj795POy-55" value="Delete (Boolean)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#000000;" parent="7pABPfw_jYTxYj795POy-26" vertex="1">
           <mxGeometry x="35" y="80" width="130" height="30" as="geometry" />
         </mxCell>
         <mxCell id="ETShx9Jj8pTSeEwa7h_H-51" value="Delete User" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#000000;" parent="1" vertex="1">
