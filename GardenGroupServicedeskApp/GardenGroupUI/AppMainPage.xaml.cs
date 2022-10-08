@@ -12,17 +12,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MongoDB.Driver;
+using System.Reflection;
 
 namespace GardenGroupUI
 {
     /// <summary>
-    /// Interaction logic for CRUD.xaml
+    /// Interaction logic for MainPage.xaml
     /// </summary>
-    public partial class CRUD : Page
+    public partial class AppMainPage : Page
     {
-        public CRUD()
+        AppWindow appWindow = (AppWindow)Application.Current.MainWindow;
+        
+        public AppMainPage()
         {
-            InitializeComponent();
+                InitializeComponent();
         }
     }
 }

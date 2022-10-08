@@ -10,20 +10,26 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using GardenGroupModel;
-//using GardenGroupLogic;
+using GardenGroupLogic;
 
 namespace GardenGroupUI
 {
     /// <summary>
-    /// Interaction logic for Login.xaml
+    /// Interaction logic for LoginPage.xaml
     /// </summary>
-    public partial class Login : Window
+    public partial class LoginPage : Page
     {
-        public Login()
+        //NOTE: These two variables are unnecessary, make them local to the methods or read directly from Passwordbox.
+        private string username;
+        private string password;
+
+        public LoginPage()
         {
             InitializeComponent();
+            //Load window in the center.
+            //NOTE: Please note that the code that once stood here has been pirated away and placed in both windows. Thx!
         }
 
         //-------------------------------------------------------------------------------------
@@ -38,6 +44,11 @@ namespace GardenGroupUI
             {
 
             }*/
+            username = loginUsernameTextBox.Text;
+            password = loginPasswordBox.Password;
+            LoginLogic loginLogic = new LoginLogic();
+            loginLogic.CheckLogin(username, password);
+
         }
 
         //-------------------------------------------------------------------------------------
@@ -46,7 +57,7 @@ namespace GardenGroupUI
         //Close login window.
         private void loginCloseButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            //this.Close();
         }
 
         //-------------------------------------------------------------------------------------
@@ -66,10 +77,10 @@ namespace GardenGroupUI
         //New Password will be saved.
         private void LoginForgotLoginButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();
+            //this.Hide();
             ResetPasswordWindow resetPassword = new ResetPasswordWindow();
             resetPassword.ShowDialog();
-            this.Close();
+            //this.Close();
         }
     }
 }

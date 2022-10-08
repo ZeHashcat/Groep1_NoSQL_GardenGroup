@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GardenGroupModel;
 
-
-namespace GardenGroupModel
+namespace GardenGroupLogic
 {
-    public class Settings
+    public class SettingsLogic
     {
         private const double resolution_X_Min = 1280;
         private const double resolution_Y_Min = 720;
@@ -16,12 +16,12 @@ namespace GardenGroupModel
         //NOTE: This array could be more in scope. <<---`-`/\/\`-`(REMINDER)
         private WindowSize[] predefinedWindowSizes;
         private bool fullscreen = false;
-        private IniFile settingsIni = new IniFile("Settings");
-        
+        private IniFileLogic settingsIni = new IniFileLogic("Settings");
+
 
         //EXPLANATION: Resolution that is given is the primary screen resolution, which can't be accessed from here afaik.
         //NOTE: This class maintains it's own .ini file, so only one instance should be made and passed around the different windows. <<---`-`/\/\`-`(IMPORTANT)
-        public Settings(double resolution_X, double resolution_Y)
+        public SettingsLogic(double resolution_X, double resolution_Y)
         {
             windowSize = new WindowSize("4:3", resolution_X, resolution_Y);
             FloodWindowSizes();
@@ -71,13 +71,13 @@ namespace GardenGroupModel
         {
             string fullscreen = Convert.ToString(this.fullscreen);
             string key = "Fullscreen";
-            
+
             if (settingsIni.KeyExists(fullscreen, section))
             {
                 //EXPLANATION: Tries to parse before setting this.fullscreen to the .ini value, if it can't this.fullscreen will default to false.
                 bool validValue = false;
                 bool.TryParse(settingsIni.Read(fullscreen, section), out validValue);
-                if(validValue == true)
+                if (validValue == true)
                 {
                     this.fullscreen = bool.Parse(fullscreen);
                     return;
@@ -94,7 +94,7 @@ namespace GardenGroupModel
 
             if (settingsIni.KeyExists(key, section))
             {
-                foreach(WindowSize windowSize in predefinedWindowSizes)
+                foreach (WindowSize windowSize in predefinedWindowSizes)
                 {
                     if (windowSize.AspectRatio == value)
                     {

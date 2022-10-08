@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace GardenGroupUI
 {
     /// <summary>
-    /// Interaction logic for TestWindow.xaml
+    /// Interaction logic for CRUD.xaml
     /// </summary>
-    public partial class TestWindow : Window
+    public partial class CRUDPage : Page
     {
-        public TestWindow()
+        public CRUDPage()
         {
             InitializeComponent();
         }

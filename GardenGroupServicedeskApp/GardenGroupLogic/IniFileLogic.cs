@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//using System.Reflection;
 using System.Runtime.InteropServices;
 
 
-namespace GardenGroupModel
+namespace GardenGroupLogic
 {
-    public class IniFile
+    public class IniFileLogic
     {
         private string name;
         private string file;
@@ -23,7 +22,7 @@ namespace GardenGroupModel
 
         //EXPLANATION: Name is mostly used when the key doesn't have a section.
         //EXPLANATION: FileInfo allows for creation, opening, moving, deletion and copying of files, there it is given to Read and Write function.
-        public IniFile(string name)
+        public IniFileLogic(string name)
         {
             this.name = name;
             file = new FileInfo($"{name}.ini").FullName;
@@ -60,6 +59,5 @@ namespace GardenGroupModel
         {
             return Read(key, section ?? name).Length > 0;
         }
-        
     }
 }

@@ -12,9 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Threading;
 using MongoDB.Driver;
 using GardenGroupModel;
-//using GardenGroupLogic; Commented out because of a lack of classes. Will need later tho.
+using GardenGroupLogic;
 
 namespace GardenGroupUI
 {
@@ -40,25 +41,24 @@ namespace GardenGroupUI
         //QOUTE: "Typically you only create one MongoClient instance for a given cluster and use it across your application." 
         // - https://mongodb.github.io/mongo-csharp-driver/2.17/getting_started/quick_tour/
         
-        Settings settings = new Settings(SystemParameters.PrimaryScreenWidth, SystemParameters.PrimaryScreenHeight);
+        SettingsLogic settings = new SettingsLogic(SystemParameters.PrimaryScreenWidth, SystemParameters.PrimaryScreenHeight);
 
         public MainWindow()
         {
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
         }
 
         private void buttonLaunch_Click(object sender, RoutedEventArgs e)
         {
             //QUESTION: Is there not an inbuild function that does what ClientSetup does? <<---`-`/\/\`-`(REMINDER)
-            MongoClient client = Client.ClientSetup(connectionString, name);
             //NOTE: Look into WPF pages, maybe only one window is needed.
             //NOTE: Code below will eventually lead into Login.
             //ENTRY_POINT: Replace below with your own window. <<---`-`/\/\`-`(IMPORTANT)
-            TestWindow testWindow = new TestWindow();
-            testWindow.Show();
-            /*Login login = new Login();
-            login.Show();*/
-            this.Hide();
+            AppWindow appWindow = new AppWindow();
+            Application.Current.MainWindow = appWindow;
+            appWindow.Show();
+            this.Close();
         }
 
         private void DetectResolution()

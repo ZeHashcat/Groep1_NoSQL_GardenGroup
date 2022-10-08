@@ -22,6 +22,8 @@ namespace GardenGroupUI
         public ResetPasswordWindow()
         {
             InitializeComponent();
+            //Placing form in center;
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             //Make shure buttin is disabeled when booting
             ResetPasswordEmailButton.IsEnabled = !string.IsNullOrEmpty(resetPasswordEmailTextBox.Text);
 
@@ -44,6 +46,8 @@ namespace GardenGroupUI
         {
             //Read entered email.                 
             string email = resetPasswordEmailTextBox.Text;
+            //Here we call on the Database to check if email exists.
+            //------------------------------------------------------------ <------ <------ Hier moet je door luuk.
 
             if(email == "mark")
             {
@@ -75,9 +79,12 @@ namespace GardenGroupUI
                 //-------------------------------------------------------------------------
                 resetPasswordConfirmLabel.Foreground = Brushes.Green;
                 resetPasswordConfirmLabel.Content = "Congratulations. Your new password has been saved.";
+                MessageBox.Show("Congratulations. Your new password has been saved.");
 
-                Login login = new Login();
-                login.ShowDialog();
+                this.Hide();
+                //Login login = new Login();
+                //login.ShowDialog();
+                this.Close();
             }
             else
             {
