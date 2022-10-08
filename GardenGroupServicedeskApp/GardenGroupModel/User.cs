@@ -19,7 +19,7 @@ namespace GardenGroupModel
         private BsonKeyValuePair location;
         private BsonKeyValuePair? teams;
 
-        public User(BsonKeyValuePair id, BsonKeyValuePair userName, BsonKeyValuePair password, BsonKeyValuePair firstName, BsonKeyValuePair lastName, BsonKeyValuePair role, BsonKeyValuePair email, BsonKeyValuePair phoneNumber, BsonKeyValuePair location, BsonKeyValuePair teams = null)
+        public User(BsonKeyValuePair id, BsonKeyValuePair userName, BsonKeyValuePair password, BsonKeyValuePair firstName, BsonKeyValuePair lastName, BsonKeyValuePair role, BsonKeyValuePair email, BsonKeyValuePair phoneNumber, BsonKeyValuePair location, BsonKeyValuePair? teams = null)
         {
             this.id = id;
             this.userName = userName;

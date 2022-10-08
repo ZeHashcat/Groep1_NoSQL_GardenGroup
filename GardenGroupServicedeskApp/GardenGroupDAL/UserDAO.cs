@@ -26,12 +26,9 @@ namespace GardenGroupDAL
                 MongoClientInstance mongoClientInstance = MongoClientInstance.GetClientInstance();
                 database = mongoClientInstance.Client.GetDatabase(databaseName);
                 collection = database.GetCollection<BsonDocument>(collectionName);
-                //filter                
-                var filter = Builders<BsonDocument>.Filter.Empty;
-                var sorted = collection.Find(filter).Sort("{UserName:1}");//hmm waarschijnlijk anders noemen
-
-                FilterDefinition<BsonDocument> filter2 = Builders<BsonDocument>.Filter.Eq("UserName", username);
-                BsonDocument document = collection.Find(filter2).First();
+                
+                FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("UserName", username);
+                BsonDocument document = collection.Find(filter).First();
                 //query
 
                 //var course = collection.FindAs<User>(MongoDB.Driver.Builders.Query.EQ("Title", "Todays Course")).SetFields(Fields.Include("Title", "Description").Exclude("_id")).ToList();
@@ -44,7 +41,7 @@ namespace GardenGroupDAL
                 else
                 {
                     //return password
-                    return ReadUser(document);
+                    return ReadPassword(document);
                 }
             }
             catch (Exception ex)
@@ -61,7 +58,7 @@ namespace GardenGroupDAL
         }
 
         // \/\/Waarschijnlijk niet nodig\/\/ \\
-        private string ReadUser(BsonDocument document)
+        private string ReadPassword(BsonDocument document)
         {
             //filter document to only get password
             try
@@ -74,6 +71,37 @@ namespace GardenGroupDAL
             {
                 throw new Exception("Data could not be retrieved from the database. Please try again, error: " + ex.Message);
             }            
+        }
+
+        public BsonDocument GetUser(string username)
+        {
+            try
+            {
+                MongoClientInstance mongoClientInstance = MongoClientInstance.GetClientInstance();
+                database = mongoClientInstance.Client.GetDatabase(databaseName);
+                collection = database.GetCollection<BsonDocument>(collectionName);
+
+                FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("UserName", username);
+                BsonDocument document = collection.Find(filter).First();
+                //query
+
+                //var course = collection.FindAs<User>(MongoDB.Driver.Builders.Query.EQ("Title", "Todays Course")).SetFields(Fields.Include("Title", "Description").Exclude("_id")).ToList();
+
+                if (document.IsBsonNull)
+                {
+                    //error detected
+                    throw new Exception("incorrect username or password, please make sure you have spelled everything correctly.");
+                }
+                else
+                {
+                    //return password
+                    return document;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Data could not be retrieved from the database. Please try again, error: " + ex.Message);
+            }
         }
     }
 }
