@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GardenGroupLogic;
+using GardenGroupModel;
 
 namespace GardenGroupUI
 {
@@ -26,15 +27,19 @@ namespace GardenGroupUI
         public DashboardMenuAddWidgetPage()
         {
             InitializeComponent();
-
-            this.dashboardControllerInstance = DashboardControllerInstance.Instance;
         }
 
         private void buttonAddWidgetAdd_Click(object sender, RoutedEventArgs e)
         {
-            string widgetType = comboBoxWidgetType.SelectedItem.ToString();
-            string widgetContent = comboBoxWidgetContent.SelectedItem.ToString();
-            dashboardControllerInstance.DashboardController.AddWidget(widgetType, widgetContent)
+            WidgetType widgetType = (WidgetType)Enum.Parse(typeof(WidgetType), comboBoxWidgetType.SelectedItem.ToString());
+            //
+            //dashboardControllerInstance.DashboardController.AddWidget(widgetType, widgetContent);
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.dashboardControllerInstance = DashboardControllerInstance.Instance;
+            comboBoxWidgetType.ItemsSource = Enum.GetValues(typeof(WidgetType)).Cast<WidgetType>();
         }
     }
 }

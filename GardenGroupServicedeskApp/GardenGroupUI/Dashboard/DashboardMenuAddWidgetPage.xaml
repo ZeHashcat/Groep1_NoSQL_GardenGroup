@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:GardenGroupUI"
       mc:Ignorable="d" 
       d:DesignHeight="500" d:DesignWidth="400"
-      Title="AppMenuAddWidgetPage">
+      Title="AppMenuAddWidgetPage" Loaded="Page_Loaded">
 
     <StackPanel Margin="0,75,0,0">
         <DockPanel>

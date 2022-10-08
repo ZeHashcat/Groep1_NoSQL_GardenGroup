@@ -28,7 +28,7 @@ namespace GardenGroupUI
 
         private void buttonAddWidget_Click(object sender, RoutedEventArgs e)
         {
-            AppMenuWindow widgetMenu = new AppMenuWindow("AppMenuAddWidgetPage.xaml");
+            AppMenuWindow widgetMenu = new AppMenuWindow("../Dashboard/DashboardMenuAddWidgetPage.xaml");
             widgetMenu.Show();
         }
     }
