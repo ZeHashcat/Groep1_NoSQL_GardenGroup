@@ -22,10 +22,11 @@ namespace GardenGroupUI
     /// </summary>
     public partial class LoginPage : Page
     {
-        public LoginPage()
+        public LoginPage(string connectionString)
         {
             InitializeComponent();
 
+            CreateClient(connectionString);
             GetLoginInfo();
         }
 
@@ -55,6 +56,12 @@ namespace GardenGroupUI
                 DeleteLoginInfo();
             }
 
+        }
+
+        private void CreateClient(string connectionString)
+        {
+            UserLogic loginLogic = new UserLogic();
+            loginLogic.CreateClient(connectionString);
         }
 
         private void SetLoginInfo()

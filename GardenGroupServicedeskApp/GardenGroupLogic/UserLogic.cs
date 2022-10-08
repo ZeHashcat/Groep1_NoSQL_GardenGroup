@@ -19,6 +19,11 @@ namespace GardenGroupLogic
 
         }
 
+        public void CreateClient(string connectionString)
+        {
+            MongoClientInstance.GetClientInstance(connectionString);
+        }
+
         public bool CheckLogin(string username, string password)
         {
             string passwordDB = userDAO.GetPassword(username);
