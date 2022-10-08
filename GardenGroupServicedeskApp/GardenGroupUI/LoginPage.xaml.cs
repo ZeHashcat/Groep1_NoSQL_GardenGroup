@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,15 +22,11 @@ namespace GardenGroupUI
     /// </summary>
     public partial class LoginPage : Page
     {
-        //NOTE: These two variables are unnecessary, make them local to the methods or read directly from Passwordbox.
-        private string username;
-        private string password;
-
         public LoginPage()
         {
             InitializeComponent();
-            //Load window in the center.
-            //NOTE: Please note that the code that once stood here has been pirated away and placed in both windows. Thx!
+
+            GetLoginInfo();
         }
 
         //-------------------------------------------------------------------------------------
@@ -40,15 +37,91 @@ namespace GardenGroupUI
         private void loginLoginButton_Click(object sender, RoutedEventArgs e)
         {
             //Stuur hier door naar Dashboard. (Mylo)
-            /*if(loginRememberMeLabel.IsChecked)
-            {
-
-            }*/
-            username = loginUsernameTextBox.Text;
-            password = loginPasswordBox.Password;
+            
+            string username = loginUsernameTextBox.Text;
+            string password = loginPasswordBox.Password;
             UserLogic loginLogic = new UserLogic();
-            //loginLogic.CheckLogin(username, password);
 
+            if(loginLogic.CheckLogin(username, password)){
+
+            }
+
+            if (loginRememberMeCheckBox.IsChecked ?? false)
+            {
+                SetLoginInfo();
+            }
+            else
+            {
+                DeleteLoginInfo();
+            }
+
+        }
+
+        private void SetLoginInfo()
+        {
+            string keyUsername = "username";
+            string keyPassword = "password";
+            try
+            {
+                Configuration appConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                KeyValueConfigurationCollection settings = appConfig.AppSettings.Settings;
+                if (settings[keyUsername] == null)
+                {
+                    settings.Add(keyUsername, loginUsernameTextBox.Text);
+                }
+                else
+                {
+                    settings[keyUsername].Value = loginUsernameTextBox.Text;
+                }
+               
+                if (settings[keyPassword] == null)
+                {
+                    settings.Add(keyPassword, loginPasswordBox.Password);
+                }
+                else
+                {
+                    settings[keyPassword].Value = loginPasswordBox.Password;
+                }
+                appConfig.Save(ConfigurationSaveMode.Modified);
+                ConfigurationManager.RefreshSection(appConfig.AppSettings.SectionInformation.Name);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Something went wrong: {ex.Message}");
+            }
+        }
+
+        private void GetLoginInfo()
+        {
+            
+            if(ConfigurationManager.AppSettings["username"] != null && ConfigurationManager.AppSettings["password"] != null)
+            {
+                loginUsernameTextBox.Text = ConfigurationManager.AppSettings["username"];
+                loginPasswordBox.Password = ConfigurationManager.AppSettings["password"];
+
+                loginRememberMeCheckBox.IsChecked = true;
+            }
+        }
+
+        private void DeleteLoginInfo()
+        {
+            string keyUsername = "username";
+            string keyPassword = "password";
+            try
+            {
+                Configuration appConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                KeyValueConfigurationCollection settings = appConfig.AppSettings.Settings;
+                
+                settings[keyUsername].Value = null;
+                settings[keyPassword].Value = null;
+
+                appConfig.Save(ConfigurationSaveMode.Modified);
+                ConfigurationManager.RefreshSection(appConfig.AppSettings.SectionInformation.Name);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Something went wrong: {ex.Message}");
+            }
         }
 
         //-------------------------------------------------------------------------------------

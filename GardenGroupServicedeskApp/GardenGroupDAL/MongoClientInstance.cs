@@ -9,11 +9,11 @@ namespace GardenGroupDAL
 {
     //Handy to know:
     //https://stackoverflow.com/questions/1086521/what-is-the-difference-between-dao-and-dal
-    internal class MongoClientInstance
+    public class MongoClientInstance
     {
         private static MongoClientInstance? instance = null;
         private static readonly object padlock = new object();
-        MongoClient client;
+        private MongoClient client;
 
 
         private MongoClientInstance(string connectionString)
@@ -28,6 +28,8 @@ namespace GardenGroupDAL
             client = new MongoClient(settings);
             return client;
         }
+
+        public MongoClient Client { get { return client; }  }
 
         //Singleton with parameters
         public static MongoClientInstance GetClientInstance(string? connectionString = null)

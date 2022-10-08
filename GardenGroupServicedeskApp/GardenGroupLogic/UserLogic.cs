@@ -19,9 +19,9 @@ namespace GardenGroupLogic
 
         }
 
-        public bool CheckLogin(string username, string password, MongoClient client)
+        public bool CheckLogin(string username, string password)
         {
-            string passwordDB = userDAO.GetPassword(username, client);
+            string passwordDB = userDAO.GetPassword(username);
             if (passwordDB == password)
                 return true;
 

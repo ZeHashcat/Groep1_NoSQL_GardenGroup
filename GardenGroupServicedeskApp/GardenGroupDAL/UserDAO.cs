@@ -19,20 +19,21 @@ namespace GardenGroupDAL
         private string databaseName = "TicketSystemDB";
         private string collectionName = "User";
 
-        public string GetPassword(string username, MongoClient client)
+        public string GetPassword(string username)
         {
             try
             {
-                database = client.GetDatabase(databaseName);
+                MongoClientInstance mongoClientInstance = MongoClientInstance.GetClientInstance();
+                database = mongoClientInstance.Client.GetDatabase(databaseName);
                 collection = database.GetCollection<BsonDocument>(collectionName);
                 //filter                
                 var filter = Builders<BsonDocument>.Filter.Empty;
-                var sorted = collection.Find(filter).Sort("{Username:1}");//hmm waarschijnlijk anders noemen
+                var sorted = collection.Find(filter).Sort("{UserName:1}");//hmm waarschijnlijk anders noemen
 
                 FilterDefinition<BsonDocument> filter2 = Builders<BsonDocument>.Filter.Eq("UserName", username);
                 BsonDocument document = collection.Find(filter2).First();
                 //query
-                                
+
                 //var course = collection.FindAs<User>(MongoDB.Driver.Builders.Query.EQ("Title", "Todays Course")).SetFields(Fields.Include("Title", "Description").Exclude("_id")).ToList();
 
                 if (document.IsBsonNull)
@@ -46,7 +47,7 @@ namespace GardenGroupDAL
                     return ReadUser(document);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception("Data could not be retrieved from the database. Please try again, error: " + ex.Message);
             }
@@ -56,7 +57,7 @@ namespace GardenGroupDAL
             //Moet ik ook nog een ROLE meegeven? of pas nadat het gevalideerd is. Kan dubbele code vermijden om gewoon meteen op te halen.
             //ANSWER: Nee, maar nadat het wachtwoord is gevalideerd en voordat het juiste scherm tevoorschijn komt moet eigenlijk een singleton van user("UserInstance.cs" in model) worden geinstantieerd die dan de ingelogde gebruiker representeert.
             //NOTE: Dus in de bovenstaande stap is dan ook een query vanuit het login gedeelte nodig waarin de User die zojuist is gevalideerd wordt opgehaald uit de DB en in zijn geheel wordt meegegeven aan de initiatie van de van "UserInstance".
-            
+
         }
 
         // \/\/Waarschijnlijk niet nodig\/\/ \\
@@ -67,7 +68,7 @@ namespace GardenGroupDAL
             {
                 string password = document.GetValue("Password").ToString();
 
-                return password; //Sorry nog heel even wachten. ja doe maar sem community. Wat?
+                return password;
             }
             catch (Exception ex)
             {
