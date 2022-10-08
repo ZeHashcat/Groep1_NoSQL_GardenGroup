@@ -21,7 +21,7 @@ namespace GardenGroupModel
         public User User { get { return user; }}
 
         //Singleton with parameters
-        public static UserInstance GetClientInstance(User? user = null)
+        public static UserInstance GetUserInstance(User? user = null)
         {
             try
             {

@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GardenGroupLogic;
+using GardenGroupModel;
 
 namespace GardenGroupUI
 {
@@ -22,11 +23,11 @@ namespace GardenGroupUI
     /// </summary>
     public partial class LoginPage : Page
     {
-        public LoginPage(string connectionString)
+        public LoginPage()
         {
             InitializeComponent();
 
-            CreateClient(connectionString);
+            CreateClient(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
             GetLoginInfo();
         }
 
@@ -44,7 +45,9 @@ namespace GardenGroupUI
             UserLogic loginLogic = new UserLogic();
 
             if(loginLogic.CheckLogin(username, password)){
-
+                User user = loginLogic.GetUser(username);
+                UserInstance.GetUserInstance(user);
+                //change source of window to AppMainPage.xaml <----------------------------
             }
 
             if (loginRememberMeCheckBox.IsChecked ?? false)
@@ -139,16 +142,6 @@ namespace GardenGroupUI
         {
             //NOTE: This method can be removed, the close button now resides in AppWindow.
             //this.Close();
-        }
-
-        //-------------------------------------------------------------------------------------
-        //-------------------------------------------------------------------------------------
-        //User wants to be remembered by system.
-        //The system on user device will remember login details.
-        private void loginRememberMeLabel_Checked(object sender, RoutedEventArgs e)
-        {
-            //Onthoud de gebruiker. //Hoef ik niet te gebruiken. ik kan het ergens ander aan roepen.
-            //Dit kan wel weg.
         }
 
         //-------------------------------------------------------------------------------------
