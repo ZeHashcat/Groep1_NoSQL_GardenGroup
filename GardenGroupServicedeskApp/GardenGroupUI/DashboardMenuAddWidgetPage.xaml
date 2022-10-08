@@ -1,0 +1,25 @@
+﻿<Page x:Class="GardenGroupUI.DashboardMenuAddWidgetPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GardenGroupUI"
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="400"
+      Title="AppMenuAddWidgetPage">
+
+    <StackPanel Margin="0,75,0,0">
+        <DockPanel>
+            <Label Content="Widget Type:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,20,0,10"/>
+            <ComboBox Width="160" HorizontalAlignment="Right" Margin="0,10,50,10"></ComboBox>
+        </DockPanel>
+        <DockPanel>
+            <Label Content="Widget Content:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,20,0,10"/>
+            <ComboBox Width="160" HorizontalAlignment="Right" Margin="0,10,50,10"></ComboBox>
+        </DockPanel>
+        <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft">
+            <Button x:Name="buttonAddWidgetCancel" Width="45" HorizontalAlignment="Right" Content="Cancel" Margin="5,0,10,0"/>
+            <Button x:Name="buttonAddWidgetAdd" Width="40" Height="25" HorizontalAlignment="Right" Content="Add" Margin="0,0,5,0"/>
+        </StackPanel>
+    </StackPanel>
+</Page>

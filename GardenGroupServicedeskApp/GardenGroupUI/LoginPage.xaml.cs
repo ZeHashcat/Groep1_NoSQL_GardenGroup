@@ -47,7 +47,7 @@ namespace GardenGroupUI
             username = loginUsernameTextBox.Text;
             password = loginPasswordBox.Password;
             LoginLogic loginLogic = new LoginLogic();
-            loginLogic.CheckLogin(username, password);
+            //loginLogic.CheckLogin(username, password);
 
         }
 
