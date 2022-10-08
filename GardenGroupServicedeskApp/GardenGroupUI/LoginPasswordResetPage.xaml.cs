@@ -10,29 +10,31 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace GardenGroupUI
 {
     /// <summary>
-    /// Interaction logic for ResetPasswordWindow.xaml
+    /// Interaction logic for LoginPasswordResetPage.xaml
     /// </summary>
-    public partial class ResetPasswordWindow : Window
+    public partial class LoginPasswordResetPage : Page
     {
-        public ResetPasswordWindow()
+        public LoginPasswordResetPage()
         {
             InitializeComponent();
             //Placing form in center;
-            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            //NOTE: Please note that the code that once stood here has been pirated away and placed in both windows. Thx!
             //Make shure buttin is disabeled when booting
             ResetPasswordEmailButton.IsEnabled = !string.IsNullOrEmpty(resetPasswordEmailTextBox.Text);
 
             //User should not be able to change password before email is checked.
+            //NOTE: ↓↓↓If these things need to be hidden at initialisation, consider putting "Visibility="Hidden"" inside the tags in the .xaml instead.
             notNeededLabel3.Visibility = Visibility.Hidden;
             notNeededLabel4.Visibility = Visibility.Hidden;
             resetPasswordPaswrdBox.Visibility = Visibility.Hidden;
             resetPasswordRepeatPaswrdBx.Visibility = Visibility.Hidden;
-            NewPasswordButton.Visibility = Visibility.Hidden;
+            NewPasswordButton.Visibility = Visibility.Hidden; 
         }
 
 
@@ -49,7 +51,7 @@ namespace GardenGroupUI
             //Here we call on the Database to check if email exists.
             //------------------------------------------------------------ <------ <------ Hier moet je door luuk.
 
-            if(email == "mark")
+            if (email == "mark")
             {
                 resetPasswordButtonPressedLbl.Foreground = Brushes.Green;
                 resetPasswordButtonPressedLbl.Content = "Email has been accepted. Please enter new password below.";
@@ -73,7 +75,7 @@ namespace GardenGroupUI
             string newPassword = resetPasswordPaswrdBox.Password.ToString();
             string newPasswordRepeat = resetPasswordRepeatPaswrdBx.Password.ToString();
 
-            if(newPassword == newPasswordRepeat && 8 < newPassword.Length)
+            if (newPassword == newPasswordRepeat && 8 < newPassword.Length)
             {
                 //Save the new password. \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ (doe dat hier)
                 //-------------------------------------------------------------------------
@@ -81,10 +83,10 @@ namespace GardenGroupUI
                 resetPasswordConfirmLabel.Content = "Congratulations. Your new password has been saved.";
                 MessageBox.Show("Congratulations. Your new password has been saved.");
 
-                this.Hide();
+                //this.Hide();
                 //Login login = new Login();
                 //login.ShowDialog();
-                this.Close();
+                //this.Close();
             }
             else
             {

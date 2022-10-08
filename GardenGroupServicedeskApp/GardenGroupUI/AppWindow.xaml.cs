@@ -25,7 +25,7 @@ namespace GardenGroupUI
         {
             InitializeComponent();
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            frameContent.Source = new Uri("AppMainPage.xaml", UriKind.Relative);
+            frameContent.Source = new Uri("LoginPage.xaml", UriKind.Relative);
         }
 
         private void buttonClose_Click(object sender, RoutedEventArgs e)

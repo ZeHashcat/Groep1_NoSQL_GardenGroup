@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GardenGroupLogic;
+using GardenGroupModel;
 
 namespace GardenGroupUI
 {
@@ -21,15 +23,12 @@ namespace GardenGroupUI
     /// </summary>
     public partial class LoginPage : Page
     {
-        //NOTE: These two variables are unnecessary, make them local to the methods or read directly from Passwordbox.
-        private string username;
-        private string password;
-
         public LoginPage()
         {
             InitializeComponent();
-            //Load window in the center.
-            //NOTE: Please note that the code that once stood here has been pirated away and placed in both windows. Thx!
+
+            CreateClient(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            GetLoginInfo();
         }
 
         //-------------------------------------------------------------------------------------
@@ -40,15 +39,99 @@ namespace GardenGroupUI
         private void loginLoginButton_Click(object sender, RoutedEventArgs e)
         {
             //Stuur hier door naar Dashboard. (Mylo)
-            /*if(loginRememberMeLabel.IsChecked)
+            
+            string username = loginUsernameTextBox.Text;
+            string password = loginPasswordBox.Password;
+            UserLogic loginLogic = new UserLogic();
+
+            if(loginLogic.CheckLogin(username, password)){
+                User user = loginLogic.GetUser(username);
+                UserInstance.GetUserInstance(user);
+                //change source of window to AppMainPage.xaml <----------------------------
+            }
+
+            if (loginRememberMeCheckBox.IsChecked ?? false)
             {
+                SetLoginInfo();
+            }
+            else
+            {
+                DeleteLoginInfo();
+            }
 
-            }*/
-            username = loginUsernameTextBox.Text;
-            password = loginPasswordBox.Password;
-            LoginLogic loginLogic = new LoginLogic();
-            loginLogic.CheckLogin(username, password);
+        }
 
+        private void CreateClient(string connectionString)
+        {
+            UserLogic loginLogic = new UserLogic();
+            loginLogic.CreateClient(connectionString);
+        }
+
+        private void SetLoginInfo()
+        {
+            string keyUsername = "username";
+            string keyPassword = "password";
+            try
+            {
+                Configuration appConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                KeyValueConfigurationCollection settings = appConfig.AppSettings.Settings;
+                if (settings[keyUsername] == null)
+                {
+                    settings.Add(keyUsername, loginUsernameTextBox.Text);
+                }
+                else
+                {
+                    settings[keyUsername].Value = loginUsernameTextBox.Text;
+                }
+               
+                if (settings[keyPassword] == null)
+                {
+                    settings.Add(keyPassword, loginPasswordBox.Password);
+                }
+                else
+                {
+                    settings[keyPassword].Value = loginPasswordBox.Password;
+                }
+                appConfig.Save(ConfigurationSaveMode.Modified);
+                ConfigurationManager.RefreshSection(appConfig.AppSettings.SectionInformation.Name);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Something went wrong: {ex.Message}");
+            }
+        }
+
+        private void GetLoginInfo()
+        {
+            
+            if(ConfigurationManager.AppSettings["username"] != null && ConfigurationManager.AppSettings["password"] != null)
+            {
+                loginUsernameTextBox.Text = ConfigurationManager.AppSettings["username"];
+                loginPasswordBox.Password = ConfigurationManager.AppSettings["password"];
+
+                loginRememberMeCheckBox.IsChecked = true;
+            }
+        }
+
+        private void DeleteLoginInfo()
+        {
+            string keyUsername = "username";
+            string keyPassword = "password";
+            try
+            {
+                Configuration appConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                KeyValueConfigurationCollection settings = appConfig.AppSettings.Settings;
+                
+                settings[keyUsername].Value = null;
+                settings[keyPassword].Value = null;
+
+                appConfig.Save(ConfigurationSaveMode.Modified);
+                ConfigurationManager.RefreshSection(appConfig.AppSettings.SectionInformation.Name);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Something went wrong: {ex.Message}");
+            }
         }
 
         //-------------------------------------------------------------------------------------
@@ -57,17 +140,8 @@ namespace GardenGroupUI
         //Close login window.
         private void loginCloseButton_Click(object sender, RoutedEventArgs e)
         {
+            //NOTE: This method can be removed, the close button now resides in AppWindow.
             //this.Close();
-        }
-
-        //-------------------------------------------------------------------------------------
-        //-------------------------------------------------------------------------------------
-        //User wants to be remembered by system.
-        //The system on user device will remember login details.
-        private void loginRememberMeLabel_Checked(object sender, RoutedEventArgs e)
-        {
-            //Onthoud de gebruiker. //Hoef ik niet te gebruiken. ik kan het ergens ander aan roepen.
-            //Dit kan wel weg.
         }
 
         //-------------------------------------------------------------------------------------
@@ -78,8 +152,8 @@ namespace GardenGroupUI
         private void LoginForgotLoginButton_Click(object sender, RoutedEventArgs e)
         {
             //this.Hide();
-            ResetPasswordWindow resetPassword = new ResetPasswordWindow();
-            resetPassword.ShowDialog();
+            //ResetPasswordWindow resetPassword = new ResetPasswordWindow();
+            //resetPassword.ShowDialog();
             //this.Close();
         }
     }

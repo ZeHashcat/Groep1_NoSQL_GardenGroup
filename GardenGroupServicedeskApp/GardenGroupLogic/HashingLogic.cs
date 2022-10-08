@@ -9,7 +9,7 @@ using System.Security.Cryptography;
 
 namespace GardenGroupLogic
 {
-    public class PasswordLogic
+    public class HashingLogic
     {
 
         /*The salt generation is as the example in the question.You can convert text to byte arrays using Encoding.UTF8.GetBytes(string). 

@@ -6,10 +6,46 @@ using System.Threading.Tasks;
 
 namespace GardenGroupModel
 {
-    internal class UserInstance
+    public class UserInstance
     {
-        //NOTE: Ik wou "UserInstance" zelf schrijven, maar ik heb een vermoeden dat als ik dit
-        //te veel doe dat dan problemen bij de eindbeoordeling kan veroorzaken, dus vandaar dat ik dat nog niet heb gedaan.
-        //Wie-ever deze code schrijft, je kan het beste "MongoClientInstance.cs" overnemen voor zo ver mogelijk.
+        private static UserInstance? instance = null;
+        private static readonly object padlock = new object();
+        private User user;
+
+
+        private UserInstance(User user)
+        {
+            this.user = user;
+        }
+
+        public User User { get { return user; }}
+
+        //Singleton with parameters
+        public static UserInstance GetUserInstance(User? user = null)
+        {
+            try
+            {
+                if (instance == null)
+                {
+                    lock (padlock)
+                    {
+                        if (instance == null) //EXPLANATION: If first if statement goes off in first instance, at same time in second instance, instance gets created like below,                  
+                        {                    //EXPLANATION: then first instance padlocks with intention of creating instance, but now has to do second check preventing another instance from being created.
+                            instance = new UserInstance(user);
+                        }
+                    }
+                }
+                return instance;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Something went wrong, user is probably null:\n {ex}");//NOTE: Make this different? <<---`-`/\/\`-`(REMINDER)
+            }
+        }
+
+        public static void Logout()
+        {
+            instance = null;
+        }
     }
 }
