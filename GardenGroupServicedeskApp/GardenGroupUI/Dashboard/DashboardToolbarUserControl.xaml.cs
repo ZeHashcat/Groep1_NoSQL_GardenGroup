@@ -12,17 +12,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GardenGroupModel;
 
 namespace GardenGroupUI
 {
     /// <summary>
-    /// Interaction logic for DashboardWidget.xaml
+    /// Interaction logic for DashboardToolbarUserControl.xaml
     /// </summary>
-    public partial class DashboardWidget : UserControl
+    public partial class DashboardToolbarUserControl : UserControl, IDashboardUserControl
     {
-        public DashboardWidget()
+        public DashboardToolbarUserControl()
         {
             InitializeComponent();
+        }
+
+        private void buttonAddWidget_Click(object sender, RoutedEventArgs e)
+        {
+            AppMenuWindow widgetMenu = new AppMenuWindow("../Dashboard/DashboardMenuAddWidgetPage.xaml");
+            widgetMenu.Show();
         }
     }
 }

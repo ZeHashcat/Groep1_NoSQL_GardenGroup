@@ -12,15 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GardenGroupModel;
 
 namespace GardenGroupUI
 {
     /// <summary>
-    /// Interaction logic for DashboardPage.xaml
+    /// Interaction logic for DashboardWidget.xaml
     /// </summary>
-    public partial class DashboardPage : Page
+    public partial class DashboardWidgetUserControl : UserControl, IDashboardUserControl
     {
-        public DashboardPage()
+        public DashboardWidgetUserControl()
         {
             InitializeComponent();
         }
