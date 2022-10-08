@@ -23,17 +23,15 @@ namespace GardenGroupUI
     public partial class DashboardPage : Page, IWidgetListObserver
     {
         private DashboardInstance dashboardInstance;
-        private DashboardControllerInstance dashboardControllerInstance;
 
         public DashboardPage()
         {
             InitializeComponent();
 
             this.dashboardInstance = DashboardInstance.Instance;
-            this.dashboardControllerInstance = DashboardControllerInstance.Instance;
 
             //Add this as observer to dashboard
-            this.dashboardInstance.AddObserver(this);
+            this.dashboardInstance.Dashboard.AddObserver(this);
         }
 
         //update methods from dashboard here ↓

@@ -11,15 +11,15 @@
     <StackPanel Margin="0,75,0,0">
         <DockPanel>
             <Label Content="Widget Type:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,20,0,10"/>
-            <ComboBox Width="160" HorizontalAlignment="Right" Margin="0,10,50,10"></ComboBox>
+            <ComboBox x:Name="comboBoxWidgetType" Width="160" HorizontalAlignment="Right" Margin="0,10,50,10"></ComboBox>
         </DockPanel>
         <DockPanel>
             <Label Content="Widget Content:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,20,0,10"/>
-            <ComboBox Width="160" HorizontalAlignment="Right" Margin="0,10,50,10"></ComboBox>
+            <ComboBox x:Name="comboBoxWidgetContent" Width="160" HorizontalAlignment="Right" Margin="0,10,50,10"></ComboBox>
         </DockPanel>
         <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft">
             <Button x:Name="buttonAddWidgetCancel" Width="45" HorizontalAlignment="Right" Content="Cancel" Margin="5,0,10,0"/>
-            <Button x:Name="buttonAddWidgetAdd" Width="40" Height="25" HorizontalAlignment="Right" Content="Add" Margin="0,0,5,0"/>
+            <Button x:Name="buttonAddWidgetAdd" Width="40" Height="25" HorizontalAlignment="Right" Content="Add" Margin="0,0,5,0" Click="buttonAddWidgetAdd_Click"/>
         </StackPanel>
     </StackPanel>
 </Page>

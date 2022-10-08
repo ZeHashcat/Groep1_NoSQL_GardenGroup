@@ -13,5 +13,8 @@ namespace GardenGroupModel
         //NOTE: readonly properties here↓
 
         //NOTE: add/remove observer here↓
+
+        public void AddObserver(IWidgetListObserver observer);
+        public void RemoveObserver(IWidgetListObserver observer);
     }
 }

@@ -4,11 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GardenGroupLogic
+
+namespace GardenGroupModel
 {
     public interface IDashboardController
     {
         //Methods down here ↓
+        public void AddWidget(string widgetType, string widgetContent);
+        public void RemoveWidget(IDashboardUserControl widget);
+
 
     }
 }

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace GardenGroupModel
 {
-    internal class IWidgetListObserver
+    public interface IWidgetListObserver
     {
+        void Update(List<IDashboardUserControl> list);
     }
 }

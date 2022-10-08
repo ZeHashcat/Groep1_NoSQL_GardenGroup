@@ -19,13 +19,14 @@ namespace GardenGroupLogic
         //this.dashboard methods without params here ↓
 
         //this.dashboard methods with params down here ↓
-        void AddWidget(IDashboardUserControl widget)
-        {
-            dashboardInstance.Dashboard.AddWidget(widget);
-        }
-        void RemoveWidget(IDashboardUserControl widget)
+        public void AddWidget(string widgetType, string widgetContent)
         {
 
+            //dashboardInstance.Dashboard.AddWidget(widget);
+        }
+        public void RemoveWidget(IDashboardUserControl widget)
+        {
+            dashboardInstance.Dashboard.RemoveWidget(widget);
         }
     }
 }

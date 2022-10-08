@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GardenGroupLogic;
 
 namespace GardenGroupUI
 {
@@ -20,9 +21,20 @@ namespace GardenGroupUI
     /// </summary>
     public partial class DashboardMenuAddWidgetPage : Page
     {
+        private DashboardControllerInstance dashboardControllerInstance;
+
         public DashboardMenuAddWidgetPage()
         {
             InitializeComponent();
+
+            this.dashboardControllerInstance = DashboardControllerInstance.Instance;
+        }
+
+        private void buttonAddWidgetAdd_Click(object sender, RoutedEventArgs e)
+        {
+            string widgetType = comboBoxWidgetType.SelectedItem.ToString();
+            string widgetContent = comboBoxWidgetContent.SelectedItem.ToString();
+            dashboardControllerInstance.DashboardController.AddWidget(widgetType, widgetContent)
         }
     }
 }
