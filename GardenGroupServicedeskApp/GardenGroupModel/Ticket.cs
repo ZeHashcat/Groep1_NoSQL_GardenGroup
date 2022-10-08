@@ -8,12 +8,13 @@ namespace GardenGroupModel
 {
     internal class Ticket
     {
-        DateTime dateReported;
-        string subject;
-        IncidentType incident;
-        User user;
-        Priority priority;
-        DateTime deadline;
+        DateTime DateReported;
+        string Subject;
+        IncidentType Incident;
+        //User user;
+        Priority Impact;
+        Priority Urgency;
+        DateTime Deadline;
 
     }
 }
