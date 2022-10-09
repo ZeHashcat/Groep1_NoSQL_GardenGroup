@@ -5,8 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:GardenGroupUI"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-      Title="WidgetPage" Loaded="Page_Loaded" Height="300" VerticalAlignment="Top" Width="300" Margin="10,10,10,10">
+      d:DesignHeight="300" d:DesignWidth="290"
+      Title="WidgetPage" Loaded="Page_Loaded" Height="300" VerticalAlignment="Top" Width="290" Margin="10,10,10,10">
 
     <StackPanel Background="Aquamarine">
         <DockPanel>

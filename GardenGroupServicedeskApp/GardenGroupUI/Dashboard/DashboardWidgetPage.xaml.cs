@@ -23,6 +23,7 @@ namespace GardenGroupUI
     public partial class DashboardWidgetPage : Page, IWidget
     {
         private DashboardControllerInstance dashboardControllerInstance;
+        int index; //To change order of widgets.
 
         public DashboardWidgetPage()
         {

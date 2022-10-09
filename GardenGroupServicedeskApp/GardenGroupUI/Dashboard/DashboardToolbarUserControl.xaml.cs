@@ -19,7 +19,7 @@ namespace GardenGroupUI
     /// <summary>
     /// Interaction logic for DashboardToolbarUserControl.xaml
     /// </summary>
-    public partial class DashboardToolbarUserControl : UserControl, IDashboardUserControl
+    public partial class DashboardToolbarUserControl : UserControl
     {
         public DashboardToolbarUserControl()
         {
