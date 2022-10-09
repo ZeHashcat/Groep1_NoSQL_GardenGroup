@@ -17,8 +17,8 @@
         <Label Content="Licensed to: The Garden Group" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="22" FontFamily="Arial Rounded MT Bold" Width="345" Margin="0,25,0,0"/>
         <Button x:Name="GoToUserManagementBtn" Content="User Management" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,60,0,0" FontFamily="Arial Rounded MT Bold" FontSize="16" Height="25" Width="185"/>
         <Button x:Name="GoToUserManagementBtn_Copy" Content="User Management" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,60,0,0" FontFamily="Arial Rounded MT Bold" FontSize="16" Height="30" Width="240"/>
-        <Button x:Name="GoToUserManagementBtn_Copy1" Content="User Management" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,60,238,0" FontFamily="Arial Rounded MT Bold" FontSize="16" Height="30" Width="240"/>
-        <Button x:Name="GoToUserManagementBtn_Copy2" Content="User Management" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,60,478,0" FontFamily="Arial Rounded MT Bold" FontSize="16" Height="30" Width="240"/>
+        <Button x:Name="GoToUserManagementBtn_Copy1" Content="Incident Management" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,60,238,0" FontFamily="Arial Rounded MT Bold" FontSize="16" Height="30" Width="240"/>
+        <Button x:Name="GoToUserManagementBtn_Copy2" Content="Dashboard" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,60,478,0" FontFamily="Arial Rounded MT Bold" FontSize="16" Height="30" Width="240"/>
         <Label Content="Create New User" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="22" FontFamily="Arial Black" Margin="75,90,0,0"/>
         <Label Content="First name:" HorizontalAlignment="Left" Margin="75,135,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label Content="Last name:" HorizontalAlignment="Left" Margin="75,160,0,0" VerticalAlignment="Top" FontSize="14"/>

@@ -38,6 +38,7 @@ namespace GardenGroupLogic
         }
 
 
+        //Zoekopdracht= c# hash with salt \/ \/
         /*public string CreateSalt(int size)
         {
             //Generate a cryptographic random number.

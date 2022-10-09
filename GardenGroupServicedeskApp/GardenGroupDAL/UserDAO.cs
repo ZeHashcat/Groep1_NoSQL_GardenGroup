@@ -28,12 +28,12 @@ namespace GardenGroupDAL
                 collection = database.GetCollection<BsonDocument>(collectionName);
                 
                 FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("UserName", username);
-                BsonDocument document = collection.Find(filter).First();
+                BsonDocument document = collection.Find(filter).FirstOrDefault();
                 //query
 
                 //var course = collection.FindAs<User>(MongoDB.Driver.Builders.Query.EQ("Title", "Todays Course")).SetFields(Fields.Include("Title", "Description").Exclude("_id")).ToList();
 
-                if (document.IsBsonNull)
+                if (document == null)
                 {
                     //error detected
                     throw new Exception("incorrect username or password, please make sure you have spelled everything correctly.");

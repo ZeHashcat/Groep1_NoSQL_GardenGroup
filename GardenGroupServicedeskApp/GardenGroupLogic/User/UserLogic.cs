@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using GardenGroupDAL;
@@ -52,12 +53,20 @@ namespace GardenGroupLogic
 
         public bool CheckLogin(string username, string password)
         {
-            string passwordDB = userDAO.GetPassword(username);
-            if (passwordDB == password)
-                return true;
+            HashingWithSaltHasher passwordHasher = new HashingWithSaltHasher();
+            HashWithSaltResult hashWithSaltResult512 = passwordHasher.HashWithSalt(password, 64, SHA512.Create());
 
+            string passwordDB = userDAO.GetPassword(username);
+            if (passwordDB == hashWithSaltResult512.ToString())
+                return true;
+            
             else
                 return false;
+
+
+            /*PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
+            
+            HashWithSaltResult hashResultSha512 = pwHasher.HashWithSalt("ultra_safe_P455w0rD", 64, SHA512.Create());*/            
         }
     }
 }
