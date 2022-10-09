@@ -92,7 +92,7 @@ namespace GardenGroupDAL
                 if (document.IsBsonNull)
                 {
                     //error detected
-                    throw new Exception("incorrect username or password, please make sure you have spelled everything correctly.");
+                    throw new Exception("Incorrect username or password, please make sure you have spelled everything correctly.");
                 }
                 else
                 {
