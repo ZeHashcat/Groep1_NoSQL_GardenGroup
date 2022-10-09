@@ -39,7 +39,9 @@ namespace GardenGroupUI
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             this.dashboardControllerInstance = DashboardControllerInstance.Instance;
+            comboBoxWidgetClass.ItemsSource = Enum.GetValues(typeof(WidgetClass)).Cast<WidgetClass>();
             comboBoxWidgetType.ItemsSource = Enum.GetValues(typeof(WidgetType)).Cast<WidgetType>();
+            
         }
     }
 }
