@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="506"
       Title="CRUD">
-    <Grid>
+    <Grid HorizontalAlignment="Center">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
@@ -15,29 +15,43 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="AUTO" />
             <RowDefinition Height="AUTO" />
+            <RowDefinition Height="AUTO" />
+            <RowDefinition Height="AUTO" />
+            <RowDefinition Height="AUTO" />
+            <RowDefinition Height="AUTO" />
+            <RowDefinition Height="AUTO" />
+            <RowDefinition Height="AUTO" />
+            <RowDefinition Height="AUTO" />
+
+
         </Grid.RowDefinitions>
         <Image Grid.Row="0"  Source = "/ShrekFace.png" HorizontalAlignment="Left" Width="75" Margin="0,0,0,5"/>
-        <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left">
-            <TextBlock  Text="Date/time reported:" HorizontalAlignment="Left"></TextBlock>
-            <TextBlock  Text="Subject of incident:" HorizontalAlignment="Left"></TextBlock>
-            <TextBlock  Text="Type of incident:" HorizontalAlignment="Left"></TextBlock>
-            <TextBlock  Text="Reported by user:" HorizontalAlignment="Left"></TextBlock>
-            <TextBlock  Text="Priority:" HorizontalAlignment="Left"></TextBlock>
-            <TextBlock  Text="Deadline/follow up:" HorizontalAlignment="Left"></TextBlock>
-            <TextBlock  Text="Description:" HorizontalAlignment="Left"></TextBlock>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Date/time reported:" HorizontalAlignment="Right"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Subject of incident:" HorizontalAlignment="Right"/>
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="Type of incident:" HorizontalAlignment="Right"></TextBlock>
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Reported by user:" HorizontalAlignment="Right"></TextBlock>
+        <TextBlock Grid.Row="5" Grid.Column="0" Text="Priority:" HorizontalAlignment="Right"></TextBlock>
+        <TextBlock Grid.Row="6" Grid.Column="0" Text="Deadline/follow up:" HorizontalAlignment="Right"></TextBlock>
+        <TextBlock  Grid.Row="7" Grid.Column="0" Text="Description:" HorizontalAlignment="Left"></TextBlock>
+
+        <ComboBox x:Name="TextBoxDateTime" Grid.Row="1" Grid.Column="1" Height="20" Width="177" Text="Select Date" ></ComboBox>
+        <TextBox x:Name="TextBoxSubject"  Grid.Row="2" Grid.Column="1" Height="20" Width="177"></TextBox>
+        <ComboBox x:Name="ComboBoxIncidentType" Grid.Row="3" Grid.Column="1" Height="20" Width="177" Text="Select Type"></ComboBox>
+        <ComboBox x:Name="ComboBoxUser" Grid.Row="4" Grid.Column="1" Height="20" Width="177"></ComboBox>
+        <ComboBox x:Name="ComboBoxPriority" Grid.Row="5" Grid.Column="1" Height="20" Width="177"></ComboBox>
+        <ComboBox x:Name="ComboBoxDeadline" Grid.Row="6" Grid.Column="1" Height="20" Width="177"></ComboBox>
+        <TextBox x:Name="TextBoxDescription"  Grid.Row="7" Grid.Column="1" Height="71" Width="177" TextWrapping="Wrap"></TextBox>
+        <StackPanel Grid.Row="8" Grid.Column="1" Orientation="Horizontal">
+            <Button Grid.Row="1" Grid.Column="1" x:Name = "ButtonCancel" Content = "Cancel"
+            HorizontalAlignment = "Right"
+            VerticalAlignment = "Top" Width = "75" Click="ButtonCancel_Click"/>
+            <Button Grid.Row="1" Grid.Column="1" x:Name = "ButtonSubmit" Content = "Submit"
+             HorizontalAlignment = "Right"
+            VerticalAlignment = "Top" Width = "75" Margin="27,0,0,0" Background="#FFE8D523" Click="ButtonSubmit_Click"/>
         </StackPanel>
-        <StackPanel Grid.Row="1" Grid.Column="1">
-            <ComboBox Height="20" Width="177"></ComboBox>
-            <TextBox  Height="20" Width="177"></TextBox>
-            <ComboBox  Height="20" Width="177"></ComboBox>
-            <ComboBox  Height="20" Width="177"></ComboBox>
-            <ComboBox  Height="20" Width="177"></ComboBox>
-            <TextBox  Height="71" Width="177" TextWrapping="Wrap"></TextBox>
 
-
-        </StackPanel>
-
-    </Grid>
+    </Grid> 
 
 
 

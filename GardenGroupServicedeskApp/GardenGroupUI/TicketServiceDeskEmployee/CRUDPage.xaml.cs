@@ -11,7 +11,7 @@ namespace GardenGroupUI
     
     public partial class CRUDPage : Page
     {
-        AppMainPage appMainPage = new AppMainPage();
+        AppMainServiceDeskEmployeePage appMainPage = new AppMainServiceDeskEmployeePage();
 
         public CRUDPage(CRUDState state)
         {
