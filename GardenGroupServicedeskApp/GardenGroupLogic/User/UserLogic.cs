@@ -30,7 +30,7 @@ namespace GardenGroupLogic
         {
             BsonDocument document = userDAO.GetUser(username);
             BsonKeyValuePair id = new BsonKeyValuePair("_id", document["_id"].ToString());
-            BsonKeyValuePair userName = new BsonKeyValuePair("UserName", document["UserName"].ToString());
+            BsonKeyValuePair userName = new BsonKeyValuePair("Username", document["Username"].ToString());
             BsonKeyValuePair salt = new BsonKeyValuePair("Salt", document["Salt"].ToString());
             BsonKeyValuePair password = new BsonKeyValuePair("Password", document["Password"].ToString());
             BsonKeyValuePair firstName = new BsonKeyValuePair("First Name", document["First Name"].ToString());
@@ -41,13 +41,14 @@ namespace GardenGroupLogic
             BsonKeyValuePair location = new BsonKeyValuePair("Location", document["Location"].ToString());
             BsonKeyValuePair? teams = null;
 
-            if (document["Teams"].ToString() != null)
+            try
             {
                 teams = new BsonKeyValuePair("Teams", document["Teams"].ToString());
             }
+            catch
+            { }
 
             User user = new User(id, userName, password, salt, firstName, lastName, role, email, phoneNumber, location, teams);
-
 
             return user;
         }
@@ -66,16 +67,7 @@ namespace GardenGroupLogic
             else
                 return false;
 
-            //"ZtzS7zL/RahJMy+4BtrntmymitRa5JqASTUxCzlgQ/HV9azfadu7gEKEaPdaG6Wz0WcYS+RN0pVnJnscgjq4RA=="
-            //"o+OZF3wHMEAyaa6T5qvJOqEvP6O1ydpMxih+GsEruegWF7ajtK1ntZAstGOg61klWoPu5/ZCII+hMdUPYJjPhQ=="
-
-
-            //"BSA8iVwUwV0Dci3EeLa9e8lmu2OmQ6y6JijYUYN6PjSFypLxw5YCFbPdcTFtimKw5EmgTsRg5Gu0Cec4Mw7y0A=="
-            //"BSA8iVwUwV0Dci3EeLa9e8lmu2OmQ6y6JijYUYN6PjSFypLxw5YCFbPdcTFtimKw5EmgTsRg5Gu0Cec4Mw7y0A=="
-
-            /*PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
             
-            HashWithSaltResult hashResultSha512 = pwHasher.HashWithSalt("ultra_safe_P455w0rD", 64, SHA512.Create());*/
         }
 
        /* public bool CheckEMAil()

@@ -49,6 +49,7 @@ namespace GardenGroupUI
             UserLogic loginLogic = new UserLogic();
 
             if(loginLogic.CheckLogin(username, password)){
+                //Creating user instance
                 User user = loginLogic.GetUser(username);
                 UserInstance.GetUserInstance(user);
                 //change source of window to AppMainPage.xaml <----------------------------

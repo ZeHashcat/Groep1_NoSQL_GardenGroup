@@ -83,7 +83,7 @@ namespace GardenGroupDAL
                 database = mongoClientInstance.Client.GetDatabase(databaseName);
                 collection = database.GetCollection<BsonDocument>(collectionName);
 
-                FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("UserName", username);
+                FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("Username", username);
                 BsonDocument document = collection.Find(filter).First();
                 //query
 
