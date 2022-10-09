@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GardenGroupModel;
+using System.Security.Cryptography;
 
 namespace GardenGroupLogic
 {
@@ -26,7 +27,6 @@ namespace GardenGroupLogic
             windowSize = new WindowSize("4:3", resolution_X, resolution_Y);
             FloodWindowSizes();
             GetSetSettings();
-            GetSetFullscreen();
         }
 
         public WindowSize WindowSize { get { return windowSize; } }
@@ -35,6 +35,7 @@ namespace GardenGroupLogic
         private void GetSetSettings()
         {
             GetSetResolution();
+            GetSetFullscreen();
         }
 
         //EXPLANATION: Decides which resolution to use, .ini or primary screen resolution. Also sets default .ini resolution values to auto when nothing is found.
@@ -65,7 +66,7 @@ namespace GardenGroupLogic
             settingsIni.Write(resolutionX, automaticMode, section);
             settingsIni.Write(resolutionY, automaticMode, section);
         }
-
+        
         //EXPLANATION: Decides whether or not to use fullscreen from the .ini or default value. if no key found or invalid it will set one.
         private void GetSetFullscreen()
         {

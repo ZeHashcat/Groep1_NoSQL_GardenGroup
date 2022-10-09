@@ -63,7 +63,8 @@ namespace GardenGroupUI
 
         private void DetectResolution()
         {
-            
+            double screenWidth = SystemParameters.PrimaryScreenWidth;
+            double screenHeight = SystemParameters.PrimaryScreenHeight;
         }
     }
 }
