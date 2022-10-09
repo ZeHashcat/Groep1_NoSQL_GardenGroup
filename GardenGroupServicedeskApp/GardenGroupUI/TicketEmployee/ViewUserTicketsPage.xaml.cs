@@ -12,21 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MongoDB.Driver;
-using System.Reflection;
 
-namespace GardenGroupUI
+namespace GardenGroupUI.TicketEmployee
 {
     /// <summary>
-    /// Interaction logic for MainPage.xaml
+    /// Interaction logic for ViewUserTicketsPage.xaml
     /// </summary>
-    public partial class AppMainPage : Page
+    public partial class ViewUserTicketsPage : Page
     {
-        AppWindow appWindow = (AppWindow)Application.Current.MainWindow;
-        
-        public AppMainPage()
+        public ViewUserTicketsPage()
         {
-                InitializeComponent();
+            InitializeComponent();
         }
     }
 }

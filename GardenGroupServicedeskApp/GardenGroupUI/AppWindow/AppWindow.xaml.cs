@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using MongoDB.Driver;
+using GardenGroupModel;
 
 namespace GardenGroupUI
 {
@@ -25,10 +25,24 @@ namespace GardenGroupUI
         {
             InitializeComponent();
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            frameContent.Source = new Uri("LoginPage.xaml", UriKind.Relative);
+            //frameContent.Source = new Uri("../Login/LoginPage.xaml", UriKind.Relative);
+            //frameContent.Source = new Uri("AppMainEmployeePage.xaml", UriKind.Relative);
+            frameContent.Source = new Uri("AppMainServiceDeskEmployeePage.xaml", UriKind.Relative);
         }
 
         private void buttonClose_Click(object sender, RoutedEventArgs e)
+        {
+            //CODE: if userInstance != null give option to logout, logout and shutdown, cancel.
+            //CODE: if userInstance == null (else) give option to shutdown or cancel
+        }
+
+        private void Logout()
+        {
+            UserInstance.Logout();
+            frameContent.Source = new Uri("../Login/LoginPage.xaml", UriKind.Relative);
+        }
+
+        private void Shutdown()
         {
             this.Close();
         }

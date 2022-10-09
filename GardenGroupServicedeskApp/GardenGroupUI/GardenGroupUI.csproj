@@ -33,7 +33,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="AppWindow\" />
+    <Page Update="AppWindow\AppMainEmployeePage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
   </ItemGroup>
 
 </Project>

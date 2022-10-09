@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GardenGroupUI
+namespace GardenGroupUI.UserManagement
 {
     /// <summary>
-    /// Interaction logic for AddUserWindow.xaml
+    /// Interaction logic for AddUserPage.xaml
     /// </summary>
-    public partial class AddUserWindow : Window
+    public partial class AddUserPage : Page
     {
-        public AddUserWindow()
+        public AddUserPage()
         {
             InitializeComponent();
         }
@@ -33,11 +34,11 @@ namespace GardenGroupUI
 
         private void CancelUserAddButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();
+            //this.Hide();
 
             //Terug naar ..... Window <------- <-------------
 
-            this.Close();
+            //this.Close();
         }
     }
 }

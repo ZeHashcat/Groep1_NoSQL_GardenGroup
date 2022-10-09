@@ -20,11 +20,11 @@ namespace GardenGroupUI
     /// <summary>
     /// Interaction logic for DashboardPage.xaml
     /// </summary>
-    public partial class DashboardPage : Page, IWidgetListObserver
+    public partial class DashboardServiceDeskEmployeePage : Page, IWidgetListObserver
     {
         private DashboardInstance dashboardInstance;
 
-        public DashboardPage()
+        public DashboardServiceDeskEmployeePage()
         {
             InitializeComponent();
 

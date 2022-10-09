@@ -45,7 +45,13 @@ namespace GardenGroupModel
 
         public static void Logout()
         {
-            instance = null;
+            if (instance != null)
+            {
+                lock (padlock)
+                {
+                    instance = null;
+                }
+            } 
         }
     }
 }

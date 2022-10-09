@@ -1,4 +1,4 @@
-﻿<Page x:Class="GardenGroupUI.AppMainPage"
+﻿<Page x:Class="GardenGroupUI.AppMainEmployeePage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -11,13 +11,13 @@
     <Grid>
         <TabControl Margin="10,20,10,10">
             <TabItem Header="Dashboard">
-                <Frame Source="../Dashboard/DashboardPage.xaml" Background="#FFE5E5E5"/>
+                <Frame Source="../Dashboard/DashboardEmployeePage.xaml" Background="#FFE5E5E5"/>
             </TabItem>
             <TabItem Header="Incident Management">
-                <Grid Background="#FFE5E5E5"/>
+                <Frame Source="../TicketEmployee/AddIncidentPage.xaml" Background="#FFE5E5E5"/>
             </TabItem>
-            <TabItem Header="Manager Management">
-                <Grid Background="#FFE5E5E5"/>
+            <TabItem Header="(possibly insert username here) tickets">
+                <Frame Source="../TicketEmployee/ViewUserTicketsPage.xaml" Background="#FFE5E5E5"/>
             </TabItem>
         </TabControl>
     </Grid>
