@@ -16,7 +16,7 @@
             <TabItem Header="Incident Management">
                 <Frame Source="../TicketEmployee/AddIncidentPage.xaml" Background="#FFE5E5E5"/>
             </TabItem>
-            <TabItem Header="(possibly insert username here) tickets">
+            <TabItem Header="(username) tickets">
                 <Frame Source="../TicketEmployee/ViewUserTicketsPage.xaml" Background="#FFE5E5E5"/>
             </TabItem>
         </TabControl>
