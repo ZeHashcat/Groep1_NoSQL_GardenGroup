@@ -8,7 +8,7 @@
       Title="ListWidgetPage" Height="300" Width="400">
 
     <Grid>
-        <ListView x:Name="widgetList" d:ItemsSource="{d:SampleData ItemCount=5}">
+        <ListView x:Name="widgetList" d:ItemsSource="{d:SampleData ItemCount=5}" Loaded="widgetList_Loaded">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

@@ -20,19 +20,29 @@ namespace GardenGroupUI
     /// <summary>
     /// Interaction logic for ListWidgetPage.xaml
     /// </summary>
-    public partial class ListWidgetPage : Page
+    public partial class ListWidgetPage : Page, IWidgetObserver
     {
+        IWidget widget;
         public ListWidgetPage(IWidget widget)
         {
             InitializeComponent();
 
-            FillWidgetList(widget);
+            this.widget = widget;
+            this.widget.AddObserver(this);
         }
 
-        private void FillWidgetList(IWidget widget)
+        private void widgetList_Loaded(object sender, RoutedEventArgs e)
         {
-
+            widgetList.BindingGroup = widget.GetData();
         }
+
+        public void Update(IWidget widget)
+        {
+            this.widget = widget;
+        }
+
+        
+
         //List widget will load a list, it has several columns each with a header.
 
         //Type of lists:

@@ -8,6 +8,14 @@ namespace GardenGroupModel
 {
     public interface IWidget
     {
-        //Strategy pattern?
+        //NOTE: methods here↓
+        public IWidgetData GetData();
+
+        //NOTE: readonly properties here↓
+
+        //NOTE: add/remove observer here↓
+
+        public void AddObserver(IWidgetObserver observer);
+        public void RemoveObserver(IWidgetObserver observer);
     }
 }

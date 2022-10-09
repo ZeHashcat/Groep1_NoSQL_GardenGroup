@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace GardenGroupModel
 {
-    public interface IWidget
+    public interface IWidgetData
     {
         //Strategy pattern?
+
     }
 }

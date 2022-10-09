@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GardenGroupModel
 {
-    public class UserTicketList : IWidget
+    public class UserTicketList : IWidgetData
     {
         private List<Ticket> ticketList;
         private string username;
