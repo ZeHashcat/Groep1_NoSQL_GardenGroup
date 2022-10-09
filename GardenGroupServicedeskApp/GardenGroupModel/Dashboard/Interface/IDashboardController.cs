@@ -10,7 +10,7 @@ namespace GardenGroupModel
     public interface IDashboardController
     {
         //Methods down here ↓
-        public void AddWidget(WidgetType widgetType, string widgetContent);
+        public void AddWidget(IWidget widget);
         public void RemoveWidget(IDashboardUserControl widget);
 
 

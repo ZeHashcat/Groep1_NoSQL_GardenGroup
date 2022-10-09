@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GardenGroupModel
+namespace GardenGroupUI
 {
-    public interface IWidgetListObserver
+    internal class PieChartWidget
     {
-        void Update(List<IWidget> list);
     }
 }

@@ -36,9 +36,15 @@ namespace GardenGroupUI
 
         //update methods from dashboard here ↓
 
-        public void Update(List<IDashboardUserControl> widgetList)
+        public void Update(List<IWidget> widgetList)
         {
-            //Refresh page and load widgets from widget list
+            DashboardStackpanel.Children.Clear();
+            foreach (WidgetPage widget in widgetList)
+            {
+                Frame frame = new Frame();
+                frame.Content = widget;
+                DashboardStackpanel.Children.Add(frame);
+            }
         }
 
         //Any page events here ↓

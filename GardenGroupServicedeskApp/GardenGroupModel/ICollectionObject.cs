@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace GardenGroupModel
 {
-    public interface IWidgetObserver
+    public interface ICollectionObject
     {
-        void Update(IWidget widget);
     }
 }

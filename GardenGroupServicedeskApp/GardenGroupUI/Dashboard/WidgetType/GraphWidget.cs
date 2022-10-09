@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GardenGroupModel
+namespace GardenGroupUI
 {
-    public interface IWidgetData
+    internal class GraphWidget
     {
-        //Strategy pattern?
-
     }
 }

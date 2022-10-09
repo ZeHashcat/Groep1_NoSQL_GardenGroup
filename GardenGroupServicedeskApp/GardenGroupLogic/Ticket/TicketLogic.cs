@@ -33,11 +33,10 @@ namespace GardenGroupLogic
         {
 
         }
-        public UserTicketList FillTicketList(string username)
+        public List<ICollectionObject> FillTicketList(string username)
         {
-            List<Ticket> tickets = ticketDAO.FillTicketList(username);
-            UserTicketList userTicketList = new UserTicketList(tickets, username);
-            return userTicketList;
+            List<ICollectionObject> tickets = ticketDAO.FillTicketList(username);
+            return tickets;
         }
     }
 }

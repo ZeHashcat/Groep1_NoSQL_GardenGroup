@@ -17,13 +17,14 @@ using GardenGroupModel;
 namespace GardenGroupUI
 {
     /// <summary>
-    /// Interaction logic for DashboardWidget.xaml
+    /// Interaction logic for WidgetPage.xaml
     /// </summary>
-    public partial class DashboardWidgetUserControl : UserControl, IDashboardUserControl
+    public partial class WidgetPage : Page, IWidget
     {
-        public DashboardWidgetUserControl()
+        public WidgetPage()
         {
             InitializeComponent();
+            WidgetContent.Source = new Uri("WidgetData/UserTicketsList.xaml", UriKind.Relative);
         }
     }
 }

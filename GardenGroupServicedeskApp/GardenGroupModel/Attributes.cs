@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace GardenGroupModel
 {
-    public interface IWidgetListObserver
+    //QUESTION: So... Since these are empty markers, why shouldn't I bunch em up in one .cs file?
+    public class CollectionObjectAttribute : Attribute
     {
-        void Update(List<IWidget> list);
     }
+
 }

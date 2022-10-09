@@ -1,0 +1,29 @@
+﻿        //Type of lists:
+
+        //User:
+        //Team list(Checks Team, lists all users with Firstname or Lastname, Role, Amount of tickets assigned to user, ?tickets closed today?)
+        //User list(Checks User, lists all tickets with status, ticket author and time since creation.) //------------------------------<DONE>
+
+        //Ticket:
+        //Unassigned ticket list(Checks Ticket, lists all unassigned tickets, time since creation, ticket author)
+        //Assigned ticket list(Checks Ticket, lists all assigned tickets, time since creation, ticket author, assigned user, team)
+        //Closed tickets list(Checks Ticket, Lists all closed tickets, status(resolved/unresolved), datetime of closure, ticket author, user that closed ticket, team)
+
+        //Pie Chart has multiple counts, every count will be assigned a colour and will be listed alongside pie chart.
+        //Graph has multiple counts, every count will be assigned a colour and will be listed alongside graph
+
+        //Type of Graph/PieChart
+
+        //User:
+        //MUST: Employee show my tickets %open %resolved %unresolved
+        //CurrentUser show Resolved/Unresolved tickets
+        //Team show open tickets per user
+        //Teams show open tickets over all teams
+
+        //Ticket:
+        //MUST: show all tickets %open %resolved %unresolved
+        //Show open ticket counts incidenttype
+        //Show resolved ticket counts incidenttype
+        //Show unresolved ticket counts incidenttype
+
+        

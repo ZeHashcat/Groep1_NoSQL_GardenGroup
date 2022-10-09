@@ -28,11 +28,13 @@ namespace GardenGroupModel
         public void AddWidget(IWidget widget)
         {
             widgetList.Add(widget);
+            NotifyObservers();
         }
 
         public void RemoveWidget(IWidget widget)
         {
             widgetList.Remove(widget);
+            NotifyObservers();
         }
 
         //NOTE: Add/Remove/Notify observers here ↓
@@ -43,6 +45,14 @@ namespace GardenGroupModel
         public void RemoveObserver(IWidgetListObserver observer)
         {
             observerList.Remove(observer);
+        }
+
+        private void NotifyObservers()
+        {
+            foreach (IWidgetListObserver observer in observerList)
+            {
+                observer.Update(widgetList);
+            }
         }
     }
 }
