@@ -9,7 +9,7 @@ namespace GardenGroupModel
     public class Dashboard : IDashboard
     {
         //NOTE: Members here ↓
-        private List<IDashboardUserControl> widgetList;
+        private List<IWidget> widgetList;
 
         //NOTE: Lists observers here ↓ 
         private List<IWidgetListObserver> observerList;
@@ -20,17 +20,17 @@ namespace GardenGroupModel
         //NOTE: Constructor here ↓, initialise observer lists
         public Dashboard()
         {
-            widgetList = new List<IDashboardUserControl>();
+            widgetList = new List<IWidget>();
             observerList = new List<IWidgetListObserver>();
         }
 
         //NOTE: Methods here ↓
-        public void AddWidget(IDashboardUserControl widget)
+        public void AddWidget(IWidget widget)
         {
             widgetList.Add(widget);
         }
 
-        public void RemoveWidget(IDashboardUserControl widget)
+        public void RemoveWidget(IWidget widget)
         {
             widgetList.Remove(widget);
         }
