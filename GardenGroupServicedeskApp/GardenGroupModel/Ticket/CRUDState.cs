@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace GardenGroupModel
 {
-    public enum Priority
+    public enum CRUDState
     {
-        low,
-        normal,
-        high
+        Create,
+        Read,
+        Update,
+        Delete
     }
 }
