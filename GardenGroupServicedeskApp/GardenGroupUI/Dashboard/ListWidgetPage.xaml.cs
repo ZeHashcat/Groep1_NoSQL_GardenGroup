@@ -13,20 +13,26 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GardenGroupModel;
+using GardenGroupLogic;
 
 namespace GardenGroupUI
 {
     /// <summary>
     /// Interaction logic for ListWidgetPage.xaml
     /// </summary>
-    public partial class ListWidgetPage : Page, IWidget
+    public partial class ListWidgetPage : Page
     {
-
-        public ListWidgetPage()
+        public ListWidgetPage(IWidget widget)
         {
             InitializeComponent();
+
+            FillWidgetList(widget);
         }
 
+        private void FillWidgetList(IWidget widget)
+        {
+
+        }
         //List widget will load a list, it has several columns each with a header.
 
         //Type of lists:

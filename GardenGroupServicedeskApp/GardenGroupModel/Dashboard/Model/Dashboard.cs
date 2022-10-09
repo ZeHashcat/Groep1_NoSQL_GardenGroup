@@ -15,7 +15,7 @@ namespace GardenGroupModel
         private List<IWidgetListObserver> observerList;
 
         //NOTE: Properties here ↓
-        public List<IDashboardUserControl> WidgetList { get { return widgetList; } }
+        public List<IWidget> WidgetList { get { return widgetList; } }
 
         //NOTE: Constructor here ↓, initialise observer lists
         public Dashboard()

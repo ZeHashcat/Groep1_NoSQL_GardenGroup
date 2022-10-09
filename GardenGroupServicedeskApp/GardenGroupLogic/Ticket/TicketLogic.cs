@@ -4,12 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GardenGroupModel;
+using GardenGroupDAL;
 
 namespace GardenGroupLogic
 {
-    internal class TicketLogic
+    public class TicketLogic
     {
         //Client client = new Client();
+        private TicketDAO ticketDAO;
+
+        public TicketLogic()
+        {
+            this.ticketDAO = new TicketDAO();
+        }
+
         public void CreateTicket()
         {
         }
@@ -24,6 +32,12 @@ namespace GardenGroupLogic
         public void DeleteTicket()
         {
 
+        }
+        public UserTicketList FillTicketList(string username)
+        {
+            List<Ticket> tickets = ticketDAO.FillTicketList(username);
+            UserTicketList userTicketList = new UserTicketList(tickets, username);
+            return userTicketList;
         }
     }
 }

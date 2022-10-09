@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GardenGroupModel
 {
-    internal class Ticket
+    public class Ticket
     {
         DateTime DateReported;
         string Subject;
