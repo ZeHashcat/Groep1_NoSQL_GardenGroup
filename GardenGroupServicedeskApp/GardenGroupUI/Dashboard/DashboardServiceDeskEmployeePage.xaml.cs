@@ -14,16 +14,17 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GardenGroupModel;
 using GardenGroupLogic;
+using System.Windows.Threading;
 
 namespace GardenGroupUI
 {
     /// <summary>
     /// Interaction logic for DashboardPage.xaml
     /// </summary>
+    
     public partial class DashboardServiceDeskEmployeePage : Page, IWidgetListObserver
     {
         private DashboardInstance dashboardInstance;
-
         public DashboardServiceDeskEmployeePage()
         {
             InitializeComponent();
@@ -38,12 +39,12 @@ namespace GardenGroupUI
 
         public void Update(List<IWidget> widgetList)
         {
-            DashboardStackpanel.Children.Clear();
-            foreach (WidgetPage widget in widgetList)
+            DashboardWrapPanel.Children.Clear();
+            foreach (DashboardWidgetPage widget in widgetList)
             {
                 Frame frame = new Frame();
                 frame.Content = widget;
-                DashboardStackpanel.Children.Add(frame);
+                DashboardWrapPanel.Children.Add(frame);
             }
         }
 

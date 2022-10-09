@@ -54,5 +54,11 @@ namespace GardenGroupUI
         {
             this.Close();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            UserLogic logic = new UserLogic();
+            logic.AddUserTest();
+        }
     }
 }

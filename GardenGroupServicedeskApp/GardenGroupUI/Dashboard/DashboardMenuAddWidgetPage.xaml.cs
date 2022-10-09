@@ -34,8 +34,8 @@ namespace GardenGroupUI
             //WidgetType widgetType = (WidgetType)Enum.Parse(typeof(WidgetType), comboBoxWidgetType.SelectedItem.ToString());
 
             //TEST:
-            string source = "WidgetData/UserTicketsList.xaml";
-            IWidget widget = new WidgetPage();
+            string source = "WidgetData/TeamUsersList.xaml";
+            IWidget widget = new DashboardWidgetPage();
             dashboardControllerInstance.DashboardController.AddWidget(widget);
         }
 

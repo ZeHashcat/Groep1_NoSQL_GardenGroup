@@ -26,9 +26,9 @@ namespace GardenGroupLogic
             //TEST:
             dashboardInstance.Dashboard.AddWidget(widget);
         }
-        public void RemoveWidget(IDashboardUserControl widget)
+        public void RemoveWidget(IWidget widget)
         {
-            //dashboardInstance.Dashboard.RemoveWidget(widget);
+            dashboardInstance.Dashboard.RemoveWidget(widget);
         }
     }
 }

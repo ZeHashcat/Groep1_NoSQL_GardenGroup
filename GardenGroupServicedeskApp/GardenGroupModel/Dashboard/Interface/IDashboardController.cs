@@ -11,7 +11,7 @@ namespace GardenGroupModel
     {
         //Methods down here ↓
         public void AddWidget(IWidget widget);
-        public void RemoveWidget(IDashboardUserControl widget);
+        public void RemoveWidget(IWidget widget);
 
 
     }

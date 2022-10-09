@@ -31,7 +31,15 @@ namespace GardenGroupUI
             {
                 listView.Items.Add(item);
             }
+            listView = SetListViewProperties(listView);
+            return listView;
+        }
 
+        private static ListView SetListViewProperties(ListView listView)
+        {
+            listView.MinHeight = 250;
+            listView.MinWidth = 300;
+            listView.Margin = new Thickness(15);
             return listView;
         }
     }

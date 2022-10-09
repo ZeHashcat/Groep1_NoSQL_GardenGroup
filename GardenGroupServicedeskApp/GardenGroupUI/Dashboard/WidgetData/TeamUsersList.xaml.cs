@@ -12,42 +12,42 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using GardenGroupLogic;
 using GardenGroupModel;
+using GardenGroupLogic;
 
 namespace GardenGroupUI
 {
     /// <summary>
-    /// Interaction logic for UserTicketsList.xaml
+    /// Interaction logic for TeamUsersList.xaml
     /// </summary>
-    public partial class UserTicketsList : Page
+    public partial class TeamUsersList : Page
     {
-        public UserTicketsList()
+        public TeamUsersList()
         {
             InitializeComponent();
+            
         }
-
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            TicketLogic ticketLogic = new TicketLogic();
-            List<ICollectionObject> tickets = ticketLogic.FillTicketList("ZeHashcat");
+            UserLogic userLogic = new UserLogic();
+            List<ICollectionObject> Users = userLogic.GetTeam(1);
             string[,] columnHeaders = SetColumnHeaders();
             listViewWidget.Items.Clear();
-            listViewWidget = ListWidget.GetListView(listViewWidget, tickets, columnHeaders);
+            listViewWidget = ListWidget.GetListView(listViewWidget, Users, columnHeaders);
         }
 
         private static string[,] SetColumnHeaders()
         {
-            string[,] columnHeaders = new string[4, 2];
-            columnHeaders[0, 0] = "Id";
-            columnHeaders[0, 1] = "Id";
-            columnHeaders[1, 0] = "Status";
-            columnHeaders[1, 1] = "Status";
-            columnHeaders[2, 0] = "Ticket Author";
-            columnHeaders[2, 1] = "TicketAuthor";
-            columnHeaders[3, 0] = "Time since Creation";
-            columnHeaders[3, 1] = "DateTimeCreated";
+            string[,] columnHeaders = new string[3, 2];
+            columnHeaders[0, 0] = "First Name";
+            columnHeaders[0, 1] = "FirstName.Value";
+            columnHeaders[1, 0] = "Role";
+            columnHeaders[1, 1] = "Role.Value";
+            columnHeaders[2, 0] = "Amount of tickets";
+            columnHeaders[2, 1] = "TicketAmount";
             return columnHeaders;
         }
+
+        
     }
 }
