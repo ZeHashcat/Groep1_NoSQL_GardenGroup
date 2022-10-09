@@ -13,7 +13,7 @@ namespace GardenGroupLogic
 
         /*public HashWithSaltResult HashWithSalt(string password, int saltLength, HashAlgorithm hashAlgo)
         {
-            RNG rng = new RNG();
+            RandomGeneratedNumber rng = new RandomGeneratedNumber();
             byte[] saltBytes = rng.GenerateRandomCryptographicBytes(saltLength);
             byte[] passwordAsBytes = Encoding.UTF8.GetBytes(password);
             List<byte> passwordWithSaltBytes = new List<byte>();
@@ -25,14 +25,25 @@ namespace GardenGroupLogic
 
         public HashWithSaltResult HashWithSalt(string password, int saltLength, HashAlgorithm hashAlgorithm)
         {
-            RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
-            byte[] saltByte = randomNumberGenerator.GenerateRandomCryptoBytes(saltLength);
+            RandomGeneratedNumber randomNumberGenerator = new RandomGeneratedNumber();
+            byte[] saltByte = randomNumberGenerator.GenerateRandomCryptoBytes(saltLength);            
             byte[] passwordAsByte = Encoding.UTF8.GetBytes(password);
             List<byte> passwordWithSalt = new List<byte>();
             passwordWithSalt.AddRange(passwordAsByte);
             passwordWithSalt.AddRange(saltByte);
-            byte[] digest = hashAlgorithm.ComputeHash(passwordWithSalt.ToArray());
-            return new HashWithSaltResult(Convert.ToBase64String(saltByte), Convert.ToBase64String(digest));
+            byte[] hash = hashAlgorithm.ComputeHash(passwordWithSalt.ToArray());
+            return new HashWithSaltResult(Convert.ToBase64String(saltByte), Convert.ToBase64String(hash));
+        }
+
+        public HashWithSaltResult HashWithSalt(string password, byte[] saltByte, HashAlgorithm hashAlgorithm)
+        {
+                       
+            byte[] passwordAsByte = Encoding.UTF8.GetBytes(password);
+            List<byte> passwordWithSalt = new List<byte>();
+            passwordWithSalt.AddRange(passwordAsByte);
+            passwordWithSalt.AddRange(saltByte);
+            byte[] hash = hashAlgorithm.ComputeHash(passwordWithSalt.ToArray());
+            return new HashWithSaltResult(Convert.ToBase64String(saltByte), Convert.ToBase64String(hash));
         }
     }
 }

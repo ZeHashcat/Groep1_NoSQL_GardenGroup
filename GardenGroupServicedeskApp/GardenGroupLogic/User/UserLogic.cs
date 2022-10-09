@@ -53,20 +53,39 @@ namespace GardenGroupLogic
 
         public bool CheckLogin(string username, string password)
         {
-            HashingWithSaltHasher passwordHasher = new HashingWithSaltHasher();
-            HashWithSaltResult hashWithSaltResult512 = passwordHasher.HashWithSalt(password, 64, SHA512.Create());
+            HashingWithSaltHasher passwordHasher = new HashingWithSaltHasher();           
 
-            string passwordDB = userDAO.GetPassword(username);
-            if (passwordDB == hashWithSaltResult512.ToString())
+            HashWithSaltResult hashAndSalt = userDAO.GetPassword(username);
+            byte[] saltBytes = Encoding.ASCII.GetBytes(hashAndSalt.Salt);
+
+            HashWithSaltResult hashWithSaltResult512 = passwordHasher.HashWithSalt(password, saltBytes, SHA512.Create());
+            if (hashAndSalt.Hash == hashWithSaltResult512.Hash)
                 return true;
             
             else
                 return false;
 
+            //"ZtzS7zL/RahJMy+4BtrntmymitRa5JqASTUxCzlgQ/HV9azfadu7gEKEaPdaG6Wz0WcYS+RN0pVnJnscgjq4RA=="
+            //"o+OZF3wHMEAyaa6T5qvJOqEvP6O1ydpMxih+GsEruegWF7ajtK1ntZAstGOg61klWoPu5/ZCII+hMdUPYJjPhQ=="
+
+
+            //"BSA8iVwUwV0Dci3EeLa9e8lmu2OmQ6y6JijYUYN6PjSFypLxw5YCFbPdcTFtimKw5EmgTsRg5Gu0Cec4Mw7y0A=="
+            //"BSA8iVwUwV0Dci3EeLa9e8lmu2OmQ6y6JijYUYN6PjSFypLxw5YCFbPdcTFtimKw5EmgTsRg5Gu0Cec4Mw7y0A=="
 
             /*PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
             
-            HashWithSaltResult hashResultSha512 = pwHasher.HashWithSalt("ultra_safe_P455w0rD", 64, SHA512.Create());*/            
+            HashWithSaltResult hashResultSha512 = pwHasher.HashWithSalt("ultra_safe_P455w0rD", 64, SHA512.Create());*/
         }
+
+       /* public bool CheckEMAil()
+        {
+
+
+            if ()
+                return true;
+
+            else
+                return false;
+        }*/
     }
 }

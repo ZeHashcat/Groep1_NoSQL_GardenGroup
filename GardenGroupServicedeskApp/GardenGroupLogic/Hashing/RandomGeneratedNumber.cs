@@ -7,10 +7,9 @@ using System.Security.Cryptography;
 
 namespace GardenGroupLogic
 {
-    public class RandomNumberGenerator
+    public class RandomGeneratedNumber
     {
-
-
+        private static RNGCryptoServiceProvider rngCsp = new RNGCryptoServiceProvider();
 
         /*public string GenerateRandomCryptographicKey(int keyLength)
         {
@@ -34,7 +33,7 @@ namespace GardenGroupLogic
         {
             RNGCryptoServiceProvider randomProvider = new RNGCryptoServiceProvider();
             byte[] random = new byte[keyLength];
-            randomProvider.GetBytes(random);
+            rngCsp.GetBytes(random);
             return random;
         }
     }

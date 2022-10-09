@@ -9,12 +9,12 @@ namespace GardenGroupModel
     public class HashWithSaltResult
     {
         public string Salt { get; }
-        public string Digest { get; set; }
+        public string Hash { get; set; }
 
-        public HashWithSaltResult(string salt, string digest)
+        public HashWithSaltResult(string salt, string hash)
         {
             Salt = salt;
-            Digest = digest;
+            Hash = hash;
         }
     }
 }

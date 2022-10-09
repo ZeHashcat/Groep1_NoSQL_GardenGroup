@@ -19,7 +19,7 @@ namespace GardenGroupDAL
         private string databaseName = "TicketSystemDB";
         private string collectionName = "User";
 
-        public string GetPassword(string username)
+        public HashWithSaltResult GetPassword(string username)
         {
             try
             {
@@ -27,7 +27,7 @@ namespace GardenGroupDAL
                 database = mongoClientInstance.Client.GetDatabase(databaseName);
                 collection = database.GetCollection<BsonDocument>(collectionName);
                 
-                FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("UserName", username);
+                FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("Username", username);
                 BsonDocument document = collection.Find(filter).FirstOrDefault();
                 //query
 
@@ -58,14 +58,16 @@ namespace GardenGroupDAL
         }
 
         // \/\/Waarschijnlijk niet nodig\/\/ \\
-        private string ReadPassword(BsonDocument document)
+        private HashWithSaltResult ReadPassword(BsonDocument document)
         {
             //filter document to only get password
             try
             {
-                string password = document.GetValue("Password").ToString();
-
-                return password;
+                string hashedPassword = document.GetValue("Password").ToString();
+                string salt = document.GetValue("Salt").ToString();
+                HashWithSaltResult hashAndSaltResult = new HashWithSaltResult(salt, hashedPassword);
+                
+                return hashAndSaltResult;
             }
             catch (Exception ex)
             {

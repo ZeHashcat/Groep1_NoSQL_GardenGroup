@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -42,13 +43,20 @@ namespace GardenGroupUI
             
             string username = loginUsernameTextBox.Text;
             string password = loginPasswordBox.Password;
+
+            /*HashingWithSaltHasher hasher = new HashingWithSaltHasher();
+            HashWithSaltResult result = hasher.HashWithSalt("wachtwoord", 64, SHA512.Create());*/
             UserLogic loginLogic = new UserLogic();
 
             if(loginLogic.CheckLogin(username, password)){
                 User user = loginLogic.GetUser(username);
                 UserInstance.GetUserInstance(user);
                 //change source of window to AppMainPage.xaml <----------------------------
+                
+
+                MessageBox.Show("username en password kloppen!!!");
             }
+            MessageBox.Show("je hebt dit verkloot!!!");
 
             if (loginRememberMeCheckBox.IsChecked ?? false)
             {
