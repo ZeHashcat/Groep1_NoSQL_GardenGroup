@@ -2,22 +2,19 @@
 using System.Windows;
 using System;
 using GardenGroupModel;
-
-
-
+using System.Collections.Generic;
 
 namespace GardenGroupUI
 {
     
     public partial class CRUDPage : Page
     {
-        AppMainServiceDeskEmployeePage appMainPage = new AppMainServiceDeskEmployeePage();
 
-        public CRUDPage(CRUDState state)
+        public CRUDPage()
         {
+            CRUDState state = CRUDState.Create;
             Priority priority = new Priority();
             InitializeComponent();
-            Console.WriteLine(Application.Current.Properties.Values);
             switch (state)
             {
 
@@ -48,17 +45,21 @@ namespace GardenGroupUI
             //date time selector fill
             DateTime date = DateTime.Now;
             //fill drop down whit priorities
+
             int lengthPriority = Enum.GetNames(typeof(Priority)).Length;
             for (int i = 0; i < lengthPriority; i++)
             {
                 ComboBoxPriority.Items.Add(Enum.GetName(typeof(Priority), i));
             }
+
             //fill drop down whit IncidentTypes
             int lengthIncidentType = Enum.GetNames(typeof(IncidentType)).Length;
             for (int i = 0; i < lengthIncidentType; i++)
             {
-                ComboBoxPriority.Items.Add(Enum.GetName(typeof(IncidentType), i));
+                ComboBoxIncidentType.Items.Add(Enum.GetName(typeof(IncidentType), i));
             }
+
+            DateSelectDeadline.SelectedDate= DateTime.Today.AddDays(7);
         }
 
         public void UpdateSetup()
@@ -70,14 +71,14 @@ namespace GardenGroupUI
 
         }
 
-        private void ButtonSubmit_Click(object sender, RoutedEventArgs e)
+        private void SetupUsers(List<User> users)
+        {
+           // ComboBoxUser.SetValue(users.);
+        }
+        private void SetupUsers(User user)
         {
 
         }
 
-        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
