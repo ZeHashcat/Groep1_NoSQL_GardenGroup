@@ -3,6 +3,7 @@ using System.Windows;
 using System;
 using GardenGroupModel;
 using System.Collections.Generic;
+using GardenGroupLogic;
 
 namespace GardenGroupUI
 {
@@ -10,9 +11,11 @@ namespace GardenGroupUI
     public partial class CRUDPage : Page
     {
 
+        TicketLogic ticketLogic = new TicketLogic();
+
         public CRUDPage()
         {
-            CRUDState state = CRUDState.Create;
+            CRUDState state = CRUDState.Read;
             Priority priority = new Priority();
             InitializeComponent();
             switch (state)
@@ -41,6 +44,7 @@ namespace GardenGroupUI
 
         public void CreateSetup()
         {
+
             //fill drop dowms
             //date time selector fill
             DateTime date = DateTime.Now;
@@ -68,6 +72,7 @@ namespace GardenGroupUI
         }
         public void ReadSetup()
         {
+            ticketLogic.ReadTicket();
 
         }
 

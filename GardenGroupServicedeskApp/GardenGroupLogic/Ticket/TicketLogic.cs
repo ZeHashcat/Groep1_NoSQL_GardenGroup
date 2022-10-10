@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GardenGroupDAL;
 using GardenGroupModel;
 
 namespace GardenGroupLogic
 {
-    internal class TicketLogic
+    public class TicketLogic
     {
-        //Client client = new Client();
+        TicketDAO TicketDAO = new TicketDAO();
+
         public void CreateTicket()
         {
         }

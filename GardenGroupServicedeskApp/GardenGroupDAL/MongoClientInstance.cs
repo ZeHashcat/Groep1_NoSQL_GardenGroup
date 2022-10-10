@@ -13,7 +13,7 @@ namespace GardenGroupDAL
     {
         private static MongoClientInstance? instance = null;
         private static readonly object padlock = new object();
-        private MongoClient client;
+        public MongoClient client;
 
 
         private MongoClientInstance(string connectionString)
