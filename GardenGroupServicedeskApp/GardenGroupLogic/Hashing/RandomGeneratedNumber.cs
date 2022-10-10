@@ -9,26 +9,7 @@ namespace GardenGroupLogic
 {
     public class RandomGeneratedNumber
     {
-        //private static RNGCryptoServiceProvider rngCsp = new RNGCryptoServiceProvider();
-
-        /*public string GenerateRandomCryptographicKey(int keyLength)
-        {
-            return Convert.ToBase64String(GenerateRandomCryptographicBytes(keyLength));
-        }
-
-        public byte[] GenerateRandomCryptographicBytes(int keyLength)
-        {
-            RNGCryptoServiceProvider rngCryptoServiceProvider = new RNGCryptoServiceProvider();
-            byte[] randomBytes = new byte[keyLength];
-            rngCryptoServiceProvider.GetBytes(randomBytes);
-            return randomBytes;
-        }*/
-
-        public string GenerateRandomCryptoKey(int keyLength)
-        {
-            return Convert.ToBase64String(GenerateRandomCryptoBytes(keyLength));
-        }
-
+        //create random based on keyLenght
         public byte[] GenerateRandomCryptoBytes(int keyLength)
         {
             RNGCryptoServiceProvider randomProvider = new RNGCryptoServiceProvider();

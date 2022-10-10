@@ -15,6 +15,7 @@ namespace GardenGroupDAL
     {
         private IMongoCollection<BsonDocument> collection = null;
         private IMongoDatabase database = null;
+        MongoClientInstance mongoClientInstance = MongoClientInstance.GetClientInstance();
 
         private string databaseName = "TicketSystemDB";
         private string collectionName = "User";
@@ -22,8 +23,7 @@ namespace GardenGroupDAL
         public HashWithSaltResult GetPassword(string username)
         {
             try
-            {
-                MongoClientInstance mongoClientInstance = MongoClientInstance.GetClientInstance();
+            {               
                 database = mongoClientInstance.Client.GetDatabase(databaseName);
                 collection = database.GetCollection<BsonDocument>(collectionName);
                 
@@ -36,7 +36,7 @@ namespace GardenGroupDAL
                 if (document == null)
                 {
                     //error detected
-                    throw new Exception("incorrect username or password, please make sure you have spelled everything correctly.");
+                    throw new Exception("incorrect username or password, please make sure you spelled everything correctly.");
                 }
                 else
                 {
@@ -78,8 +78,7 @@ namespace GardenGroupDAL
         public BsonDocument GetUser(string username)
         {
             try
-            {
-                MongoClientInstance mongoClientInstance = MongoClientInstance.GetClientInstance();
+            {                
                 database = mongoClientInstance.Client.GetDatabase(databaseName);
                 collection = database.GetCollection<BsonDocument>(collectionName);
 
@@ -99,6 +98,50 @@ namespace GardenGroupDAL
                     //return password
                     return document;
                 }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Data could not be retrieved from the database. Please try again, error: " + ex.Message);
+            }
+        }
+
+        public string ValidateEmail(string email)
+        {
+            try
+            {                
+                database = mongoClientInstance.Client.GetDatabase(databaseName);
+                collection = database.GetCollection<BsonDocument>(collectionName);
+
+                FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("E-Mail", email);
+                BsonDocument document = collection.Find(filter).FirstOrDefault();
+                //query
+
+                //var course = collection.FindAs<User>(MongoDB.Driver.Builders.Query.EQ("Title", "Todays Course")).SetFields(Fields.Include("Title", "Description").Exclude("_id")).ToList();
+
+                if (document == null)
+                {
+                    //error detected
+                    throw new Exception("Email cannot be found in our system, please make sure you spelled everything correctly.");
+                }
+                else
+                {
+                    //return email
+                    return GetEmail(document);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Data could not be retrieved from the database. Please try again, error: " + ex.Message);
+            }
+        }
+
+        private string GetEmail(BsonDocument document)
+        {
+            try
+            {
+                string email = document.GetValue("E-Mail").ToString();               
+               
+                return email;
             }
             catch (Exception ex)
             {

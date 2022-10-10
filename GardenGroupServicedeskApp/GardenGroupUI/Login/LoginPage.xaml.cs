@@ -43,9 +43,7 @@ namespace GardenGroupUI
             
             string username = loginUsernameTextBox.Text;
             string password = loginPasswordBox.Password;
-
-            /*HashingWithSaltHasher hasher = new HashingWithSaltHasher();
-            HashWithSaltResult result = hasher.HashWithSalt("wachtwoord", 64, SHA512.Create());*/
+                        
             UserLogic loginLogic = new UserLogic();
 
             if(loginLogic.CheckLogin(username, password)){
@@ -145,25 +143,12 @@ namespace GardenGroupUI
 
         //-------------------------------------------------------------------------------------
         //-------------------------------------------------------------------------------------
-        //User chose not to login. 
-        //Close login window.
-        private void loginCloseButton_Click(object sender, RoutedEventArgs e)
-        {
-            //NOTE: This method can be removed, the close button now resides in AppWindow.
-            //this.Close();
-        }
-
-        //-------------------------------------------------------------------------------------
-        //-------------------------------------------------------------------------------------
         //User has forgotten their password. User enters email.
         //If email exists (and has been accepted) user can reset password.
         //New Password will be saved.
         private void LoginForgotLoginButton_Click(object sender, RoutedEventArgs e)
         {
-            //this.Hide();
-            //ResetPasswordWindow resetPassword = new ResetPasswordWindow();
-            //resetPassword.ShowDialog();
-            //this.Close();
+                       
         }
     }
 }

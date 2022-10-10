@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GardenGroupLogic;
+using GardenGroupModel;
 
 namespace GardenGroupUI
 {
@@ -49,10 +53,18 @@ namespace GardenGroupUI
             //Read entered email.                 
             string email = resetPasswordEmailTextBox.Text;
             //Here we call on the Database to check if email exists.
-            //------------------------------------------------------------ <------ <------ Hier moet je door luuk.
+            UserLogic loginLogic = new UserLogic();
 
-            if (email == "mark")
+            if (loginLogic.CheckEmail(email))
             {
+                //Creating user instance
+                /*User user = loginLogic.GetUser(email);
+                UserInstance.GetUserInstance(user);*/
+                //change source of window to AppMainPage.xaml <----------------------------
+
+
+
+                //This is for the layout.
                 resetPasswordButtonPressedLbl.Foreground = Brushes.Green;
                 resetPasswordButtonPressedLbl.Content = "Email has been accepted. Please enter new password below.";
 
@@ -62,11 +74,24 @@ namespace GardenGroupUI
                 resetPasswordPaswrdBox.Visibility = Visibility.Visible;
                 resetPasswordRepeatPaswrdBx.Visibility = Visibility.Visible;
                 NewPasswordButton.Visibility = Visibility.Visible;
+                MessageBox.Show("email kan worden opgehaald!!!");
             }
             else
             {
                 resetPasswordButtonPressedLbl.Foreground = Brushes.Red;
                 resetPasswordButtonPressedLbl.Content = "Unknown email has been entered. Please enter a valid email.";
+                MessageBox.Show("je hebt dit verkloot!!!");
+            }
+            
+
+
+            if (email == "mark")
+            {
+                
+            }
+            else
+            {
+                
             }
         }
 
@@ -79,14 +104,16 @@ namespace GardenGroupUI
             {
                 //Save the new password. \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ (doe dat hier)
                 //-------------------------------------------------------------------------
+                HashingWithSaltHasher hasher = new HashingWithSaltHasher();
+                HashWithSaltResult result = hasher.HashWithSalt(newPassword, 64, SHA512.Create());
+                //Als ik dit nodig heb schrijf ik result.Hash of .Salt == alleen in deze methode
+
+
                 resetPasswordConfirmLabel.Foreground = Brushes.Green;
                 resetPasswordConfirmLabel.Content = "Congratulations. Your new password has been saved.";
                 MessageBox.Show("Congratulations. Your new password has been saved.");
 
-                //this.Hide();
-                //Login login = new Login();
-                //login.ShowDialog();
-                //this.Close();
+                
             }
             else
             {

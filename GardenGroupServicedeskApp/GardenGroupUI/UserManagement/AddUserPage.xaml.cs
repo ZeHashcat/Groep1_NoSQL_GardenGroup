@@ -29,16 +29,25 @@ namespace GardenGroupUI.UserManagement
         {
             //Roep hier database aan en voeg toe. Gebruik try catch.
             //Letop dat de email en gebruikersnaam niet twee maal voor mogen komen!!!
+            string firstname = addUserFirstnameTextBox.Text;
+            string lastname;
+            //enum typeUser;
+            string email;
+            int phoneNumber;
+
+            string username;
+            string password;
+            //enum location;
+
+
 
         }
 
         private void CancelUserAddButton_Click(object sender, RoutedEventArgs e)
         {
-            //this.Hide();
-
-            //Terug naar ..... Window <------- <-------------
-
-            //this.Close();
+            
+            //Terug naar usermannagement Window <------- <-------------
+            
         }
     }
 }

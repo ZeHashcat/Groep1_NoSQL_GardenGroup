@@ -65,20 +65,19 @@ namespace GardenGroupLogic
                 return true;
             
             else
-                return false;
-
-            
+                return false;            
         }
 
-       /* public bool CheckEMAil()
+        public bool CheckEmail(string email)
         {
 
+            string emailDB = userDAO.ValidateEmail(email);
 
-            if ()
+            if (email == emailDB)
                 return true;
 
             else
                 return false;
-        }*/
+        }
     }
 }
