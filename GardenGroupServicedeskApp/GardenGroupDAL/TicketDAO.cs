@@ -11,14 +11,20 @@ namespace GardenGroupDAL
 {
     public class TicketDAO
     {
-        static string connstring = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-       public TicketDAO()
-        {
-            Console.WriteLine(connstring);
+        //static string connstring = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        private IMongoCollection<BsonDocument> collection = null;
+        private IMongoDatabase database = null;
 
-            MongoClientInstance MongoClientInstance = MongoClientInstance.GetClientInstance("mongodb+srv://Group1Admin:WNtAWH3BCCnMfTWi@ticketsystemcluster.0fedf6a.mongodb.net/?retryWrites=true");
-         IAsyncCursor<string> list= MongoClientInstance.client.ListDatabaseNames();
-            Console.WriteLine(list);
+        private string databaseName = "TicketSystemDB";
+        private string collectionName = "User";
+
+       public TicketDAO(){
+            MongoClientInstance mongoClientInstance = MongoClientInstance.GetClientInstance();
+                
+
+            //database = mongoClientInstance.Client.GetDatabase(databaseName);
+            //collection = database.GetCollection<BsonDocument>(collectionName);
+            Console.WriteLine("test");
         }
     }
 }
