@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GardenGroupModel
 {
-    internal enum Priority
+    public enum Priority
     {
         low,
         normal,

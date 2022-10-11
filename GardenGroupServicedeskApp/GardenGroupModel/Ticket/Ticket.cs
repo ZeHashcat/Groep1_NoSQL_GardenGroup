@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace GardenGroupModel
 {
-    internal class Ticket
+    public class Ticket
     {
-        DateTime DateReported;
-        string Subject;
-        IncidentType Incident;
-        //User user;
-        Priority Impact;
-        Priority Urgency;
-        DateTime Deadline;
-
+        public DateTime DateReported;
+        public string Subject;
+        public IncidentType Incident;
+        public User User;
+        public Priority Impact;
+        public Priority Urgency;
+        public DateTime Deadline;
+        public string Description;
     }
 }
