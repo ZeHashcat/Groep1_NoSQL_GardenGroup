@@ -11,20 +11,27 @@ namespace GardenGroupDAL
 {
     public class TicketDAO
     {
-        //static string connstring = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        static string connstring = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         private IMongoCollection<BsonDocument> collection = null;
         private IMongoDatabase database = null;
 
         private string databaseName = "TicketSystemDB";
-        private string collectionName = "User";
+        private string collectionName = "Ticket";
 
        public TicketDAO(){
-            MongoClientInstance mongoClientInstance = MongoClientInstance.GetClientInstance();
-                
+            MongoClientInstance mongoClientInstance = MongoClientInstance.GetClientInstance(connstring);
 
-            //database = mongoClientInstance.Client.GetDatabase(databaseName);
-            //collection = database.GetCollection<BsonDocument>(collectionName);
-            Console.WriteLine("test");
+
+            database = mongoClientInstance.Client.GetDatabase(databaseName);
+            collection = database.GetCollection<BsonDocument>(collectionName);
+        }
+        public List<BsonDocument> Read()
+        {
+            FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("UserName", "ZeHashcat");
+            List<BsonDocument> document = collection.Find(filter).ToList();
+
+            return document;
+            
         }
     }
 }

@@ -1,21 +1,17 @@
-﻿using Ticket;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace GardenGroupModel
 {
-    internal class Ticket
+    public class Ticket
     {
-        DateTime DateReported;
-        string Subject;
-        IncidentType Incident;
-        User user;
-        Priority Impact;
-        Priority Urgency;
-        DateTime Deadline;
-        TicketStatus status;
+       public DateTime DateReported;
+       public string Subject;
+       public IncidentType Incident;
+       public User User;
+       public Priority Impact;
+       public Priority Urgency;
+       public DateTime Deadline;
+       public TicketStatus status;
+       public String Description;
     }
 }
