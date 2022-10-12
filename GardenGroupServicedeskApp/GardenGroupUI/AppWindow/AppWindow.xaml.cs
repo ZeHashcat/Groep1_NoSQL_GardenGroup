@@ -28,6 +28,8 @@ namespace GardenGroupUI
             //frameContent.Source = new Uri("../Login/LoginPage.xaml", UriKind.Relative);
             //frameContent.Source = new Uri("AppMainEmployeePage.xaml", UriKind.Relative);
             frameContent.Source = new Uri("AppMainServiceDeskEmployeePage.xaml", UriKind.Relative);
+            //frameContent.Source = new Uri("../TicketServiceDeskEmployee/CRUDPage.xaml", UriKind.Relative);
+
         }
 
         private void buttonClose_Click(object sender, RoutedEventArgs e)

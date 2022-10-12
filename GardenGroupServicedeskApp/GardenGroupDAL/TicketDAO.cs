@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using GardenGroupModel;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -25,13 +26,54 @@ namespace GardenGroupDAL
             database = mongoClientInstance.Client.GetDatabase(databaseName);
             collection = database.GetCollection<BsonDocument>(collectionName);
         }
-        public List<BsonDocument> Read()
+
+        /// <summary>
+        /// 
+        /// Writen by Floortje 
+        /// 
+        /// gets all tickets from the database
+        /// </summary>
+        /// <returns></returns>
+        public  List<BsonDocument> ReadAsync()
         {
-            FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("UserName", "ZeHashcat");
-            List<BsonDocument> document = collection.Find(filter).ToList();
+            //List<BsonDocument> document = collection.Find("{ }").ToList();
+
+            var aggregate = collection.Aggregate().Match(new BsonDocument
+
+            {
+            { "_id", 1 },
+            { "UserName", "ZeHashcat" },
+            { "Status", "open" },
+            { "Ticket Author", "Shreck" },
+            { "DateReported", "09/10/22" },
+            { "DeadLine", "09/10/22" },
+            { "Description", "Donkey is trying to vacinate the laptops against computer viruses again" },
+            { "Incident", "service" },
+            { "Subject", "Vacinatie" },
+            { "impact", "high" },
+            { "urgency", "low" }
+        }).Lookup("User", "UserName", "Username", "User");
+            List<BsonDocument> document =  aggregate.ToList();
 
             return document;
             
         }
+        /// <summary>
+        ///  writen by Floortje
+        ///  gets all tickets by a filter of <paramref name="ticket"/>
+        /// </summary>
+        /// <param name="ticket"></param>
+        /// <returns></returns>
+        public List<BsonDocument> Read(Ticket ticket)
+        {
+             
+            BsonDocument DocumentToFind = ticket.ToBsonDocument();
+           
+            List<BsonDocument> document = collection.Find(DocumentToFind).ToList();
+
+            return document;
+
+        }
     }
 }
+

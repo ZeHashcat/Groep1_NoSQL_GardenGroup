@@ -11,7 +11,7 @@ namespace GardenGroupModel
        public Priority Impact;
        public Priority Urgency;
        public DateTime Deadline;
-       public TicketStatus status;
+       public TicketStatus Status;
        public String Description;
     }
 }

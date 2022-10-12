@@ -72,8 +72,13 @@ namespace GardenGroupUI
         }
         public void ReadSetup()
         {
+            String result="";
             List<Ticket> tickets =ticketLogic.ReadTicket();
-            MessageBox.Show(tickets[0].DateReported.ToString());
+            foreach (Ticket ticket in tickets) { 
+             result += ticket.Subject.ToString() + "\n"
+                + ticket.Description.ToString();
+            }
+            MessageBox.Show(result);
 
         }
 
