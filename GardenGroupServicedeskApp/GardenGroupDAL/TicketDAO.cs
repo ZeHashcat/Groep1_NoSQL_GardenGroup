@@ -34,30 +34,18 @@ namespace GardenGroupDAL
         /// gets all tickets from the database
         /// </summary>
         /// <returns></returns>
-        public  List<BsonDocument> ReadAsync()
+        public  List<BsonDocument> Read()
         {
             //List<BsonDocument> document = collection.Find("{ }").ToList();
 
-            var aggregate = collection.Aggregate().Match(new BsonDocument
-
-            {
-            { "_id", 1 },
-            { "UserName", "ZeHashcat" },
-            { "Status", "open" },
-            { "Ticket Author", "Shreck" },
-            { "DateReported", "09/10/22" },
-            { "DeadLine", "09/10/22" },
-            { "Description", "Donkey is trying to vacinate the laptops against computer viruses again" },
-            { "Incident", "service" },
-            { "Subject", "Vacinatie" },
-            { "impact", "high" },
-            { "urgency", "low" }
+            IAggregateFluent<BsonDocument> aggregate = collection.Aggregate().Match(new BsonDocument{
         }).Lookup("User", "UserName", "Username", "User");
-            List<BsonDocument> document =  aggregate.ToList();
+            List<BsonDocument> document = aggregate.ToList();
 
             return document;
             
         }
+
         /// <summary>
         ///  writen by Floortje
         ///  gets all tickets by a filter of <paramref name="ticket"/>
@@ -66,14 +54,62 @@ namespace GardenGroupDAL
         /// <returns></returns>
         public List<BsonDocument> Read(Ticket ticket)
         {
-             
+
+            //find single Ticket and its user by agregation
+
+            //transforms ticket object to bsondocument
             BsonDocument DocumentToFind = ticket.ToBsonDocument();
-           
-            List<BsonDocument> document = collection.Find(DocumentToFind).ToList();
+            //delete user
+            DocumentToFind.Remove("User");
+
+            //set user name value in place of User
+            DocumentToFind.Set("UserName", BsonValue.Create(ticket.User.UserName.Value));
+
+            //test code removes dates
+            DocumentToFind.Remove("DateReported");
+            DocumentToFind.Remove("Deadline");
+            List<BsonDocument> document = collection.Aggregate().Match(DocumentToFind).Lookup("User", "UserName", "Username", "User").ToList();
 
             return document;
 
         }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="ticket"></param>
+        public void Create(Ticket ticket)
+        {
+            BsonDocument documentToAdd = ticket.ToBsonDocument();
+            //delete user
+            documentToAdd.Remove("User");
+
+            //set user name value in place of User
+            documentToAdd.Set("UserName", BsonValue.Create(ticket.User.UserName.Value));
+            collection.InsertOne(documentToAdd);
+        }
+
+        /// <summary>
+        ///  writen by Floortje
+        ///  gets all tickets by a filter of <paramref name="ticket"/>
+        /// </summary>
+        /// <param name="ticket"></param>
+        /// <returns></returns>
+        public void Update(Ticket ticketToUpdate,Ticket Update)
+        {
+            BsonDocument documentToAdd = ticketToUpdate.ToBsonDocument();
+
+            BsonDocument documentToAddUpdate = Update.ToBsonDocument();
+
+            //delete user
+            documentToAdd.Remove("User");
+
+            //set user name value in place of User
+            documentToAdd.Set("UserName", BsonValue.Create(ticketToUpdate.User.UserName.Value));
+
+            collection.UpdateOne(documentToAdd, documentToAddUpdate);
+        }
+
     }
 }
 

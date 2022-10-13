@@ -74,6 +74,8 @@ namespace GardenGroupUI
         {
             String result="";
             List<Ticket> tickets =ticketLogic.ReadTicket();
+
+            ticketLogic.CreateTicket(tickets[0]);
             foreach (Ticket ticket in tickets) { 
              result += ticket.Subject.ToString() + "\n"
                 + ticket.Description.ToString();
