@@ -1,20 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
 
 namespace GardenGroupModel
 {
-    internal class Ticket
+    public class Ticket
     {
-        DateTime DateReported;
-        string Subject;
-        IncidentType Incident;
-        //User user;
-        Priority Impact;
-        Priority Urgency;
-        DateTime Deadline;
+        [BsonRepresentation(BsonType.DateTime)]
+        public DateTime DateReported;
+       
+        public string Subject;
+        
+        [BsonRepresentation(BsonType.String)]        
+        public IncidentType Incident;
+       
+        public User User;
+        
+        [BsonRepresentation(BsonType.String)]         
+        public Priority Impact;
+        
+        [BsonRepresentation(BsonType.String)]       
+        public Priority Urgency;
 
+        [BsonRepresentation(BsonType.DateTime)]
+        public DateTime DeadLine;
+
+        [BsonRepresentation(BsonType.String)]         
+        public TicketStatus Status;
+
+        public String Description;
     }
 }

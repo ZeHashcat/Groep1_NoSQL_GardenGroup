@@ -14,7 +14,7 @@
                 <Frame Source="../Dashboard/DashboardServiceDeskEmployeePage.xaml" Background="#FFE5E5E5"/>
             </TabItem>
             <TabItem Header="Incident Management">
-                <Frame Source="../TicketServiceDeskEmployee/CRUDPage.xaml" Background="#FFE5E5E5"/>
+              <Frame Source="../TicketServiceDeskEmployee/CRUDPage.xaml" Background="#FFE5E5E5"/> 
             </TabItem>
             <TabItem Header="User Management">
                 <Frame Source="../UserManagement/AddUserPage.xaml" Background="#FFE5E5E5"/>
