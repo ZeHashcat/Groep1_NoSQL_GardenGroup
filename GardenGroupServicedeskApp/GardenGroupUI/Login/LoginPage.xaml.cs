@@ -46,25 +46,40 @@ namespace GardenGroupUI
                         
             UserLogic loginLogic = new UserLogic();
 
-            if(loginLogic.CheckLogin(username, password)){
-                //Creating user instance
-                User user = loginLogic.GetUser(username);
-                UserInstance.GetUserInstance(user);
-                //change source of window to AppMainPage.xaml <----------------------------
-                
-
-                MessageBox.Show("username en password kloppen!!!");
-            }
-            MessageBox.Show("je hebt dit verkloot!!!");
-
-            if (loginRememberMeCheckBox.IsChecked ?? false)
+            try
             {
-                SetLoginInfo();
+                if (loginLogic.CheckLogin(username, password))
+                {
+                    //Creating user instance
+                    User user = loginLogic.GetUser(username);
+                    UserInstance.GetUserInstance(user);
+                    //change source of window to AppMainPage.xaml <----------------------------
+
+
+                    MessageBox.Show("username en password kloppen!!!");
+                }
+                else
+                {
+
+                }
+                //MessageBox.Show("je hebt dit verkloot!!!");
+
+                loginWrongPasswordMessageLabel.Foreground = new SolidColorBrush(Colors.Red);
+                loginWrongPasswordMessageLabel.Content = "Wrong username or password entered,\nPlease try again.";
+
+                if (loginRememberMeCheckBox.IsChecked ?? false)
+                {
+                    SetLoginInfo();
+                }
+                else
+                {
+                    DeleteLoginInfo();
+                }
             }
-            else
+            catch(Exception ex)
             {
-                DeleteLoginInfo();
-            }
+                MessageBox.Show(ex.Message);
+            }            
 
         }
 

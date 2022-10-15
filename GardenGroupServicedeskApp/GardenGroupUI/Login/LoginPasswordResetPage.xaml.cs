@@ -27,6 +27,8 @@ namespace GardenGroupUI
         public LoginPasswordResetPage()
         {
             InitializeComponent();
+            CreateClient(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+
             //Placing form in center;
             //NOTE: Please note that the code that once stood here has been pirated away and placed in both windows. Thx!
             //Make shure buttin is disabeled when booting
@@ -39,6 +41,12 @@ namespace GardenGroupUI
             resetPasswordPaswrdBox.Visibility = Visibility.Hidden;
             resetPasswordRepeatPaswrdBx.Visibility = Visibility.Hidden;
             NewPasswordButton.Visibility = Visibility.Hidden; 
+        }
+
+        private void CreateClient(string connectionString)
+        {
+            UserLogic loginLogic = new UserLogic();
+            loginLogic.CreateClient(connectionString);
         }
 
 
@@ -55,71 +63,92 @@ namespace GardenGroupUI
             //Here we call on the Database to check if email exists.
             UserLogic loginLogic = new UserLogic();
 
-            if (loginLogic.CheckEmail(email))
+            try
             {
-                //Creating user instance
-                /*User user = loginLogic.GetUser(email);
-                UserInstance.GetUserInstance(user);*/
-                //change source of window to AppMainPage.xaml <----------------------------
+                if (loginLogic.CheckEmail(email))
+                {
 
+                    //This is for the layout.
+                    resetPasswordButtonPressedLbl.Foreground = Brushes.Green;
+                    resetPasswordButtonPressedLbl.Content = "Email has been accepted. Please enter new password below.";
 
+                    //Enable user to change password (showing labels and boxes)
+                    notNeededLabel3.Visibility = Visibility.Visible;
+                    notNeededLabel4.Visibility = Visibility.Visible;
+                    resetPasswordPaswrdBox.Visibility = Visibility.Visible;
+                    resetPasswordRepeatPaswrdBx.Visibility = Visibility.Visible;
+                    NewPasswordButton.Visibility = Visibility.Visible;
 
-                //This is for the layout.
-                resetPasswordButtonPressedLbl.Foreground = Brushes.Green;
-                resetPasswordButtonPressedLbl.Content = "Email has been accepted. Please enter new password below.";
-
-                //Enable user to change password (showing labels and boxes)
-                notNeededLabel3.Visibility = Visibility.Visible;
-                notNeededLabel4.Visibility = Visibility.Visible;
-                resetPasswordPaswrdBox.Visibility = Visibility.Visible;
-                resetPasswordRepeatPaswrdBx.Visibility = Visibility.Visible;
-                NewPasswordButton.Visibility = Visibility.Visible;
-                MessageBox.Show("email kan worden opgehaald!!!");
+                    //We need the email to stay the same now.
+                    resetPasswordEmailTextBox.IsEnabled = false;
+                    MessageBox.Show("email kan worden opgehaald!!!");
+                }
+                else
+                {
+                    resetPasswordButtonPressedLbl.Foreground = Brushes.Red;
+                    resetPasswordButtonPressedLbl.Content = "Unknown email has been entered. Please enter a valid email.";
+                    MessageBox.Show("je hebt dit verkloot!!!");
+                }
             }
-            else
+            catch(Exception ex)
             {
-                resetPasswordButtonPressedLbl.Foreground = Brushes.Red;
-                resetPasswordButtonPressedLbl.Content = "Unknown email has been entered. Please enter a valid email.";
-                MessageBox.Show("je hebt dit verkloot!!!");
+                MessageBox.Show(ex.Message);
             }
             
-
-
-            if (email == "mark")
-            {
-                
-            }
-            else
-            {
-                
-            }
         }
 
         private void NewPasswordButton_Click(object sender, RoutedEventArgs e)
         {
             string newPassword = resetPasswordPaswrdBox.Password.ToString();
             string newPasswordRepeat = resetPasswordRepeatPaswrdBx.Password.ToString();
+            string email = resetPasswordEmailTextBox.Text;
 
-            if (newPassword == newPasswordRepeat && 8 < newPassword.Length)
+            UserLogic loginLogic = new UserLogic();
+
+            try
             {
-                //Save the new password. \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ (doe dat hier)
-                //-------------------------------------------------------------------------
-                HashingWithSaltHasher hasher = new HashingWithSaltHasher();
-                HashWithSaltResult result = hasher.HashWithSalt(newPassword, 64, SHA512.Create());
-                //Als ik dit nodig heb schrijf ik result.Hash of .Salt == alleen in deze methode
+                if (newPassword == newPasswordRepeat && 8 < newPassword.Length)
+                {
+                    //Save the new password. \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ (doe dat hier)
+                    //-------------------------------------------------------------------------
+                    HashingWithSaltHasher hasher = new HashingWithSaltHasher();
+                    HashWithSaltResult hashWithSalt = hasher.HashWithSalt(newPassword, 64, SHA512.Create());
+                    //Als ik dit nodig heb schrijf ik result.Hash of .Salt == alleen in deze methode
+                    if (loginLogic.ChangePassword(email, hashWithSalt))
+                    {
+                        MessageBox.Show("Lekker bezig, is gelukt");
 
+                        resetPasswordConfirmLabel.Foreground = Brushes.Green;
+                        resetPasswordConfirmLabel.Content = "Congratulations. Your new password has been saved.";
+                        MessageBox.Show("Congratulations. Your new password has been saved.");
+                    }
+                    else
+                        MessageBox.Show("WTF ben jij aan het doen, mafkees");
 
-                resetPasswordConfirmLabel.Foreground = Brushes.Green;
-                resetPasswordConfirmLabel.Content = "Congratulations. Your new password has been saved.";
-                MessageBox.Show("Congratulations. Your new password has been saved.");
+                }
+                else
+                {
+                    resetPasswordConfirmLabel.Foreground = Brushes.Red;
+                    resetPasswordConfirmLabel.Content = "The entered passwords dont match.\nKeep in mind the password must contain atleast 8 symbols.";
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }            
+        }
 
-                
+        public bool AddUser()
+        {
+            //We will first check if the entered username and Email dont match the existing ones.
+            UserLogic userLogic = new UserLogic();
+
+            if (userLogic.AddUser())
+            {
+                return true;
             }
             else
-            {
-                resetPasswordConfirmLabel.Foreground = Brushes.Red;
-                resetPasswordConfirmLabel.Content = "The entered passwords dont match.\nKeep in mind the password must contain atleast 8 symbols.";
-            }
+                return false;
         }
     }
 }

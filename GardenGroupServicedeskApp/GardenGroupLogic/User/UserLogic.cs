@@ -65,9 +65,10 @@ namespace GardenGroupLogic
                 return true;
             
             else
-                return false;            
+                return false;
+            
         }
-
+        //validate email before changing the password
         public bool CheckEmail(string email)
         {
 
@@ -78,6 +79,33 @@ namespace GardenGroupLogic
 
             else
                 return false;
+        }
+        public bool ChangePassword(string email, HashWithSaltResult hashWithSalt)
+        {
+
+            //If password can be changed (email exists)
+            if (CheckEmail(email))
+            {
+                userDAO.ChangePassword(email, hashWithSalt);
+
+                return true;
+            }
+            //Cant update password. Something went wrong
+            else
+                return false;
+        }
+        public bool AddUser()
+        {
+            userDAO.AddUser();
+            return true;
+
+            /*if (userDAO.CheckUserData())
+            {
+                userDAO.AddUser();
+                return true;
+            }
+            else
+                return false;*/
         }
     }
 }
