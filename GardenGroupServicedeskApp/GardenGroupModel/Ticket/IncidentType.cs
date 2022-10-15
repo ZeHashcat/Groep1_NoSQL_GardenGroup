@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GardenGroupModel
 {
-   public enum IncidentType{
+    public enum IncidentType{
         software,
         hardware,
         service
