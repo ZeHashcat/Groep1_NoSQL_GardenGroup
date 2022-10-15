@@ -10,6 +10,12 @@ namespace GardenGroupLogic
     {
         TicketDAO TicketDAO = new TicketDAO();
 
+        /// <summary>
+        /// <list type="bullet">
+        /// <item>made by floortje Tjeertes</item>
+        /// </list>
+        /// </summary>
+        /// <param name="ticket"></param>
         public void CreateTicket(Ticket ticket)
         {
             TicketDAO.Create(ticket);
@@ -18,17 +24,40 @@ namespace GardenGroupLogic
         {
 
         }
+
+        /// <summary>
+        /// <list type="bullet">
+        /// <item>made by floortje Tjeertes</item>
+        /// </list>
+        /// </summary>
+        /// <returns></returns>
         public List<Ticket> ReadTicket()
         {
 
             return ListTickets(TicketDAO.Read()); ;
         }
+
+        /// <summary>
+        /// gets list of tickets 
+        /// <list type="bullet">
+        /// <item>made by floortje Tjeertes</item>
+        /// </list>
+        /// </summary>
+        /// <param name="ticket"></param>
+        /// <returns></returns>
         public List<Ticket> ReadTicket(Ticket ticket)
         {
 
             return ListTickets(TicketDAO.Read(ticket)); ;
         }
 
+        /// <summary>
+        /// <list type="bullet">
+        /// <item>made by floortje Tjeertes</item>
+        /// </list>
+        /// </summary>
+        /// <param name="ticketsBsonFormat"></param>
+        /// <returns></returns>
         private List<Ticket> ListTickets(List<BsonDocument> ticketsBsonFormat)
         {
             List<Ticket> tickets = new List<Ticket>();
