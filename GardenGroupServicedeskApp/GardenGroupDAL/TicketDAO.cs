@@ -13,8 +13,8 @@ namespace GardenGroupDAL
     public class TicketDAO
     {
         static string connstring = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-        private IMongoCollection<BsonDocument> collection = null;
-        private IMongoDatabase database = null;
+        private IMongoCollection<BsonDocument>? collection = null;
+        private IMongoDatabase? database = null;
 
         private string databaseName = "TicketSystemDB";
         private string collectionName = "Ticket";
@@ -66,18 +66,17 @@ namespace GardenGroupDAL
             DocumentToFind.Set("UserName", BsonValue.Create(ticket.User.UserName.Value));
 
             //test code removes dates
-            DocumentToFind.Remove("DateReported");
-            DocumentToFind.Remove("Deadline");
+       
             List<BsonDocument> document = collection.Aggregate().Match(DocumentToFind).Lookup("User", "UserName", "Username", "User").ToList();
 
             return document;
 
         }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="ticket"></param>
+        /// <summary>
+        ///  writen by Floortje
+        /// </summary>
+        /// <param name="ticket"></param>
         public void Create(Ticket ticket)
         {
             BsonDocument documentToAdd = ticket.ToBsonDocument();
@@ -97,17 +96,30 @@ namespace GardenGroupDAL
         /// <returns></returns>
         public void Update(Ticket ticketToUpdate,Ticket Update)
         {
-            BsonDocument documentToAdd = ticketToUpdate.ToBsonDocument();
+            BsonDocument documentToUpdate = ticketToUpdate.ToBsonDocument();
 
-            BsonDocument documentToAddUpdate = Update.ToBsonDocument();
+
+
+
+
+            BsonDocument updateddocument = Update.ToBsonDocument();
+
 
             //delete user
-            documentToAdd.Remove("User");
+            documentToUpdate.Remove("User");
+            updateddocument.Remove("User");
+
 
             //set user name value in place of User
-            documentToAdd.Set("UserName", BsonValue.Create(ticketToUpdate.User.UserName.Value));
+            documentToUpdate.Set("UserName", BsonValue.Create(ticketToUpdate.User.UserName.Value));
+            updateddocument.Set("UserName", BsonValue.Create(Update.User.UserName.Value));
 
-            collection.UpdateOne(documentToAdd, documentToAddUpdate);
+            FilterDefinition<BsonDocument> filter = documentToUpdate;
+            UpdateDefinition<BsonDocument> update = updateddocument;
+
+
+
+            collection.FindOneAndUpdate(filter, update);
         }
 
     }

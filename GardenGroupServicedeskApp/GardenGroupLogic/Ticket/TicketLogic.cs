@@ -20,9 +20,17 @@ namespace GardenGroupLogic
         {
             TicketDAO.Create(ticket);
         }
-        public void UpdateTicker()
-        {
 
+        /// <summary>
+        /// <list type="bullet">
+        /// <item>made by floortje Tjeertes</item>
+        /// </list>
+        /// </summary>
+        /// <param name="Tickettoupdate"></param>
+        /// <param name="update"></param>
+        public void UpdateTicket(Ticket TickettoUpdate, Ticket update)
+        {
+            TicketDAO.Update(TickettoUpdate, update);
         }
 
         /// <summary>

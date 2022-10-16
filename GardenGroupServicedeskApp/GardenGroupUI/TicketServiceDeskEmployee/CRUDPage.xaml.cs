@@ -4,6 +4,8 @@ using System;
 using GardenGroupModel;
 using System.Collections.Generic;
 using GardenGroupLogic;
+using System.Xml.Linq;
+using MongoDB.Bson;
 
 namespace GardenGroupUI
 {
@@ -72,15 +74,7 @@ namespace GardenGroupUI
         }
         public void ReadSetup()
         {
-            String result="";
-            List<Ticket> tickets =ticketLogic.ReadTicket();
-
-            ticketLogic.CreateTicket(tickets[0]);
-            foreach (Ticket ticket in tickets) { 
-             result += ticket.Subject.ToString() + "\n"
-                + ticket.Description.ToString();
-            }
-            MessageBox.Show(result);
+         
 
         }
 
@@ -93,5 +87,107 @@ namespace GardenGroupUI
 
         }
 
+        private void ButtonTestRead_Click(object sender, RoutedEventArgs e)
+        {
+            String result = "";
+            List<Ticket> tickets = ticketLogic.ReadTicket();
+
+            foreach (Ticket ticket in tickets)
+            {
+                result += ticket.Subject.ToString() + "\n"
+                   + ticket.Description.ToString() + "\n";
+            }
+            MessageBox.Show(result);
+        }
+
+       
+
+        private void ButtonTestDelete_Click(object sender, RoutedEventArgs e)
+        {
+            ticketLogic.DeleteTicket();
+        }
+
+     
+
+        private void ButtonTestCreate_Click(object sender, RoutedEventArgs e)
+        {
+            Ticket ticket = new Ticket()
+            {
+                DateReported = DateTime.Today,
+                Subject = "Create Test",
+                Incident = IncidentType.hardware,
+                User = new User(
+                        new BsonKeyValuePair("id", ObjectId.GenerateNewId()),
+                        new BsonKeyValuePair("userName", "Reynard96Blazer"),
+                        new BsonKeyValuePair("password", ""),
+                        new BsonKeyValuePair("firstName", "Jane"),
+                        new BsonKeyValuePair("lastName", "Doe"),
+                        new BsonKeyValuePair("role", "test user"),
+                        new BsonKeyValuePair("email", "Jane.Doe@Test.com"),
+                        new BsonKeyValuePair("phoneNumber","123456789"),
+                        new BsonKeyValuePair("location", "testlocation")
+
+                        ),
+            Impact = Priority.normal,
+            Urgency = Priority.low,
+            DeadLine = DateTime.Today.AddDays(1),
+            Status = TicketStatus.closed,
+            Description ="Dit is een test message 10 days until total destruction of all human kind. thank you for being alive🙇‍♀️ "
+            };
+            ticketLogic.CreateTicket(ticket);
+        }
+
+        private void ButtonTestUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            Ticket ticket = new Ticket()
+            {
+                DateReported = DateTime.Today,
+                Subject = "Create Test",
+                Incident = IncidentType.hardware,
+                User = new User(
+                       new BsonKeyValuePair("id", "634c05a26f28451bb8619190"),
+                       new BsonKeyValuePair("userName", "test"),
+                       new BsonKeyValuePair("password", ""),
+                       new BsonKeyValuePair("firstName", "Jane"),
+                       new BsonKeyValuePair("lastName", "Doe"),
+                       new BsonKeyValuePair("role", "test user"),
+                       new BsonKeyValuePair("email", "Jane.Doe@Test.com"),
+                       new BsonKeyValuePair("phoneNumber", "123456789"),
+                       new BsonKeyValuePair("location", "testlocation")
+
+                       ),
+                Impact = Priority.normal,
+                Urgency = Priority.low,
+                DeadLine = DateTime.Today.AddDays(1),
+                Status = TicketStatus.closed,
+                Description = "Dit is een test message 10 days until total destruction of all human kind. thank you for being alive🙇‍♀️ "
+            };
+            Ticket update = new Ticket()
+            {
+                DateReported = DateTime.Today.AddDays(2),
+                Subject = "Create Test",
+                Incident = IncidentType.hardware,
+                User = new User(
+                       new BsonKeyValuePair("id", "634c05a26f28451bb8619190"),
+                       new BsonKeyValuePair("userName", "Reynard96Blazer"),
+                       new BsonKeyValuePair("password", ""),
+                       new BsonKeyValuePair("firstName", "Jane"),
+                       new BsonKeyValuePair("lastName", "Doe"),
+                       new BsonKeyValuePair("role", "test user"),
+                       new BsonKeyValuePair("email", "Jane.Doe@Test.com"),
+                       new BsonKeyValuePair("phoneNumber", "123456789"),
+                       new BsonKeyValuePair("location", "testlocation")
+
+                       ),
+                Impact = Priority.high,
+                Urgency = Priority.high,
+                DeadLine = DateTime.Today.AddDays(3),
+                Status = TicketStatus.open,
+                Description = "Updated tickets"
+            };
+
+
+            ticketLogic.UpdateTicket(ticket,update);
+        }
     }
 }
