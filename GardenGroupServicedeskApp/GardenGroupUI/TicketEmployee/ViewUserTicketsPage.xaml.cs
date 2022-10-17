@@ -46,6 +46,8 @@ namespace GardenGroupUI.TicketEmployee
             //fetch ticketarray from method in logic layer
             List<Ticket> tickets = ticketLogic.ReadTicket();
 
+            ClearGrid();
+
             /*tickets.Add(new Ticket()
             {
                 DateReported = DateTime.Today,
@@ -83,16 +85,28 @@ namespace GardenGroupUI.TicketEmployee
             PrintTickets(tickets);
         }
 
+        public void ClearGrid()
+        {
+            GridTicketOverview.Children.Clear();
+            GridTicketOverview.RowDefinitions.Clear();
+            //AddRow(new GridLength(0, GridUnitType.Auto));
+        }
+
         public void PrintTickets(List<Ticket> tickets)
         {
             for (int i = 0; i < tickets.Count; i++)
             {
-                RowDefinition rowDef = new RowDefinition();
-                rowDef.Height = new GridLength(40);
-                GridTicketOverview.RowDefinitions.Add(rowDef);
+                AddRow(new GridLength(40));
 
                 FillColumns(i, tickets);
             }
+        }
+
+        public void AddRow(GridLength gridLength)
+        {
+            RowDefinition rowDef = new RowDefinition();
+            rowDef.Height = gridLength;
+            GridTicketOverview.RowDefinitions.Add(rowDef);
         }
 
         public void FillColumns(int i, List<Ticket> tickets)
@@ -100,9 +114,9 @@ namespace GardenGroupUI.TicketEmployee
             for (int j = 0; j < GridTicketOverview.ColumnDefinitions.Count; j++)
             {
                 TextBlock textBlock = new TextBlock();
-                SelectTicketField(i, j, textBlock, tickets);
+                SelectTicketField(j, textBlock, tickets[i]);
                 FillTextBlockDetails(textBlock);
-                Grid.SetRow(textBlock, i + 1);
+                Grid.SetRow(textBlock, i);
                 Grid.SetColumn(textBlock, j);
                 GridTicketOverview.Children.Add(textBlock);
 
@@ -110,27 +124,27 @@ namespace GardenGroupUI.TicketEmployee
             }
         }
 
-        public void SelectTicketField(int i, int j, TextBlock textBlock, List<Ticket> tickets)
+        public void SelectTicketField(int j, TextBlock textBlock, Ticket ticket)
         {
             switch (j)
             {
                 case 0:
-                    textBlock.Text = tickets[i].DeadLine.ToString();
+                    textBlock.Text = ticket.DeadLine.ToString("MM dd, yy");
                     break;
                 case 1:
-                    textBlock.Text = tickets[i].Subject.ToString();
+                    textBlock.Text = ticket.Subject.ToString();
                     break;
                 case 2:
-                    textBlock.Text = tickets[i].User.ToString();
+                    textBlock.Text = ticket.User.ToString();
                     break;
                 case 3:
-                    textBlock.Text = tickets[i].Description.ToString();
+                    textBlock.Text = ticket.Description.ToString();
                     break;
                 case 4:
-                    textBlock.Text = tickets[i].DateReported.ToString();
+                    textBlock.Text = ticket.DateReported.ToString("MMMM dd, yy");
                     break;
                 case 5:
-                    textBlock.Text = tickets[i].Status.ToString();
+                    textBlock.Text = ticket.Status.ToString();
                     break;
             }
         }
@@ -147,20 +161,21 @@ namespace GardenGroupUI.TicketEmployee
                 border.BorderThickness = new Thickness(0, 1, 0, 0);
             }
             border.BorderBrush = Brushes.Black;
-            Grid.SetRow(border, row + 1);
+            Grid.SetRow(border, row);
             Grid.SetColumn(border, column);
             GridTicketOverview.Children.Add(border);
         }
 
-        public TextBlock FillTextBlockDetails(TextBlock textBlock)
+        public void FillTextBlockDetails(TextBlock textBlock)
         {
             textBlock.HorizontalAlignment = HorizontalAlignment.Left;
             textBlock.VerticalAlignment = VerticalAlignment.Top;
             textBlock.Margin = new Thickness(5, 0, 20, 0);
-
-            return textBlock;
         }
 
-
+        private void ButtonRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            TicketFetcher();
+        }
     }
 }

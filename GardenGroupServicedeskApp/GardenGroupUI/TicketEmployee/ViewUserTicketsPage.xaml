@@ -17,18 +17,18 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <ScrollViewer>
+        <ScrollViewer x:Name="ScrollTicketOverview">
            <Grid x:Name="GridTicketOverview" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="White">
                <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition x:Name="Col1" Width="auto"/>
-                    <ColumnDefinition x:Name="Col2" Width="1*" MaxWidth="150" MinWidth="50"/>
-                    <ColumnDefinition x:Name="Col3" Width="auto"/>
-                    <ColumnDefinition x:Name="Col4" Width="1*" MinWidth="70"/>
-                    <ColumnDefinition x:Name="Col5" Width="auto"/>
-                    <ColumnDefinition x:Name="Col6" Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="1*" MaxWidth="150" MinWidth="50"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="1*" MinWidth="70"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
                 <Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,0" Background="#FF9A9A9A"/>
                 <Border Grid.Row="0" Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,1,0" Background="#FF9A9A9A"/>
@@ -45,5 +45,6 @@
                 <TextBlock Grid.Row="0" Grid.Column="5" Text="Status" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top"/>
             </Grid>
         </ScrollViewer>
+        <Button Content="Refresh" x:Name="ButtonRefresh" Height="20" Width="80" Grid.Column="1" Margin="0,0,0,200" Click="ButtonRefresh_Click"/>
     </Grid>
 </Page>
