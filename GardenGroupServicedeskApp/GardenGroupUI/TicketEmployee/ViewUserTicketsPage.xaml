@@ -11,53 +11,39 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="680"/>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Grid x:Name="GridTicketOverview" Grid.RowSpan="2" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="White">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="40"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition x:Name="Col1" Width="Auto"/>
-                <ColumnDefinition x:Name="Col2" Width="100"/>
-                <ColumnDefinition x:Name="Col3" Width="Auto"/>
-                <ColumnDefinition x:Name="Col4" Width="200"/>
-                <ColumnDefinition x:Name="Col5" Width="120"/>
-                <ColumnDefinition x:Name="Col6" />
-            </Grid.ColumnDefinitions>
-            <Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,0" Background="#FF9A9A9A"/>
-            <Border Grid.Row="0" Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,1,0" Background="#FF9A9A9A"/>
-            <Border Grid.Row="0" Grid.Column="2" BorderBrush="Black" BorderThickness="0,0,1,0" Background="#FF9A9A9A"/>
-            <Border Grid.Row="0" Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,1,0" Background="#FF9A9A9A"/>
-            <Border Grid.Row="0" Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,1,0" Background="#FF9A9A9A"/>
-            <Border Grid.Row="0" Grid.Column="5" BorderBrush="Black" BorderThickness="0,0,0,0" Background="#FF9A9A9A"/>
-            
-            <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="0,1,1,0"/>
-            <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="0,1,1,0"/>
-            <Border Grid.Row="1" Grid.Column="2" BorderBrush="Black" BorderThickness="0,1,1,0"/>
-            <Border Grid.Row="1" Grid.Column="3" BorderBrush="Black" BorderThickness="0,1,1,0"/>
-            <Border Grid.Row="1" Grid.Column="4" BorderBrush="Black" BorderThickness="0,1,1,0"/>
-            <Border Grid.Row="1" Grid.Column="5" BorderBrush="Black" BorderThickness="0,1,0,0"/>
+        <ScrollViewer>
+           <Grid x:Name="GridTicketOverview" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="White">
+               <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition x:Name="Col1" Width="auto"/>
+                    <ColumnDefinition x:Name="Col2" Width="1*" MaxWidth="150" MinWidth="50"/>
+                    <ColumnDefinition x:Name="Col3" Width="auto"/>
+                    <ColumnDefinition x:Name="Col4" Width="1*" MinWidth="70"/>
+                    <ColumnDefinition x:Name="Col5" Width="auto"/>
+                    <ColumnDefinition x:Name="Col6" Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,0" Background="#FF9A9A9A"/>
+                <Border Grid.Row="0" Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,1,0" Background="#FF9A9A9A"/>
+                <Border Grid.Row="0" Grid.Column="2" BorderBrush="Black" BorderThickness="0,0,1,0" Background="#FF9A9A9A"/>
+                <Border Grid.Row="0" Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,1,0" Background="#FF9A9A9A"/>
+                <Border Grid.Row="0" Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,1,0" Background="#FF9A9A9A"/>
+                <Border Grid.Row="0" Grid.Column="5" Background="#FF9A9A9A"/>
 
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="ID" HorizontalAlignment="Left" Margin="5,0,0,0"/>
-            <TextBlock Grid.Row="0" Grid.Column="1" Text="Subject" HorizontalAlignment="Left" Margin="5,0,0,0"/>
-            <TextBlock Grid.Row="0" Grid.Column="2" Text="User" HorizontalAlignment="Left" Margin="5,0,0,0"/>
-            <TextBlock Grid.Row="0" Grid.Column="3" Text="Description" HorizontalAlignment="Left" Grid.ColumnSpan="2" Margin="5,0,0,0"/>
-            <TextBlock Grid.Row="0" Grid.Column="4" Text="Date" HorizontalAlignment="Left" Margin="5,0,0,0"/>
-            <TextBlock Grid.Row="0" Grid.Column="5" Text="Status" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top"/>
-
-            <TextBlock Grid.Row="1" Grid.Column="0" Text="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,0,20,0"/>
-            <TextBlock Grid.Row="1" Grid.Column="1" Text="Ur mom" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,0,20,0" TextTrimming="CharacterEllipsis"/>
-            <TextBlock Grid.Row="1" Grid.Column="2" Text="Soem" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,0,20,0"/>
-            <TextBlock Grid.Row="1" Grid.Column="3" Text="I has a complaint and it's very long cuz i'm testing the length of this" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,0,20,0" TextTrimming="CharacterEllipsis"/>
-            <TextBlock Grid.Row="1" Grid.Column="4" Text="10/10/2022" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,0,20,0"/>
-            <TextBlock Grid.Row="1" Grid.Column="5" Text="Open" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,0,20,0"/>
-        </Grid>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Deadline" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="Subject" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="User" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+                <TextBlock Grid.Row="0" Grid.Column="3" Text="Description" HorizontalAlignment="Left" Grid.ColumnSpan="2" Margin="5,0,0,0"/>
+                <TextBlock Grid.Row="0" Grid.Column="4" Text="Date" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+                <TextBlock Grid.Row="0" Grid.Column="5" Text="Status" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top"/>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </Page>

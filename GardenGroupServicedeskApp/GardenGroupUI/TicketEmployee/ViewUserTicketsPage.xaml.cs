@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GardenGroupLogic;
 using GardenGroupModel;
 
 namespace GardenGroupUI.TicketEmployee
@@ -23,6 +24,8 @@ namespace GardenGroupUI.TicketEmployee
     /// </summary>
     public partial class ViewUserTicketsPage : Page
     {
+        TicketLogic ticketLogic = new TicketLogic();
+
         public ViewUserTicketsPage()
         {
             InitializeComponent();
@@ -31,17 +34,19 @@ namespace GardenGroupUI.TicketEmployee
 
             GridTicketOverview.MouseLeftButtonDown += (sen, evg) =>
             {
-                /*DataContext = new CRUDPage();*/
-                CRUDPage page = new CRUDPage();
-                this.Content = page;
+                //AppWindow.GetWindow(this).Content = new CRUDPage(CRUDState.Read);
+                TicketWindow ticketWindow = new TicketWindow(CRUDState.Read);
+                ticketWindow.Show();
+                AppWindow.GetWindow(this).IsEnabled = false;
             };
         }
 
         public void TicketFetcher()
         {
             //fetch ticketarray from method in logic layer
-            List<Ticket> tickets = new List<Ticket>();
-            tickets.Add(new Ticket()
+            List<Ticket> tickets = ticketLogic.ReadTicket();
+
+            /*tickets.Add(new Ticket()
             {
                 DateReported = DateTime.Today,
                 Subject = "test1",
@@ -73,7 +78,7 @@ namespace GardenGroupUI.TicketEmployee
                 Urgency = Priority.low,
                 DeadLine = DateTime.Now,
                 Description = "this is a test."
-            });
+            });*/
 
             PrintTickets(tickets);
         }
@@ -97,7 +102,7 @@ namespace GardenGroupUI.TicketEmployee
                 TextBlock textBlock = new TextBlock();
                 SelectTicketField(i, j, textBlock, tickets);
                 FillTextBlockDetails(textBlock);
-                Grid.SetRow(textBlock, i + 2);
+                Grid.SetRow(textBlock, i + 1);
                 Grid.SetColumn(textBlock, j);
                 GridTicketOverview.Children.Add(textBlock);
 
@@ -110,7 +115,7 @@ namespace GardenGroupUI.TicketEmployee
             switch (j)
             {
                 case 0:
-                    /*textBlock.Text = tickets[i].Id.ToString();*/
+                    textBlock.Text = tickets[i].DeadLine.ToString();
                     break;
                 case 1:
                     textBlock.Text = tickets[i].Subject.ToString();
@@ -125,7 +130,7 @@ namespace GardenGroupUI.TicketEmployee
                     textBlock.Text = tickets[i].DateReported.ToString();
                     break;
                 case 5:
-                    /*textBlock.Text = tickets[i].Status.ToString();*/
+                    textBlock.Text = tickets[i].Status.ToString();
                     break;
             }
         }
@@ -142,7 +147,7 @@ namespace GardenGroupUI.TicketEmployee
                 border.BorderThickness = new Thickness(0, 1, 0, 0);
             }
             border.BorderBrush = Brushes.Black;
-            Grid.SetRow(border, row + 2);
+            Grid.SetRow(border, row + 1);
             Grid.SetColumn(border, column);
             GridTicketOverview.Children.Add(border);
         }
