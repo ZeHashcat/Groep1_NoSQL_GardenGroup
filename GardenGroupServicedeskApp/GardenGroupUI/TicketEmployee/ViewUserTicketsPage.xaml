@@ -18,19 +18,18 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.RowSpan="2" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="White">
+        <Grid x:Name="GridTicketOverview" Grid.RowSpan="2" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="White">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="70"/>
-                <RowDefinition Height="70"/>
+                <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition/>
+                <ColumnDefinition x:Name="Col1" Width="Auto"/>
+                <ColumnDefinition x:Name="Col2" Width="100"/>
+                <ColumnDefinition x:Name="Col3" Width="Auto"/>
+                <ColumnDefinition x:Name="Col4" Width="200"/>
+                <ColumnDefinition x:Name="Col5" Width="120"/>
+                <ColumnDefinition x:Name="Col6" />
             </Grid.ColumnDefinitions>
             <Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,0" Background="#FF9A9A9A"/>
             <Border Grid.Row="0" Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,1,0" Background="#FF9A9A9A"/>
@@ -45,13 +44,6 @@
             <Border Grid.Row="1" Grid.Column="3" BorderBrush="Black" BorderThickness="0,1,1,0"/>
             <Border Grid.Row="1" Grid.Column="4" BorderBrush="Black" BorderThickness="0,1,1,0"/>
             <Border Grid.Row="1" Grid.Column="5" BorderBrush="Black" BorderThickness="0,1,0,0"/>
-            
-            <Border Grid.Row="2" Grid.Column="0" BorderBrush="Black" BorderThickness="0,1,1,0"/>
-            <Border Grid.Row="2" Grid.Column="1" BorderBrush="Black" BorderThickness="0,1,1,0"/>
-            <Border Grid.Row="2" Grid.Column="2" BorderBrush="Black" BorderThickness="0,1,1,0"/>
-            <Border Grid.Row="2" Grid.Column="3" BorderBrush="Black" BorderThickness="0,1,1,0"/>
-            <Border Grid.Row="2" Grid.Column="4" BorderBrush="Black" BorderThickness="0,1,1,0"/>
-            <Border Grid.Row="2" Grid.Column="5" BorderBrush="Black" BorderThickness="0,1,0,0"/>
 
             <TextBlock Grid.Row="0" Grid.Column="0" Text="ID" HorizontalAlignment="Left" Margin="5,0,0,0"/>
             <TextBlock Grid.Row="0" Grid.Column="1" Text="Subject" HorizontalAlignment="Left" Margin="5,0,0,0"/>
@@ -66,13 +58,6 @@
             <TextBlock Grid.Row="1" Grid.Column="3" Text="I has a complaint and it's very long cuz i'm testing the length of this" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,0,20,0" TextTrimming="CharacterEllipsis"/>
             <TextBlock Grid.Row="1" Grid.Column="4" Text="10/10/2022" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,0,20,0"/>
             <TextBlock Grid.Row="1" Grid.Column="5" Text="Open" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,0,20,0"/>
-
-            <TextBlock Grid.Row="2" Grid.Column="0" Text="2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,0,20,0"/>
-            <TextBlock Grid.Row="2" Grid.Column="1" Text="A longer subject" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,0,20,0" TextTrimming="CharacterEllipsis"/>
-            <TextBlock Grid.Row="2" Grid.Column="2" Text="Floortje" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,0,20,0"/>
-            <TextBlock Grid.Row="2" Grid.Column="3" Text="I has a complaint and it's very long cuz i'm testing the length of this" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,0,20,0" TextTrimming="CharacterEllipsis"/>
-            <TextBlock Grid.Row="2" Grid.Column="4" Text="14/10/2022" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,0,20,0"/>
-            <TextBlock Grid.Row="2" Grid.Column="5" Text="Closed" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,0,20,0"/>
         </Grid>
     </Grid>
 </Page>
