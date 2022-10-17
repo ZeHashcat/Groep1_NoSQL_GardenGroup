@@ -24,6 +24,7 @@ namespace GardenGroupUI
     /// </summary>
     public partial class LoginPasswordResetPage : Page
     {
+        private UserLogic loginLogic = new UserLogic();
         public LoginPasswordResetPage()
         {
             InitializeComponent();
@@ -44,25 +45,21 @@ namespace GardenGroupUI
         }
 
         private void CreateClient(string connectionString)
-        {
-            UserLogic loginLogic = new UserLogic();
+        {            
             loginLogic.CreateClient(connectionString);
         }
-
 
         private void resetPasswordEmailTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             ResetPasswordEmailButton.IsEnabled = !string.IsNullOrEmpty(resetPasswordEmailTextBox.Text);
         }
 
-
         private void ResetPasswordEmailButton_Click(object sender, RoutedEventArgs e)
         {
             //Read entered email.                 
             string email = resetPasswordEmailTextBox.Text;
             //Here we call on the Database to check if email exists.
-            UserLogic loginLogic = new UserLogic();
-
+            
             try
             {
                 if (loginLogic.CheckEmail(email))
@@ -81,29 +78,26 @@ namespace GardenGroupUI
 
                     //We need the email to stay the same now.
                     resetPasswordEmailTextBox.IsEnabled = false;
-                    MessageBox.Show("email kan worden opgehaald!!!");
+                    MessageBox.Show("Email has been send to validate.");
                 }
                 else
                 {
                     resetPasswordButtonPressedLbl.Foreground = Brushes.Red;
                     resetPasswordButtonPressedLbl.Content = "Unknown email has been entered. Please enter a valid email.";
-                    MessageBox.Show("je hebt dit verkloot!!!");
+                    MessageBox.Show("Entered wrong email, please try again");
                 }
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-            
+            }            
         }
 
         private void NewPasswordButton_Click(object sender, RoutedEventArgs e)
         {
             string newPassword = resetPasswordPaswrdBox.Password.ToString();
             string newPasswordRepeat = resetPasswordRepeatPaswrdBx.Password.ToString();
-            string email = resetPasswordEmailTextBox.Text;
-
-            UserLogic loginLogic = new UserLogic();
+            string email = resetPasswordEmailTextBox.Text;           
 
             try
             {
@@ -115,16 +109,13 @@ namespace GardenGroupUI
                     HashWithSaltResult hashWithSalt = hasher.HashWithSalt(newPassword, 64, SHA512.Create());
                     //Als ik dit nodig heb schrijf ik result.Hash of .Salt == alleen in deze methode
                     if (loginLogic.ChangePassword(email, hashWithSalt))
-                    {
-                        MessageBox.Show("Lekker bezig, is gelukt");
-
+                    {                      
                         resetPasswordConfirmLabel.Foreground = Brushes.Green;
                         resetPasswordConfirmLabel.Content = "Congratulations. Your new password has been saved.";
                         MessageBox.Show("Congratulations. Your new password has been saved.");
                     }
                     else
-                        MessageBox.Show("WTF ben jij aan het doen, mafkees");
-
+                        throw new Exception("Something went wrong, please try again");
                 }
                 else
                 {
@@ -136,19 +127,6 @@ namespace GardenGroupUI
             {
                 MessageBox.Show(ex.Message);
             }            
-        }
-
-        public bool AddUser()
-        {
-            //We will first check if the entered username and Email dont match the existing ones.
-            UserLogic userLogic = new UserLogic();
-
-            if (userLogic.AddUser())
-            {
-                return true;
-            }
-            else
-                return false;
-        }
+        }      
     }
 }

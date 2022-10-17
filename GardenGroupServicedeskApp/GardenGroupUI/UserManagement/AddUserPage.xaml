@@ -6,9 +6,9 @@
       xmlns:local="clr-namespace:GardenGroupUI.UserManagement"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AddUserPage">
+      Title="AddUserPage" Loaded="Page_Loaded">
 
-    <Grid x:Name="addUserLocationCombobox">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="81*"/>
             <RowDefinition/>
@@ -32,8 +32,8 @@
         <TextBox x:Name="addUserPasswordTextBox" HorizontalAlignment="Left" Margin="210,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="330"/>
         <Label Content="Username:" HorizontalAlignment="Left" Margin="70,266,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label Content="Password:" HorizontalAlignment="Left" Margin="70,295,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <ComboBox x:Name="addUserRoleCombobox" HorizontalAlignment="Left" Margin="210,134,0,0" VerticalAlignment="Top" Width="330"/>
-        <ComboBox HorizontalAlignment="Left" Margin="210,225,0,0" VerticalAlignment="Top" Width="330"/>
+        <ComboBox x:Name="addUserRoleComboBox" HorizontalAlignment="Left" Margin="210,134,0,0" VerticalAlignment="Top" Width="330"/>
+        <ComboBox x:Name="addUserLocationsComboBox" HorizontalAlignment="Left" Margin="210,225,0,0" VerticalAlignment="Top" Width="330"/>
 
     </Grid>
 </Page>

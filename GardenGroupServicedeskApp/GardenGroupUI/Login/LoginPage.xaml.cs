@@ -24,6 +24,7 @@ namespace GardenGroupUI
     /// </summary>
     public partial class LoginPage : Page
     {
+        private UserLogic loginLogic = new UserLogic();
         public LoginPage()
         {
             InitializeComponent();
@@ -44,8 +45,7 @@ namespace GardenGroupUI
             string username = loginUsernameTextBox.Text;
             string password = loginPasswordBox.Password;
                         
-            UserLogic loginLogic = new UserLogic();
-
+           
             try
             {
                 if (loginLogic.CheckLogin(username, password))
@@ -56,7 +56,7 @@ namespace GardenGroupUI
                     //change source of window to AppMainPage.xaml <----------------------------
 
 
-                    MessageBox.Show("username en password kloppen!!!");
+                    MessageBox.Show($"Welcome {user.FirstName}");
                 }
                 else
                 {
@@ -84,8 +84,7 @@ namespace GardenGroupUI
         }
 
         private void CreateClient(string connectionString)
-        {
-            UserLogic loginLogic = new UserLogic();
+        {           
             loginLogic.CreateClient(connectionString);
         }
 
@@ -163,7 +162,7 @@ namespace GardenGroupUI
         //New Password will be saved.
         private void LoginForgotLoginButton_Click(object sender, RoutedEventArgs e)
         {
-                       
+              
         }
     }
 }

@@ -148,16 +148,19 @@ namespace GardenGroupDAL
             collection.UpdateOne(filter, update, options);            
         }
 
-        public bool CheckUserData()
+        public bool CheckUserData(string username, string email, double phonenumber)
         {
             //Here we will check if any given values wont match the existing ones
             //This is how we find the documents
+            MongoClientInstance mongoClientInstance = MongoClientInstance.GetClientInstance();
+            database = mongoClientInstance.Client.GetDatabase(databaseName);
+            collection = database.GetCollection<BsonDocument>(collectionName);
 
             var users = collection.Find(new BsonDocument()).ToList();
 
             foreach (BsonDocument user in users)
             {
-                if (user.Contains("Phone Number") || user.Contains("Username") || user.Contains("Firstname") || user.Contains("E-Mail"))
+                if (user.Contains(username) || user.Contains(email) || user.Contains(phonenumber.ToString()))
                 {
                     return false;
                 }                    
@@ -171,23 +174,27 @@ namespace GardenGroupDAL
             return false;
         }
 
-        public void AddUser()
+        public void AddUser(string username, HashWithSaltResult hashWithSalt, string firstname, string lastname, string email, double phonenumber, string role,  string location)
         {
-            BsonDocument doc = new BsonDocument
-            {
-                //Adding the data into a document
+            MongoClientInstance mongoClientInstance = MongoClientInstance.GetClientInstance();
+            database = mongoClientInstance.Client.GetDatabase(databaseName);
+            collection = database.GetCollection<BsonDocument>(collectionName);
 
-                //Variabelen aanroepen. En achteraan plaatsen
-                {"Username", "HenkieNogiets"},
-                {"Password", "lekker bezig"},
-                {"Salt", "pffffffffffffff"},
-                {"First Name", "Mark"},
-                {"Last Name", "Smoelhouder"},
-                {"E-Mail", "Kaniknietuitstaan@geenidee.klomp"},
-                {"Phone Number", 0612345678},
-                {"Role", "Kies maar iets"},
-                {"Location", "ergensennergens"},
-                {"Teams", "nummer1"}
+            BsonDocument doc = new BsonDocument
+            {                
+            //Adding the data into a document
+
+            //Variabelen aanroepen. En achteraan plaatsen
+            { "Username", username},
+                {"Password", hashWithSalt.Hash},
+                {"Salt", hashWithSalt.Salt},
+                {"First Name", firstname},
+                {"Last Name", lastname},
+                {"E-Mail", email},
+                {"Phone Number", phonenumber},
+                {"Role", role},
+                {"Location", location},
+                {"Teams", new BsonDocument() }
             };      
             //Saving the data into the database
             collection.InsertOne(doc);

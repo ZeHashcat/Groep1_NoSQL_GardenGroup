@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -94,18 +95,16 @@ namespace GardenGroupLogic
             else
                 return false;
         }
-        public bool AddUser()
-        {
-            userDAO.AddUser();
-            return true;
+        public bool AddUser(string username, HashWithSaltResult hashWithSalt, string firstname, string lastname, string email, double phonenumber, string role, string location)
+        {        
 
-            /*if (userDAO.CheckUserData())
+            if (userDAO.CheckUserData(username, email, phonenumber))
             {
-                userDAO.AddUser();
+                userDAO.AddUser(username, hashWithSalt, firstname, lastname, email, phonenumber, role, location);
                 return true;
             }
             else
-                return false;*/
-        }
+                return false;
+        }        
     }
 }
