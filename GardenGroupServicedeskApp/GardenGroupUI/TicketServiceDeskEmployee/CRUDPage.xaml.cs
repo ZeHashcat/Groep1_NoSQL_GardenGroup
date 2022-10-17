@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using GardenGroupLogic;
 using System.Xml.Linq;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace GardenGroupUI
 {
@@ -15,10 +16,16 @@ namespace GardenGroupUI
 
         TicketLogic ticketLogic = new TicketLogic();
 
+        Ticket ticket;
+
+        TicketStatus currentStatus = TicketStatus.open;
+
         public CRUDPage()
         {
-            CRUDState state = CRUDState.Read;
+            CRUDState state = CRUDState.Create;
             Priority priority = new Priority();
+            ticket = ticketLogic.ReadTicket()[0];
+
             InitializeComponent();
             switch (state)
             {
@@ -55,7 +62,9 @@ namespace GardenGroupUI
             int lengthPriority = Enum.GetNames(typeof(Priority)).Length;
             for (int i = 0; i < lengthPriority; i++)
             {
-                ComboBoxPriority.Items.Add(Enum.GetName(typeof(Priority), i));
+                ComboBoxImpact.Items.Add(Enum.GetName(typeof(Priority), i));
+                ComboBoxUrgency.Items.Add(Enum.GetName(typeof(Priority), i));
+
             }
 
             //fill drop down whit IncidentTypes
@@ -74,7 +83,31 @@ namespace GardenGroupUI
         }
         public void ReadSetup()
         {
-         
+            this.IsEnabled = false;
+            
+             DatePickerDateTime.SelectedDate = ticket.DateReported;
+            
+
+             TextBoxSubject.Text = ticket.Subject;
+
+
+             ComboBoxIncidentType.Items.Add (ticket.Incident);
+            ComboBoxIncidentType.SelectedIndex = 0;
+
+             ComboBoxUser.Items.Add(ticket.User.FirstName.Value.ToString());
+            ComboBoxUser.SelectedIndex = 0;
+
+
+
+            ComboBoxImpact.Items.Add(ticket.Impact.ToString());
+            ComboBoxImpact.SelectedIndex = 0;
+
+            ComboBoxUrgency.Text = ticket.Urgency.ToString();
+
+             DateSelectDeadline.SelectedDate = ticket.DeadLine;
+
+            TextBoxDescription.Text = ticket.Description;
+
 
         }
 
@@ -206,6 +239,41 @@ namespace GardenGroupUI
             }
             
             catch(Exception ex) { }
+        }
+
+        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void ButtonSubmit_Click(object sender, RoutedEventArgs e)
+        {
+            ticketLogic.CreateTicket(ticket);
+        }
+
+        public Ticket MakeTicket()
+        {
+
+            Ticket ticket = new Ticket()
+            {
+                DateReported = (DateTime)DatePickerDateTime.SelectedDate,
+
+                Subject = TextBoxDescription.Text.ToString(),
+
+                Incident = (IncidentType)ComboBoxIncidentType.SelectedValue,
+
+                User = (User)ComboBoxUser.SelectedValue,
+
+                Impact = (Priority)ComboBoxImpact.SelectedValue,
+
+                Urgency = (Priority)ComboBoxUrgency.SelectedValue,
+
+                DeadLine = (DateTime)DateSelectDeadline.SelectedDate,
+
+                Status = currentStatus
+
+           };
+            return ticket;
         }
     }
 }
