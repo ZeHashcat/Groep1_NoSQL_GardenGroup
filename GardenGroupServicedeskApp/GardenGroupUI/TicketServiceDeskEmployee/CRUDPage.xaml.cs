@@ -19,6 +19,7 @@ namespace GardenGroupUI
         Ticket ticket;
 
         TicketStatus currentStatus = TicketStatus.open;
+        UserInstance user = UserInstance.GetUserInstance();
 
         public CRUDPage()
         {
@@ -75,6 +76,7 @@ namespace GardenGroupUI
                 ComboBoxIncidentType.Items.Add(Enum.GetName(typeof(IncidentType), i));
             }
 
+            ComboBoxUser.Items.Add(user.User.FirstName.ToString());
             DateSelectDeadline.SelectedDate= DateTime.Today.AddDays(7);
         }
 

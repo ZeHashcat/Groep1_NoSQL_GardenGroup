@@ -7,6 +7,8 @@ namespace GardenGroupModel
 {
     public class Ticket
     {
+      
+
         [BsonRepresentation(BsonType.DateTime)]
         public DateTime DateReported;
        
