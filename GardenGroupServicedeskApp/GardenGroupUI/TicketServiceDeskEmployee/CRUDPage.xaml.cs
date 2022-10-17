@@ -7,6 +7,8 @@ using GardenGroupLogic;
 using System.Xml.Linq;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System.Drawing;
+using System.Windows.Media;
 
 namespace GardenGroupUI
 {
@@ -23,8 +25,10 @@ namespace GardenGroupUI
 
         public CRUDPage()
         {
-            CRUDState state = CRUDState.Create;
+            CRUDState state = CRUDState.Update;
             Priority priority = new Priority();
+
+            //sets a ticket to test whit
             ticket = ticketLogic.ReadTicket()[0];
 
             InitializeComponent();
@@ -83,6 +87,20 @@ namespace GardenGroupUI
         public void UpdateSetup()
         {
 
+
+            PreFillForm(this.ticket);
+
+            //update button
+            ButtonCancel.Content = "update";
+            ButtonCancel.Click -= new RoutedEventHandler(ButtonCancel_Click);
+            ButtonCancel.Click += new RoutedEventHandler(UpdateTicket);
+
+            //delete button
+            ButtonSubmit.Content = "delete";
+            ButtonSubmit.Background = new SolidColorBrush(Colors.Red);
+            ButtonSubmit.Click -= new RoutedEventHandler(ButtonSubmit_Click);
+            ButtonSubmit.Click += new RoutedEventHandler(DeleteTicket);
+
         }
         public void ReadSetup()
         {
@@ -105,12 +123,16 @@ namespace GardenGroupUI
             ComboBoxImpact.Items.Add(ticket.Impact.ToString());
             ComboBoxImpact.SelectedIndex = 0;
 
-            ComboBoxUrgency.Text = ticket.Urgency.ToString();
+            ComboBoxUrgency.Items.Add(ticket.Urgency.ToString());
+            ComboBoxUrgency.SelectedIndex = 0;
 
-             DateSelectDeadline.SelectedDate = ticket.DeadLine;
+
+            DateSelectDeadline.SelectedDate = ticket.DeadLine;
 
             TextBoxDescription.Text = ticket.Description;
 
+            buttonGroup.Children.Remove(ButtonCancel);
+            buttonGroup.Children.Remove(ButtonSubmit);
 
         }
 
@@ -123,6 +145,7 @@ namespace GardenGroupUI
 
         }
 
+        //test methods
         private void ButtonTestRead_Click(object sender, RoutedEventArgs e)
         {
             String result = "";
@@ -137,8 +160,6 @@ namespace GardenGroupUI
             }
             MessageBox.Show(result);
         }
-
-       
 
         private void ButtonTestDelete_Click(object sender, RoutedEventArgs e)
         {
@@ -244,6 +265,8 @@ namespace GardenGroupUI
             catch(Exception ex) { }
         }
 
+       
+        //button events
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
             
@@ -261,6 +284,15 @@ namespace GardenGroupUI
             }
         }
 
+        private void UpdateTicket(object sender, RoutedEventArgs e)
+        {
+            ticketLogic.UpdateTicket(this.ticket,MakeTicket());
+        }
+        private void DeleteTicket(object sender, RoutedEventArgs e)
+        {
+
+        }
+        //help methods
         public Ticket MakeTicket()
         {
 
@@ -284,6 +316,38 @@ namespace GardenGroupUI
 
            };
             return ticket;
+        }
+
+        public void PreFillForm(Ticket ticket)
+        {
+
+
+            DatePickerDateTime.SelectedDate = ticket.DateReported;
+
+
+            TextBoxSubject.Text = ticket.Subject;
+
+
+            ComboBoxIncidentType.Items.Add(ticket.Incident);
+            ComboBoxIncidentType.SelectedIndex = 0;
+
+            ComboBoxUser.Items.Add(ticket.User.FirstName.Value.ToString());
+            ComboBoxUser.SelectedIndex = 0;
+
+
+
+            ComboBoxImpact.Items.Add(ticket.Impact.ToString());
+            ComboBoxImpact.SelectedIndex = 0;
+
+            ComboBoxUrgency.Items.Add(ticket.Urgency.ToString());
+            ComboBoxUrgency.SelectedIndex = 0;
+
+
+            DateSelectDeadline.SelectedDate = ticket.DeadLine;
+
+            TextBoxDescription.Text = ticket.Description;
+
+          
         }
     }
 }
