@@ -62,6 +62,7 @@ namespace GardenGroupUI
             int lengthPriority = Enum.GetNames(typeof(Priority)).Length;
             for (int i = 0; i < lengthPriority; i++)
             {
+
                 ComboBoxImpact.Items.Add(Enum.GetName(typeof(Priority), i));
                 ComboBoxUrgency.Items.Add(Enum.GetName(typeof(Priority), i));
 
@@ -248,7 +249,14 @@ namespace GardenGroupUI
 
         private void ButtonSubmit_Click(object sender, RoutedEventArgs e)
         {
-            ticketLogic.CreateTicket(ticket);
+
+            try
+            {
+                ticketLogic.CreateTicket(MakeTicket());
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         public Ticket MakeTicket()
@@ -260,13 +268,13 @@ namespace GardenGroupUI
 
                 Subject = TextBoxDescription.Text.ToString(),
 
-                Incident = (IncidentType)ComboBoxIncidentType.SelectedValue,
+                Incident = (IncidentType)ComboBoxIncidentType.SelectedIndex,
 
                 User = (User)ComboBoxUser.SelectedValue,
 
-                Impact = (Priority)ComboBoxImpact.SelectedValue,
+                Impact = (Priority)ComboBoxImpact.SelectedIndex,
 
-                Urgency = (Priority)ComboBoxUrgency.SelectedValue,
+                Urgency = (Priority)ComboBoxUrgency.SelectedIndex,
 
                 DeadLine = (DateTime)DateSelectDeadline.SelectedDate,
 
