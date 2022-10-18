@@ -29,10 +29,8 @@ namespace GardenGroupUI
         {
             InitializeComponent();
             CreateClient(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
-
-            //Placing form in center;
-            //NOTE: Please note that the code that once stood here has been pirated away and placed in both windows. Thx!
-            //Make shure buttin is disabeled when booting
+                        
+            //Make shure button is disabeled when booting
             ResetPasswordEmailButton.IsEnabled = !string.IsNullOrEmpty(resetPasswordEmailTextBox.Text);
 
             //User should not be able to change password before email is checked.
@@ -55,13 +53,16 @@ namespace GardenGroupUI
         }
 
         private void ResetPasswordEmailButton_Click(object sender, RoutedEventArgs e)
-        {
-            //Read entered email.                 
-            string email = resetPasswordEmailTextBox.Text;
-            //Here we call on the Database to check if email exists.
+        {           
+            //Before the user can be allowed to enter the new password they are asked to enter a email to enshure they are the user they make out to be.
+            //(In a real application the entered email must first het accepted in the users email)
             
             try
             {
+                //Read entered email.
+                string email = resetPasswordEmailTextBox.Text;
+
+                //Here we call on the Database to check if email exists.
                 if (loginLogic.CheckEmail(email))
                 {
 
@@ -72,9 +73,9 @@ namespace GardenGroupUI
                     //Enable user to change password (showing labels and boxes)
                     notNeededLabel3.Visibility = Visibility.Visible;
                     notNeededLabel4.Visibility = Visibility.Visible;
+                    NewPasswordButton.Visibility = Visibility.Visible;
                     resetPasswordPaswrdBox.Visibility = Visibility.Visible;
                     resetPasswordRepeatPaswrdBx.Visibility = Visibility.Visible;
-                    NewPasswordButton.Visibility = Visibility.Visible;
 
                     //We need the email to stay the same now.
                     resetPasswordEmailTextBox.IsEnabled = false;
@@ -94,19 +95,20 @@ namespace GardenGroupUI
         }
 
         private void NewPasswordButton_Click(object sender, RoutedEventArgs e)
-        {
-            string newPassword = resetPasswordPaswrdBox.Password.ToString();
-            string newPasswordRepeat = resetPasswordRepeatPaswrdBx.Password.ToString();
-            string email = resetPasswordEmailTextBox.Text;           
-
+        {                       
+            //The new password has been entered. It will now get checked and if everything is alright it will get updated into the database
             try
             {
+                string email = resetPasswordEmailTextBox.Text;
+                string newPassword = resetPasswordPaswrdBox.Password.ToString();
+                string newPasswordRepeat = resetPasswordRepeatPaswrdBx.Password.ToString();
+
                 if (newPassword == newPasswordRepeat && 8 < newPassword.Length)
                 {
                     //Save the new password. \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ (doe dat hier)
                     //-------------------------------------------------------------------------
                     HashingWithSaltHasher hasher = new HashingWithSaltHasher();
-                    HashWithSaltResult hashWithSalt = hasher.HashWithSalt(newPassword, 64, SHA512.Create());
+                    HashWithSaltResult hashWithSalt = hasher.NewHashWithSalt(newPassword, 64, SHA512.Create());
                     //Als ik dit nodig heb schrijf ik result.Hash of .Salt == alleen in deze methode
                     if (loginLogic.ChangePassword(email, hashWithSalt))
                     {                      
