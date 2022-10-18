@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,8 +14,8 @@ namespace GardenGroupDAL
     public class TicketDAO
     {
         static string connstring = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-        private IMongoCollection<BsonDocument> collection = null;
-        private IMongoDatabase database = null;
+        private IMongoCollection<BsonDocument>? collection = null;
+        private IMongoDatabase? database = null;
 
         private string databaseName = "TicketSystemDB";
         private string collectionName = "Ticket";
@@ -39,7 +40,7 @@ namespace GardenGroupDAL
             //List<BsonDocument> document = collection.Find("{ }").ToList();
 
             IAggregateFluent<BsonDocument> aggregate = collection.Aggregate().Match(new BsonDocument{
-        }).Lookup("User", "UserName", "Username", "User");
+            }).Lookup("User", "UserName", "Username", "User");
             List<BsonDocument> document = aggregate.ToList();
 
             return document;
@@ -66,18 +67,17 @@ namespace GardenGroupDAL
             DocumentToFind.Set("UserName", BsonValue.Create(ticket.User.UserName.Value));
 
             //test code removes dates
-            DocumentToFind.Remove("DateReported");
-            DocumentToFind.Remove("Deadline");
+       
             List<BsonDocument> document = collection.Aggregate().Match(DocumentToFind).Lookup("User", "UserName", "Username", "User").ToList();
 
             return document;
 
         }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="ticket"></param>
+        /// <summary>
+        ///  writen by Floortje
+        /// </summary>
+        /// <param name="ticket"></param>
         public void Create(Ticket ticket)
         {
             BsonDocument documentToAdd = ticket.ToBsonDocument();
@@ -86,7 +86,15 @@ namespace GardenGroupDAL
 
             //set user name value in place of User
             documentToAdd.Set("UserName", BsonValue.Create(ticket.User.UserName.Value));
-            collection.InsertOne(documentToAdd);
+            try
+            {
+                collection.InsertOne(documentToAdd);
+            }
+            catch(MongoWriteException e)
+            {
+
+                throw new Exception(e.ToString());
+            }
         }
 
         /// <summary>
@@ -95,20 +103,54 @@ namespace GardenGroupDAL
         /// </summary>
         /// <param name="ticket"></param>
         /// <returns></returns>
-        public void Update(Ticket ticketToUpdate,Ticket Update)
+        public BsonDocument Update(Ticket ticketToUpdate,Ticket Update)
         {
-            BsonDocument documentToAdd = ticketToUpdate.ToBsonDocument();
+            BsonDocument documentToUpdate = ticketToUpdate.ToBsonDocument();
 
-            BsonDocument documentToAddUpdate = Update.ToBsonDocument();
+            BsonDocument updateddocument = Update.ToBsonDocument();
+
 
             //delete user
-            documentToAdd.Remove("User");
+            documentToUpdate.Remove("User");
+            updateddocument.Remove("User");
+
 
             //set user name value in place of User
-            documentToAdd.Set("UserName", BsonValue.Create(ticketToUpdate.User.UserName.Value));
+            documentToUpdate.Set("UserName", BsonValue.Create(ticketToUpdate.User.UserName.Value));
+            updateddocument.Set("UserName", BsonValue.Create(Update.User.UserName.Value));
 
-            collection.UpdateOne(documentToAdd, documentToAddUpdate);
+            FilterDefinition<BsonDocument> filter = documentToUpdate;
+            UpdateDefinition<BsonDocument> update = updateddocument;
+
+
+            BsonDocument returnedDocument = collection.FindOneAndUpdate(filter, update);
+            if(returnedDocument != updateddocument)
+            {
+                
+                throw new Exception("something went wrong the ticket whas not updated");
+
+            }
+            return returnedDocument;
+
         }
+
+        public BsonDocument Delete(Ticket ticket)
+        {
+            BsonDocument documentToDelete = ticket.ToBsonDocument();
+            documentToDelete.Remove("User");
+            documentToDelete.Set("UserName", BsonValue.Create(ticket.User.UserName.Value));
+            FilterDefinition<BsonDocument> FilterToDelete = documentToDelete;
+            BsonDocument documentToValidate = collection.FindOneAndDelete(FilterToDelete);
+
+            if (documentToValidate != documentToDelete)
+            {
+                throw new Exception("something went wrong the ticket whas not deleted");
+            }
+
+            return documentToValidate;
+        }
+
+
 
     }
 }

@@ -22,6 +22,7 @@
             <RowDefinition Height="AUTO" />
             <RowDefinition Height="AUTO" />
             <RowDefinition Height="AUTO" />
+            <RowDefinition Height="AUTO" />
 
 
         </Grid.RowDefinitions>
@@ -31,23 +32,39 @@
         <TextBlock Grid.Row="2" Grid.Column="0" Text="Subject of incident:" HorizontalAlignment="Right"/>
         <TextBlock Grid.Row="3" Grid.Column="0" Text="Type of incident:" HorizontalAlignment="Right"></TextBlock>
         <TextBlock Grid.Row="4" Grid.Column="0" Text="Reported by user:" HorizontalAlignment="Right"></TextBlock>
-        <TextBlock Grid.Row="5" Grid.Column="0" Text="Priority:" HorizontalAlignment="Right"></TextBlock>
-        <TextBlock Grid.Row="6" Grid.Column="0" Text="Deadline/follow up:" HorizontalAlignment="Right"></TextBlock>
-        <TextBlock  Grid.Row="7" Grid.Column="0" Text="Description:" HorizontalAlignment="Left"></TextBlock>
+        <TextBlock Grid.Row="5" Grid.Column="0" Text="Impact:" HorizontalAlignment="Right"></TextBlock>
+        <TextBlock Grid.Row="6" Grid.Column="0" Text="Urgency:" HorizontalAlignment="Right"></TextBlock>
 
-        <ComboBox x:Name="TextBoxDateTime" Grid.Row="1" Grid.Column="1" Height="20" Width="177" Text="Select Date" ></ComboBox>
+        <TextBlock Grid.Row="7" Grid.Column="0" Text="Deadline/follow up:" HorizontalAlignment="Right"></TextBlock>
+        <TextBlock  Grid.Row="8" Grid.Column="0" Text="Description:" HorizontalAlignment="Left"></TextBlock>
+
+        <DatePicker x:Name="DatePickerDateTime" Grid.Row="1" Grid.Column="1" Height="20" Width="177" Text="Select Date" ></DatePicker>
         <TextBox x:Name="TextBoxSubject"  Grid.Row="2" Grid.Column="1" Height="20" Width="177"></TextBox>
         <ComboBox x:Name="ComboBoxIncidentType" Grid.Row="3" Grid.Column="1" Height="20" Width="177" Text="Select Type"></ComboBox>
         <ComboBox x:Name="ComboBoxUser" Grid.Row="4" Grid.Column="1" Height="20" Width="177"></ComboBox>
-        <ComboBox x:Name="ComboBoxPriority" Grid.Row="5" Grid.Column="1" Height="20" Width="177"></ComboBox>
-        <DatePicker x:Name="DateSelectDeadline" Grid.Row="6" Grid.Column="1" Height="20" Width="177"></DatePicker>
-        <TextBox x:Name="TextBoxDescription"  Grid.Row="7" Grid.Column="1" Height="71" Width="177" TextWrapping="Wrap"></TextBox>
-        <StackPanel Grid.Row="8" Grid.Column="1" Orientation="Horizontal">
-            <Button Grid.Row="1" Grid.Column="1" x:Name = "ButtonCancel" Content = "Cancel" HorizontalAlignment = "Right" VerticalAlignment = "Top" Width = "75" />
-            <Button Grid.Row="1" Grid.Column="1" x:Name = "ButtonSubmit" Content = "Submit" HorizontalAlignment = "Right" VerticalAlignment = "Top" Width = "75" Margin="27,0,0,0" Background="#FFE8D523"/>
+        <ComboBox x:Name="ComboBoxImpact" Grid.Row="5" Grid.Column="1" Height="20" Width="177"></ComboBox>
+
+        <ComboBox x:Name="ComboBoxUrgency" Grid.Row="6" Grid.Column="1" Height="20" Width="177"></ComboBox>
+
+
+        <DatePicker x:Name="DateSelectDeadline" Grid.Row="7" Grid.Column="1" Height="20" Width="177"></DatePicker>
+        <TextBox x:Name="TextBoxDescription"  Grid.Row="8" Grid.Column="1" Height="71" Width="177" TextWrapping="Wrap"></TextBox>
+        <StackPanel Grid.Row="9" Grid.Column="1" Orientation="Vertical">
+            <StackPanel x:Name="buttonGroup" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name = "ButtonCancel" Content = "Cancel" Width = "75" Click="ButtonCancel_Click" />
+                <Button Grid.Row="1" Grid.Column="1" x:Name = "ButtonSubmit" Content = "Submit" HorizontalAlignment = "Right" VerticalAlignment = "Top" Width = "75" Margin="27,0,0,0" Background="#FFE8D523" Click="ButtonSubmit_Click"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button Grid.Row="1" Grid.Column="1" x:Name = "ButtonTestRead" Content = "Test Read Function" HorizontalAlignment = "Right" VerticalAlignment = "Top" Width = "auto" Click="ButtonTestRead_Click" />
+                <Button Grid.Row="1" Grid.Column="1" x:Name = "ButtonTestCreate" Content = "Test Create Function" HorizontalAlignment = "Right" VerticalAlignment = "Top" Width = "auto" Click="ButtonTestCreate_Click" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button Grid.Row="1" Grid.Column="1" x:Name = "ButtonTestDelete" Content = "Test Delete Function" HorizontalAlignment = "Right" VerticalAlignment = "Top" Width = "auto" Click="ButtonTestDelete_Click" />
+                <Button Grid.Row="1" Grid.Column="1" x:Name = "ButtonTestUpdate" Content = "Test Update Function" HorizontalAlignment = "Right" VerticalAlignment = "Top" Width = "auto" Click="ButtonTestUpdate_Click"  />
+            </StackPanel>
         </StackPanel>
 
-    </Grid> 
+    </Grid>
 
 
 

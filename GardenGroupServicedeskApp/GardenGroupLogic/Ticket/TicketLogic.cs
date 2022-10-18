@@ -1,5 +1,6 @@
 ﻿using GardenGroupDAL;
 using GardenGroupModel;
+using Microsoft.VisualBasic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using System.Text.Json.Nodes;
@@ -10,25 +11,64 @@ namespace GardenGroupLogic
     {
         TicketDAO TicketDAO = new TicketDAO();
 
+        /// <summary>
+        /// <list type="bullet">
+        /// <item>made by floortje Tjeertes</item>
+        /// </list>
+        /// </summary>
+        /// <param name="ticket"></param>
         public void CreateTicket(Ticket ticket)
         {
             TicketDAO.Create(ticket);
         }
-        public void UpdateTicker()
+
+        /// <summary>
+        /// <list type="bullet">
+        /// <item>made by floortje Tjeertes</item>
+        /// </list>
+        /// </summary>
+        /// <param name="Tickettoupdate"></param>
+        /// <param name="update"></param>
+        public Ticket UpdateTicket(Ticket TickettoUpdate, Ticket update)
         {
+           BsonDocument document = TicketDAO.Update(TickettoUpdate, update);
+           return BsonSerializer.Deserialize<Ticket>(document);
 
         }
+
+        /// <summary>
+        /// <list type="bullet">
+        /// <item>made by floortje Tjeertes</item>
+        /// </list>
+        /// </summary>
+        /// <returns></returns>
         public List<Ticket> ReadTicket()
         {
 
             return ListTickets(TicketDAO.Read()); ;
         }
+
+        /// <summary>
+        /// gets list of tickets 
+        /// <list type="bullet">
+        /// <item>made by floortje Tjeertes</item>
+        /// </list>
+        /// </summary>
+        /// <param name="ticket"></param>
+        /// <returns></returns>
         public List<Ticket> ReadTicket(Ticket ticket)
         {
 
             return ListTickets(TicketDAO.Read(ticket)); ;
         }
 
+        /// <summary>
+        /// <list type="bullet">
+        /// <item>made by floortje Tjeertes</item>
+        /// </list>
+        /// </summary>
+        /// <param name="ticketsBsonFormat"></param>
+        /// <returns></returns>
         private List<Ticket> ListTickets(List<BsonDocument> ticketsBsonFormat)
         {
             List<Ticket> tickets = new List<Ticket>();
@@ -37,9 +77,11 @@ namespace GardenGroupLogic
             {
                 BsonArray user = document.GetElement("User").Value.AsBsonArray;
 
+
                 Ticket localticket = new Ticket()
                 {
                     Subject = document.GetElement("Subject").Value.ToString(),
+                    DateReported = DateTime.Parse(document.GetElement("DateReported").Value.ToString()),
                     Incident = (IncidentType)Enum.Parse(typeof(IncidentType), document.GetElement("Incident").Value.ToString()),
                     User = new User(
                         new BsonKeyValuePair("id", user[0].AsBsonDocument.GetElement("_id").Value.ToInt32()),
@@ -67,9 +109,11 @@ namespace GardenGroupLogic
             return tickets;
         }
        
-        public void DeleteTicket()
+        public Ticket DeleteTicket(Ticket ticket)
         {
+            BsonDocument document = TicketDAO.Delete(ticket);
 
+            return BsonSerializer.Deserialize<Ticket>(document);
         }
     }
 }

@@ -42,7 +42,7 @@ namespace GardenGroupUI.TicketEmployee
                 User = new User(null, null, null, null, null, null, null, null, null, null),
                 Impact = Priority.high,
                 Urgency = Priority.low,
-                Deadline = DateTime.Now,
+                DeadLine = DateTime.Now,
                 Description = "this is a test."
             });
             tickets.Add(new Ticket()
@@ -53,7 +53,7 @@ namespace GardenGroupUI.TicketEmployee
                 User = new User(null, null, null, null, null, null, null, null, null, null),
                 Impact = Priority.high,
                 Urgency = Priority.low,
-                Deadline = DateTime.Now,
+                DeadLine = DateTime.Now,
                 Description = "this is a test."
             });
             tickets.Add(new Ticket()
@@ -64,7 +64,7 @@ namespace GardenGroupUI.TicketEmployee
                 User = new User(null, null, null, null, null, null, null, null, null, null),
                 Impact = Priority.high,
                 Urgency = Priority.low,
-                Deadline = DateTime.Now,
+                DeadLine = DateTime.Now,
                 Description = "this is a test."
             });
 
