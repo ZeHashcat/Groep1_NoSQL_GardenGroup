@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using GardenGroupModel;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -102,6 +101,123 @@ namespace GardenGroupDAL
             {
                 throw new Exception("Data could not be retrieved from the database. Please try again, error: " + ex.Message);
             }
+        }
+
+        public List<ICollectionObject> GetTeam(int? teamNumber = null, string? teamName = null)
+        {
+            string databaseName = "TicketSystemDB";
+            string collectionName = "User";
+            MongoClientInstance mongoClientInstance = MongoClientInstance.GetClientInstance();
+
+            IMongoDatabase database = mongoClientInstance.Client.GetDatabase(databaseName);
+            IMongoCollection<BsonDocument> collection = database.GetCollection<BsonDocument>(collectionName);
+
+            FilterDefinition<BsonDocument> filter;
+
+            try
+            {
+                if (teamNumber != null)
+                {
+                    filter = Builders<BsonDocument>.Filter.Eq("_id", teamNumber);
+                }
+                else if (teamName != null)
+                {
+                    filter = Builders<BsonDocument>.Filter.Eq("Name", teamName);
+                }
+                else
+                {
+                    throw new Exception("No parameters given to method GetTeam(int? teamNumber = null, string? teamName = null) in UserDAO.cs");
+                }
+
+                List<BsonDocument> documents = collection.Find(filter).ToList();
+                List<ICollectionObject> users = new List<ICollectionObject>();
+
+                foreach (BsonDocument document in documents)
+                {
+                    //Write adapter pattern
+                    //users.Add(AdapterPatternUser(document))
+                    User user;
+                    BsonDocument documentOut;
+                    try
+                    {
+                        user = new User(
+                                            new BsonKeyValuePair("_id", document.GetValue("_id").ToString()),
+                                            new BsonKeyValuePair("Username", document.GetValue("Username").ToString()),
+                                            new BsonKeyValuePair("Password", document.GetValue("Password").ToString()),
+                                            new BsonKeyValuePair("First Name", document.GetValue("First Name").ToString()),
+                                            new BsonKeyValuePair("Last Name", document.GetValue("Last Name").ToString()),
+                                            new BsonKeyValuePair("Role", document.GetValue("Role").ToString()),
+                                            new BsonKeyValuePair("E-Mail", document.GetValue("E-Mail").ToString()),
+                                            new BsonKeyValuePair("Phone Number", document.GetValue("Phone Number").ToString()),
+                                            new BsonKeyValuePair("Location", document.GetValue("Location").ToString()),
+                                            new BsonKeyValuePair("Teams", document.GetValue("Teams").ToString())
+                                            );
+                    }
+                    catch (Exception ex)
+                    {
+                        user = new User(
+                                            new BsonKeyValuePair("_id", document.GetValue("_id").ToString()),
+                                            new BsonKeyValuePair("Username", document.GetValue("Username").ToString()),
+                                            new BsonKeyValuePair("Password", document.GetValue("Password").ToString()),
+                                            new BsonKeyValuePair("First Name", document.GetValue("First Name").ToString()),
+                                            new BsonKeyValuePair("Last Name", document.GetValue("Last Name").ToString()),
+                                            new BsonKeyValuePair("Role", document.GetValue("Role").ToString()),
+                                            new BsonKeyValuePair("E-Mail", document.GetValue("E-Mail").ToString()),
+                                            new BsonKeyValuePair("Phone Number", document.GetValue("Phone Number").ToString()),
+                                            new BsonKeyValuePair("Location", document.GetValue("Location").ToString())
+                                            );
+                    }
+                    users.Add(user);
+                    
+                }
+                return users;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void AddUserTest()
+        {
+            string databaseName = "TicketSystemDB";
+            string collectionName = "User";
+            MongoClientInstance mongoClientInstance = MongoClientInstance.GetClientInstance();
+
+            IMongoDatabase database = mongoClientInstance.Client.GetDatabase(databaseName);
+            IMongoCollection<BsonDocument> collection = database.GetCollection<BsonDocument>(collectionName);
+
+
+            BsonDocument document = new BsonDocument();
+            document.Add("Team1Id", 1);
+            document.Add("Team1Name", "Alpha Team");
+
+            User user = new User(
+                        new BsonKeyValuePair("_id", 2),
+                        new BsonKeyValuePair("Username", "Reynard96Blazer"),
+                        new BsonKeyValuePair("Password", "9669420"),
+                        new BsonKeyValuePair("First Name", "Reynard"),
+                        new BsonKeyValuePair("Last Name", "Blazer"),
+                        new BsonKeyValuePair("Role", "Sudo"),
+                        new BsonKeyValuePair("Email", "ReynardBlazer@Nanotrasen.net"),
+                        new BsonKeyValuePair("PhoneNumber", 0644498323),
+                        new BsonKeyValuePair("Location", "BayStation"),
+                        new BsonKeyValuePair("Teams", document)
+                        );
+
+            BsonDocument userDocument = new BsonDocument();
+            userDocument.Add(user.Id.Key, user.Id.Value);
+            userDocument.Add(user.UserName.Key, user.UserName.Value);
+            userDocument.Add(user.FirstName.Key, user.FirstName.Value);
+            userDocument.Add(user.LastName.Key, user.LastName.Value);
+            userDocument.Add(user.Role.Key, user.Role.Value);
+            userDocument.Add(user.Email.Key, user.Email.Value);
+            userDocument.Add(user.PhoneNumber.Key, user.PhoneNumber.Value);
+            userDocument.Add(user.Location.Key, user.Location.Value);
+            userDocument.Add(user.Teams.Key, user.Teams.Value);
+
+            collection.InsertOne(userDocument);
         }
     }
 }

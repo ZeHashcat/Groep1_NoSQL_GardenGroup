@@ -5,7 +5,7 @@ using MongoDB.Bson;
 
 namespace GardenGroupModel
 {
-    public class Ticket
+    public class Ticket : ICollectionObject
     {
         [BsonRepresentation(BsonType.DateTime)]
         public DateTime DateReported;

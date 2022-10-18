@@ -1,5 +1,6 @@
 ﻿using GardenGroupDAL;
 using GardenGroupModel;
+using GardenGroupDAL;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using System.Text.Json.Nodes;
@@ -8,7 +9,13 @@ namespace GardenGroupLogic
 {
     public class TicketLogic
     {
-        TicketDAO TicketDAO = new TicketDAO();
+        //Client client = new Client();
+        private TicketDAO ticketDAO;
+
+        public TicketLogic()
+        {
+            this.ticketDAO = new TicketDAO();
+        }
 
         public void CreateTicket(Ticket ticket)
         {
@@ -70,6 +77,11 @@ namespace GardenGroupLogic
         public void DeleteTicket()
         {
 
+        }
+        public List<ICollectionObject> FillTicketList(string username)
+        {
+            List<ICollectionObject> tickets = ticketDAO.FillTicketList(username);
+            return tickets;
         }
     }
 }

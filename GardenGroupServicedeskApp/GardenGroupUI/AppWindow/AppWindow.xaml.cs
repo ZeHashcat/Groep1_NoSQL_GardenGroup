@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using GardenGroupModel;
+using GardenGroupLogic;
 
 namespace GardenGroupUI
 {
@@ -25,11 +26,18 @@ namespace GardenGroupUI
         {
             InitializeComponent();
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            CreateClient(System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
             //frameContent.Source = new Uri("../Login/LoginPage.xaml", UriKind.Relative);
             //frameContent.Source = new Uri("AppMainEmployeePage.xaml", UriKind.Relative);
             frameContent.Source = new Uri("AppMainServiceDeskEmployeePage.xaml", UriKind.Relative);
             //frameContent.Source = new Uri("../TicketServiceDeskEmployee/CRUDPage.xaml", UriKind.Relative);
 
+        }
+
+        private void CreateClient(string connectionString)
+        {
+            UserLogic loginLogic = new UserLogic();
+            loginLogic.CreateClient(connectionString);
         }
 
         private void buttonClose_Click(object sender, RoutedEventArgs e)
@@ -47,6 +55,12 @@ namespace GardenGroupUI
         private void Shutdown()
         {
             this.Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            UserLogic logic = new UserLogic();
+            logic.AddUserTest();
         }
     }
 }

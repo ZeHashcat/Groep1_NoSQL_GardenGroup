@@ -9,30 +9,32 @@ namespace GardenGroupModel
     public class Dashboard : IDashboard
     {
         //NOTE: Members here ↓
-        private List<IDashboardUserControl> widgetList;
+        private List<IWidget> widgetList;
 
         //NOTE: Lists observers here ↓ 
         private List<IWidgetListObserver> observerList;
 
         //NOTE: Properties here ↓
-        public List<IDashboardUserControl> WidgetList { get { return widgetList; } }
+        public List<IWidget> WidgetList { get { return widgetList; } }
 
         //NOTE: Constructor here ↓, initialise observer lists
         public Dashboard()
         {
-            widgetList = new List<IDashboardUserControl>();
+            widgetList = new List<IWidget>();
             observerList = new List<IWidgetListObserver>();
         }
 
         //NOTE: Methods here ↓
-        public void AddWidget(IDashboardUserControl widget)
+        public void AddWidget(IWidget widget)
         {
             widgetList.Add(widget);
+            NotifyObservers();
         }
 
-        public void RemoveWidget(IDashboardUserControl widget)
+        public void RemoveWidget(IWidget widget)
         {
             widgetList.Remove(widget);
+            NotifyObservers();
         }
 
         //NOTE: Add/Remove/Notify observers here ↓
@@ -43,6 +45,14 @@ namespace GardenGroupModel
         public void RemoveObserver(IWidgetListObserver observer)
         {
             observerList.Remove(observer);
+        }
+
+        private void NotifyObservers()
+        {
+            foreach (IWidgetListObserver observer in observerList)
+            {
+                observer.Update(widgetList);
+            }
         }
     }
 }

@@ -59,5 +59,19 @@ namespace GardenGroupLogic
             else
                 return false;
         }
+
+        public void AddUserTest()
+        {
+            userDAO.AddUserTest();
+        }
+
+        public List<ICollectionObject> GetTeam(int? teamNumber = null, string? teamName = null)
+        {
+            if (teamNumber != null || teamName != null)
+            {
+                return userDAO.GetTeam(teamNumber, teamName);
+            }
+            throw new Exception("Method GetTeam in UserLogic wasn't given parameters.");
+        }
     }
 }

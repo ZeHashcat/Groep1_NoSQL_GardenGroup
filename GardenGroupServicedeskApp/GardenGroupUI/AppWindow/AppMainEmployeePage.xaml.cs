@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MongoDB.Driver;
 using System.Reflection;
+using GardenGroupModel;
 
 namespace GardenGroupUI
 {
@@ -23,7 +24,6 @@ namespace GardenGroupUI
     public partial class AppMainEmployeePage : Page
     {
         AppWindow appWindow = (AppWindow)Application.Current.MainWindow;
-        
         public AppMainEmployeePage()
         {
                 InitializeComponent();

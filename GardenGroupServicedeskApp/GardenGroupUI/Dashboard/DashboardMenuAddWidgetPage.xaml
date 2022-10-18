@@ -10,6 +10,10 @@
 
     <StackPanel Margin="0,75,0,0">
         <DockPanel>
+            <Label Content="Widget Class:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,20,0,10"/>
+            <ComboBox x:Name="comboBoxWidgetClass" Width="160" HorizontalAlignment="Right" Margin="0,10,50,10"></ComboBox>
+        </DockPanel>
+        <DockPanel>
             <Label Content="Widget Type:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,20,0,10"/>
             <ComboBox x:Name="comboBoxWidgetType" Width="160" HorizontalAlignment="Right" Margin="0,10,50,10"></ComboBox>
         </DockPanel>

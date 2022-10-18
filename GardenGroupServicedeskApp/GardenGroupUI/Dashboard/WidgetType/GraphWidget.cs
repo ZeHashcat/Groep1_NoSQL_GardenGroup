@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GardenGroupModel
+namespace GardenGroupUI
 {
-    public interface IDashboardUserControl
+    internal class GraphWidget
     {
     }
 }

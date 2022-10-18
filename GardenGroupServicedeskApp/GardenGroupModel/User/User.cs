@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GardenGroupModel
 {
-    public class User
+    public class User : ICollectionObject
     {
         private BsonKeyValuePair id;
         private BsonKeyValuePair userName;

@@ -31,15 +31,19 @@ namespace GardenGroupUI
 
         private void buttonAddWidgetAdd_Click(object sender, RoutedEventArgs e)
         {
-            WidgetType widgetType = (WidgetType)Enum.Parse(typeof(WidgetType), comboBoxWidgetType.SelectedItem.ToString());
-            //
-            //dashboardControllerInstance.DashboardController.AddWidget(widgetType, widgetContent);
+            //WidgetType widgetType = (WidgetType)Enum.Parse(typeof(WidgetType), comboBoxWidgetType.SelectedItem.ToString());
+
+            //TEST:
+            string source = "WidgetData/TeamUsersList.xaml";
+            IWidget widget = new DashboardWidgetPage();
+            dashboardControllerInstance.DashboardController.AddWidget(widget);
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             this.dashboardControllerInstance = DashboardControllerInstance.Instance;
-            comboBoxWidgetType.ItemsSource = Enum.GetValues(typeof(WidgetType)).Cast<WidgetType>();
+            comboBoxWidgetClass.ItemsSource = Enum.GetValues(typeof(WidgetClass)).Cast<WidgetClass>();
+            comboBoxWidgetType.ItemsSource = Enum.GetValues(typeof(WidgetType)).Cast<WidgetType>(); 
         }
     }
 }

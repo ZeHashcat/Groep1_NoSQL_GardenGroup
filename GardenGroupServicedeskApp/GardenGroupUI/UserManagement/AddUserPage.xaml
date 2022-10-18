@@ -13,8 +13,6 @@
             <RowDefinition Height="81*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Label Content="NoDesk" HorizontalAlignment="Right" VerticalAlignment="Top" FontFamily="Arial Black" FontSize="24"/>
-        <Label Content="Licensed to: The Garden Group" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="22" FontFamily="Arial Rounded MT Bold" Width="345" Margin="0,25,0,0"/>
         <Button x:Name="GoToUserManagementBtn" Content="User Management" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,60,0,0" FontFamily="Arial Rounded MT Bold" FontSize="16" Height="25" Width="185"/>
         <Button x:Name="GoToUserManagementBtn_Copy" Content="User Management" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,60,0,0" FontFamily="Arial Rounded MT Bold" FontSize="16" Height="30" Width="240"/>
         <Button x:Name="GoToUserManagementBtn_Copy1" Content="User Management" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,60,238,0" FontFamily="Arial Rounded MT Bold" FontSize="16" Height="30" Width="240"/>
