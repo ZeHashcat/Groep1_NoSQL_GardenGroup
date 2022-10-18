@@ -11,6 +11,7 @@ namespace GardenGroupModel
         private BsonKeyValuePair id;
         private BsonKeyValuePair userName;
         private BsonKeyValuePair password;
+        private BsonKeyValuePair salt;
         private BsonKeyValuePair firstName;
         private BsonKeyValuePair lastName;
         private BsonKeyValuePair role;
@@ -19,11 +20,12 @@ namespace GardenGroupModel
         private BsonKeyValuePair location;
         private BsonKeyValuePair? teams;
 
-        public User(BsonKeyValuePair id, BsonKeyValuePair userName, BsonKeyValuePair password, BsonKeyValuePair firstName, BsonKeyValuePair lastName, BsonKeyValuePair role, BsonKeyValuePair email, BsonKeyValuePair phoneNumber, BsonKeyValuePair location, BsonKeyValuePair? teams = null)
+        public User(BsonKeyValuePair id, BsonKeyValuePair userName, BsonKeyValuePair password, BsonKeyValuePair salt, BsonKeyValuePair firstName, BsonKeyValuePair lastName, BsonKeyValuePair role, BsonKeyValuePair email, BsonKeyValuePair phoneNumber, BsonKeyValuePair location, BsonKeyValuePair? teams = null)
         {
             this.id = id;
             this.userName = userName;
             this.password = password;
+            this.salt = salt;
             this.firstName = firstName;
             this.lastName = lastName;
             this.role = role;
@@ -37,6 +39,7 @@ namespace GardenGroupModel
         public BsonKeyValuePair Id { get { return this.id; } }
         public BsonKeyValuePair UserName { get { return this.userName; } }
         public BsonKeyValuePair Password { get { return this.password; } }
+        public BsonKeyValuePair Salt { get { return this.salt; } }
         public BsonKeyValuePair FirstName { get { return this.firstName; } }
         public BsonKeyValuePair LastName { get { return this.lastName; } }
         public BsonKeyValuePair Role { get { return this.role; } }

@@ -6,38 +6,34 @@
       xmlns:local="clr-namespace:GardenGroupUI.UserManagement"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AddUserPage">
+      Title="AddUserPage" Loaded="Page_Loaded">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="81*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Button x:Name="GoToUserManagementBtn" Content="User Management" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,60,0,0" FontFamily="Arial Rounded MT Bold" FontSize="16" Height="25" Width="185"/>
-        <Button x:Name="GoToUserManagementBtn_Copy" Content="User Management" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,60,0,0" FontFamily="Arial Rounded MT Bold" FontSize="16" Height="30" Width="240"/>
-        <Button x:Name="GoToUserManagementBtn_Copy1" Content="User Management" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,60,238,0" FontFamily="Arial Rounded MT Bold" FontSize="16" Height="30" Width="240"/>
-        <Button x:Name="GoToUserManagementBtn_Copy2" Content="User Management" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,60,478,0" FontFamily="Arial Rounded MT Bold" FontSize="16" Height="30" Width="240"/>
-        <Label Content="Create New User" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="22" FontFamily="Arial Black" Margin="75,90,0,0"/>
-        <Label Content="First name:" HorizontalAlignment="Left" Margin="75,135,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <Label Content="Last name:" HorizontalAlignment="Left" Margin="75,160,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <Label Content="Type of user:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="75,0,0,27" FontSize="14"/>
-        <Label Content="E-mail address" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" Margin="75,25,0,0"/>
-        <Label Content="Phone number:" HorizontalAlignment="Left" Margin="75,76,0,0" VerticalAlignment="Center" FontSize="14"/>
-        <Label Content="Location/branch:" HorizontalAlignment="Left" Margin="75,127,0,0" VerticalAlignment="Center" FontSize="14"/>
-        <Label Content="Send password?" HorizontalAlignment="Left" Margin="75,0,0,55" VerticalAlignment="Bottom" FontSize="14" VerticalContentAlignment="Center"/>
+        <Label Content="Create New User" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="22" FontFamily="Arial Black" Margin="75,30,0,0"/>
+        <Label Content="First name:" HorizontalAlignment="Left" Margin="70,70,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Last name:" HorizontalAlignment="Left" Margin="70,99,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Type of user:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,128,0,0" FontSize="14"/>
+        <Label Content="E-mail address" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Margin="70,157,0,0"/>
+        <Label Content="Phone number:" HorizontalAlignment="Left" Margin="70,187,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Location/branch:" HorizontalAlignment="Left" Margin="70,221,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Send password?" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Margin="70,323,0,0"/>
         <Button x:Name="CancelUserAddButton" Content="Cancel" HorizontalAlignment="Left" Margin="250,0,0,5" VerticalAlignment="Bottom" FontSize="16" UseLayoutRounding="False" Height="44" Width="144" Background="#FF4583FF" Foreground="White" Click="CancelUserAddButton_Click"/>
         <Button x:Name="AddUserButton" Content="Add User" HorizontalAlignment="Right" Margin="0,0,250,5" VerticalAlignment="Bottom" FontSize="16" UseLayoutRounding="False" Height="44" Width="144" Foreground="White" Background="#FF4583FF" Click="AddUserButton_Click"/>
-        <CheckBox Content="yes, a password e-mail will be send to the user" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,70,60" FontSize="14"/>
-        <TextBox HorizontalAlignment="Left" Margin="211,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="330"/>
-        <TextBox HorizontalAlignment="Left" Margin="211,168,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="330"/>
-        <TextBox HorizontalAlignment="Left" Margin="211,26,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="330"/>
-        <TextBox HorizontalAlignment="Left" Margin="211,76,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="330"/>
-        <TextBox HorizontalAlignment="Left" Margin="211,302,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="330"/>
-        <TextBox HorizontalAlignment="Left" Margin="211,328,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="330"/>
-        <Label Content="Username:" HorizontalAlignment="Left" Margin="75,297,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <Label Content="Password:" HorizontalAlignment="Left" Margin="75,323,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <ComboBox HorizontalAlignment="Left" Margin="211,191,0,0" VerticalAlignment="Top" Width="330"/>
-        <ComboBox HorizontalAlignment="Left" Margin="211,269,0,0" VerticalAlignment="Top" Width="330"/>
+        <CheckBox x:Name="addUserSendMailCheckbox" Content="yes, a password e-mail will be send to the user" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,328,0,0" FontSize="14"/>
+        <TextBox x:Name="addUserFirstnameTextBox" HorizontalAlignment="Left" Margin="210,75,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="330"/>
+        <TextBox x:Name="addUserlastnameTextBox" HorizontalAlignment="Left" Margin="210,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="330"/>
+        <TextBox x:Name="addUserEmailTextBox" HorizontalAlignment="Left" Margin="210,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="330"/>
+        <TextBox x:Name="addUserPhonenumberTextBox" HorizontalAlignment="Left" Margin="210,199,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="330"/>
+        <TextBox x:Name="addUserUsernameTextBox" HorizontalAlignment="Left" Margin="210,271,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="330"/>
+        <TextBox x:Name="addUserPasswordTextBox" HorizontalAlignment="Left" Margin="210,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="330"/>
+        <Label Content="Username:" HorizontalAlignment="Left" Margin="70,266,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Password:" HorizontalAlignment="Left" Margin="70,295,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <ComboBox x:Name="addUserRoleComboBox" HorizontalAlignment="Left" Margin="210,134,0,0" VerticalAlignment="Top" Width="330"/>
+        <ComboBox x:Name="addUserLocationsComboBox" HorizontalAlignment="Left" Margin="210,225,0,0" VerticalAlignment="Top" Width="330"/>
 
     </Grid>
 </Page>

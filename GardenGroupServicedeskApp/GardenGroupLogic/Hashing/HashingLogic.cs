@@ -18,7 +18,7 @@ namespace GardenGroupLogic
         //Password must be hased
         //Save new password
 
-        public static byte[] GetSaltHashedPassword(byte[] password, byte[] salt)
+        /*public static byte[] GetSaltHashedPassword(byte[] password, byte[] salt)
         {
             HashAlgorithm algorithm = new SHA256Managed();
 
@@ -35,9 +35,10 @@ namespace GardenGroupLogic
             }
 
             return algorithm.ComputeHash(passwordWithSaltBytes);            
-        }
+        }*/
 
 
+        //Zoekopdracht= c# hash with salt \/ \/
         /*public string CreateSalt(int size)
         {
             //Generate a cryptographic random number.

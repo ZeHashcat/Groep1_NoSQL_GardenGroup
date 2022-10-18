@@ -6,13 +6,14 @@
       xmlns:local="clr-namespace:GardenGroupUI"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="LoginPage">
+      Title="LoginPage"
+      Background="AntiqueWhite">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="144*"/>
-            <RowDefinition Height="193*"/>
-            <RowDefinition Height="97*"/>
+            <RowDefinition Height="149*"/>
+            <RowDefinition Height="235*"/>
+            <RowDefinition Height="66*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="263*"/>
@@ -21,12 +22,13 @@
         </Grid.ColumnDefinitions>
         <Label x:Name="notNeededLabel1" Content="NoDesk: TGG" HorizontalAlignment="Center" VerticalAlignment="Top" Height="35" Width="137" Grid.Column="1" Margin="0,46,0,0" FontSize="16" FontFamily="Arial Black"/>
         <Label x:Name="notNeededLabel2" Content="Please provide login credentials to login&#xD;&#xA;to NoDesk for the Garden Group" HorizontalAlignment="Center" VerticalAlignment="Top" Height="50" Width="272" Grid.Column="1" Margin="0,81,0,0" Background="White" FontSize="13" Foreground="#FF8C8585" FontFamily="Arial Rounded MT Bold"/>
-        <Label x:Name="notNeededLabel4" Grid.Column="1" Content="Password" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="72" Margin="15,80,184,0" FontFamily="Arial Rounded MT Bold" Grid.Row="1"/>
+        <Label x:Name="notNeededLabel4" Grid.Column="1" Content="Password" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="72" Margin="15,80,0,0" FontFamily="Arial Rounded MT Bold" Grid.Row="1"/>
         <Label x:Name="notNeededLabel3" Grid.Column="1" Content="Username" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="74" Margin="15,20,0,0" FontFamily="Arial Rounded MT Bold" Grid.Row="1"/>
-        <PasswordBox x:Name="loginPasswordBox" Grid.Column="1" HorizontalAlignment="Center" Margin="0,104,0,0" VerticalAlignment="Top" Width="230" Height="18" Grid.Row="1"/>
+        <PasswordBox x:Name="loginPasswordBox" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="230" Height="18" Grid.Row="1" Margin="0,106,0,0"/>
         <TextBox x:Name="loginUsernameTextBox" Grid.Column="1" HorizontalAlignment="Center" Margin="0,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="18" Grid.Row="1"/>
-        <CheckBox x:Name="loginRememberMeCheckBox" Grid.Column="1" Content="Remember Me" HorizontalAlignment="Left" Margin="21,137,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="10"/>
-        <Button x:Name="loginLoginButton" Grid.Column="1" Content="Login" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Top" Height="35" Margin="0,193,0,0" Grid.RowSpan="2" Width="85" Background="#FF4583FF" Foreground="White" Click="loginLoginButton_Click"/>
-        <Button x:Name="LoginForgotLoginButton" Grid.Column="1" Content="Forgot Login Details?" HorizontalAlignment="Left" Margin="153,135,0,0" Grid.Row="1" VerticalAlignment="Top" BorderBrush="White" Background="White" Foreground="#FF4583FF" FontSize="10" Click="LoginForgotLoginButton_Click"/>
+        <CheckBox x:Name="loginRememberMeCheckBox" Grid.Column="1" Content="Remember Me" HorizontalAlignment="Left" Margin="21,137,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="10" Height="15" Width="85"/>
+        <Button x:Name="loginLoginButton" Grid.Column="1" Content="Login" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Top" Height="35" Margin="0,213,0,0" Width="85" Background="#FF4583FF" Foreground="White" Click="loginLoginButton_Click" Grid.RowSpan="2"/>
+        <Button x:Name="LoginForgotLoginButton" Grid.Column="1" Content="Forgot Login Details?" HorizontalAlignment="Left" Margin="153,135,0,0" Grid.Row="1" VerticalAlignment="Top" BorderBrush="White" Background="White" Foreground="#FF4583FF" FontSize="10" Click="LoginForgotLoginButton_Click" Height="17" Width="98"/>
+        <Label x:Name="loginWrongPasswordMessageLabel" HorizontalAlignment="Center" Margin="0,164,0,0" Grid.Row="1" VerticalAlignment="Top" Height="44" Width="250" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
     </Grid>
 </Page>

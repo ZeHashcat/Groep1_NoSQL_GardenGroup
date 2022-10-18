@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using GardenGroupDAL;
@@ -29,7 +31,8 @@ namespace GardenGroupLogic
         {
             BsonDocument document = userDAO.GetUser(username);
             BsonKeyValuePair id = new BsonKeyValuePair("_id", document["_id"].ToString());
-            BsonKeyValuePair userName = new BsonKeyValuePair("UserName", document["UserName"].ToString());
+            BsonKeyValuePair userName = new BsonKeyValuePair("Username", document["Username"].ToString());
+            BsonKeyValuePair salt = new BsonKeyValuePair("Salt", document["Salt"].ToString());
             BsonKeyValuePair password = new BsonKeyValuePair("Password", document["Password"].ToString());
             BsonKeyValuePair firstName = new BsonKeyValuePair("First Name", document["First Name"].ToString());
             BsonKeyValuePair lastName = new BsonKeyValuePair("Last Name", document["Last Name"].ToString());
@@ -39,39 +42,69 @@ namespace GardenGroupLogic
             BsonKeyValuePair location = new BsonKeyValuePair("Location", document["Location"].ToString());
             BsonKeyValuePair? teams = null;
 
-            if (document["Teams"].ToString() != null)
+            try
             {
                 teams = new BsonKeyValuePair("Teams", document["Teams"].ToString());
             }
+            catch
+            { }
 
-            User user = new User(id, userName, password, firstName, lastName, role, email, phoneNumber, location, teams);
-
+            User user = new User(id, userName, password, salt, firstName, lastName, role, email, phoneNumber, location, teams);
 
             return user;
         }
 
         public bool CheckLogin(string username, string password)
         {
-            string passwordDB = userDAO.GetPassword(username);
-            if (passwordDB == password)
+            HashingWithSaltHasher passwordHasher = new HashingWithSaltHasher();           
+
+            HashWithSaltResult hashAndSalt = userDAO.GetPassword(username);
+            byte[] saltBytes = Encoding.ASCII.GetBytes(hashAndSalt.Salt);
+
+            HashWithSaltResult hashWithSaltResult512 = passwordHasher.HashWithSalt(password, saltBytes, SHA512.Create());
+            if (hashAndSalt.Hash == hashWithSaltResult512.Hash)
+                return true;
+            
+            else
+                return false;
+            
+        }
+        //validate email before changing the password
+        public bool CheckEmail(string email)
+        {
+
+            string emailDB = userDAO.ValidateEmail(email);
+
+            if (email == emailDB)
                 return true;
 
             else
                 return false;
         }
-
-        public void AddUserTest()
+        public bool ChangePassword(string email, HashWithSaltResult hashWithSalt)
         {
-            userDAO.AddUserTest();
-        }
 
-        public List<ICollectionObject> GetTeam(int? teamNumber = null, string? teamName = null)
-        {
-            if (teamNumber != null || teamName != null)
+            //If password can be changed (email exists)
+            if (CheckEmail(email))
             {
-                return userDAO.GetTeam(teamNumber, teamName);
+                userDAO.ChangePassword(email, hashWithSalt);
+
+                return true;
             }
-            throw new Exception("Method GetTeam in UserLogic wasn't given parameters.");
+            //Cant update password. Something went wrong
+            else
+                return false;
         }
+        public bool AddUser(string username, HashWithSaltResult hashWithSalt, string firstname, string lastname, string email, double phonenumber, string role, string location)
+        {        
+
+            if (userDAO.CheckUserData(username, email, phonenumber))
+            {
+                userDAO.AddUser(username, hashWithSalt, firstname, lastname, email, phonenumber, role, location);
+                return true;
+            }
+            else
+                return false;
+        }        
     }
 }

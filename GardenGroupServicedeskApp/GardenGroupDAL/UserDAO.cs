@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,39 +15,31 @@ namespace GardenGroupDAL
     {
         private IMongoCollection<BsonDocument> collection = null;
         private IMongoDatabase database = null;
+        
 
         private string databaseName = "TicketSystemDB";
         private string collectionName = "User";
 
-        public string GetPassword(string username)
+        public HashWithSaltResult GetPassword(string username)
         {
-            try
-            {
-                MongoClientInstance mongoClientInstance = MongoClientInstance.GetClientInstance();
-                database = mongoClientInstance.Client.GetDatabase(databaseName);
-                collection = database.GetCollection<BsonDocument>(collectionName);
+            MongoClientInstance mongoClientInstance = MongoClientInstance.GetClientInstance();
+                          
+            database = mongoClientInstance.Client.GetDatabase(databaseName);
+            collection = database.GetCollection<BsonDocument>(collectionName);
                 
-                FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("UserName", username);
-                BsonDocument document = collection.Find(filter).First();
-                //query
-
-                //var course = collection.FindAs<User>(MongoDB.Driver.Builders.Query.EQ("Title", "Todays Course")).SetFields(Fields.Include("Title", "Description").Exclude("_id")).ToList();
-
-                if (document.IsBsonNull)
-                {
-                    //error detected
-                    throw new Exception("incorrect username or password, please make sure you have spelled everything correctly.");
-                }
-                else
-                {
-                    //return password
-                    return ReadPassword(document);
-                }
-            }
-            catch (Exception ex)
+            FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("Username", username);
+            BsonDocument document = collection.Find(filter).FirstOrDefault();
+            
+            if (document == null)
             {
-                throw new Exception("Data could not be retrieved from the database. Please try again, error: " + ex.Message);
+                //error detected
+                throw new Exception("incorrect username or password, please make sure you spelled everything correctly.");
             }
+            else
+            {
+                //return password
+                return ReadPassword(document);
+            }            
 
             //Gewenste uitput = password (username is al bekend).
 
@@ -57,50 +50,153 @@ namespace GardenGroupDAL
         }
 
         // \/\/Waarschijnlijk niet nodig\/\/ \\
-        private string ReadPassword(BsonDocument document)
-        {
+        private HashWithSaltResult ReadPassword(BsonDocument document)
+        {            
             //filter document to only get password
-            try
-            {
-                string password = document.GetValue("Password").ToString();
-
-                return password;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Data could not be retrieved from the database. Please try again, error: " + ex.Message);
-            }            
+           
+            string hashedPassword = document.GetValue("Password").ToString();
+            string salt = document.GetValue("Salt").ToString();
+            HashWithSaltResult hashAndSaltResult = new HashWithSaltResult(salt, hashedPassword);
+                
+            return hashAndSaltResult;            
+                      
         }
 
         public BsonDocument GetUser(string username)
         {
-            try
+            MongoClientInstance mongoClientInstance = MongoClientInstance.GetClientInstance();
+                            
+            database = mongoClientInstance.Client.GetDatabase(databaseName);
+            collection = database.GetCollection<BsonDocument>(collectionName);
+
+            FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("Username", username);
+            BsonDocument document = collection.Find(filter).FirstOrDefault();
+            
+            if (document.IsBsonNull)
             {
-                MongoClientInstance mongoClientInstance = MongoClientInstance.GetClientInstance();
-                database = mongoClientInstance.Client.GetDatabase(databaseName);
-                collection = database.GetCollection<BsonDocument>(collectionName);
+                //error detected
+                throw new Exception("Incorrect username or password, please make sure you have spelled everything correctly.");
+            }
+            else
+            {
+                //return password
+                return document;
+            }
+            
+            
+        }
 
-                FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("UserName", username);
-                BsonDocument document = collection.Find(filter).First();
-                //query
+        public string ValidateEmail(string email)
+        {
+            MongoClientInstance mongoClientInstance = MongoClientInstance.GetClientInstance();
+                          
+            database = mongoClientInstance.Client.GetDatabase(databaseName);
+            collection = database.GetCollection<BsonDocument>(collectionName);
 
-                //var course = collection.FindAs<User>(MongoDB.Driver.Builders.Query.EQ("Title", "Todays Course")).SetFields(Fields.Include("Title", "Description").Exclude("_id")).ToList();
+            FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("E-Mail", email);
+            BsonDocument document = collection.Find(filter).FirstOrDefault();
+            
+            if (document == null)
+            {
+                //error detected
+                throw new Exception("Email cannot be found in our system, please make sure you spelled everything correctly.");
+            }
+            else
+            {
+                //return email
+                return GetEmail(document);
+            }            
+        }
 
-                if (document.IsBsonNull)
+        private string GetEmail(BsonDocument document)
+        {
+            
+            string email = document.GetValue("E-Mail").ToString();               
+               
+            return email;            
+            
+        }
+
+        public void ChangePassword(string email, HashWithSaltResult hashWithSalt)
+        {
+            MongoClientInstance mongoClientInstance = MongoClientInstance.GetClientInstance();
+            
+            database = mongoClientInstance.Client.GetDatabase(databaseName);
+            collection = database.GetCollection<BsonDocument>(collectionName);
+
+            FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("E-Mail", email);
+            BsonDocument document = collection.Find(filter).FirstOrDefault();
+            //update password
+            UpdatePassword(email, document, hashWithSalt);                
+                       
+        }
+
+        private void UpdatePassword(string email, BsonDocument document, HashWithSaltResult hashWithSalt)
+        {
+            MongoClientInstance mongoClientInstance = MongoClientInstance.GetClientInstance();
+            database = mongoClientInstance.Client.GetDatabase(databaseName);
+            collection = database.GetCollection<BsonDocument>(collectionName);
+
+            var update = Builders<BsonDocument>.Update.Set("Password", hashWithSalt.Hash);
+            FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("E-Mail", email);
+            var options = new UpdateOptions { IsUpsert = true };
+            collection.UpdateOne(filter, update, options);
+                                    
+            update = Builders<BsonDocument>.Update.Set("Salt", hashWithSalt.Salt);
+            options = new UpdateOptions { IsUpsert = true };
+            collection.UpdateOne(filter, update, options);            
+        }
+
+        public bool CheckUserData(string username, string email, double phonenumber)
+        {
+            //Here we will check if any given values wont match the existing ones
+            //This is how we find the documents
+            MongoClientInstance mongoClientInstance = MongoClientInstance.GetClientInstance();
+            database = mongoClientInstance.Client.GetDatabase(databaseName);
+            collection = database.GetCollection<BsonDocument>(collectionName);
+
+            var users = collection.Find(new BsonDocument()).ToList();
+
+            foreach (BsonDocument user in users)
+            {
+                if (user.Contains(username) || user.Contains(email) || user.Contains(phonenumber.ToString()))
                 {
-                    //error detected
-                    throw new Exception("incorrect username or password, please make sure you have spelled everything correctly.");
-                }
+                    return false;
+                }                    
+
+                //After checking if the values dont match the existing ones in the system we will proceed and add the user
                 else
                 {
-                    //return password
-                    return document;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Data could not be retrieved from the database. Please try again, error: " + ex.Message);
-            }
+                    return true;
+                }                    
+            }            
+            return false;
+        }
+
+        public void AddUser(string username, HashWithSaltResult hashWithSalt, string firstname, string lastname, string email, double phonenumber, string role,  string location)
+        {
+            MongoClientInstance mongoClientInstance = MongoClientInstance.GetClientInstance();
+            database = mongoClientInstance.Client.GetDatabase(databaseName);
+            collection = database.GetCollection<BsonDocument>(collectionName);
+
+            BsonDocument doc = new BsonDocument
+            {                
+            //Adding the data into a document
+
+            //Variabelen aanroepen. En achteraan plaatsen
+            { "Username", username},
+                {"Password", hashWithSalt.Hash},
+                {"Salt", hashWithSalt.Salt},
+                {"First Name", firstname},
+                {"Last Name", lastname},
+                {"E-Mail", email},
+                {"Phone Number", phonenumber},
+                {"Role", role},
+                {"Location", location},
+                {"Teams", new BsonDocument() }
+            };      
+            //Saving the data into the database
+            collection.InsertOne(doc);
         }
 
         public List<ICollectionObject> GetTeam(int? teamNumber = null, string? teamName = null)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +24,7 @@ namespace GardenGroupUI
     /// </summary>
     public partial class LoginPage : Page
     {
+        private UserLogic loginLogic = new UserLogic();
         public LoginPage()
         {
             InitializeComponent();
@@ -42,28 +44,47 @@ namespace GardenGroupUI
             
             string username = loginUsernameTextBox.Text;
             string password = loginPasswordBox.Password;
-            UserLogic loginLogic = new UserLogic();
-
-            if(loginLogic.CheckLogin(username, password)){
-                User user = loginLogic.GetUser(username);
-                UserInstance.GetUserInstance(user);
-                //change source of window to AppMainPage.xaml <----------------------------
-            }
-
-            if (loginRememberMeCheckBox.IsChecked ?? false)
+                        
+           
+            try
             {
-                SetLoginInfo();
+                if (loginLogic.CheckLogin(username, password))
+                {
+                    //Creating user instance
+                    User user = loginLogic.GetUser(username);
+                    UserInstance.GetUserInstance(user);
+                    //change source of window to AppMainPage.xaml <----------------------------
+
+
+                    MessageBox.Show($"Welcome {user.FirstName}");
+                }
+                else
+                {
+
+                }
+                //MessageBox.Show("je hebt dit verkloot!!!");
+
+                loginWrongPasswordMessageLabel.Foreground = new SolidColorBrush(Colors.Red);
+                loginWrongPasswordMessageLabel.Content = "Wrong username or password entered,\nPlease try again.";
+
+                if (loginRememberMeCheckBox.IsChecked ?? false)
+                {
+                    SetLoginInfo();
+                }
+                else
+                {
+                    DeleteLoginInfo();
+                }
             }
-            else
+            catch(Exception ex)
             {
-                DeleteLoginInfo();
-            }
+                MessageBox.Show(ex.Message);
+            }            
 
         }
 
         private void CreateClient(string connectionString)
-        {
-            UserLogic loginLogic = new UserLogic();
+        {           
             loginLogic.CreateClient(connectionString);
         }
 
@@ -136,25 +157,12 @@ namespace GardenGroupUI
 
         //-------------------------------------------------------------------------------------
         //-------------------------------------------------------------------------------------
-        //User chose not to login. 
-        //Close login window.
-        private void loginCloseButton_Click(object sender, RoutedEventArgs e)
-        {
-            //NOTE: This method can be removed, the close button now resides in AppWindow.
-            //this.Close();
-        }
-
-        //-------------------------------------------------------------------------------------
-        //-------------------------------------------------------------------------------------
         //User has forgotten their password. User enters email.
         //If email exists (and has been accepted) user can reset password.
         //New Password will be saved.
         private void LoginForgotLoginButton_Click(object sender, RoutedEventArgs e)
         {
-            //this.Hide();
-            //ResetPasswordWindow resetPassword = new ResetPasswordWindow();
-            //resetPassword.ShowDialog();
-            //this.Close();
+              
         }
     }
 }
