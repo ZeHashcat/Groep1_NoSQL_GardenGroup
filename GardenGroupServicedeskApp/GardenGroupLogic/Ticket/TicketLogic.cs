@@ -2,8 +2,6 @@
 using GardenGroupModel;
 using Microsoft.VisualBasic;
 using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
-using System.Text.Json.Nodes;
 
 namespace GardenGroupLogic
 {
@@ -44,7 +42,6 @@ namespace GardenGroupLogic
         /// <returns></returns>
         public List<Ticket> ReadTicket()
         {
-
             return ListTickets(TicketDAO.Read()); ;
         }
 
@@ -58,7 +55,6 @@ namespace GardenGroupLogic
         /// <returns></returns>
         public List<Ticket> ReadTicket(Ticket ticket)
         {
-
             return ListTickets(TicketDAO.Read(ticket)); ;
         }
 

@@ -11,12 +11,12 @@ namespace GardenGroupModel
 
         [BsonRepresentation(BsonType.DateTime)]
         public DateTime DateReported;
-       
+        
         public string Subject;
         
         [BsonRepresentation(BsonType.String)]        
         public IncidentType Incident;
-       
+        
         public User User;
         
         [BsonRepresentation(BsonType.String)]         

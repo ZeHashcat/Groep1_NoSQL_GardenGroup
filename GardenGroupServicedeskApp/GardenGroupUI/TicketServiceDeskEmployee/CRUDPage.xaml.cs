@@ -18,14 +18,8 @@ namespace GardenGroupUI
 
         TicketLogic ticketLogic = new TicketLogic();
 
-        Ticket ticket;
-
-        TicketStatus currentStatus = TicketStatus.open;
-        UserInstance user = UserInstance.GetUserInstance();
-
-        public CRUDPage()
+        public CRUDPage(CRUDState state)
         {
-            CRUDState state = CRUDState.Update;
             Priority priority = new Priority();
 
             //sets a ticket to test whit
@@ -48,12 +42,6 @@ namespace GardenGroupUI
                     ReadSetup();
                     break;
             }
-
-
-
-
-
-
         }
 
         public void CreateSetup()
@@ -109,7 +97,12 @@ namespace GardenGroupUI
              DatePickerDateTime.SelectedDate = ticket.DateReported;
             
 
-             TextBoxSubject.Text = ticket.Subject;
+            //ticketLogic.CreateTicket(tickets[0]);
+            foreach (Ticket ticket in tickets) { 
+             result += ticket.Subject.ToString() + "\n"
+                + ticket.Description.ToString();
+            }
+            MessageBox.Show(result);
 
 
              ComboBoxIncidentType.Items.Add (ticket.Incident);
