@@ -25,8 +25,7 @@ namespace GardenGroupUI
 
         public CRUDPage()
         {
-            CRUDState state = CRUDState.Update;
-            Priority priority = new Priority();
+            CRUDState state = CRUDState.Create;
 
             //sets a ticket to test whit
             ticket = ticketLogic.ReadTicket()[0];
@@ -79,14 +78,15 @@ namespace GardenGroupUI
             {
                 ComboBoxIncidentType.Items.Add(Enum.GetName(typeof(IncidentType), i));
             }
+            //only works whit login 
+            //ComboBoxUser.Items.Add(user.User.UserName.ToString());
 
-            ComboBoxUser.Items.Add(user.User.FirstName.ToString());
             DateSelectDeadline.SelectedDate= DateTime.Today.AddDays(7);
         }
 
         public void UpdateSetup()
         {
-
+            CreateSetup();
 
             PreFillForm(this.ticket);
 
@@ -104,32 +104,11 @@ namespace GardenGroupUI
         }
         public void ReadSetup()
         {
+            CreateSetup();
+            PreFillForm(ticket);
             this.IsEnabled = false;
             
-             DatePickerDateTime.SelectedDate = ticket.DateReported;
             
-
-             TextBoxSubject.Text = ticket.Subject;
-
-
-             ComboBoxIncidentType.Items.Add (ticket.Incident);
-            ComboBoxIncidentType.SelectedIndex = 0;
-
-             ComboBoxUser.Items.Add(ticket.User.FirstName.Value.ToString());
-            ComboBoxUser.SelectedIndex = 0;
-
-
-
-            ComboBoxImpact.Items.Add(ticket.Impact.ToString());
-            ComboBoxImpact.SelectedIndex = 0;
-
-            ComboBoxUrgency.Items.Add(ticket.Urgency.ToString());
-            ComboBoxUrgency.SelectedIndex = 0;
-
-
-            DateSelectDeadline.SelectedDate = ticket.DeadLine;
-
-            TextBoxDescription.Text = ticket.Description;
 
             buttonGroup.Children.Remove(ButtonCancel);
             buttonGroup.Children.Remove(ButtonSubmit);
@@ -172,8 +151,6 @@ namespace GardenGroupUI
 
             }
         }
-
-     
 
         private void ButtonTestCreate_Click(object sender, RoutedEventArgs e)
         {
@@ -277,7 +254,7 @@ namespace GardenGroupUI
 
             try
             {
-                ticketLogic.CreateTicket(MakeTicket());
+                ticketLogic.CreateTicket(MakeTicket(user.User));
             }
             catch (Exception ex) {
                 MessageBox.Show(ex.Message);
@@ -286,25 +263,38 @@ namespace GardenGroupUI
 
         private void UpdateTicket(object sender, RoutedEventArgs e)
         {
-            ticketLogic.UpdateTicket(this.ticket,MakeTicket());
+            UserLogic userLogic = new UserLogic();
+            //User user = userLogic.GetUser(ComboBoxUser.SelectedValue.ToString());
+            User user = userLogic.GetUser(ComboBoxUser.Text);
+
+            ticketLogic.UpdateTicket(this.ticket,MakeTicket(user));
         }
         private void DeleteTicket(object sender, RoutedEventArgs e)
         {
 
         }
         //help methods
-        public Ticket MakeTicket()
+        public Ticket MakeTicket(User user)
         {
 
+            ObjectId id = this.ticket._id;
+            if (this.ticket._id == null)
+            {
+                id= (ObjectId)BsonObjectId.GenerateNewId();
+            }
             Ticket ticket = new Ticket()
             {
+                _id = id,
+
                 DateReported = (DateTime)DatePickerDateTime.SelectedDate,
 
-                Subject = TextBoxDescription.Text.ToString(),
+                Subject = TextBoxSubject.Text.ToString(),
+
+                Description = TextBoxDescription.Text.ToString(),
 
                 Incident = (IncidentType)ComboBoxIncidentType.SelectedIndex,
 
-                User = (User)ComboBoxUser.SelectedValue,
+                User = user,
 
                 Impact = (Priority)ComboBoxImpact.SelectedIndex,
 
@@ -326,12 +316,20 @@ namespace GardenGroupUI
 
 
             TextBoxSubject.Text = ticket.Subject;
+            bool makenew = false;
+            for (int i =0; i < ComboBoxIncidentType.Items.Count; i++)
+            {
+                if (ComboBoxIncidentType.Items[i].ToString()==ticket.Incident.ToString())
+                {
+                    ComboBoxIncidentType.SelectedIndex = i;
+                }
+               
+            }
+          
 
 
-            ComboBoxIncidentType.Items.Add(ticket.Incident);
-            ComboBoxIncidentType.SelectedIndex = 0;
 
-            ComboBoxUser.Items.Add(ticket.User.FirstName.Value.ToString());
+            ComboBoxUser.Items.Add(ticket.User.UserName.Value.ToString());
             ComboBoxUser.SelectedIndex = 0;
 
 

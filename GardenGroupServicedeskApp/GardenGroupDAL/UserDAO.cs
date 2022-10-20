@@ -13,8 +13,8 @@ namespace GardenGroupDAL
 {
     public class UserDAO
     {
-        private IMongoCollection<BsonDocument> collection = null;
-        private IMongoDatabase database = null;
+        private IMongoCollection<BsonDocument> collection;
+        private IMongoDatabase database;
 
         private string databaseName = "TicketSystemDB";
         private string collectionName = "User";
@@ -81,7 +81,7 @@ namespace GardenGroupDAL
                 database = mongoClientInstance.Client.GetDatabase(databaseName);
                 collection = database.GetCollection<BsonDocument>(collectionName);
 
-                FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("UserName", username);
+                FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("Username", username);
                 BsonDocument document = collection.Find(filter).First();
                 //query
 

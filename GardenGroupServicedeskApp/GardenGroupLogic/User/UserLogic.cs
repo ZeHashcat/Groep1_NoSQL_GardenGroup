@@ -29,7 +29,7 @@ namespace GardenGroupLogic
         {
             BsonDocument document = userDAO.GetUser(username);
             BsonKeyValuePair id = new BsonKeyValuePair("_id", document["_id"].ToString());
-            BsonKeyValuePair userName = new BsonKeyValuePair("UserName", document["UserName"].ToString());
+            BsonKeyValuePair userName = new BsonKeyValuePair("UserName", document["Username"].ToString());
             BsonKeyValuePair password = new BsonKeyValuePair("Password", document["Password"].ToString());
             BsonKeyValuePair firstName = new BsonKeyValuePair("First Name", document["First Name"].ToString());
             BsonKeyValuePair lastName = new BsonKeyValuePair("Last Name", document["Last Name"].ToString());

@@ -124,12 +124,12 @@ namespace GardenGroupDAL
 
 
             BsonDocument returnedDocument = collection.FindOneAndUpdate(filter, update);
-            if(returnedDocument != updateddocument)
+          /*  if(!returnedDocument.Equals(updateddocument))
             {
                 
                 throw new Exception("something went wrong the ticket whas not updated");
 
-            }
+            }*/
             return returnedDocument;
 
         }
