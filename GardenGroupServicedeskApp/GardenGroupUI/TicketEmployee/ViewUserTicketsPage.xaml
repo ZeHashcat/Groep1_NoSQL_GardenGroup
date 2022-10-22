@@ -18,19 +18,19 @@
         </Grid.ColumnDefinitions>
 
         <ScrollViewer x:Name="ScrollTicketOverview">
-            <Grid x:Name="GridTicketOverview" Margin="10">
-                <DataGrid x:Name="DataGridTicketOverview" AutoGenerateColumns="False" IsReadOnly="True">
+            <Grid x:Name="GridTicketOverview" Margin="5">
+                <DataGrid x:Name="DataGridTicketOverview" AutoGenerateColumns="False" IsReadOnly="True" AlternatingRowBackground="LightGray">
                     <DataGrid.ItemContainerStyle>
                         <Style TargetType="DataGridRow">
                             <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick"/>
                         </Style>
                     </DataGrid.ItemContainerStyle>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Deadline" Binding="{Binding Path=DeadLine}" Width="Auto"/>
+                        <DataGridTextColumn Header="Deadline" Binding="{Binding Path=DeadLine, StringFormat=dd/MM/yyyy HH:mm}" Width="Auto"/>
                         <DataGridTextColumn Header="Subject" Binding="{Binding Path=Subject}" Width = "1*" MaxWidth = "150" MinWidth = "50"/>
-                        <DataGridTextColumn Header="User" Binding="{Binding Path=User}" Width = "auto"/>
+                        <DataGridTextColumn Header="User" Binding="{Binding Path=User.UserName}" Width = "auto"/>
                         <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}" Width = "1*" MinWidth = "70"/>
-                        <DataGridTextColumn Header="Date" Binding="{Binding Path=DateReported}" Width = "auto"/>
+                        <DataGridTextColumn Header="DateReported" Binding="{Binding Path=DateReported, StringFormat=dd/MM/yyyy HH:mm}" Width = "auto"/>
                         <DataGridTextColumn Header="Status" Binding="{Binding Path=Status}" Width = "auto"/>
                     </DataGrid.Columns>
                 </DataGrid>

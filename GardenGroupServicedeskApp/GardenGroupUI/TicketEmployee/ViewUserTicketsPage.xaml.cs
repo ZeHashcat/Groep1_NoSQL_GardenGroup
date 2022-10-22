@@ -39,7 +39,7 @@ namespace GardenGroupUI.TicketEmployee
         {
             //fetch ticketarray from method in logic layer
             tickets = ticketLogic.ReadTicket();
-
+            
             DataGridTicketOverview.ItemsSource = tickets;
 
             /*< TextBlock Grid.Row = "0" Grid.Column = "0" Text = "Deadline" HorizontalAlignment = "Left" Margin = "5,0,0,0" />
