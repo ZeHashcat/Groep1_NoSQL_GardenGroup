@@ -25,7 +25,7 @@ namespace GardenGroupUI
 
         public CRUDPage()
         {
-            CRUDState state = CRUDState.Create;
+            CRUDState state = CRUDState.Delete;
 
             //sets a ticket to test whit
             ticket = ticketLogic.ReadTicket()[0];
@@ -44,7 +44,7 @@ namespace GardenGroupUI
                     UpdateSetup();
                     break;
                 case CRUDState.Delete:
-                    ReadSetup();
+                    DeleteSetup();
                     break;
             }
 
@@ -83,7 +83,6 @@ namespace GardenGroupUI
 
             DateSelectDeadline.SelectedDate= DateTime.Today.AddDays(7);
         }
-
         public void UpdateSetup()
         {
             CreateSetup();
@@ -114,6 +113,21 @@ namespace GardenGroupUI
             buttonGroup.Children.Remove(ButtonSubmit);
 
         }
+        public void DeleteSetup()
+        {
+            PreFillForm(ticket);
+
+
+
+
+            ButtonSubmit.Content = "delete";
+            ButtonSubmit.Background = new SolidColorBrush(Colors.Red);
+            ButtonSubmit.Click -= new RoutedEventHandler(ButtonSubmit_Click);
+            ButtonSubmit.Click += new RoutedEventHandler(DeleteTicket);
+
+            ButtonSubmit.IsEnabled = true;
+        }
+
 
         private void SetupUsers(List<User> users)
         {
@@ -132,7 +146,8 @@ namespace GardenGroupUI
 
             foreach (Ticket ticket in tickets)
             {
-                result += ticket.Subject.ToString() + "\n"
+                result += ticket._id.ToString()+ "\n"
+                    +ticket.Subject.ToString() + "\n"
                    + ticket.Description.ToString() + "\n"
                    + ticket.DateReported.ToString() + "\n"
                    + ticket.DeadLine.ToString() + "\n";
@@ -246,8 +261,8 @@ namespace GardenGroupUI
         //button events
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
-            
-        }
+/*            this.Close();
+*/        }
 
         private void ButtonSubmit_Click(object sender, RoutedEventArgs e)
         {
@@ -271,7 +286,7 @@ namespace GardenGroupUI
         }
         private void DeleteTicket(object sender, RoutedEventArgs e)
         {
-
+            ticketLogic.DeleteTicket(ticket);
         }
         //help methods
         public Ticket MakeTicket(User user)
@@ -302,9 +317,9 @@ namespace GardenGroupUI
 
                 DeadLine = (DateTime)DateSelectDeadline.SelectedDate,
 
-                Status = currentStatus
+                Status = (TicketStatus)ComboBoxIncidentType.SelectedIndex
 
-           };
+            };
             return ticket;
         }
 
@@ -316,7 +331,6 @@ namespace GardenGroupUI
 
 
             TextBoxSubject.Text = ticket.Subject;
-            bool makenew = false;
             for (int i =0; i < ComboBoxIncidentType.Items.Count; i++)
             {
                 if (ComboBoxIncidentType.Items[i].ToString()==ticket.Incident.ToString())
