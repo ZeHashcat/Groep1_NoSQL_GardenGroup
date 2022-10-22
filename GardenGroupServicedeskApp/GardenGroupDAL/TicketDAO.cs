@@ -66,9 +66,8 @@ namespace GardenGroupDAL
             //set user name value in place of User
             DocumentToFind.Set("UserName", BsonValue.Create(ticket.User.UserName.Value));
 
-            //test code removes dates
-       
-            List<BsonDocument> document = collection.Aggregate().Match(DocumentToFind).Lookup("User", "UserName", "Username", "User").ToList();
+            
+            List<BsonDocument> document = collection.Aggregate().Match(DocumentToFind).Lookup("User", "UserName", "Username", "User").Sort(Builders<BsonDocument>.Sort.Ascending("_id")).ToList();
 
             return document;
 
