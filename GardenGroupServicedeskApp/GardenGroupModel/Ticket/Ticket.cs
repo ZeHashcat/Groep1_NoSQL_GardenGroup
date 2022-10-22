@@ -5,30 +5,30 @@ namespace GardenGroupModel
 {
     public class Ticket
     {
-        public ObjectId _id;
+        public ObjectId _id { get; set; }
 
         [BsonRepresentation(BsonType.DateTime)]
-        public DateTime DateReported;
+        public DateTime DateReported { get; set; }
 
-        public string Subject;
-
-        [BsonRepresentation(BsonType.String)]
-        public IncidentType Incident;
-
-        public User User;
+        public string Subject { get; set; }
 
         [BsonRepresentation(BsonType.String)]
-        public Priority Impact;
+        public IncidentType Incident { get; set; }
+
+        public User User { get; set; }
 
         [BsonRepresentation(BsonType.String)]
-        public Priority Urgency;
+        public Priority Impact { get; set; }
+
+        [BsonRepresentation(BsonType.String)]
+        public Priority Urgency { get; set; }
 
         [BsonRepresentation(BsonType.DateTime)]
-        public DateTime DeadLine;
+        public DateTime DeadLine { get; set; }
 
         [BsonRepresentation(BsonType.String)]
-        public TicketStatus Status;
+        public TicketStatus Status { get; set; }
 
-        public String Description;
+        public String Description { get; set; }
     }
 }

@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GardenGroupLogic;
 using GardenGroupModel;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace GardenGroupUI.TicketEmployee
 {
@@ -31,152 +32,34 @@ namespace GardenGroupUI.TicketEmployee
         {
             InitializeComponent();
 
-            TicketFetcher();
-
-            GridTicketOverview.MouseLeftButtonDown += (sen, evg) =>
-            {
-                //AppWindow.GetWindow(this).Content = new CRUDPage(CRUDState.Read);
-                TicketWindow ticketWindow = new TicketWindow(CRUDState.Read, tickets[0]);
-                ticketWindow.Show();
-                AppWindow.GetWindow(this).IsEnabled = false;
-            };
+            TicketLoader();
         }
 
-        public void TicketFetcher()
+        public void TicketLoader()
         {
             //fetch ticketarray from method in logic layer
             tickets = ticketLogic.ReadTicket();
 
-            ClearGrid();
+            DataGridTicketOverview.ItemsSource = tickets;
 
-            /*tickets.Add(new Ticket()
-            {
-                DateReported = DateTime.Today,
-                Subject = "test1",
-                Incident = IncidentType.service,
-                User = new User(null, null, null, null, null, null, null, null, null, null),
-                Impact = Priority.high,
-                Urgency = Priority.low,
-                DeadLine = DateTime.Now,
-                Description = "this is a test."
-            });
-            tickets.Add(new Ticket()
-            {
-                DateReported = DateTime.Today,
-                Subject = "test2",
-                Incident = IncidentType.service,
-                User = new User(null, null, null, null, null, null, null, null, null, null),
-                Impact = Priority.high,
-                Urgency = Priority.low,
-                DeadLine = DateTime.Now,
-                Description = "this is a test."
-            });
-            tickets.Add(new Ticket()
-            {
-                DateReported = DateTime.Today,
-                Subject = "test3",
-                Incident = IncidentType.service,
-                User = new User(null, null, null, null, null, null, null, null, null, null),
-                Impact = Priority.high,
-                Urgency = Priority.low,
-                DeadLine = DateTime.Now,
-                Description = "this is a test."
-            });*/
-
-            PrintTickets(tickets);
-        }
-
-        public void ClearGrid()
-        {
-            GridTicketOverview.Children.Clear();
-            GridTicketOverview.RowDefinitions.Clear();
-            //AddRow(new GridLength(0, GridUnitType.Auto));
-        }
-
-        public void PrintTickets(List<Ticket> tickets)
-        {
-            for (int i = 0; i < tickets.Count; i++)
-            {
-                AddRow(new GridLength(40));
-
-                FillColumns(i, tickets);
-            }
-        }
-
-        public void AddRow(GridLength gridLength)
-        {
-            RowDefinition rowDef = new RowDefinition();
-            rowDef.Height = gridLength;
-            GridTicketOverview.RowDefinitions.Add(rowDef);
-        }
-
-        public void FillColumns(int i, List<Ticket> tickets)
-        {
-            for (int j = 0; j < GridTicketOverview.ColumnDefinitions.Count; j++)
-            {
-                TextBlock textBlock = new TextBlock();
-                SelectTicketField(j, textBlock, tickets[i]);
-                FillTextBlockDetails(textBlock);
-                Grid.SetRow(textBlock, i);
-                Grid.SetColumn(textBlock, j);
-                GridTicketOverview.Children.Add(textBlock);
-
-                SetBorders(i, j);
-            }
-        }
-
-        public void SelectTicketField(int j, TextBlock textBlock, Ticket ticket)
-        {
-            switch (j)
-            {
-                case 0:
-                    textBlock.Text = ticket.DeadLine.ToString("MM dd, yy");
-                    break;
-                case 1:
-                    textBlock.Text = ticket.Subject.ToString();
-                    break;
-                case 2:
-                    textBlock.Text = ticket.User.ToString();
-                    break;
-                case 3:
-                    textBlock.Text = ticket.Description.ToString();
-                    break;
-                case 4:
-                    textBlock.Text = ticket.DateReported.ToString("MMMM dd, yy");
-                    break;
-                case 5:
-                    textBlock.Text = ticket.Status.ToString();
-                    break;
-            }
-        }
-
-        public void SetBorders(int row, int column)
-        {
-            Border border = new Border();
-            if (column < GridTicketOverview.ColumnDefinitions.Count - 1)
-            {
-                border.BorderThickness = new Thickness(0, 1, 1, 0);
-            }
-            else
-            {
-                border.BorderThickness = new Thickness(0, 1, 0, 0);
-            }
-            border.BorderBrush = Brushes.Black;
-            Grid.SetRow(border, row);
-            Grid.SetColumn(border, column);
-            GridTicketOverview.Children.Add(border);
-        }
-
-        public void FillTextBlockDetails(TextBlock textBlock)
-        {
-            textBlock.HorizontalAlignment = HorizontalAlignment.Left;
-            textBlock.VerticalAlignment = VerticalAlignment.Top;
-            textBlock.Margin = new Thickness(5, 0, 20, 0);
+            /*< TextBlock Grid.Row = "0" Grid.Column = "0" Text = "Deadline" HorizontalAlignment = "Left" Margin = "5,0,0,0" />
+            < TextBlock Grid.Row = "0" Grid.Column = "1" Text = "Subject" HorizontalAlignment = "Left" Margin = "5,0,0,0" />
+            < TextBlock Grid.Row = "0" Grid.Column = "2" Text = "User" HorizontalAlignment = "Left" Margin = "5,0,0,0" />
+            < TextBlock Grid.Row = "0" Grid.Column = "3" Text = "Description" HorizontalAlignment = "Left" Grid.ColumnSpan = "2" Margin = "5,0,0,0" />
+            < TextBlock Grid.Row = "0" Grid.Column = "4" Text = "Date" HorizontalAlignment = "Left" Margin = "5,0,0,0" />
+            < TextBlock Grid.Row = "0" Grid.Column = "5" Text = "Status" HorizontalAlignment = "Left" Margin = "5,0,0,0" VerticalAlignment = "Top" />*/
         }
 
         private void ButtonRefresh_Click(object sender, RoutedEventArgs e)
         {
-            TicketFetcher();
+            TicketLoader();
+        }
+
+        private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            TicketWindow ticketWindow = new TicketWindow(CRUDState.Read, tickets[0]);
+            ticketWindow.Show();
+            AppWindow.GetWindow(this).IsEnabled = false;
         }
     }
 }
