@@ -25,6 +25,7 @@ namespace GardenGroupUI.TicketEmployee
     public partial class ViewUserTicketsPage : Page
     {
         TicketLogic ticketLogic = new TicketLogic();
+        List<Ticket> tickets;
 
         public ViewUserTicketsPage()
         {
@@ -35,7 +36,7 @@ namespace GardenGroupUI.TicketEmployee
             GridTicketOverview.MouseLeftButtonDown += (sen, evg) =>
             {
                 //AppWindow.GetWindow(this).Content = new CRUDPage(CRUDState.Read);
-                TicketWindow ticketWindow = new TicketWindow(CRUDState.Read);
+                TicketWindow ticketWindow = new TicketWindow(CRUDState.Read, tickets[0]);
                 ticketWindow.Show();
                 AppWindow.GetWindow(this).IsEnabled = false;
             };
@@ -44,7 +45,7 @@ namespace GardenGroupUI.TicketEmployee
         public void TicketFetcher()
         {
             //fetch ticketarray from method in logic layer
-            List<Ticket> tickets = ticketLogic.ReadTicket();
+            tickets = ticketLogic.ReadTicket();
 
             ClearGrid();
 

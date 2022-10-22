@@ -12,23 +12,24 @@ using System.Windows.Media;
 
 namespace GardenGroupUI
 {
-    
+
     public partial class CRUDPage : Page
     {
 
         TicketLogic ticketLogic = new TicketLogic();
 
-        public CRUDPage(CRUDState state)
-        {
-            Priority priority = new Priority();
+        Ticket ticket;
 
-            //sets a ticket to test whit
-            ticket = ticketLogic.ReadTicket()[0];
+        TicketStatus currentStatus = TicketStatus.open;
+        UserInstance user = UserInstance.GetUserInstance();
+
+        public CRUDPage(CRUDState state, Ticket ticket)
+        {
+            this.ticket = ticket;
 
             InitializeComponent();
             switch (state)
             {
-
                 case CRUDState.Create:
                     CreateSetup();
                     break;
@@ -39,14 +40,13 @@ namespace GardenGroupUI
                     UpdateSetup();
                     break;
                 case CRUDState.Delete:
-                    ReadSetup();
+                    DeleteSetup();
                     break;
             }
         }
 
         public void CreateSetup()
         {
-
             //fill drop dowms
             //date time selector fill
             DateTime date = DateTime.Now;
@@ -67,14 +67,14 @@ namespace GardenGroupUI
             {
                 ComboBoxIncidentType.Items.Add(Enum.GetName(typeof(IncidentType), i));
             }
+            //only works whit login 
+            //ComboBoxUser.Items.Add(user.User.UserName.ToString());
 
-            ComboBoxUser.Items.Add(user.User.FirstName.ToString());
-            DateSelectDeadline.SelectedDate= DateTime.Today.AddDays(7);
+            DateSelectDeadline.SelectedDate = DateTime.Today.AddDays(7);
         }
-
         public void UpdateSetup()
         {
-
+            CreateSetup();
 
             PreFillForm(this.ticket);
 
@@ -92,46 +92,35 @@ namespace GardenGroupUI
         }
         public void ReadSetup()
         {
+            CreateSetup();
+            PreFillForm(ticket);
             this.IsEnabled = false;
-            
-             DatePickerDateTime.SelectedDate = ticket.DateReported;
-            
-
-            //ticketLogic.CreateTicket(tickets[0]);
-            foreach (Ticket ticket in tickets) { 
-             result += ticket.Subject.ToString() + "\n"
-                + ticket.Description.ToString();
-            }
-            MessageBox.Show(result);
 
 
-             ComboBoxIncidentType.Items.Add (ticket.Incident);
-            ComboBoxIncidentType.SelectedIndex = 0;
-
-             ComboBoxUser.Items.Add(ticket.User.FirstName.Value.ToString());
-            ComboBoxUser.SelectedIndex = 0;
-
-
-
-            ComboBoxImpact.Items.Add(ticket.Impact.ToString());
-            ComboBoxImpact.SelectedIndex = 0;
-
-            ComboBoxUrgency.Items.Add(ticket.Urgency.ToString());
-            ComboBoxUrgency.SelectedIndex = 0;
-
-
-            DateSelectDeadline.SelectedDate = ticket.DeadLine;
-
-            TextBoxDescription.Text = ticket.Description;
 
             buttonGroup.Children.Remove(ButtonCancel);
             buttonGroup.Children.Remove(ButtonSubmit);
 
         }
+        public void DeleteSetup()
+        {
+            PreFillForm(ticket);
+
+
+
+
+            ButtonSubmit.Content = "delete";
+            ButtonSubmit.Background = new SolidColorBrush(Colors.Red);
+            ButtonSubmit.Click -= new RoutedEventHandler(ButtonSubmit_Click);
+            ButtonSubmit.Click += new RoutedEventHandler(DeleteTicket);
+
+            ButtonSubmit.IsEnabled = true;
+        }
+
 
         private void SetupUsers(List<User> users)
         {
-           // ComboBoxUser.SetValue(users.);
+            // ComboBoxUser.SetValue(users.);
         }
         private void SetupUsers(User user)
         {
@@ -146,7 +135,8 @@ namespace GardenGroupUI
 
             foreach (Ticket ticket in tickets)
             {
-                result += ticket.Subject.ToString() + "\n"
+                result += ticket._id.ToString() + "\n"
+                    + ticket.Subject.ToString() + "\n"
                    + ticket.Description.ToString() + "\n"
                    + ticket.DateReported.ToString() + "\n"
                    + ticket.DeadLine.ToString() + "\n";
@@ -156,17 +146,16 @@ namespace GardenGroupUI
 
         private void ButtonTestDelete_Click(object sender, RoutedEventArgs e)
         {
-            try {
+            try
+            {
                 Ticket tickets = ticketLogic.ReadTicket()[0];
-              MessageBox.Show(ticketLogic.DeleteTicket(tickets).ToString()); 
-            } 
+                MessageBox.Show(ticketLogic.DeleteTicket(tickets).ToString());
+            }
             catch (Exception ex)
             {
 
             }
         }
-
-     
 
         private void ButtonTestCreate_Click(object sender, RoutedEventArgs e)
         {
@@ -183,15 +172,15 @@ namespace GardenGroupUI
                         new BsonKeyValuePair("lastName", "Doe"),
                         new BsonKeyValuePair("role", "test user"),
                         new BsonKeyValuePair("email", "Jane.Doe@Test.com"),
-                        new BsonKeyValuePair("phoneNumber","123456789"),
+                        new BsonKeyValuePair("phoneNumber", "123456789"),
                         new BsonKeyValuePair("location", "testlocation")
 
                         ),
-            Impact = Priority.normal,
-            Urgency = Priority.low,
-            DeadLine = DateTime.Today.AddDays(1),
-            Status = TicketStatus.closed,
-            Description ="Dit is een test message 10 days until total destruction of all human kind. thank you for being alive🙇‍♀️ "
+                Impact = Priority.normal,
+                Urgency = Priority.low,
+                DeadLine = DateTime.Today.AddDays(1),
+                Status = TicketStatus.closed,
+                Description = "Dit is een test message 10 days until total destruction of all human kind. thank you for being alive🙇‍♀️ "
             };
             ticketLogic.CreateTicket(ticket);
         }
@@ -200,33 +189,34 @@ namespace GardenGroupUI
         {
 
             //test
-              Ticket ticket = new Ticket()
+            Ticket ticket = new Ticket()
             {
                 DateReported = DateTime.Today,
                 Subject = "Create Test",
                 Incident = IncidentType.hardware,
                 User = new User(
-                        new BsonKeyValuePair("id", ObjectId.GenerateNewId()),
-                        new BsonKeyValuePair("userName", "Reynard96Blazer"),
-                        new BsonKeyValuePair("password", ""),
-                        new BsonKeyValuePair("firstName", "Jane"),
-                        new BsonKeyValuePair("lastName", "Doe"),
-                        new BsonKeyValuePair("role", "test user"),
-                        new BsonKeyValuePair("email", "Jane.Doe@Test.com"),
-                        new BsonKeyValuePair("phoneNumber","123456789"),
-                        new BsonKeyValuePair("location", "testlocation")
+                      new BsonKeyValuePair("id", ObjectId.GenerateNewId()),
+                      new BsonKeyValuePair("userName", "Reynard96Blazer"),
+                      new BsonKeyValuePair("password", ""),
+                      new BsonKeyValuePair("firstName", "Jane"),
+                      new BsonKeyValuePair("lastName", "Doe"),
+                      new BsonKeyValuePair("role", "test user"),
+                      new BsonKeyValuePair("email", "Jane.Doe@Test.com"),
+                      new BsonKeyValuePair("phoneNumber", "123456789"),
+                      new BsonKeyValuePair("location", "testlocation")
 
-                        ),
-            Impact = Priority.normal,
-            Urgency = Priority.low,
-            DeadLine = DateTime.Today.AddDays(1),
-            Status = TicketStatus.closed,
-            Description ="Dit is een test message 10 days until total destruction of all human kind. thank you for being alive🙇‍♀️ "
+                      ),
+                Impact = Priority.normal,
+                Urgency = Priority.low,
+                DeadLine = DateTime.Today.AddDays(1),
+                Status = TicketStatus.closed,
+                Description = "Dit is een test message 10 days until total destruction of all human kind. thank you for being alive🙇‍♀️ "
             };
 
 
             //test
-            Ticket update = new Ticket(){
+            Ticket update = new Ticket()
+            {
                 DateReported = DateTime.Today,
                 Subject = "update",
                 Incident = IncidentType.hardware,
@@ -254,15 +244,16 @@ namespace GardenGroupUI
             {
                 MessageBox.Show(ticketLogic.UpdateTicket(ticket, update).ToString());
             }
-            
-            catch(Exception ex) { }
+
+            catch (Exception ex) { }
         }
 
-       
+
         //button events
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
-            
+            /*            this.Close();
+            */
         }
 
         private void ButtonSubmit_Click(object sender, RoutedEventArgs e)
@@ -270,34 +261,48 @@ namespace GardenGroupUI
 
             try
             {
-                ticketLogic.CreateTicket(MakeTicket());
+                ticketLogic.CreateTicket(MakeTicket(user.User));
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 MessageBox.Show(ex.Message);
             }
         }
 
         private void UpdateTicket(object sender, RoutedEventArgs e)
         {
-            ticketLogic.UpdateTicket(this.ticket,MakeTicket());
+            UserLogic userLogic = new UserLogic();
+            //User user = userLogic.GetUser(ComboBoxUser.SelectedValue.ToString());
+            User user = userLogic.GetUser(ComboBoxUser.Text);
+
+            ticketLogic.UpdateTicket(this.ticket, MakeTicket(user));
         }
         private void DeleteTicket(object sender, RoutedEventArgs e)
         {
-
+            ticketLogic.DeleteTicket(ticket);
         }
         //help methods
-        public Ticket MakeTicket()
+        public Ticket MakeTicket(User user)
         {
 
+            ObjectId id = this.ticket._id;
+            if (this.ticket._id == null)
+            {
+                id = (ObjectId)BsonObjectId.GenerateNewId();
+            }
             Ticket ticket = new Ticket()
             {
+                _id = id,
+
                 DateReported = (DateTime)DatePickerDateTime.SelectedDate,
 
-                Subject = TextBoxDescription.Text.ToString(),
+                Subject = TextBoxSubject.Text.ToString(),
+
+                Description = TextBoxDescription.Text.ToString(),
 
                 Incident = (IncidentType)ComboBoxIncidentType.SelectedIndex,
 
-                User = (User)ComboBoxUser.SelectedValue,
+                User = user,
 
                 Impact = (Priority)ComboBoxImpact.SelectedIndex,
 
@@ -305,9 +310,9 @@ namespace GardenGroupUI
 
                 DeadLine = (DateTime)DateSelectDeadline.SelectedDate,
 
-                Status = currentStatus
+                Status = (TicketStatus)ComboBoxIncidentType.SelectedIndex
 
-           };
+            };
             return ticket;
         }
 
@@ -319,12 +324,19 @@ namespace GardenGroupUI
 
 
             TextBoxSubject.Text = ticket.Subject;
+            for (int i = 0; i < ComboBoxIncidentType.Items.Count; i++)
+            {
+                if (ComboBoxIncidentType.Items[i].ToString() == ticket.Incident.ToString())
+                {
+                    ComboBoxIncidentType.SelectedIndex = i;
+                }
+
+            }
 
 
-            ComboBoxIncidentType.Items.Add(ticket.Incident);
-            ComboBoxIncidentType.SelectedIndex = 0;
 
-            ComboBoxUser.Items.Add(ticket.User.FirstName.Value.ToString());
+
+            ComboBoxUser.Items.Add(ticket.User.UserName.Value.ToString());
             ComboBoxUser.SelectedIndex = 0;
 
 
@@ -340,7 +352,7 @@ namespace GardenGroupUI
 
             TextBoxDescription.Text = ticket.Description;
 
-          
+
         }
     }
 }

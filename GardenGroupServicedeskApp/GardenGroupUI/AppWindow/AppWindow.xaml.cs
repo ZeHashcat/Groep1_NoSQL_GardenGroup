@@ -30,6 +30,7 @@ namespace GardenGroupUI
             frameContent.Source = new Uri("AppMainEmployeePage.xaml", UriKind.Relative);
             //frameContent.Source = new Uri("AppMainServiceDeskEmployeePage.xaml", UriKind.Relative);
             //frameContent.Source = new Uri("../TicketServiceDeskEmployee/CRUDPage.xaml", UriKind.Relative);
+        }
 
         private void CreateClient(string connectionString)
         {
@@ -54,10 +55,11 @@ namespace GardenGroupUI
             this.Close();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        //AddUserTest bestaat niet
+        /*private void Button_Click(object sender, RoutedEventArgs e)
         {
             UserLogic logic = new UserLogic();
             logic.AddUserTest();
-        }
+        }*/
     }
 }

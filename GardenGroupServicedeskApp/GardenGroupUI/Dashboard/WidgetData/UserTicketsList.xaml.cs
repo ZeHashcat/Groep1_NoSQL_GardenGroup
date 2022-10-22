@@ -30,10 +30,10 @@ namespace GardenGroupUI
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             TicketLogic ticketLogic = new TicketLogic();
-            List<ICollectionObject> tickets = ticketLogic.FillTicketList("ZeHashcat");
+            /*List<ICollectionObject> tickets = ticketLogic.FillTicketList("ZeHashcat");*/
             string[,] columnHeaders = SetColumnHeaders();
             listViewWidget.Items.Clear();
-            listViewWidget = ListWidget.GetListView(listViewWidget, tickets, columnHeaders);
+            /*listViewWidget = ListWidget.GetListView(listViewWidget, tickets, columnHeaders);*/
         }
 
         private static string[,] SetColumnHeaders()

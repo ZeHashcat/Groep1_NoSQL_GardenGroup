@@ -251,7 +251,8 @@ namespace GardenGroupDAL
                     }
                     catch (Exception ex)
                     {
-                        user = new User(
+                        //user mist een team
+                        /*user = new User(
                                             new BsonKeyValuePair("_id", document.GetValue("_id").ToString()),
                                             new BsonKeyValuePair("Username", document.GetValue("Username").ToString()),
                                             new BsonKeyValuePair("Password", document.GetValue("Password").ToString()),
@@ -261,13 +262,12 @@ namespace GardenGroupDAL
                                             new BsonKeyValuePair("E-Mail", document.GetValue("E-Mail").ToString()),
                                             new BsonKeyValuePair("Phone Number", document.GetValue("Phone Number").ToString()),
                                             new BsonKeyValuePair("Location", document.GetValue("Location").ToString())
-                                            );
+                                            );*/
                     }
-                    users.Add(user);
-                    
-                }
-                return users;
+                    /*users.Add(user);*/
 
+                }
+                    return users;
             }
             catch (Exception ex)
             {
@@ -311,7 +311,7 @@ namespace GardenGroupDAL
             userDocument.Add(user.Email.Key, user.Email.Value);
             userDocument.Add(user.PhoneNumber.Key, user.PhoneNumber.Value);
             userDocument.Add(user.Location.Key, user.Location.Value);
-            userDocument.Add(user.Teams.Key, user.Teams.Value);
+            /*userDocument.Add(user.Teams.Key, user.Teams.Value);*/
 
             collection.InsertOne(userDocument);
         }
