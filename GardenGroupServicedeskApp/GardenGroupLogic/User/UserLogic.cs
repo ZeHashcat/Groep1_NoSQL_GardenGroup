@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -59,9 +60,12 @@ namespace GardenGroupLogic
             HashingWithSaltHasher passwordHasher = new HashingWithSaltHasher();           
 
             HashWithSaltResult hashAndSalt = userDAO.GetPassword(username);
-            byte[] saltBytes = Encoding.ASCII.GetBytes(hashAndSalt.Salt);
+            //byte[] saltBytes = Encoding.ASCII.GetBytes(hashAndSalt.Salt);
+            //HashWithSaltResult hashWithSaltResult512 = passwordHasher.HashWithSalt(password, saltBytes, SHA512.Create());
 
-            HashWithSaltResult hashWithSaltResult512 = passwordHasher.HashWithSalt(password, saltBytes, SHA512.Create());
+            HashWithSaltResult hashWithSaltResult512 = passwordHasher.HashWithSalt(password, hashAndSalt.Salt, SHA512.Create());
+
+
             if (hashAndSalt.Hash == hashWithSaltResult512.Hash)
                 return true;
             
@@ -97,12 +101,14 @@ namespace GardenGroupLogic
         }
         public bool AddUser(string username, HashWithSaltResult hashWithSalt, string firstname, string lastname, string email, double phonenumber, string role, string location)
         {        
-
+            //User will be checked for duplicate values
             if (userDAO.CheckUserData(username, email, phonenumber))
             {
+                //User will get added here
                 userDAO.AddUser(username, hashWithSalt, firstname, lastname, email, phonenumber, role, location);
                 return true;
             }
+            //User has entered duplicate values. The user will be asked to enter diferent values
             else
                 return false;
         }        

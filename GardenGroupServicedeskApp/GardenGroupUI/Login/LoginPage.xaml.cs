@@ -30,6 +30,7 @@ namespace GardenGroupUI
             InitializeComponent();
 
             CreateClient(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+
             GetLoginInfo();
         }
 
@@ -40,14 +41,14 @@ namespace GardenGroupUI
         //If password correct send to respectable window.
         private void loginLoginButton_Click(object sender, RoutedEventArgs e)
         {
-            //Stuur hier door naar Dashboard. (Mylo)
-            
-            string username = loginUsernameTextBox.Text;
-            string password = loginPasswordBox.Password;
-                        
+            //The login button has been pressed. Now the validation will begin                   
            
             try
             {
+                string username = loginUsernameTextBox.Text;
+                string password = loginPasswordBox.Password;
+
+                //Here the username and password will be checked
                 if (loginLogic.CheckLogin(username, password))
                 {
                     //Creating user instance
@@ -55,14 +56,13 @@ namespace GardenGroupUI
                     UserInstance.GetUserInstance(user);
                     //change source of window to AppMainPage.xaml <----------------------------
 
-
                     MessageBox.Show($"Welcome {user.FirstName}");
                 }
                 else
                 {
-
+                    MessageBox.Show("Wrong username or password entered,\nPlease try again.");
                 }
-                //MessageBox.Show("je hebt dit verkloot!!!");
+
 
                 loginWrongPasswordMessageLabel.Foreground = new SolidColorBrush(Colors.Red);
                 loginWrongPasswordMessageLabel.Content = "Wrong username or password entered,\nPlease try again.";

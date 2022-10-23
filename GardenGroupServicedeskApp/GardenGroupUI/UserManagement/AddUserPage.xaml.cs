@@ -26,8 +26,8 @@ namespace GardenGroupUI.UserManagement
     public partial class AddUserPage : Page
     {
         private UserLogic userLogic = new UserLogic();
-        private LocationService locationService = new LocationService();
         private RoleService roleService = new RoleService();
+        private LocationService locationService = new LocationService();
 
         public AddUserPage()
         {
@@ -48,16 +48,16 @@ namespace GardenGroupUI.UserManagement
         {            
             try
             {
-                List<string> locations = await Task.Run(() => locationService.GetLocations());
-                foreach (string location in locations)
-                {
-                    addUserLocationsComboBox.Items.Add(location);
-                }
-
                 List<string> roles = await Task.Run(() => roleService.GetRoles());
                 foreach (string role in roles)
                 {
                     addUserRoleComboBox.Items.Add(role);
+                }
+
+                List<string> locations = await Task.Run(() => locationService.GetLocations());
+                foreach (string location in locations)
+                {
+                    addUserLocationsComboBox.Items.Add(location);
                 }
             }            
             catch (Exception ex)
@@ -68,11 +68,9 @@ namespace GardenGroupUI.UserManagement
 
         private void AddUserButton_Click(object sender, RoutedEventArgs e)
         {
-            //Roep hier database aan en voeg toe. Gebruik try catch.
-            //Letop dat de email en gebruikersnaam niet twee maal voor mogen komen!!!
-
-            
-
+            //Here we call on the database using try catch
+            //The username, email and phone number cant be the same as one that is already in the database.
+                        
             try
             {
                 //Getting data from the inputboxes 
@@ -87,7 +85,7 @@ namespace GardenGroupUI.UserManagement
 
                 //Change input into hash and salt
                 HashingWithSaltHasher hasher = new HashingWithSaltHasher();
-                HashWithSaltResult hashWithSalt = hasher.HashWithSalt(password, 64, SHA512.Create());
+                HashWithSaltResult hashWithSalt = hasher.NewHashWithSalt(password, 64, SHA512.Create());
 
                 if (userLogic.AddUser(username, hashWithSalt, firstname, lastname, email, phoneNumber, role, location))
                 {

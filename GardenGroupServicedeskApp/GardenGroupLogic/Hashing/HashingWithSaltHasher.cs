@@ -11,7 +11,7 @@ namespace GardenGroupLogic
     public class HashingWithSaltHasher
     {
         //Use with AddUser
-        public HashWithSaltResult HashWithSalt(string password, int saltLength, HashAlgorithm hashAlgorithm)
+        public HashWithSaltResult NewHashWithSalt(string password, int saltLength, HashAlgorithm hashAlgorithm)
         {
             RandomGeneratedNumber randomNumberGenerator = new RandomGeneratedNumber();
             byte[] saltByte = randomNumberGenerator.GenerateRandomCryptoBytes(saltLength);            
@@ -20,7 +20,8 @@ namespace GardenGroupLogic
             passwordWithSalt.AddRange(passwordAsByte);
             passwordWithSalt.AddRange(saltByte);
             byte[] hash = hashAlgorithm.ComputeHash(passwordWithSalt.ToArray());
-            return new HashWithSaltResult(Convert.ToBase64String(saltByte), Convert.ToBase64String(hash));
+            return new HashWithSaltResult(saltByte, hash);
+            //return new HashWithSaltResult(Convert.ToBase64String(saltByte), Convert.ToBase64String(hash));
         }
         //Use with Login
         public HashWithSaltResult HashWithSalt(string password, byte[] saltByte, HashAlgorithm hashAlgorithm)
@@ -31,7 +32,7 @@ namespace GardenGroupLogic
             passwordWithSalt.AddRange(passwordAsByte);
             passwordWithSalt.AddRange(saltByte);
             byte[] hash = hashAlgorithm.ComputeHash(passwordWithSalt.ToArray());
-            return new HashWithSaltResult(Convert.ToBase64String(saltByte), Convert.ToBase64String(hash));
+            return new HashWithSaltResult(saltByte, hash);
         }
     }
 }

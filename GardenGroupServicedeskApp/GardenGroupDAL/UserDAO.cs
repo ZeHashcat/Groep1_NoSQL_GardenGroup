@@ -33,7 +33,7 @@ namespace GardenGroupDAL
             if (document == null)
             {
                 //error detected
-                throw new Exception("incorrect username or password, please make sure you spelled everything correctly.");
+                throw new Exception("Incorrect username or password, please make sure you spelled everything correctly.");
             }
             else
             {
@@ -54,12 +54,11 @@ namespace GardenGroupDAL
         {            
             //filter document to only get password
            
-            string hashedPassword = document.GetValue("Password").ToString();
-            string salt = document.GetValue("Salt").ToString();
+            byte[] hashedPassword = Encoding.ASCII.GetBytes(document.GetValue("Password").ToString());
+            byte[] salt = Encoding.ASCII.GetBytes(document.GetValue("Salt").ToString());
             HashWithSaltResult hashAndSaltResult = new HashWithSaltResult(salt, hashedPassword);
                 
-            return hashAndSaltResult;            
-                      
+            return hashAndSaltResult;                             
         }
 
         public BsonDocument GetUser(string username)
