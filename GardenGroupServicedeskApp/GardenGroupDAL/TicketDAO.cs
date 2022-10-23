@@ -69,9 +69,8 @@ namespace GardenGroupDAL
             //set user name value in place of User
             DocumentToFind.Set("UserName", BsonValue.Create(ticket.User.UserName.Value));
 
-            //test code removes dates
-       
-            List<BsonDocument> document = collection.Aggregate().Match(DocumentToFind).Lookup("User", "UserName", "Username", "User").ToList();
+            
+            List<BsonDocument> document = collection.Aggregate().Match(DocumentToFind).Lookup("User", "UserName", "Username", "User").Sort(Builders<BsonDocument>.Sort.Descending("_id")).ToList();
 
             return document;
 
@@ -127,12 +126,12 @@ namespace GardenGroupDAL
 
 
             BsonDocument returnedDocument = collection.FindOneAndUpdate(filter, update);
-            if(returnedDocument != updateddocument)
+          /*  if(!returnedDocument.Equals(updateddocument))
             {
                 
                 throw new Exception("something went wrong the ticket whas not updated");
 
-            }
+            }*/
             return returnedDocument;
 
         }
@@ -145,10 +144,10 @@ namespace GardenGroupDAL
             FilterDefinition<BsonDocument> FilterToDelete = documentToDelete;
             BsonDocument documentToValidate = collection.FindOneAndDelete(FilterToDelete);
 
-            if (documentToValidate != documentToDelete)
+        /*    if (documentToValidate != documentToDelete)
             {
                 throw new Exception("something went wrong the ticket whas not deleted");
-            }
+            }*/
 
             return documentToValidate;
         }

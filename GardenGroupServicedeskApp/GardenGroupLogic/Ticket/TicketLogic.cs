@@ -134,8 +134,7 @@ namespace GardenGroupLogic
         /// </summary>
         /// <param name="document"></param>
         /// <returns></returns>
-        private Ticket makeTicket(BsonDocument document)
-        {
+        private Ticket makeTicket(BsonDocument document) {
             BsonArray user = document.GetElement("User").Value.AsBsonArray;
 
 
@@ -155,7 +154,7 @@ namespace GardenGroupLogic
                     new BsonKeyValuePair("email", user[0].AsBsonDocument.GetElement("E-Mail").Value.ToString()),
                     new BsonKeyValuePair("phoneNumber", user[0].AsBsonDocument.GetElement("Phone Number").Value.ToString()),
                     new BsonKeyValuePair("location", user[0].AsBsonDocument.GetElement("Location").Value.ToString())
-                    
+
                     ),
 
 

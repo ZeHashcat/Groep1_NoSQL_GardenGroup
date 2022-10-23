@@ -13,9 +13,8 @@ namespace GardenGroupDAL
 {
     public class UserDAO
     {
-        private IMongoCollection<BsonDocument> collection = null;
-        private IMongoDatabase database = null;
-        
+        private IMongoCollection<BsonDocument> collection;
+        private IMongoDatabase database;
 
         private string databaseName = "TicketSystemDB";
         private string collectionName = "User";
@@ -163,6 +162,13 @@ namespace GardenGroupDAL
                     return false;
                 }                    
 
+        }
+        //The code below belongs in BsonDocument GetUser(string username)
+                FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("Username", username);
+                BsonDocument document = collection.Find(filter).First();
+                //query
+                
+        //The code below belongs in GetUserData
                 //After checking if the values dont match the existing ones in the system we will proceed and add the user
                 else
                 {

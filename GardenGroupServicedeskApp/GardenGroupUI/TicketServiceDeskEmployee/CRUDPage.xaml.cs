@@ -25,7 +25,7 @@ namespace GardenGroupUI
 
         public CRUDPage(CRUDState state, Ticket ticket)
         {
-            this.ticket = ticket;
+            CRUDState state = CRUDState.Delete;
 
             InitializeComponent();
             switch (state)
@@ -70,7 +70,7 @@ namespace GardenGroupUI
             //only works whit login 
             //ComboBoxUser.Items.Add(user.User.UserName.ToString());
 
-            DateSelectDeadline.SelectedDate = DateTime.Today.AddDays(7);
+            DateSelectDeadline.SelectedDate= DateTime.Today.AddDays(7);
         }
         public void UpdateSetup()
         {
@@ -95,8 +95,9 @@ namespace GardenGroupUI
             CreateSetup();
             PreFillForm(ticket);
             this.IsEnabled = false;
-
-
+            
+             DatePickerDateTime.SelectedDate = ticket.DateReported;
+            
 
             buttonGroup.Children.Remove(ButtonCancel);
             buttonGroup.Children.Remove(ButtonSubmit);
@@ -106,7 +107,11 @@ namespace GardenGroupUI
         {
             PreFillForm(ticket);
 
+             ComboBoxIncidentType.Items.Add (ticket.Incident);
+            ComboBoxIncidentType.SelectedIndex = 0;
 
+             ComboBoxUser.Items.Add(ticket.User.FirstName.Value.ToString());
+            ComboBoxUser.SelectedIndex = 0;
 
 
             ButtonSubmit.Content = "delete";
@@ -117,6 +122,18 @@ namespace GardenGroupUI
             ButtonSubmit.IsEnabled = true;
         }
 
+            ComboBoxUrgency.Items.Add(ticket.Urgency.ToString());
+            ComboBoxUrgency.SelectedIndex = 0;
+
+
+            DateSelectDeadline.SelectedDate = ticket.DeadLine;
+
+            TextBoxDescription.Text = ticket.Description;
+
+            buttonGroup.Children.Remove(ButtonCancel);
+            buttonGroup.Children.Remove(ButtonSubmit);
+
+        }
 
         private void SetupUsers(List<User> users)
         {
@@ -135,8 +152,8 @@ namespace GardenGroupUI
 
             foreach (Ticket ticket in tickets)
             {
-                result += ticket._id.ToString() + "\n"
-                    + ticket.Subject.ToString() + "\n"
+                result += ticket._id.ToString()+ "\n"
+                    +ticket.Subject.ToString() + "\n"
                    + ticket.Description.ToString() + "\n"
                    + ticket.DateReported.ToString() + "\n"
                    + ticket.DeadLine.ToString() + "\n";
@@ -252,9 +269,8 @@ namespace GardenGroupUI
         //button events
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
-            /*            this.Close();
-            */
-        }
+/*            this.Close();
+*/        }
 
         private void ButtonSubmit_Click(object sender, RoutedEventArgs e)
         {
@@ -275,7 +291,7 @@ namespace GardenGroupUI
             //User user = userLogic.GetUser(ComboBoxUser.SelectedValue.ToString());
             User user = userLogic.GetUser(ComboBoxUser.Text);
 
-            ticketLogic.UpdateTicket(this.ticket, MakeTicket(user));
+            ticketLogic.UpdateTicket(this.ticket,MakeTicket(user));
         }
         private void DeleteTicket(object sender, RoutedEventArgs e)
         {
@@ -288,7 +304,7 @@ namespace GardenGroupUI
             ObjectId id = this.ticket._id;
             if (this.ticket._id == null)
             {
-                id = (ObjectId)BsonObjectId.GenerateNewId();
+                id= (ObjectId)BsonObjectId.GenerateNewId();
             }
             Ticket ticket = new Ticket()
             {
@@ -324,16 +340,17 @@ namespace GardenGroupUI
 
 
             TextBoxSubject.Text = ticket.Subject;
-            for (int i = 0; i < ComboBoxIncidentType.Items.Count; i++)
+            for (int i =0; i < ComboBoxIncidentType.Items.Count; i++)
             {
-                if (ComboBoxIncidentType.Items[i].ToString() == ticket.Incident.ToString())
+                if (ComboBoxIncidentType.Items[i].ToString()==ticket.Incident.ToString())
                 {
                     ComboBoxIncidentType.SelectedIndex = i;
                 }
+               
+            }
+          
 
             }
-
-
 
 
             ComboBoxUser.Items.Add(ticket.User.UserName.Value.ToString());
