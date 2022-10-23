@@ -105,8 +105,7 @@ namespace GardenGroupUI
 
                 if (newPassword == newPasswordRepeat && 8 < newPassword.Length)
                 {
-                    //Save the new password. \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ (doe dat hier)
-                    //-------------------------------------------------------------------------
+                    //Save the new password.                     
                     HashingWithSaltHasher hasher = new HashingWithSaltHasher();
                     HashWithSaltResult hashWithSalt = hasher.NewHashWithSalt(newPassword, 64, SHA512.Create());
                     //Als ik dit nodig heb schrijf ik result.Hash of .Salt == alleen in deze methode
