@@ -2,13 +2,16 @@
 using GardenGroupModel;
 using Microsoft.VisualBasic;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
+using System.Reflection.Metadata;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 
 namespace GardenGroupLogic
 {
     public class TicketLogic
     {
-        //Client client = new Client();
-        private TicketDAO ticketDAO;
+        TicketDAO TicketDAO = new TicketDAO();
 
         /// <summary>
         /// <list type="bullet">
@@ -23,6 +26,7 @@ namespace GardenGroupLogic
 
         /// <summary>
         /// <list type="bullet">
+        /// updates ticket database
         /// <item>made by floortje Tjeertes</item>
         /// </list>
         /// </summary>
@@ -30,8 +34,31 @@ namespace GardenGroupLogic
         /// <param name="update"></param>
         public Ticket UpdateTicket(Ticket TickettoUpdate, Ticket update)
         {
-           BsonDocument document = TicketDAO.Update(TickettoUpdate, update);
-           return BsonSerializer.Deserialize<Ticket>(document);
+            UserLogic userLogic = new UserLogic();
+
+            BsonDocument document = TicketDAO.Update(TickettoUpdate, update);
+
+
+            User user = userLogic.GetUser(document.GetElement("UserName").Value.ToString());
+
+
+            Ticket localticket = new Ticket()
+            {
+                _id = document.GetElement("_id").Value.AsObjectId,
+                Subject = document.GetElement("Subject").Value.ToString(),
+                DateReported = DateTime.Parse(document.GetElement("DateReported").Value.ToString()),
+                Incident = (IncidentType)Enum.Parse(typeof(IncidentType), document.GetElement("Incident").Value.ToString()),
+                User = user,
+
+
+                Impact = (Priority)Enum.Parse(typeof(Priority), document.GetElement("Impact").Value.ToString()),
+                Urgency = (Priority)Enum.Parse(typeof(Priority), document.GetElement("Urgency").Value.ToString()),
+                DeadLine = DateTime.Parse(document.GetElement("DeadLine").Value.ToString()),
+                Status = (TicketStatus)Enum.Parse(typeof(TicketStatus), document.GetElement("Status").Value.ToString()),
+                Description = document.GetElement("Description").Value.ToString()
+            };
+            //ticket = BsonSerializer.Deserialize<Ticket>(document);
+            return localticket;
 
         }
 
@@ -43,6 +70,7 @@ namespace GardenGroupLogic
         /// <returns></returns>
         public List<Ticket> ReadTicket()
         {
+
             return ListTickets(TicketDAO.Read()); ;
         }
 
@@ -56,6 +84,7 @@ namespace GardenGroupLogic
         /// <returns></returns>
         public List<Ticket> ReadTicket(Ticket ticket)
         {
+
             return ListTickets(TicketDAO.Read(ticket)); ;
         }
 
@@ -75,47 +104,68 @@ namespace GardenGroupLogic
                 BsonArray user = document.GetElement("User").Value.AsBsonArray;
 
 
-                Ticket localticket = new Ticket()
-                {
-                    Subject = document.GetElement("Subject").Value.ToString(),
-                    DateReported = DateTime.Parse(document.GetElement("DateReported").Value.ToString()),
-                    Incident = (IncidentType)Enum.Parse(typeof(IncidentType), document.GetElement("Incident").Value.ToString()),
-                    User = new User(
-                        new BsonKeyValuePair("id", user[0].AsBsonDocument.GetElement("_id").Value.ToInt32()),
-                        new BsonKeyValuePair("userName", user[0].AsBsonDocument.GetElement("Username").Value.ToString()),
-                        new BsonKeyValuePair("password", user[0].AsBsonDocument.GetElement("Password").Value.ToString()),
-                        new BsonKeyValuePair("firstName", user[0].AsBsonDocument.GetElement("First Name").Value.ToString()),
-                        new BsonKeyValuePair("lastName", user[0].AsBsonDocument.GetElement("Last Name").Value.ToString()),
-                        new BsonKeyValuePair("role", user[0].AsBsonDocument.GetElement("Role").Value.ToString()),
-                        new BsonKeyValuePair("email", user[0].AsBsonDocument.GetElement("E-Mail").Value.ToString()),
-                        new BsonKeyValuePair("phoneNumber", user[0].AsBsonDocument.GetElement("Phone Number").Value.ToString()),
-                        new BsonKeyValuePair("location", user[0].AsBsonDocument.GetElement("Location").Value.ToString())
-
-                        ),
-
-
-                    Impact = (Priority)Enum.Parse(typeof(Priority), document.GetElement("Impact").Value.ToString()),
-                    Urgency = (Priority)Enum.Parse(typeof(Priority), document.GetElement("Urgency").Value.ToString()),
-                    DeadLine = DateTime.Parse(document.GetElement("DeadLine").Value.ToString()),
-                    Status = (TicketStatus)Enum.Parse(typeof(TicketStatus), document.GetElement("Status").Value.ToString()),
-                    Description = document.GetElement("Description").Value.ToString()
-
-                };
+                Ticket localticket = makeTicket(document);
                 tickets.Add(localticket);
             }
             return tickets;
         }
-       
+
+        /// <summary>
+        /// deletes a ticket from the database
+        /// <list type="bullet">
+        /// <item>made by floortje Tjeertes</item>
+        /// </list>
+        /// </summary>
+        /// <param name="ticket"></param>
+        /// <returns></returns>
         public Ticket DeleteTicket(Ticket ticket)
         {
             BsonDocument document = TicketDAO.Delete(ticket);
 
             return BsonSerializer.Deserialize<Ticket>(document);
         }
-        public List<ICollectionObject> FillTicketList(string username)
+
+
+        /// <summary>
+        /// makes a ticket from a documenbt
+        /// <list type="bullet">
+        /// <item>made by floortje Tjeertes</item>
+        /// </list>
+        /// </summary>
+        /// <param name="document"></param>
+        /// <returns></returns>
+        private Ticket makeTicket(BsonDocument document)
         {
-            List<ICollectionObject> tickets = ticketDAO.FillTicketList(username);
-            return tickets;
+            BsonArray user = document.GetElement("User").Value.AsBsonArray;
+
+
+            Ticket localticket = new Ticket()
+            {
+                _id = document.GetElement("_id").Value.AsObjectId,
+                Subject = document.GetElement("Subject").Value.ToString(),
+                DateReported = DateTime.Parse(document.GetElement("DateReported").Value.ToString()),
+                Incident = (IncidentType)Enum.Parse(typeof(IncidentType), document.GetElement("Incident").Value.ToString()),
+                User = new User(
+                    new BsonKeyValuePair("id", user[0].AsBsonDocument.GetElement("_id").Value),
+                    new BsonKeyValuePair("userName", user[0].AsBsonDocument.GetElement("Username").Value.ToString()),
+                    new BsonKeyValuePair("password", user[0].AsBsonDocument.GetElement("Password").Value.ToString()),
+                    new BsonKeyValuePair("firstName", user[0].AsBsonDocument.GetElement("First Name").Value.ToString()),
+                    new BsonKeyValuePair("lastName", user[0].AsBsonDocument.GetElement("Last Name").Value.ToString()),
+                    new BsonKeyValuePair("role", user[0].AsBsonDocument.GetElement("Role").Value.ToString()),
+                    new BsonKeyValuePair("email", user[0].AsBsonDocument.GetElement("E-Mail").Value.ToString()),
+                    new BsonKeyValuePair("phoneNumber", user[0].AsBsonDocument.GetElement("Phone Number").Value.ToString()),
+                    new BsonKeyValuePair("location", user[0].AsBsonDocument.GetElement("Location").Value.ToString())
+                    
+                    ),
+
+
+                Impact = (Priority)Enum.Parse(typeof(Priority), document.GetElement("Impact").Value.ToString()),
+                Urgency = (Priority)Enum.Parse(typeof(Priority), document.GetElement("Urgency").Value.ToString()),
+                DeadLine = DateTime.Parse(document.GetElement("DeadLine").Value.ToString()),
+                Status = (TicketStatus)Enum.Parse(typeof(TicketStatus), document.GetElement("Status").Value.ToString()),
+                Description = document.GetElement("Description").Value.ToString()
+            };
+            return localticket;
         }
     }
 }

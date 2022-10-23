@@ -20,19 +20,19 @@ namespace GardenGroupModel
         private BsonKeyValuePair location;
         private BsonKeyValuePair? teams;
 
-        public User(BsonKeyValuePair id, BsonKeyValuePair userName, BsonKeyValuePair password, BsonKeyValuePair salt, BsonKeyValuePair firstName, BsonKeyValuePair lastName, BsonKeyValuePair role, BsonKeyValuePair email, BsonKeyValuePair phoneNumber, BsonKeyValuePair location, BsonKeyValuePair? teams = null)
+        public User(BsonKeyValuePair id, BsonKeyValuePair userName, BsonKeyValuePair password, BsonKeyValuePair firstName, BsonKeyValuePair lastName, BsonKeyValuePair role, BsonKeyValuePair email, BsonKeyValuePair phoneNumber, BsonKeyValuePair location, BsonKeyValuePair? teams = null, BsonKeyValuePair? salt = null)
         {
             this.id = id;
             this.userName = userName;
             this.password = password;
-            this.salt = salt;
+            /*this.salt = salt;*/
             this.firstName = firstName;
             this.lastName = lastName;
             this.role = role;
             this.email = email;
             this.phoneNumber = phoneNumber;
             this.location = location;
-            this.teams = teams ?? null;
+            /*this.teams = teams ?? null;*/
         }
 
 
@@ -46,6 +46,6 @@ namespace GardenGroupModel
         public BsonKeyValuePair Email { get { return this.email; } }
         public BsonKeyValuePair PhoneNumber { get { return this.phoneNumber; } }   
         public BsonKeyValuePair Location { get { return this.location; } }
-        public BsonKeyValuePair Teams { get { return this.teams; } }
+        /*public BsonKeyValuePair Teams { get { return this.teams; } }*/
     }
 }

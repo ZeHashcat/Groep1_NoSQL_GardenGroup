@@ -30,10 +30,10 @@ namespace GardenGroupUI
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             UserLogic userLogic = new UserLogic();
-            List<ICollectionObject> Users = userLogic.GetTeam(1);
+            /*List<ICollectionObject> Users = userLogic.GetTeam(1);*/
             string[,] columnHeaders = SetColumnHeaders();
             listViewWidget.Items.Clear();
-            listViewWidget = ListWidget.GetListView(listViewWidget, Users, columnHeaders);
+            /*listViewWidget = ListWidget.GetListView(listViewWidget, Users, columnHeaders);*/
         }
 
         private static string[,] SetColumnHeaders()
