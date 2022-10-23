@@ -59,14 +59,12 @@ namespace GardenGroupLogic
         {
             HashingWithSaltHasher passwordHasher = new HashingWithSaltHasher();           
 
+            //Getting hash and salt from database
             HashWithSaltResult hashAndSalt = userDAO.GetPassword(username);
-            //byte[] saltBytes = Encoding.ASCII.GetBytes(hashAndSalt.Salt);
-            //HashWithSaltResult hashWithSaltResult512 = passwordHasher.HashWithSalt(password, saltBytes, SHA512.Create());
+            
+            HashWithSaltResult hashWithSaltResult = passwordHasher.HashWithSalt(password, hashAndSalt, SHA512.Create());
 
-            HashWithSaltResult hashWithSaltResult512 = passwordHasher.HashWithSalt(password, hashAndSalt.Salt, SHA512.Create());
-
-
-            if (hashAndSalt.Hash == hashWithSaltResult512.Hash)
+            if (hashAndSalt.Hash == hashWithSaltResult.Hash)
                 return true;
             
             else

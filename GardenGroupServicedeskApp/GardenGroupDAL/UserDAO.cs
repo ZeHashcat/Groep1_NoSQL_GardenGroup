@@ -50,13 +50,13 @@ namespace GardenGroupDAL
 
         // \/\/Waarschijnlijk niet nodig\/\/ \\
         private HashWithSaltResult ReadPassword(BsonDocument document)
-        {            
+        {
             //filter document to only get password
-           
-            byte[] hashedPassword = Encoding.ASCII.GetBytes(document.GetValue("Password").ToString());
-            byte[] salt = Encoding.ASCII.GetBytes(document.GetValue("Salt").ToString());
+
+            string hashedPassword = document.GetValue("Password").ToString();
+            string salt = document.GetValue("Salt").ToString();
             HashWithSaltResult hashAndSaltResult = new HashWithSaltResult(salt, hashedPassword);
-                
+
             return hashAndSaltResult;                             
         }
 
@@ -79,9 +79,7 @@ namespace GardenGroupDAL
             {
                 //return password
                 return document;
-            }
-            
-            
+            }            
         }
 
         public string ValidateEmail(string email)
@@ -125,8 +123,7 @@ namespace GardenGroupDAL
             FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("E-Mail", email);
             BsonDocument document = collection.Find(filter).FirstOrDefault();
             //update password
-            UpdatePassword(email, document, hashWithSalt);                
-                       
+            UpdatePassword(email, document, hashWithSalt);                              
         }
 
         private void UpdatePassword(string email, BsonDocument document, HashWithSaltResult hashWithSalt)

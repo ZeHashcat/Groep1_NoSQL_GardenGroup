@@ -83,16 +83,25 @@ namespace GardenGroupUI.UserManagement
                 string username = addUserUsernameTextBox.Text;
                 string password = addUserPasswordTextBox.Text;
 
-                //Change input into hash and salt
-                HashingWithSaltHasher hasher = new HashingWithSaltHasher();
-                HashWithSaltResult hashWithSalt = hasher.NewHashWithSalt(password, 64, SHA512.Create());
-
-                if (userLogic.AddUser(username, hashWithSalt, firstname, lastname, email, phoneNumber, role, location))
+                if(IsNullOrEmpty(firstname, lastname, email, phoneNumber, username, password, role, location))
                 {
-                    MessageBox.Show("The new user has been added.");
+                    //Change input into hash and salt
+                    HashingWithSaltHasher hasher = new HashingWithSaltHasher();
+                    HashWithSaltResult hashWithSalt = hasher.NewHashWithSalt(password, 64, SHA512.Create());
+
+                    if (userLogic.AddUser(username, hashWithSalt, firstname, lastname, email, phoneNumber, role, location))
+                    {
+                        MessageBox.Show("The new user has been added.");
+                    }
+                    else
+                        MessageBox.Show("A user already exists with the same USERNAME, E-MAIL AND OR PHONE NUMBER");
                 }
                 else
-                    MessageBox.Show("A user already exists with the same USERNAME, E-MAIL AND OR PHONE NUMBER");
+                {
+                    MessageBox.Show("Some fields might not be filled.");
+                }
+
+                
             }catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -107,5 +116,14 @@ namespace GardenGroupUI.UserManagement
             
         }  
 
+        private bool IsNullOrEmpty(string firstname, string lastname, string email, double phoneNumber, string username, string password, string role, string location)
+        {
+            if (firstname == null || lastname == null || email == null || phoneNumber == null || username == null || password == null || role == null || location == null)
+            {
+                return true;
+            }
+            else
+                return false;            
+        }
     }
 }

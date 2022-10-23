@@ -8,10 +8,10 @@ namespace GardenGroupModel
 {
     public class HashWithSaltResult
     {
-        public byte[] Salt { get; }
-        public byte[] Hash { get; set; }
+        public string Salt { get; }
+        public string Hash { get; set; }
 
-        public HashWithSaltResult(byte[] salt, byte[] hash)
+        public HashWithSaltResult(string salt, string hash)
         {
             Salt = salt;
             Hash = hash;

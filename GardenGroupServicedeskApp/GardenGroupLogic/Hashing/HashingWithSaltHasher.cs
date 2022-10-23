@@ -20,19 +20,18 @@ namespace GardenGroupLogic
             passwordWithSalt.AddRange(passwordAsByte);
             passwordWithSalt.AddRange(saltByte);
             byte[] hash = hashAlgorithm.ComputeHash(passwordWithSalt.ToArray());
-            return new HashWithSaltResult(saltByte, hash);
-            //return new HashWithSaltResult(Convert.ToBase64String(saltByte), Convert.ToBase64String(hash));
+            return new HashWithSaltResult(Convert.ToBase64String(saltByte), Convert.ToBase64String(hash));            
         }
-        //Use with Login
-        public HashWithSaltResult HashWithSalt(string password, byte[] saltByte, HashAlgorithm hashAlgorithm)
+        //Use with Login        
+        public HashWithSaltResult HashWithSalt(string password, HashWithSaltResult hashAndSalt, HashAlgorithm hashAlgorithm)
         {
-                       
+            byte[] saltBytes = Convert.FromBase64String(hashAndSalt.Salt);
             byte[] passwordAsByte = Encoding.UTF8.GetBytes(password);
             List<byte> passwordWithSalt = new List<byte>();
             passwordWithSalt.AddRange(passwordAsByte);
-            passwordWithSalt.AddRange(saltByte);
+            passwordWithSalt.AddRange(saltBytes);
             byte[] hash = hashAlgorithm.ComputeHash(passwordWithSalt.ToArray());
-            return new HashWithSaltResult(saltByte, hash);
+            return new HashWithSaltResult(Convert.ToBase64String(saltBytes), Convert.ToBase64String(hash));
         }
     }
 }
