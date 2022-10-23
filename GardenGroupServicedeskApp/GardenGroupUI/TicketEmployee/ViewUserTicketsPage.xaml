@@ -28,10 +28,11 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Deadline" Binding="{Binding Path=DeadLine, StringFormat=dd/MM/yyyy HH:mm}" Width="Auto"/>
                         <DataGridTextColumn Header="Subject" Binding="{Binding Path=Subject}" Width = "1*" MaxWidth = "150" MinWidth = "50"/>
-                        <DataGridTextColumn Header="User" Binding="{Binding Path=User.UserName}" Width = "auto"/>
+                        <DataGridTextColumn Header="User" Binding="{Binding Path=User.UserName.Value}" Width = "auto"/>
                         <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}" Width = "1*" MinWidth = "70"/>
                         <DataGridTextColumn Header="DateReported" Binding="{Binding Path=DateReported, StringFormat=dd/MM/yyyy HH:mm}" Width = "auto"/>
                         <DataGridTextColumn Header="Status" Binding="{Binding Path=Status}" Width = "auto"/>
+                        <DataGridTextColumn Header="Priority" Binding="{Binding Path=Priority}" Width = "auto"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

@@ -8,6 +8,6 @@ namespace GardenGroupModel
 {
     public class TicketDisplay : Ticket
     {
-        public String UserName { get; set; }
+        public int Priority { get; set; }
     }
 }

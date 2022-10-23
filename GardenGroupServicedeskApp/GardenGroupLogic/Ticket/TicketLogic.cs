@@ -167,5 +167,59 @@ namespace GardenGroupLogic
             };
             return localticket;
         }
+
+        public List<TicketDisplay> ListTicketsDisplay(List<Ticket> tickets)
+        {
+            UserLogic userLogic = new UserLogic();
+            List<TicketDisplay> ticketsDisplay = new List<TicketDisplay>();
+            for (int i = 0; i < tickets.Count; i++)
+            {
+                TicketDisplay ticketDisplay = new TicketDisplay()
+                {
+                    _id = tickets[i]._id,
+                    DateReported = tickets[i].DateReported,
+                    Subject = tickets[i].Subject,
+                    Incident = tickets[i].Incident,
+                    User = tickets[i].User,
+                    Impact = tickets[i].Impact,
+                    Urgency = tickets[i].Urgency,
+                    DeadLine = tickets[i].DeadLine,
+                    Status = tickets[i].Status,
+                    Description = tickets[i].Description,
+                    Priority = ticketDisplayPriority(tickets[i].Impact, tickets[i].Urgency),
+                };
+
+                ticketsDisplay.Add(ticketDisplay);
+            }
+
+            return ticketsDisplay;
+        }
+
+        public int ticketDisplayPriority(Priority Impact, Priority Urgency)
+        {
+            switch (Impact, Urgency)
+            {
+                case (Priority.high, Priority.high):
+                    return 1;
+                case (Priority.high, Priority.normal):
+                    return 2;
+                case (Priority.high, Priority.low):
+                    return 3;
+                case (Priority.normal, Priority.high):
+                    return 2;
+                case (Priority.normal, Priority.normal):
+                    return 3;
+                case (Priority.normal, Priority.low):
+                    return 4;
+                case (Priority.low, Priority.high):
+                    return 3;
+                case (Priority.low, Priority.normal):
+                    return 4;
+                case (Priority.low, Priority.low):
+                    return 5;
+                default:
+                    return 5;
+            }
+        }
     }
 }
