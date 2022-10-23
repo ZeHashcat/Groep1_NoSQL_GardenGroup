@@ -27,6 +27,9 @@ namespace GardenGroupUI.TicketEmployee
     {
         TicketLogic ticketLogic = new TicketLogic();
         List<Ticket> tickets;
+        List<TicketDisplay> ticketsDisplay;
+        List<User> users;
+        User userLoggedIn;
 
         public ViewUserTicketsPage()
         {
@@ -41,11 +44,28 @@ namespace GardenGroupUI.TicketEmployee
             tickets = ticketLogic.ReadTicket();
 
             //make and fill ticketdisplaylist modified for displaying (contains priority)
-            List<TicketDisplay> ticketsDisplay = new List<TicketDisplay>();
+            ticketsDisplay = new List<TicketDisplay>();
             ticketsDisplay = ticketLogic.ListTicketsDisplay(tickets);
-            
+
+            //filter list for viewing
+            /*if (userLoggedIn.Role.ToString() == "RegularEmployee")
+            {
+                FilterTicketsList();
+            }*/
+
             //fill datagrid with displaytickets
             DataGridTicketOverview.ItemsSource = ticketsDisplay;
+        }
+
+        public void FilterTicketsList()
+        {
+            for (int i = 0; i < ticketsDisplay.Count; i++)
+            {
+                if (ticketsDisplay[i].User.UserName.Value.ToString() != userLoggedIn.UserName.Value.ToString())
+                {
+                    ticketsDisplay.Remove(ticketsDisplay[i]);
+                }
+            }
         }
 
         private void ButtonRefresh_Click(object sender, RoutedEventArgs e)
