@@ -27,6 +27,9 @@ namespace GardenGroupUI.TicketEmployee
     {
         TicketLogic ticketLogic = new TicketLogic();
         List<Ticket> tickets;
+        List<TicketDisplay> ticketsDisplay;
+        List<User> users;
+        User userLoggedIn;
 
         public ViewUserTicketsPage()
         {
@@ -37,17 +40,32 @@ namespace GardenGroupUI.TicketEmployee
 
         public void TicketLoader()
         {
-            //fetch ticketarray from method in logic layer
+            //fill ticketlist from method in logic layer
             tickets = ticketLogic.ReadTicket();
-            
-            DataGridTicketOverview.ItemsSource = tickets;
 
-            /*< TextBlock Grid.Row = "0" Grid.Column = "0" Text = "Deadline" HorizontalAlignment = "Left" Margin = "5,0,0,0" />
-            < TextBlock Grid.Row = "0" Grid.Column = "1" Text = "Subject" HorizontalAlignment = "Left" Margin = "5,0,0,0" />
-            < TextBlock Grid.Row = "0" Grid.Column = "2" Text = "User" HorizontalAlignment = "Left" Margin = "5,0,0,0" />
-            < TextBlock Grid.Row = "0" Grid.Column = "3" Text = "Description" HorizontalAlignment = "Left" Grid.ColumnSpan = "2" Margin = "5,0,0,0" />
-            < TextBlock Grid.Row = "0" Grid.Column = "4" Text = "Date" HorizontalAlignment = "Left" Margin = "5,0,0,0" />
-            < TextBlock Grid.Row = "0" Grid.Column = "5" Text = "Status" HorizontalAlignment = "Left" Margin = "5,0,0,0" VerticalAlignment = "Top" />*/
+            //make and fill ticketdisplaylist modified for displaying (contains priority)
+            ticketsDisplay = new List<TicketDisplay>();
+            ticketsDisplay = ticketLogic.ListTicketsDisplay(tickets);
+
+            //filter list for viewing
+            /*if (userLoggedIn.Role.ToString() == "RegularEmployee")
+            {
+                FilterTicketsList();
+            }*/
+
+            //fill datagrid with displaytickets
+            DataGridTicketOverview.ItemsSource = ticketsDisplay;
+        }
+
+        public void FilterTicketsList()
+        {
+            for (int i = 0; i < ticketsDisplay.Count; i++)
+            {
+                if (ticketsDisplay[i].User.UserName.Value.ToString() != userLoggedIn.UserName.Value.ToString())
+                {
+                    ticketsDisplay.Remove(ticketsDisplay[i]);
+                }
+            }
         }
 
         private void ButtonRefresh_Click(object sender, RoutedEventArgs e)
@@ -57,8 +75,7 @@ namespace GardenGroupUI.TicketEmployee
 
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            TicketWindow ticketWindow = new TicketWindow(CRUDState.Read, tickets[0]);
-            ticketWindow.Show();
+            new TicketWindow(CRUDState.Read, tickets[DataGridTicketOverview.SelectedIndex]).Show();
             AppWindow.GetWindow(this).IsEnabled = false;
         }
     }

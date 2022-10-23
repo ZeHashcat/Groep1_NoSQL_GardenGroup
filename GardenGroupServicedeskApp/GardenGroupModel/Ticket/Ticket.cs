@@ -31,6 +31,6 @@ namespace GardenGroupModel
         [BsonRepresentation(BsonType.String)]
         public TicketStatus Status { get; set; }
 
-        public String Description { get; set; }
+        public string Description { get; set; }
     }
 }
