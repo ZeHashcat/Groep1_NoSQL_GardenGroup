@@ -17,13 +17,13 @@ namespace GardenGroupUI.TicketEmployee
         TicketLogic ticketLogic = new TicketLogic();
 
         Page ticketOverviewPage;
-        Ticket ticket;
+        Ticket ?ticket;
 
         TicketStatus currentStatus = TicketStatus.open;
         UserInstance user = UserInstance.GetUserInstance();
         UserLogic UserLogic = new UserLogic();
 
-        public TicketWindow(CRUDState state, Ticket ticket, Page page)
+        public TicketWindow(CRUDState state, Page page, Ticket? ticket)
         {
             this.ticketOverviewPage = page;
             this.ticket = ticket;
