@@ -4,6 +4,7 @@ using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -273,6 +274,7 @@ namespace GardenGroupUI.TicketEmployee
         {
             AppWindow.GetWindow(this).Close();
 
+            //AppWindow.GetWindow(this).IsEnabled = true;
         }
 
         private void ButtonSubmit_Click(object sender, RoutedEventArgs e)
@@ -303,14 +305,15 @@ namespace GardenGroupUI.TicketEmployee
         //help methods
         public Ticket MakeTicket(User user)
         {
-
-
+          
             Ticket ticket = new Ticket();
             ObjectId id = this.ticket._id;
             Ticket ticketToReturn = new Ticket()
             
             {
                 _id = (ObjectId)new BsonObjectId(ObjectId.GenerateNewId()),
+
+           
 
                 DateReported = (DateTime)DatePickerDateTime.SelectedDate,
 
@@ -331,10 +334,13 @@ namespace GardenGroupUI.TicketEmployee
                 Status = 0
 
             };
+          
             return ticketToReturn;
         }
 
-        public Ticket MakeTicket(User user, Ticket ticket)
+
+
+        private Ticket MakeTicket(User user, Ticket ticket)
         {
 
             ObjectId id;
@@ -365,8 +371,39 @@ namespace GardenGroupUI.TicketEmployee
             return ticketToReturn;
         }
 
+        private void ValidateFields()
+        {
+            if (DatePickerDateTime.SelectedDate == null)
+            {
 
-        public void PreFillForm(Ticket ticket)
+            }
+            if (TextBoxSubject.Text == null)
+            {
+
+            }
+            if (TextBoxDescription.Text == null)
+            {
+
+            }
+            if (ComboBoxIncidentType.SelectedItem == null)
+            {
+
+            }
+            if (ComboBoxUser.SelectedItem  == null)
+            {
+
+            }
+            if (DateSelectDeadline.SelectedDate == null)
+            {
+
+            }
+            if (ComboBoxIncidentType.SelectedItem == null)
+            {
+
+            }
+        }
+
+        private void PreFillForm(Ticket ticket)
         {
 
 
