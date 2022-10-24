@@ -28,18 +28,13 @@ namespace GardenGroupUI
         public LoginPasswordResetPage()
         {
             InitializeComponent();
+
             CreateClient(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
                         
             //Make shure button is disabeled when booting
             ResetPasswordEmailButton.IsEnabled = !string.IsNullOrEmpty(resetPasswordEmailTextBox.Text);
 
-            //User should not be able to change password before email is checked.
-            //NOTE: ↓↓↓If these things need to be hidden at initialisation, consider putting "Visibility="Hidden"" inside the tags in the .xaml instead.
-            /*notNeededLabel3.Visibility = Visibility.Hidden;
-            notNeededLabel4.Visibility = Visibility.Hidden;
-            resetPasswordPaswrdBox.Visibility = Visibility.Hidden;
-            resetPasswordRepeatPaswrdBx.Visibility = Visibility.Hidden;
-            NewPasswordButton.Visibility = Visibility.Hidden; */
+            //User should not be able to change password before email is checked.            
         }
 
         private void CreateClient(string connectionString)

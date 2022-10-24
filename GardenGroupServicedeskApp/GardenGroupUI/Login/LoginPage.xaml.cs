@@ -26,6 +26,8 @@ namespace GardenGroupUI
     public partial class LoginPage : Page
     {
         private UserLogic userLogic = new UserLogic();
+        //private AppWindow appWindow = new AppWindow();
+
         public LoginPage()
         {
             InitializeComponent();
@@ -33,7 +35,7 @@ namespace GardenGroupUI
             CreateClient(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
 
             GetLoginInfo();
-        }
+        }       
 
         //-------------------------------------------------------------------------------------
         //-------------------------------------------------------------------------------------

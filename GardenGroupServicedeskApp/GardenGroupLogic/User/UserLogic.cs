@@ -124,7 +124,20 @@ namespace GardenGroupLogic
 
             foreach (BsonDocument userdocument in userDAO.GetUserList())
             {
-                users.Add(BsonSerializer.Deserialize<User>(userdocument));
+                BsonKeyValuePair id = new BsonKeyValuePair("_id", userdocument["_id"].ToString());
+                BsonKeyValuePair userName = new BsonKeyValuePair("Username", userdocument["Username"].ToString());
+                BsonKeyValuePair salt = new BsonKeyValuePair("Salt", userdocument["Salt"].ToString());
+                BsonKeyValuePair password = new BsonKeyValuePair("Password", userdocument["Password"].ToString());
+                BsonKeyValuePair firstName = new BsonKeyValuePair("First Name", userdocument["First Name"].ToString());
+                BsonKeyValuePair lastName = new BsonKeyValuePair("Last Name", userdocument["Last Name"].ToString());
+                BsonKeyValuePair role = new BsonKeyValuePair("Role", userdocument["Role"].ToString());
+                BsonKeyValuePair email = new BsonKeyValuePair("E-Mail", userdocument["E-Mail"].ToString());
+                BsonKeyValuePair phoneNumber = new BsonKeyValuePair("Phone Number", userdocument["Phone Number"].ToString());
+                BsonKeyValuePair location = new BsonKeyValuePair("Location", userdocument["Location"].ToString());
+                BsonKeyValuePair? teams = null;
+                User user = new User(id,userName,salt,password,firstName,lastName,role,email,phoneNumber,location,teams);
+
+                users.Add(user);
             }
             return users;
         }
