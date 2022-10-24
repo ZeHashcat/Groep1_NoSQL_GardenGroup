@@ -27,19 +27,26 @@
         </Grid.RowDefinitions>
         <Image Grid.Row="0"  Source = "/resources/ShrekFace.png" HorizontalAlignment="Left" Width="75" Margin="0,0,0,5"/>
 
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Date/time reported:" HorizontalAlignment="Right"/>
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="Subject of incident:" HorizontalAlignment="Right"/>
-        <TextBlock Grid.Row="3" Grid.Column="0" Text="Type of incident:" HorizontalAlignment="Right"></TextBlock>
-        <TextBlock Grid.Row="4" Grid.Column="0" Text="Reported by user:" HorizontalAlignment="Right"></TextBlock>
-        <TextBlock Grid.Row="5" Grid.Column="0" Text="Impact:" HorizontalAlignment="Right"></TextBlock>
-        <TextBlock Grid.Row="6" Grid.Column="0" Text="Urgency:" HorizontalAlignment="Right"></TextBlock>
+        <TextBlock x:Name="Date_timeText" Grid.Row="1" Grid.Column="0" Text="Date/time reported:" HorizontalAlignment="Right"></TextBlock>
+        <TextBlock x:Name="SubjectIncidentTextBlock" Grid.Row="2" Grid.Column="0" Text="Subject of incident:" HorizontalAlignment="Right"></TextBlock>
+        <TextBlock x:Name="TypeOfIncidentTextBox" Grid.Row="3" Grid.Column="0" Text="Type of incident:" HorizontalAlignment="Right"></TextBlock>
+        <TextBlock x:Name="ReportedTextBlock" Grid.Row="4" Grid.Column="0" Text="Reported by user:" HorizontalAlignment="Right"></TextBlock>
+        <TextBlock x:Name="ImpactTextBlock" Grid.Row="5" Grid.Column="0" Text="Impact:" HorizontalAlignment="Right"></TextBlock>
+        <TextBlock x:Name="UrgencyTextBlock" Grid.Row="6" Grid.Column="0" Text="Urgency:" HorizontalAlignment="Right"></TextBlock>
 
-        <TextBlock Grid.Row="7" Grid.Column="0" Text="Deadline/follow up:" HorizontalAlignment="Right"></TextBlock>
-        <TextBlock  Grid.Row="8" Grid.Column="0" Text="Description:" HorizontalAlignment="Left"></TextBlock>
+        <TextBlock x:Name="DeadlineTekstblock" Grid.Row="7" Grid.Column="0" Text="Deadline/follow up:" HorizontalAlignment="Right"></TextBlock>
+        <TextBlock x:Name="DescriptionTekstBlock"  Grid.Row="8" Grid.Column="0" Text="Description:" HorizontalAlignment="Left"></TextBlock>
 
         <DatePicker x:Name="DatePickerDateTime" Height="20" Width="177" Text="Select Date" Grid.ColumnSpan="2" Margin="105,77,0,0" Grid.RowSpan="2" VerticalAlignment="Top" />
         <TextBox x:Name="TextBoxSubject"  Grid.Row="2" Grid.Column="1" Height="20" Width="177"></TextBox>
-        <ComboBox x:Name="ComboBoxIncidentType" Grid.Row="3" Grid.Column="1" Height="20" Width="177" Text="Select Type"></ComboBox>
+        <ComboBox x:Name="ComboBoxIncidentType" Grid.Row="3" Grid.Column="1" Height="20" Width="177" Text="Select Type">
+            <ComboBox.Background>
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop Color="#FFF0F0F0"/>
+                    <GradientStop Color="#FFFF0606" Offset="1"/>
+                </LinearGradientBrush>
+            </ComboBox.Background>
+        </ComboBox>
         <ComboBox x:Name="ComboBoxUser" Grid.Row="4" Grid.Column="1" Height="20" Width="177"></ComboBox>
         <ComboBox x:Name="ComboBoxImpact" Grid.Row="5" Grid.Column="1" Height="20" Width="177"></ComboBox>
 
