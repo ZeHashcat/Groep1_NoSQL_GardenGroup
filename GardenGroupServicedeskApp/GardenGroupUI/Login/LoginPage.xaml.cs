@@ -25,6 +25,8 @@ namespace GardenGroupUI
     public partial class LoginPage : Page
     {
         private UserLogic userLogic = new UserLogic();
+        //private AppWindow appWindow = new AppWindow();
+
         public LoginPage()
         {
             InitializeComponent();
@@ -32,7 +34,7 @@ namespace GardenGroupUI
             CreateClient(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
 
             GetLoginInfo();
-        }
+        }       
 
         //-------------------------------------------------------------------------------------
         //-------------------------------------------------------------------------------------
@@ -165,7 +167,7 @@ namespace GardenGroupUI
         private void LoginForgotLoginButton_Click(object sender, RoutedEventArgs e)
         {
             AppMenuWindow appWindow = new AppMenuWindow("../Login/LoginPasswordResetPage.xaml");
-            appWindow.Show();
+            appWindow.Show();            
         }
     }
 }
