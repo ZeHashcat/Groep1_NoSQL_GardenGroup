@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GardenGroupModel;
+﻿using GardenGroupModel;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
@@ -22,13 +15,13 @@ namespace GardenGroupDAL
         public HashWithSaltResult GetPassword(string username)
         {
             MongoClientInstance mongoClientInstance = MongoClientInstance.GetClientInstance();
-                          
+
             database = mongoClientInstance.Client.GetDatabase(databaseName);
             collection = database.GetCollection<BsonDocument>(collectionName);
-                
+
             FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("Username", username);
             BsonDocument document = collection.Find(filter).FirstOrDefault();
-            
+
             if (document == null)
             {
                 //error detected
@@ -38,7 +31,7 @@ namespace GardenGroupDAL
             {
                 //return password
                 return ReadPassword(document);
-            }            
+            }
 
             //Gewenste uitput = password (username is al bekend).
 
@@ -57,19 +50,19 @@ namespace GardenGroupDAL
             string salt = document.GetValue("Salt").ToString();
             HashWithSaltResult hashAndSaltResult = new HashWithSaltResult(salt, hashedPassword);
 
-            return hashAndSaltResult;                             
+            return hashAndSaltResult;
         }
 
         public BsonDocument GetUser(string username)
         {
             MongoClientInstance mongoClientInstance = MongoClientInstance.GetClientInstance();
-                            
+
             database = mongoClientInstance.Client.GetDatabase(databaseName);
             collection = database.GetCollection<BsonDocument>(collectionName);
 
             FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("Username", username);
             BsonDocument document = collection.Find(filter).FirstOrDefault();
-            
+
             if (document.IsBsonNull)
             {
                 //error detected
@@ -79,19 +72,19 @@ namespace GardenGroupDAL
             {
                 //return password
                 return document;
-            }            
+            }
         }
 
         public string ValidateEmail(string email)
         {
             MongoClientInstance mongoClientInstance = MongoClientInstance.GetClientInstance();
-                          
+
             database = mongoClientInstance.Client.GetDatabase(databaseName);
             collection = database.GetCollection<BsonDocument>(collectionName);
 
             FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("E-Mail", email);
             BsonDocument document = collection.Find(filter).FirstOrDefault();
-            
+
             if (document == null)
             {
                 //error detected
@@ -101,29 +94,29 @@ namespace GardenGroupDAL
             {
                 //return email
                 return GetEmail(document);
-            }            
+            }
         }
 
         private string GetEmail(BsonDocument document)
         {
-            
-            string email = document.GetValue("E-Mail").ToString();               
-               
-            return email;            
-            
+
+            string email = document.GetValue("E-Mail").ToString();
+
+            return email;
+
         }
 
         public void ChangePassword(string email, HashWithSaltResult hashWithSalt)
         {
             MongoClientInstance mongoClientInstance = MongoClientInstance.GetClientInstance();
-            
+
             database = mongoClientInstance.Client.GetDatabase(databaseName);
             collection = database.GetCollection<BsonDocument>(collectionName);
 
             FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("E-Mail", email);
             BsonDocument document = collection.Find(filter).FirstOrDefault();
             //update password
-            UpdatePassword(email, document, hashWithSalt);                              
+            UpdatePassword(email, document, hashWithSalt);
         }
 
         private void UpdatePassword(string email, BsonDocument document, HashWithSaltResult hashWithSalt)
@@ -136,10 +129,10 @@ namespace GardenGroupDAL
             FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("E-Mail", email);
             var options = new UpdateOptions { IsUpsert = true };
             collection.UpdateOne(filter, update, options);
-                                    
+
             update = Builders<BsonDocument>.Update.Set("Salt", hashWithSalt.Salt);
             options = new UpdateOptions { IsUpsert = true };
-            collection.UpdateOne(filter, update, options);            
+            collection.UpdateOne(filter, update, options);
         }
 
         public bool CheckUserData(string username, string email, double phonenumber)
@@ -163,7 +156,7 @@ namespace GardenGroupDAL
                 {
                     return true;
                 }
-            }                          
+            }
             return false;
         }
 
@@ -178,7 +171,7 @@ namespace GardenGroupDAL
         }
 
 
-        public void AddUser(string username, HashWithSaltResult hashWithSalt, string firstname, string lastname, string email, double phonenumber, string role,  string location)
+        public void AddUser(string username, HashWithSaltResult hashWithSalt, string firstname, string lastname, string email, double phonenumber, string role, string location)
         {
             MongoClientInstance mongoClientInstance = MongoClientInstance.GetClientInstance();
             database = mongoClientInstance.Client.GetDatabase(databaseName);
@@ -197,7 +190,7 @@ namespace GardenGroupDAL
                 {"Role", role},
                 {"Location", location},
                 {"Teams", new BsonDocument() }
-            };      
+            };
             //Saving the data into the database
             collection.InsertOne(doc);
         }
@@ -270,7 +263,7 @@ namespace GardenGroupDAL
                     /*users.Add(user);*/
 
                 }
-                    return users;
+                return users;
             }
             catch (Exception ex)
             {

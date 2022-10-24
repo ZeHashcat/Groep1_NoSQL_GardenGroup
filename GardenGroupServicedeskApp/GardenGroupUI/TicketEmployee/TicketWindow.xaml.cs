@@ -3,18 +3,8 @@ using GardenGroupModel;
 using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace GardenGroupUI.TicketEmployee
 {
@@ -62,7 +52,7 @@ namespace GardenGroupUI.TicketEmployee
             //fill dropdown whit users
             //ComboBoxUser.Items.Add(user.User.UserName.Value.ToString());
 
-            foreach(User user in UserLogic.GetAllusers())
+            foreach (User user in UserLogic.GetAllusers())
             {
                 ComboBoxUser.Items.Add(user.UserName.Value.ToString());
             }
@@ -85,10 +75,6 @@ namespace GardenGroupUI.TicketEmployee
             {
                 ComboBoxIncidentType.Items.Add(Enum.GetName(typeof(IncidentType), i));
             }
-
-
-
-
 
             DateSelectDeadline.SelectedDate = DateTime.Today.AddDays(7);
         }
@@ -114,12 +100,10 @@ namespace GardenGroupUI.TicketEmployee
         {
             CreateSetup();
             PreFillForm(ticket);
-            this.IsEnabled = false;
 
 
-
-            buttonGroup.Children.Remove(ButtonCancel);
             buttonGroup.Children.Remove(ButtonSubmit);
+            disableFields();
 
         }
         public void DeleteSetup()
@@ -138,14 +122,7 @@ namespace GardenGroupUI.TicketEmployee
         }
 
 
-        private void SetupUsers(List<User> users)
-        {
-            // ComboBoxUser.SetValue(users.);
-        }
-        private void SetupUsers(User user)
-        {
 
-        }
 
         //test methods
         private void ButtonTestRead_Click(object sender, RoutedEventArgs e)
@@ -296,7 +273,7 @@ namespace GardenGroupUI.TicketEmployee
             //User user = userLogic.GetUser(ComboBoxUser.SelectedValue.ToString());
             User user = userLogic.GetUser(ComboBoxUser.Text);
 
-            ticketLogic.UpdateTicket(this.ticket, MakeTicket(user));
+            ticketLogic.UpdateTicket(this.ticket, MakeTicket(user, ticket));
         }
         private void DeleteTicket(object sender, RoutedEventArgs e)
         {
@@ -305,15 +282,15 @@ namespace GardenGroupUI.TicketEmployee
         //help methods
         public Ticket MakeTicket(User user)
         {
-          
+
             Ticket ticket = new Ticket();
             ObjectId id = this.ticket._id;
             Ticket ticketToReturn = new Ticket()
-            
+
             {
                 _id = (ObjectId)new BsonObjectId(ObjectId.GenerateNewId()),
 
-           
+
 
                 DateReported = (DateTime)DatePickerDateTime.SelectedDate,
 
@@ -334,7 +311,7 @@ namespace GardenGroupUI.TicketEmployee
                 Status = 0
 
             };
-          
+
             return ticketToReturn;
         }
 
@@ -344,10 +321,10 @@ namespace GardenGroupUI.TicketEmployee
         {
 
             ObjectId id;
-         
+
             Ticket ticketToReturn = new Ticket()
             {
-                _id = this.ticket._id,
+                _id = ticket._id,
 
                 DateReported = (DateTime)DatePickerDateTime.SelectedDate,
 
@@ -389,7 +366,7 @@ namespace GardenGroupUI.TicketEmployee
             {
 
             }
-            if (ComboBoxUser.SelectedItem  == null)
+            if (ComboBoxUser.SelectedItem == null)
             {
 
             }
@@ -402,7 +379,22 @@ namespace GardenGroupUI.TicketEmployee
 
             }
         }
+        private void disableFields()
+        {
+            DatePickerDateTime.IsEnabled = false;
 
+            TextBoxSubject.IsEnabled = false;
+
+            TextBoxDescription.IsEnabled = false;
+
+            ComboBoxIncidentType.IsEnabled = false;
+
+            ComboBoxUser.IsEnabled = false;
+
+            DateSelectDeadline.IsEnabled = false;
+
+            ComboBoxIncidentType.IsEnabled = false;
+        }
         private void PreFillForm(Ticket ticket)
         {
 

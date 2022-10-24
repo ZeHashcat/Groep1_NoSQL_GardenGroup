@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using GardenGroupLogic;
 using GardenGroupModel;
-using GardenGroupLogic;
+using System;
+using System.Windows;
 
 namespace GardenGroupUI
 {
@@ -23,7 +12,7 @@ namespace GardenGroupUI
     {
 
         public AppWindow()
-        { 
+        {
             InitializeComponent();
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             frameContent.Source = new Uri("../Login/LoginPage.xaml", UriKind.Relative);
@@ -55,7 +44,7 @@ namespace GardenGroupUI
         {
             this.Close();
         }
-      
+
         //AddUserTest bestaat niet
         /*private void Button_Click(object sender, RoutedEventArgs e)
         {

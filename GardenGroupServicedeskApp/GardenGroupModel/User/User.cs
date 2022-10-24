@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GardenGroupModel
+﻿namespace GardenGroupModel
 {
     public class User : ICollectionObject
     {
@@ -44,7 +38,7 @@ namespace GardenGroupModel
         public BsonKeyValuePair LastName { get { return this.lastName; } }
         public BsonKeyValuePair Role { get { return this.role; } }
         public BsonKeyValuePair Email { get { return this.email; } }
-        public BsonKeyValuePair PhoneNumber { get { return this.phoneNumber; } }   
+        public BsonKeyValuePair PhoneNumber { get { return this.phoneNumber; } }
         public BsonKeyValuePair Location { get { return this.location; } }
         /*public BsonKeyValuePair Teams { get { return this.teams; } }*/
     }

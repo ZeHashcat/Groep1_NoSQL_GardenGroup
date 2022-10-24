@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 
 namespace GardenGroupDAL
 {
@@ -29,7 +24,7 @@ namespace GardenGroupDAL
             return client;
         }
 
-        public MongoClient Client { get { return client; }  }
+        public MongoClient Client { get { return client; } }
 
         //Singleton with parameters
         public static MongoClientInstance GetClientInstance(string? connectionString = null)
@@ -43,14 +38,15 @@ namespace GardenGroupDAL
                         if (instance == null) //EXPLANATION: If first if statement goes off in first instance, at same time in second instance, instance gets created like below,                  
                         {                    //EXPLANATION: then first instance padlocks with intention of creating instance, but now has to do second check preventing another instance from being created.
                             instance = new MongoClientInstance(connectionString);
-                        }  
+                        }
                     }
                 }
                 return instance;
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw new Exception($"Something went wrong, was it the connectionstring?:\n {ex}");//NOTE: Make this different? <<---`-`/\/\`-`(REMINDER)
-            }  
+            }
         }
     }
 }

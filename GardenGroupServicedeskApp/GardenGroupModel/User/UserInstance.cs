@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GardenGroupModel
+﻿namespace GardenGroupModel
 {
     public class UserInstance
     {
@@ -18,7 +12,7 @@ namespace GardenGroupModel
             this.user = user;
         }
 
-        public User User { get { return user; }}
+        public User User { get { return user; } }
 
         //Singleton with parameters
         public static UserInstance GetUserInstance(User? user = null)
@@ -51,7 +45,7 @@ namespace GardenGroupModel
                 {
                     instance = null;
                 }
-            } 
+            }
         }
     }
 }
