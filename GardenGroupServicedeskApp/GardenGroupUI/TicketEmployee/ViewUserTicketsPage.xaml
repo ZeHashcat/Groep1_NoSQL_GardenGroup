@@ -38,5 +38,6 @@
             </Grid>
         </ScrollViewer>
         <Button Content="Refresh" x:Name="ButtonRefresh" Height="20" Width="80" Grid.Column="1" Margin="0,0,0,200" Click="ButtonRefresh_Click"/>
+        <Button Content="Create" x:Name="ButtonCreate" Height="20" Width="80" Grid.Column="1" Margin="0,200,0,0" Click="ButtonCreate_Click"/>
     </Grid>
 </Page>

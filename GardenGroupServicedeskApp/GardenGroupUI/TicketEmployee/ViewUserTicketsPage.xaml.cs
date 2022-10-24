@@ -13,48 +13,58 @@ namespace GardenGroupUI.TicketEmployee
     public partial class ViewUserTicketsPage : Page
     {
         TicketLogic ticketLogic = new TicketLogic();
-        List<Ticket> tickets;
-        List<TicketDisplay> ticketsDisplay;
         User userLoggedIn;
 
         public ViewUserTicketsPage()
         {
             InitializeComponent();
 
+            PageLoader();
+        }
+
+        public void PageLoader()
+        {
+            //get logged in user
+            userLoggedIn = UserInstance.GetUserInstance().User;
+
             TicketLoader();
         }
 
         public void TicketLoader()
         {
-            //get logged in user
-            userLoggedIn = UserInstance.GetUserInstance().User;
-
             //fill ticketlist from method in logic layer
-            tickets = ticketLogic.ReadTicket();
-
-            //make and fill ticketdisplaylist modified for displaying (contains priority)
-            ticketsDisplay = new List<TicketDisplay>();
-            ticketsDisplay = ticketLogic.ListTicketsDisplay(tickets);
+            List<Ticket> tickets = ticketLogic.ReadTicket();
 
             //filter list for viewing
-            if (userLoggedIn.Role.ToString() == "RegularEmployee")
+            if (userLoggedIn.Role.Value.ToString() == "User")
             {
-                FilterTicketsList();
+                //hide create button from regular employee
+                ButtonCreate.Visibility = Visibility.Hidden;
+
+                tickets = FilterTicketsList(tickets);
             }
+
+            //make and fill filtered ticketdisplaylist modified for displaying (contains priority)
+            List<TicketDisplay> ticketsDisplay = ticketLogic.ListTicketsDisplay(tickets);
 
             //fill datagrid with displaytickets
             DataGridTicketOverview.ItemsSource = ticketsDisplay;
         }
 
-        public void FilterTicketsList()
+        public List<Ticket> FilterTicketsList(List<Ticket> tickets)
         {
-            for (int i = 0; i < ticketsDisplay.Count; i++)
+            //make list of filtered tickets
+            List<Ticket> filteredTickets = new List<Ticket>();
+
+            //fill list
+            for (int i = 0; i < tickets.Count; i++)
             {
-                if (ticketsDisplay[i].User.UserName.Value.ToString() != userLoggedIn.UserName.Value.ToString())
+                if (tickets[i].User.UserName.Value.ToString() == userLoggedIn.UserName.Value.ToString())
                 {
-                    ticketsDisplay.Remove(ticketsDisplay[i]);
+                    filteredTickets.Add(tickets[i]);
                 }
             }
+            return filteredTickets;
         }
 
         private void ButtonRefresh_Click(object sender, RoutedEventArgs e)
@@ -64,27 +74,37 @@ namespace GardenGroupUI.TicketEmployee
 
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            //make window for c.r.u.d.
-            TicketWindow ticketWindow = new TicketWindow(SelectCRUDState(), tickets[DataGridTicketOverview.SelectedIndex], this);
-            //set ticketwindow owner and show it
-            ticketWindow.Owner = AppMenuWindow.GetWindow(this);
-            ticketWindow.Activate();
-            ticketWindow.Show();
-            //disable this window
-            AppMenuWindow.GetWindow(this).IsEnabled = false;
+            CreateCRUDPage(SelectCRUDState());
         }
 
         public CRUDState SelectCRUDState()
         {
             switch (userLoggedIn.Role.Value.ToString())
             {
-                case "Regular Employee":
+                case "User":
                     return CRUDState.Read;
                 case "Admin":
-                    return CRUDState.Create;
+                    return CRUDState.Update;
                 default:
                     return CRUDState.Read;
             }
+        }
+
+        private void ButtonCreate_Click(object sender, RoutedEventArgs e)
+        {
+            CreateCRUDPage(CRUDState.Create);
+        }
+
+        public void CreateCRUDPage(CRUDState state)
+        {
+            //make window for c.r.u.d.
+            TicketWindow ticketWindow = new TicketWindow(state, this, null);
+            //set ticketwindow owner and show it
+            ticketWindow.Owner = AppMenuWindow.GetWindow(this);
+            ticketWindow.Activate();
+            ticketWindow.Show();
+            //disable this window
+            AppMenuWindow.GetWindow(this).IsEnabled = false;
         }
     }
 }
