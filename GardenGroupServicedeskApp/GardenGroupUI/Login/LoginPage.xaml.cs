@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GardenGroupLogic;
 using GardenGroupModel;
+using GardenGroupUI.TicketEmployee;
 
 namespace GardenGroupUI
 {
@@ -60,7 +61,7 @@ namespace GardenGroupUI
 
                     AppMenuWindow appWindow = new AppMenuWindow("AppMainServiceDeskEmployeePage.xaml");
                     appWindow.Show();
-                    //AppWindow..frameContent.Source = new Uri("AppMainServiceDeskEmployeePage.xaml", UriKind.Relative);
+                    AppWindow.GetWindow(this).Close();
                 }
                 else
                 {
@@ -168,6 +169,7 @@ namespace GardenGroupUI
         {
             AppMenuWindow appWindow = new AppMenuWindow("../Login/LoginPasswordResetPage.xaml");
             appWindow.Show();
+            AppWindow.GetWindow(this).Close();
         }
     }
 }
