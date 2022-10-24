@@ -55,7 +55,7 @@ namespace GardenGroupUI
         {
             this.Close();
         }
-
+      
         //AddUserTest bestaat niet
         /*private void Button_Click(object sender, RoutedEventArgs e)
         {
