@@ -14,6 +14,7 @@ namespace GardenGroupUI.TicketEmployee
     {
         TicketLogic ticketLogic = new TicketLogic();
         User userLoggedIn;
+        List<Ticket> tickets;
 
         public ViewUserTicketsPage()
         {
@@ -33,7 +34,7 @@ namespace GardenGroupUI.TicketEmployee
         public void TicketLoader()
         {
             //fill ticketlist from method in logic layer
-            List<Ticket> tickets = ticketLogic.ReadTicket();
+            tickets = ticketLogic.ReadTicket();
 
             //filter list for viewing
             if (userLoggedIn.Role.Value.ToString() == "User")
@@ -41,7 +42,7 @@ namespace GardenGroupUI.TicketEmployee
                 //hide create button from regular employee
                 ButtonCreate.Visibility = Visibility.Hidden;
 
-                tickets = FilterTicketsList(tickets);
+                tickets = FilterTicketsList();
             }
 
             //make and fill filtered ticketdisplaylist modified for displaying (contains priority)
@@ -51,7 +52,7 @@ namespace GardenGroupUI.TicketEmployee
             DataGridTicketOverview.ItemsSource = ticketsDisplay;
         }
 
-        public List<Ticket> FilterTicketsList(List<Ticket> tickets)
+        public List<Ticket> FilterTicketsList()
         {
             //make list of filtered tickets
             List<Ticket> filteredTickets = new List<Ticket>();
@@ -97,8 +98,13 @@ namespace GardenGroupUI.TicketEmployee
 
         public void CreateCRUDPage(CRUDState state)
         {
+            Ticket ticket = null;
+            if (state != CRUDState.Create)
+            {
+                ticket = tickets[DataGridTicketOverview.SelectedIndex];
+            }
             //make window for c.r.u.d.
-            TicketWindow ticketWindow = new TicketWindow(state, this, null);
+            TicketWindow ticketWindow = new TicketWindow(state, this, ticket);
             //set ticketwindow owner and show it
             ticketWindow.Owner = AppMenuWindow.GetWindow(this);
             ticketWindow.Activate();
