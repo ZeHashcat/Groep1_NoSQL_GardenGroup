@@ -176,7 +176,7 @@ namespace GardenGroupDAL
             BsonDocument doc = new BsonDocument
             {                
                 //Adding the data into a document                        
-                { "Username", username},
+                {"Username", username},
                 {"Password", hashWithSalt.Hash},
                 {"Salt", hashWithSalt.Salt},
                 {"First Name", firstname},
