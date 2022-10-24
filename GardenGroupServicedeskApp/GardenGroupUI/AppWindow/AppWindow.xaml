@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:GardenGroupUI"
         mc:Ignorable="d"
         Title="ShrekDesk98°" Height="450" Width="800">
-    <Grid>
+    <Grid> 
         <Button x:Name="buttonClose" Content="X" HorizontalAlignment="Right" VerticalAlignment="Top" Background="#FFFF0404" Foreground="#FFFBFBFB" FontFamily="Arial Black" FontSize="14" Height="22" Width="24" Margin="0,3,3,0" Click="buttonClose_Click"/>
         <Frame Name="frameContent" 
            Source="{Binding}"
