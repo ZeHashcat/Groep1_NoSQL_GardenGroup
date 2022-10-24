@@ -273,6 +273,7 @@ namespace GardenGroupUI.TicketEmployee
         {
             AppWindow.GetWindow(this).Close();
 
+            //AppWindow.GetWindow(this).IsEnabled = true;
         }
 
         private void ButtonSubmit_Click(object sender, RoutedEventArgs e)
