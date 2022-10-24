@@ -147,6 +147,8 @@ namespace GardenGroupLogic
                 User = new User(
                     new BsonKeyValuePair("id", user[0].AsBsonDocument.GetElement("_id").Value),
                     new BsonKeyValuePair("userName", user[0].AsBsonDocument.GetElement("Username").Value.ToString()),
+                    //Ik heb deze salt toegevoegd om de firstname van de user te verkrijgen. Dit kan beter wel hierin verwerkt blijven.
+                    new BsonKeyValuePair("Salt", user[0].AsBsonDocument.GetElement("Salt").Value.ToString()),
                     new BsonKeyValuePair("password", user[0].AsBsonDocument.GetElement("Password").Value.ToString()),
                     new BsonKeyValuePair("firstName", user[0].AsBsonDocument.GetElement("First Name").Value.ToString()),
                     new BsonKeyValuePair("lastName", user[0].AsBsonDocument.GetElement("Last Name").Value.ToString()),

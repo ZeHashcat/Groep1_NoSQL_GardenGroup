@@ -163,17 +163,7 @@ namespace GardenGroupDAL
                 {
                     return true;
                 }
-
-
-            }
-        /*//The code below belongs in BsonDocument GetUser(string username)
-                FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("Username", username);
-                BsonDocument document = collection.Find(filter).First();
-                //query
-                
-        //The code below belongs in GetUserData*/
-                                  
-                        
+            }                          
             return false;
         }
 

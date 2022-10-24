@@ -24,7 +24,7 @@ namespace GardenGroupUI
     /// </summary>
     public partial class LoginPage : Page
     {
-        private UserLogic loginLogic = new UserLogic();
+        private UserLogic userLogic = new UserLogic();
         public LoginPage()
         {
             InitializeComponent();
@@ -49,14 +49,14 @@ namespace GardenGroupUI
                 string password = loginPasswordBox.Password;
 
                 //Here the username and password will be checked
-                if (loginLogic.CheckLogin(username, password))
+                if (userLogic.CheckLogin(username, password))
                 {
                     //Creating user instance
-                    User user = loginLogic.GetUser(username);
+                    User user = userLogic.GetUser(username);
                     UserInstance.GetUserInstance(user);
                     //change source of window to AppMainPage.xaml <----------------------------
 
-                    MessageBox.Show($"Welcome {user.FirstName}");
+                    MessageBox.Show($"Welcome {user.FirstName.Value}");
                 }
                 else
                 {
@@ -85,7 +85,7 @@ namespace GardenGroupUI
 
         private void CreateClient(string connectionString)
         {           
-            loginLogic.CreateClient(connectionString);
+            userLogic.CreateClient(connectionString);
         }
 
         private void SetLoginInfo()

@@ -83,7 +83,7 @@ namespace GardenGroupUI.UserManagement
                 string username = addUserUsernameTextBox.Text;
                 string password = addUserPasswordTextBox.Text;
 
-                if(IsNullOrEmpty(firstname, lastname, email, phoneNumber, username, password, role, location))
+                if(!IsNullOrEmpty(firstname, lastname, email, phoneNumber, username, password, role, location))
                 {
                     //Change input into hash and salt
                     HashingWithSaltHasher hasher = new HashingWithSaltHasher();
@@ -118,7 +118,7 @@ namespace GardenGroupUI.UserManagement
 
         private bool IsNullOrEmpty(string firstname, string lastname, string email, double phoneNumber, string username, string password, string role, string location)
         {
-            if (firstname == null || lastname == null || email == null || phoneNumber == null || username == null || password == null || role == null || location == null)
+            if (firstname == "" || lastname == "" || email == "" || phoneNumber.ToString() == "" || username == "" || password == "" || role == "" || location == "")
             {
                 return true;
             }

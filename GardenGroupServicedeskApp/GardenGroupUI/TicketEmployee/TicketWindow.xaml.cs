@@ -165,7 +165,7 @@ namespace GardenGroupUI.TicketEmployee
 
         private void ButtonTestCreate_Click(object sender, RoutedEventArgs e)
         {
-            Ticket ticket = new Ticket()
+            /*Ticket ticket = new Ticket()
             {
                 DateReported = DateTime.Today,
                 Subject = "Create Test",
@@ -188,13 +188,13 @@ namespace GardenGroupUI.TicketEmployee
                 Status = TicketStatus.closed,
                 Description = "Dit is een test message 10 days until total destruction of all human kind. thank you for being alive🙇‍♀️ "
             };
-            ticketLogic.CreateTicket(ticket);
+            ticketLogic.CreateTicket(ticket);*/
         }
 
         private void ButtonTestUpdate_Click(object sender, RoutedEventArgs e)
         {
 
-            //test
+            /*//test
             Ticket ticket = new Ticket()
             {
                 DateReported = DateTime.Today,
@@ -251,7 +251,7 @@ namespace GardenGroupUI.TicketEmployee
                 MessageBox.Show(ticketLogic.UpdateTicket(ticket, update).ToString());
             }
 
-            catch (Exception ex) { }
+            catch (Exception ex) { }*/
         }
 
 
@@ -339,9 +339,6 @@ namespace GardenGroupUI.TicketEmployee
 
             }
 
-
-
-
             ComboBoxUser.Items.Add(ticket.User.UserName.Value.ToString());
             ComboBoxUser.SelectedIndex = 0;
 
@@ -357,8 +354,6 @@ namespace GardenGroupUI.TicketEmployee
             DateSelectDeadline.SelectedDate = ticket.DeadLine;
 
             TextBoxDescription.Text = ticket.Description;
-
-
         }
     }
 }
