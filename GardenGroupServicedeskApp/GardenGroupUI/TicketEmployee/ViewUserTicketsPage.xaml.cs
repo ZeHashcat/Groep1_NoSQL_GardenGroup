@@ -1,22 +1,9 @@
-﻿using System;
+﻿using GardenGroupLogic;
+using GardenGroupModel;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Sockets;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using GardenGroupLogic;
-using GardenGroupModel;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace GardenGroupUI.TicketEmployee
 {
@@ -28,7 +15,6 @@ namespace GardenGroupUI.TicketEmployee
         TicketLogic ticketLogic = new TicketLogic();
         List<Ticket> tickets;
         List<TicketDisplay> ticketsDisplay;
-        List<User> users;
         User userLoggedIn;
 
         public ViewUserTicketsPage()
@@ -36,12 +22,13 @@ namespace GardenGroupUI.TicketEmployee
             InitializeComponent();
 
             TicketLoader();
-
-            
         }
 
         public void TicketLoader()
         {
+            //get logged in user
+            userLoggedIn = UserInstance.GetUserInstance().User;
+
             //fill ticketlist from method in logic layer
             tickets = ticketLogic.ReadTicket();
 
@@ -50,10 +37,10 @@ namespace GardenGroupUI.TicketEmployee
             ticketsDisplay = ticketLogic.ListTicketsDisplay(tickets);
 
             //filter list for viewing
-            /*if (userLoggedIn.Role.ToString() == "RegularEmployee")
+            if (userLoggedIn.Role.ToString() == "RegularEmployee")
             {
                 FilterTicketsList();
-            }*/
+            }
 
             //fill datagrid with displaytickets
             DataGridTicketOverview.ItemsSource = ticketsDisplay;
@@ -78,13 +65,26 @@ namespace GardenGroupUI.TicketEmployee
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             //make window for c.r.u.d.
-            TicketWindow ticketWindow = new TicketWindow(CRUDState.Read, tickets[DataGridTicketOverview.SelectedIndex]);
+            TicketWindow ticketWindow = new TicketWindow(SelectCRUDState(), tickets[DataGridTicketOverview.SelectedIndex], this);
             //set ticketwindow owner and show it
-            ticketWindow.Owner = AppWindow.GetWindow(this);
+            ticketWindow.Owner = AppMenuWindow.GetWindow(this);
             ticketWindow.Activate();
             ticketWindow.Show();
             //disable this window
-            AppWindow.GetWindow(this).IsEnabled = false;
+            AppMenuWindow.GetWindow(this).IsEnabled = false;
+        }
+
+        public CRUDState SelectCRUDState()
+        {
+            switch (userLoggedIn.Role.Value.ToString())
+            {
+                case "Regular Employee":
+                    return CRUDState.Read;
+                case "Admin":
+                    return CRUDState.Create;
+                default:
+                    return CRUDState.Read;
+            }
         }
     }
 }

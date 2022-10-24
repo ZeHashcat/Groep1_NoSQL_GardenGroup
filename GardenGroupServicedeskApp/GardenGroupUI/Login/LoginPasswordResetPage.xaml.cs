@@ -1,21 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using GardenGroupLogic;
+using GardenGroupModel;
+using System;
 using System.Configuration;
-using System.Linq;
 using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using GardenGroupLogic;
-using GardenGroupModel;
 
 namespace GardenGroupUI
 {
@@ -30,7 +20,7 @@ namespace GardenGroupUI
             InitializeComponent();
 
             CreateClient(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
-                        
+
             //Make shure button is disabeled when booting
             ResetPasswordEmailButton.IsEnabled = !string.IsNullOrEmpty(resetPasswordEmailTextBox.Text);
 
@@ -38,7 +28,7 @@ namespace GardenGroupUI
         }
 
         private void CreateClient(string connectionString)
-        {            
+        {
             loginLogic.CreateClient(connectionString);
         }
 
@@ -48,10 +38,10 @@ namespace GardenGroupUI
         }
 
         private void ResetPasswordEmailButton_Click(object sender, RoutedEventArgs e)
-        {           
+        {
             //Before the user can be allowed to enter the new password they are asked to enter a email to enshure they are the user they make out to be.
             //(In a real application the entered email must first het accepted in the users email)
-            
+
             try
             {
                 //Read entered email.
@@ -83,14 +73,14 @@ namespace GardenGroupUI
                     MessageBox.Show("Entered wrong email, please try again");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }            
+            }
         }
 
         private void NewPasswordButton_Click(object sender, RoutedEventArgs e)
-        {                       
+        {
             //The new password has been entered. It will now get checked and if everything is alright it will get updated into the database
             try
             {
@@ -105,7 +95,7 @@ namespace GardenGroupUI
                     HashWithSaltResult hashWithSalt = hasher.NewHashWithSalt(newPassword, 64, SHA512.Create());
                     //Als ik dit nodig heb schrijf ik result.Hash of .Salt == alleen in deze methode
                     if (loginLogic.ChangePassword(email, hashWithSalt))
-                    {                      
+                    {
                         resetPasswordConfirmLabel.Foreground = Brushes.Green;
                         resetPasswordConfirmLabel.Content = "Congratulations. Your new password has been saved.";
                         MessageBox.Show("Congratulations. Your new password has been saved.");
@@ -119,10 +109,10 @@ namespace GardenGroupUI
                     resetPasswordConfirmLabel.Content = "The entered passwords dont match.\nKeep in mind the password must contain atleast 8 symbols.";
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }            
-        }      
+            }
+        }
     }
 }

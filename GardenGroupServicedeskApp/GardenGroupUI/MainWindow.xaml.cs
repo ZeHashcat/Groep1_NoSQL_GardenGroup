@@ -1,21 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GardenGroupLogic;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Threading;
-using MongoDB.Driver;
-using GardenGroupModel;
-using GardenGroupLogic;
 
 namespace GardenGroupUI
 {
@@ -40,7 +24,7 @@ namespace GardenGroupUI
 
         //QOUTE: "Typically you only create one MongoClient instance for a given cluster and use it across your application." 
         // - https://mongodb.github.io/mongo-csharp-driver/2.17/getting_started/quick_tour/
-        
+
         SettingsLogic settings = new SettingsLogic(SystemParameters.PrimaryScreenWidth, SystemParameters.PrimaryScreenHeight);
 
         public MainWindow()
@@ -63,7 +47,7 @@ namespace GardenGroupUI
 
         private void DetectResolution()
         {
-            
+
         }
     }
 }

@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlTypes;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using GardenGroupDAL;
+﻿using GardenGroupDAL;
 using GardenGroupModel;
 using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
-using MongoDB.Bson.Serialization.IdGenerators;
-using MongoDB.Driver;
+using System.Security.Cryptography;
 
 namespace GardenGroupLogic
 {
@@ -58,19 +48,19 @@ namespace GardenGroupLogic
 
         public bool CheckLogin(string username, string password)
         {
-            HashingWithSaltHasher passwordHasher = new HashingWithSaltHasher();           
+            HashingWithSaltHasher passwordHasher = new HashingWithSaltHasher();
 
             //Getting hash and salt from database
             HashWithSaltResult hashAndSalt = userDAO.GetPassword(username);
-            
+
             HashWithSaltResult hashWithSaltResult = passwordHasher.HashWithSalt(password, hashAndSalt, SHA512.Create());
 
             if (hashAndSalt.Hash == hashWithSaltResult.Hash)
                 return true;
-            
+
             else
                 return false;
-            
+
         }
         //validate email before changing the password
         public bool CheckEmail(string email)
@@ -99,7 +89,7 @@ namespace GardenGroupLogic
                 return false;
         }
         public bool AddUser(string username, HashWithSaltResult hashWithSalt, string firstname, string lastname, string email, double phonenumber, string role, string location)
-        {        
+        {
             //User will be checked for duplicate values
             if (userDAO.CheckUserData(username, email, phonenumber))
             {
@@ -135,7 +125,7 @@ namespace GardenGroupLogic
                 BsonKeyValuePair phoneNumber = new BsonKeyValuePair("Phone Number", userdocument["Phone Number"].ToString());
                 BsonKeyValuePair location = new BsonKeyValuePair("Location", userdocument["Location"].ToString());
                 BsonKeyValuePair? teams = null;
-                User user = new User(id,userName,salt,password,firstName,lastName,role,email,phoneNumber,location,teams);
+                User user = new User(id, userName, salt, password, firstName, lastName, role, email, phoneNumber, location, teams);
 
                 users.Add(user);
             }

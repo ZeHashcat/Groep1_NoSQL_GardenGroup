@@ -1,11 +1,7 @@
 ﻿using GardenGroupDAL;
 using GardenGroupModel;
-using Microsoft.VisualBasic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
-using System.Reflection.Metadata;
-using System.Text.Json;
-using System.Text.Json.Nodes;
 
 namespace GardenGroupLogic
 {
@@ -134,7 +130,8 @@ namespace GardenGroupLogic
         /// </summary>
         /// <param name="document"></param>
         /// <returns></returns>
-        private Ticket makeTicket(BsonDocument document) {
+        private Ticket makeTicket(BsonDocument document)
+        {
             BsonArray user = document.GetElement("User").Value.AsBsonArray;
 
 
