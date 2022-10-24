@@ -1,11 +1,10 @@
-﻿using System;
+﻿using GardenGroupLogic;
+using GardenGroupModel;
+using System;
 using System.Configuration;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using GardenGroupLogic;
-using GardenGroupModel;
-using GardenGroupUI.TicketEmployee;
 
 namespace GardenGroupUI
 {
@@ -24,7 +23,7 @@ namespace GardenGroupUI
             CreateClient(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
 
             GetLoginInfo();
-        }       
+        }
 
         //-------------------------------------------------------------------------------------
         //-------------------------------------------------------------------------------------
@@ -34,7 +33,7 @@ namespace GardenGroupUI
         private void loginLoginButton_Click(object sender, RoutedEventArgs e)
         {
             //The login button has been pressed. Now the validation will begin                   
-           
+
             try
             {
                 string username = loginUsernameTextBox.Text;
@@ -72,15 +71,15 @@ namespace GardenGroupUI
                     DeleteLoginInfo();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }            
+            }
 
         }
 
         private void CreateClient(string connectionString)
-        {           
+        {
             userLogic.CreateClient(connectionString);
         }
 
@@ -100,7 +99,7 @@ namespace GardenGroupUI
                 {
                     settings[keyUsername].Value = loginUsernameTextBox.Text;
                 }
-               
+
                 if (settings[keyPassword] == null)
                 {
                     settings.Add(keyPassword, loginPasswordBox.Password);
@@ -112,7 +111,7 @@ namespace GardenGroupUI
                 appConfig.Save(ConfigurationSaveMode.Modified);
                 ConfigurationManager.RefreshSection(appConfig.AppSettings.SectionInformation.Name);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show($"Something went wrong: {ex.Message}");
             }
@@ -120,8 +119,8 @@ namespace GardenGroupUI
 
         private void GetLoginInfo()
         {
-            
-            if(ConfigurationManager.AppSettings["username"] != null && ConfigurationManager.AppSettings["password"] != null)
+
+            if (ConfigurationManager.AppSettings["username"] != null && ConfigurationManager.AppSettings["password"] != null)
             {
                 loginUsernameTextBox.Text = ConfigurationManager.AppSettings["username"];
                 loginPasswordBox.Password = ConfigurationManager.AppSettings["password"];
@@ -138,7 +137,7 @@ namespace GardenGroupUI
             {
                 Configuration appConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
                 KeyValueConfigurationCollection settings = appConfig.AppSettings.Settings;
-                
+
                 settings[keyUsername].Value = null;
                 settings[keyPassword].Value = null;
 

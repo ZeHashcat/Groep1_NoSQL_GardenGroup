@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
-using GardenGroupModel;
-using MongoDB.Driver;
+﻿using GardenGroupModel;
 using MongoDB.Bson;
+using MongoDB.Driver;
+using System.Configuration;
 
 namespace GardenGroupDAL
 {
@@ -20,7 +14,8 @@ namespace GardenGroupDAL
         private string databaseName = "TicketSystemDB";
         private string collectionName = "Ticket";
 
-       public TicketDAO(){
+        public TicketDAO()
+        {
             MongoClientInstance mongoClientInstance = MongoClientInstance.GetClientInstance(connstring);
 
 
@@ -35,16 +30,17 @@ namespace GardenGroupDAL
         /// gets all tickets from the database
         /// </summary>
         /// <returns></returns>
-        public  List<BsonDocument> Read()
+        public List<BsonDocument> Read()
         {
             //List<BsonDocument> document = collection.Find("{ }").ToList();
 
-            IAggregateFluent<BsonDocument> aggregate = collection.Aggregate().Match(new BsonDocument{
+            IAggregateFluent<BsonDocument> aggregate = collection.Aggregate().Match(new BsonDocument
+            {
             }).Lookup("User", "UserName", "Username", "User");
             List<BsonDocument> document = aggregate.ToList();
 
             return document;
-            
+
         }
 
         /// <summary>
@@ -66,7 +62,7 @@ namespace GardenGroupDAL
             //set user name value in place of User
             DocumentToFind.Set("UserName", BsonValue.Create(ticket.User.UserName.Value));
 
-            
+
             List<BsonDocument> document = collection.Aggregate().Match(DocumentToFind).Lookup("User", "UserName", "Username", "User").Sort(Builders<BsonDocument>.Sort.Descending("_id")).ToList();
 
             return document;
@@ -89,7 +85,7 @@ namespace GardenGroupDAL
             {
                 collection.InsertOne(documentToAdd);
             }
-            catch(MongoWriteException e)
+            catch (MongoWriteException e)
             {
 
                 throw new Exception(e.ToString());
@@ -102,7 +98,7 @@ namespace GardenGroupDAL
         /// </summary>
         /// <param name="ticket"></param>
         /// <returns></returns>
-        public BsonDocument Update(Ticket ticketToUpdate,Ticket Update)
+        public BsonDocument Update(Ticket ticketToUpdate, Ticket Update)
         {
             BsonDocument documentToUpdate = ticketToUpdate.ToBsonDocument();
 
@@ -123,12 +119,12 @@ namespace GardenGroupDAL
 
 
             BsonDocument returnedDocument = collection.FindOneAndUpdate(filter, update);
-          /*  if(!returnedDocument.Equals(updateddocument))
-            {
-                
-                throw new Exception("something went wrong the ticket whas not updated");
+            /*  if(!returnedDocument.Equals(updateddocument))
+              {
 
-            }*/
+                  throw new Exception("something went wrong the ticket whas not updated");
+
+              }*/
             return returnedDocument;
 
         }
@@ -141,10 +137,10 @@ namespace GardenGroupDAL
             FilterDefinition<BsonDocument> FilterToDelete = documentToDelete;
             BsonDocument documentToValidate = collection.FindOneAndDelete(FilterToDelete);
 
-        /*    if (documentToValidate != documentToDelete)
-            {
-                throw new Exception("something went wrong the ticket whas not deleted");
-            }*/
+            /*    if (documentToValidate != documentToDelete)
+                {
+                    throw new Exception("something went wrong the ticket whas not deleted");
+                }*/
 
             return documentToValidate;
         }

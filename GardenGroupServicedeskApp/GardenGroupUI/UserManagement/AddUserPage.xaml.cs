@@ -1,23 +1,12 @@
-﻿using System;
+﻿using GardenGroupLogic;
+using GardenGroupModel;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 using System.Security.Cryptography;
-using System.Security.Policy;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using DnsClient.Protocol;
-using GardenGroupLogic;
-using GardenGroupModel;
 
 namespace GardenGroupUI.UserManagement
 {
@@ -46,7 +35,7 @@ namespace GardenGroupUI.UserManagement
         }
 
         private async void FillComboBoxes()
-        {            
+        {
             try
             {
                 addUserRoleComboBox.Items.Clear();
@@ -64,7 +53,7 @@ namespace GardenGroupUI.UserManagement
                 {
                     addUserLocationsComboBox.Items.Add(location);
                 }
-            }            
+            }
             catch (Exception ex)
             {
                 MessageBox.Show($"Locations cant be loaded: {ex.Message}");
@@ -75,7 +64,7 @@ namespace GardenGroupUI.UserManagement
         {
             //Here we call on the database using try catch
             //The username, email and phone number cant be the same as one that is already in the database.
-                        
+
             try
             {
                 //Getting data from the inputboxes 
@@ -83,12 +72,12 @@ namespace GardenGroupUI.UserManagement
                 string lastname = addUserlastnameTextBox.Text;
                 string role = addUserRoleComboBox.Text;
                 string email = addUserEmailTextBox.Text;
-                double phoneNumber = double.Parse(addUserPhonenumberTextBox.Text);               
+                double phoneNumber = double.Parse(addUserPhonenumberTextBox.Text);
                 string location = addUserLocationsComboBox.Text;
                 string username = addUserUsernameTextBox.Text;
                 string password = addUserPasswordTextBox.Text;
 
-                if(!IsNullOrEmpty(firstname, lastname, email, phoneNumber, username, password, role, location))
+                if (!IsNullOrEmpty(firstname, lastname, email, phoneNumber, username, password, role, location))
                 {
                     //Change input into hash and salt
                     HashingWithSaltHasher hasher = new HashingWithSaltHasher();
@@ -106,8 +95,9 @@ namespace GardenGroupUI.UserManagement
                     MessageBox.Show("Some fields might not be filled.");
                 }
 
-                
-            }catch(Exception ex)
+
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -115,11 +105,11 @@ namespace GardenGroupUI.UserManagement
 
         private void CancelUserAddButton_Click(object sender, RoutedEventArgs e)
         {
-            
+
             //Terug naar usermannagement Window <------- <-------------
             //to usermanagement
-            
-        }  
+
+        }
 
         private bool IsNullOrEmpty(string firstname, string lastname, string email, double phoneNumber, string username, string password, string role, string location)
         {
@@ -128,7 +118,7 @@ namespace GardenGroupUI.UserManagement
                 return true;
             }
             else
-                return false;            
+                return false;
         }
     }
 }
