@@ -36,6 +36,8 @@ namespace GardenGroupUI.TicketEmployee
             InitializeComponent();
 
             TicketLoader();
+
+            
         }
 
         public void TicketLoader()
