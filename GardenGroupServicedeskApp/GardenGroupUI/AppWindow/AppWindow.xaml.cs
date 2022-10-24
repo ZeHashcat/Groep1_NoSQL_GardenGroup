@@ -23,7 +23,7 @@ namespace GardenGroupUI
     {
 
         public AppWindow()
-        { 
+        {
             InitializeComponent();
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             frameContent.Source = new Uri("../Login/LoginPage.xaml", UriKind.Relative);

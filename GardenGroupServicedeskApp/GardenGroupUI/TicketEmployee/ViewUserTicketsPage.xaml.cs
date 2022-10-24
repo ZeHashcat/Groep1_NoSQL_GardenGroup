@@ -40,6 +40,9 @@ namespace GardenGroupUI.TicketEmployee
 
         public void TicketLoader()
         {
+            //get logged in user
+            userLoggedIn = UserInstance.GetUserInstance().User;
+
             //fill ticketlist from method in logic layer
             tickets = ticketLogic.ReadTicket();
 
@@ -48,10 +51,10 @@ namespace GardenGroupUI.TicketEmployee
             ticketsDisplay = ticketLogic.ListTicketsDisplay(tickets);
 
             //filter list for viewing
-            /*if (userLoggedIn.Role.ToString() == "RegularEmployee")
+            if (userLoggedIn.Role.ToString() == "RegularEmployee")
             {
                 FilterTicketsList();
-            }*/
+            }
 
             //fill datagrid with displaytickets
             DataGridTicketOverview.ItemsSource = ticketsDisplay;
@@ -76,7 +79,7 @@ namespace GardenGroupUI.TicketEmployee
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             //make window for c.r.u.d.
-            TicketWindow ticketWindow = new TicketWindow(CRUDState.Create, tickets[DataGridTicketOverview.SelectedIndex], this);
+            TicketWindow ticketWindow = new TicketWindow(CRUDState.Read, tickets[DataGridTicketOverview.SelectedIndex], this);
             //set ticketwindow owner and show it
             ticketWindow.Owner = AppMenuWindow.GetWindow(this);
             ticketWindow.Activate();
