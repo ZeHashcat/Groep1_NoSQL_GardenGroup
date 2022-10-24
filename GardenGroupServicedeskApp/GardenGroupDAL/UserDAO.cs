@@ -276,47 +276,6 @@ namespace GardenGroupDAL
             {
                 throw ex;
             }
-        }
-
-        /*public void AddUserTest()
-        {
-            string databaseName = "TicketSystemDB";
-            string collectionName = "User";
-            MongoClientInstance mongoClientInstance = MongoClientInstance.GetClientInstance();
-
-            IMongoDatabase database = mongoClientInstance.Client.GetDatabase(databaseName);
-            IMongoCollection<BsonDocument> collection = database.GetCollection<BsonDocument>(collectionName);
-
-
-            BsonDocument document = new BsonDocument();
-            document.Add("Team1Id", 1);
-            document.Add("Team1Name", "Alpha Team");
-
-            User user = new User(
-                        new BsonKeyValuePair("_id", 2),
-                        new BsonKeyValuePair("Username", "Reynard96Blazer"),
-                        new BsonKeyValuePair("Password", "9669420"),
-                        new BsonKeyValuePair("First Name", "Reynard"),
-                        new BsonKeyValuePair("Last Name", "Blazer"),
-                        new BsonKeyValuePair("Role", "Sudo"),
-                        new BsonKeyValuePair("Email", "ReynardBlazer@Nanotrasen.net"),
-                        new BsonKeyValuePair("PhoneNumber", 0644498323),
-                        new BsonKeyValuePair("Location", "BayStation"),
-                        new BsonKeyValuePair("Teams", document)
-                        );
-
-            BsonDocument userDocument = new BsonDocument();
-            userDocument.Add(user.Id.Key, user.Id.Value);
-            userDocument.Add(user.UserName.Key, user.UserName.Value);
-            userDocument.Add(user.FirstName.Key, user.FirstName.Value);
-            userDocument.Add(user.LastName.Key, user.LastName.Value);
-            userDocument.Add(user.Role.Key, user.Role.Value);
-            userDocument.Add(user.Email.Key, user.Email.Value);
-            userDocument.Add(user.PhoneNumber.Key, user.PhoneNumber.Value);
-            userDocument.Add(user.Location.Key, user.Location.Value);
-            *//*userDocument.Add(user.Teams.Key, user.Teams.Value);*//*
-
-            collection.InsertOne(userDocument);
-        }*/
+        }        
     }
 }

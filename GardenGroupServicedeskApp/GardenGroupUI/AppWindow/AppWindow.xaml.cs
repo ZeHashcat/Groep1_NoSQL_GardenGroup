@@ -29,6 +29,7 @@ namespace GardenGroupUI
             frameContent.Source = new Uri("../Login/LoginPage.xaml", UriKind.Relative);
             //frameContent.Source = new Uri("../Login/LoginPasswordResetPage.xaml", UriKind.Relative);
             //frameContent.Source = new Uri("../UserManagement/AddUserPage.xaml", UriKind.Relative);
+            //frameContent.Source = new Uri("../UserManagement/UserManagementPage.xaml", UriKind.Relative);
             //frameContent.Source = new Uri("AppMainEmployeePage.xaml", UriKind.Relative);
             //frameContent.Source = new Uri("AppMainServiceDeskEmployeePage.xaml", UriKind.Relative);            
         }
