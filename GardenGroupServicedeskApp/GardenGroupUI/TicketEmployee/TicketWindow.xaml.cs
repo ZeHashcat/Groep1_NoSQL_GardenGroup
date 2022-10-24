@@ -296,11 +296,11 @@ namespace GardenGroupUI.TicketEmployee
         public Ticket MakeTicket(User user)
         {
 
-        
-            Ticket ticket = new Ticket()
+
+            Ticket ticket = new Ticket();
             ObjectId id = this.ticket._id;
-            //misschien i.p.v == null >> EQUALS(null)
-            if (this.ticket._id == null)
+            Ticket ticketToReturn = new Ticket()
+            
             {
                 _id = (ObjectId)new BsonObjectId(ObjectId.GenerateNewId()),
 
@@ -323,7 +323,7 @@ namespace GardenGroupUI.TicketEmployee
                 Status = 0
 
             };
-            return ticket;
+            return ticketToReturn;
         }
 
         public Ticket MakeTicket(User user, Ticket ticket)
