@@ -28,6 +28,7 @@ namespace GardenGroupUI.TicketEmployee
 
         TicketStatus currentStatus = TicketStatus.open;
         UserInstance user = UserInstance.GetUserInstance();
+        UserLogic UserLogic = new UserLogic();
 
         public TicketWindow(CRUDState state, Ticket ticket)
         {
@@ -56,6 +57,16 @@ namespace GardenGroupUI.TicketEmployee
             //fill drop dowms
             //date time selector fill
             DateTime date = DateTime.Now;
+
+            //fill dropdown whit users
+            //ComboBoxUser.Items.Add(user.User.UserName.Value.ToString());
+
+            foreach(User user in UserLogic.GetAllusers())
+            {
+                ComboBoxUser.Items.Add(user.UserName.Value.ToString());
+            }
+
+
             //fill drop down whit priorities
 
             int lengthPriority = Enum.GetNames(typeof(Priority)).Length;
@@ -73,8 +84,10 @@ namespace GardenGroupUI.TicketEmployee
             {
                 ComboBoxIncidentType.Items.Add(Enum.GetName(typeof(IncidentType), i));
             }
-            //only works whit login 
-            //ComboBoxUser.Items.Add(user.User.UserName.ToString());
+
+
+
+
 
             DateSelectDeadline.SelectedDate = DateTime.Today.AddDays(7);
         }
@@ -258,8 +271,8 @@ namespace GardenGroupUI.TicketEmployee
         //button events
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
-            /*            this.Close();
-            */
+            AppWindow.GetWindow(this).Close();
+
         }
 
         private void ButtonSubmit_Click(object sender, RoutedEventArgs e)
@@ -291,15 +304,44 @@ namespace GardenGroupUI.TicketEmployee
         public Ticket MakeTicket(User user)
         {
 
+
+            Ticket ticket = new Ticket();
             ObjectId id = this.ticket._id;
-            //misschien i.p.v == null >> EQUALS(null)
-            if (this.ticket._id == null)
+            Ticket ticketToReturn = new Ticket()
+            
             {
-                id = (ObjectId)BsonObjectId.GenerateNewId();
-            }
-            Ticket ticket = new Ticket()
+                _id = (ObjectId)new BsonObjectId(ObjectId.GenerateNewId()),
+
+                DateReported = (DateTime)DatePickerDateTime.SelectedDate,
+
+                Subject = TextBoxSubject.Text.ToString(),
+
+                Description = TextBoxDescription.Text.ToString(),
+
+                Incident = (IncidentType)ComboBoxIncidentType.SelectedIndex,
+
+                User = user,
+
+                Impact = (Priority)ComboBoxImpact.SelectedIndex,
+
+                Urgency = (Priority)ComboBoxUrgency.SelectedIndex,
+
+                DeadLine = (DateTime)DateSelectDeadline.SelectedDate,
+
+                Status = 0
+
+            };
+            return ticketToReturn;
+        }
+
+        public Ticket MakeTicket(User user, Ticket ticket)
+        {
+
+            ObjectId id;
+         
+            Ticket ticketToReturn = new Ticket()
             {
-                _id = id,
+                _id = this.ticket._id,
 
                 DateReported = (DateTime)DatePickerDateTime.SelectedDate,
 
@@ -320,8 +362,9 @@ namespace GardenGroupUI.TicketEmployee
                 Status = (TicketStatus)ComboBoxIncidentType.SelectedIndex
 
             };
-            return ticket;
+            return ticketToReturn;
         }
+
 
         public void PreFillForm(Ticket ticket)
         {
@@ -340,16 +383,16 @@ namespace GardenGroupUI.TicketEmployee
 
             }
 
-            ComboBoxUser.Items.Add(ticket.User.UserName.Value.ToString());
-            ComboBoxUser.SelectedIndex = 0;
+
+            //ComboBoxUser.Items.Add(ticket.User.UserName.Value.ToString());
+            ComboBoxUser.Items.IndexOf(ticket.User.UserName.Value.ToString());
+            ComboBoxUser.SelectedItem = ticket.User.UserName.Value.ToString();
 
 
 
-            ComboBoxImpact.Items.Add(ticket.Impact.ToString());
-            ComboBoxImpact.SelectedIndex = 0;
+            ComboBoxImpact.SelectedItem = ticket.Impact.ToString();
 
-            ComboBoxUrgency.Items.Add(ticket.Urgency.ToString());
-            ComboBoxUrgency.SelectedIndex = 0;
+            ComboBoxUrgency.SelectedItem = ticket.Urgency.ToString();
 
 
             DateSelectDeadline.SelectedDate = ticket.DeadLine;
