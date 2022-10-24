@@ -15,7 +15,6 @@ namespace GardenGroupUI.TicketEmployee
         TicketLogic ticketLogic = new TicketLogic();
         List<Ticket> tickets;
         List<TicketDisplay> ticketsDisplay;
-        List<User> users;
         User userLoggedIn;
 
         public ViewUserTicketsPage()
@@ -77,7 +76,7 @@ namespace GardenGroupUI.TicketEmployee
 
         public CRUDState SelectCRUDState()
         {
-            switch (userLoggedIn.Role.ToString())
+            switch (userLoggedIn.Role.Value.ToString())
             {
                 case "Regular Employee":
                     return CRUDState.Read;
