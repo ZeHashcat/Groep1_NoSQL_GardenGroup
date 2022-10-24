@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using GardenGroupLogic;
+using GardenGroupModel;
+using System.Configuration;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace GardenGroupUI.UserManagement
