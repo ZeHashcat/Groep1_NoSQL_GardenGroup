@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DnsClient.Protocol;
 using GardenGroupLogic;
 using GardenGroupModel;
 
@@ -48,11 +49,15 @@ namespace GardenGroupUI.UserManagement
         {            
             try
             {
+                addUserRoleComboBox.Items.Clear();
+
                 List<string> roles = await Task.Run(() => roleService.GetRoles());
                 foreach (string role in roles)
                 {
                     addUserRoleComboBox.Items.Add(role);
                 }
+
+                addUserLocationsComboBox.Items.Clear();
 
                 List<string> locations = await Task.Run(() => locationService.GetLocations());
                 foreach (string location in locations)
