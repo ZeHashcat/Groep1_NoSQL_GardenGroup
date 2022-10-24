@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GardenGroupUI"
         mc:Ignorable="d"
-        Title="ShrekDesk98° Manager" BorderBrush="DarkOliveGreen" BorderThickness="2" Height="470" Width="810" ResizeMode="NoResize" Topmost="True" Icon="/ShrekIconTransparent.png" Background="DarkSeaGreen">
+        Title="ShrekDesk98° Manager" BorderBrush="DarkOliveGreen" BorderThickness="2" Height="470" Width="810" ResizeMode="NoResize" Topmost="True" Icon="/ShrekIconTransparent.png" Background="DarkSeaGreen" WindowState="Maximized" WindowStyle="None">
 
     <Grid x:Name="gridMain">
         <Grid.ColumnDefinitions>
