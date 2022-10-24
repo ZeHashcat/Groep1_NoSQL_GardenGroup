@@ -57,6 +57,8 @@ namespace GardenGroupUI
                     //change source of window to AppMainPage.xaml <----------------------------
 
                     MessageBox.Show($"Welcome {user.FirstName.Value}");
+                    AppMenuWindow appWindow = new AppMenuWindow("AppMainServiceDeskEmployeePage.xaml");
+                    appWindow.Show();
                 }
                 else
                 {
