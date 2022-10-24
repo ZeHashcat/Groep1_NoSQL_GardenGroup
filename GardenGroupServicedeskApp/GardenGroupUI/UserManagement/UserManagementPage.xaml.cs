@@ -8,12 +8,34 @@ namespace GardenGroupUI.UserManagement
     /// </summary>
     public partial class UserManagementPage : Page
     {
+        UserLogic userLogic = new UserLogic();
+
         public UserManagementPage()
         {
             InitializeComponent();
+
+            CreateClient(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+
+            FillDataGrid();
         }
 
+        private void CreateClient(string connectionString)
+        {
+            userLogic.CreateClient(connectionString);
+        }
 
+        private void FillDataGrid()
+        {
+            int id = 1;
+            foreach (User user in userLogic.GetAllusers())
+            {
+
+                //ComboBoxUser.Items.Add(user.UserName.Value.ToString());              
+                
+                DataGridUserOverview.Items.Add(new { Id = id, Username = user.UserName.Value, FirstName = user.FirstName.Value, LastName = user.LastName.Value, Email = user.Email.Value});
+                id++;
+            }
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
