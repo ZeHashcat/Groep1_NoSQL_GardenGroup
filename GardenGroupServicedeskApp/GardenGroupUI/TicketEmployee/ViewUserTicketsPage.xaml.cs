@@ -23,8 +23,6 @@ namespace GardenGroupUI.TicketEmployee
             InitializeComponent();
 
             TicketLoader();
-
-
         }
 
         public void TicketLoader()
@@ -68,13 +66,26 @@ namespace GardenGroupUI.TicketEmployee
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             //make window for c.r.u.d.
-            TicketWindow ticketWindow = new TicketWindow(CRUDState.Read, tickets[DataGridTicketOverview.SelectedIndex], this);
+            TicketWindow ticketWindow = new TicketWindow(SelectCRUDState(), tickets[DataGridTicketOverview.SelectedIndex], this);
             //set ticketwindow owner and show it
             ticketWindow.Owner = AppMenuWindow.GetWindow(this);
             ticketWindow.Activate();
             ticketWindow.Show();
             //disable this window
             AppMenuWindow.GetWindow(this).IsEnabled = false;
+        }
+
+        public CRUDState SelectCRUDState()
+        {
+            switch (userLoggedIn.Role.ToString())
+            {
+                case "Regular Employee":
+                    return CRUDState.Read;
+                case "Admin":
+                    return CRUDState.Create;
+                default:
+                    return CRUDState.Read;
+            }
         }
     }
 }
