@@ -157,21 +157,23 @@ namespace GardenGroupDAL
                 if (user.Contains(username) || user.Contains(email) || user.Contains(phonenumber.ToString()))
                 {
                     return false;
-                }                    
-
-        }
-        //The code below belongs in BsonDocument GetUser(string username)
-                FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("Username", username);
-                BsonDocument document = collection.Find(filter).First();
-                //query
-                
-        //The code below belongs in GetUserData
+                }
                 //After checking if the values dont match the existing ones in the system we will proceed and add the user
                 else
                 {
                     return true;
-                }                    
-            }            
+                }
+
+
+            }
+        /*//The code below belongs in BsonDocument GetUser(string username)
+                FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("Username", username);
+                BsonDocument document = collection.Find(filter).First();
+                //query
+                
+        //The code below belongs in GetUserData*/
+                                  
+                        
             return false;
         }
 
@@ -183,10 +185,8 @@ namespace GardenGroupDAL
 
             BsonDocument doc = new BsonDocument
             {                
-            //Adding the data into a document
-
-            //Variabelen aanroepen. En achteraan plaatsen
-            { "Username", username},
+                //Adding the data into a document                        
+                { "Username", username},
                 {"Password", hashWithSalt.Hash},
                 {"Salt", hashWithSalt.Salt},
                 {"First Name", firstname},
@@ -277,7 +277,7 @@ namespace GardenGroupDAL
             }
         }
 
-        public void AddUserTest()
+        /*public void AddUserTest()
         {
             string databaseName = "TicketSystemDB";
             string collectionName = "User";
@@ -313,9 +313,9 @@ namespace GardenGroupDAL
             userDocument.Add(user.Email.Key, user.Email.Value);
             userDocument.Add(user.PhoneNumber.Key, user.PhoneNumber.Value);
             userDocument.Add(user.Location.Key, user.Location.Value);
-            /*userDocument.Add(user.Teams.Key, user.Teams.Value);*/
+            *//*userDocument.Add(user.Teams.Key, user.Teams.Value);*//*
 
             collection.InsertOne(userDocument);
-        }
+        }*/
     }
 }

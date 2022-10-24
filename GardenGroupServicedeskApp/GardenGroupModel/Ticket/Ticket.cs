@@ -7,7 +7,7 @@ namespace GardenGroupModel
     {
         public ObjectId _id { get; set; }
 
-        public ObjectId _id;
+        //public ObjectId _id;
 
         [BsonRepresentation(BsonType.DateTime)]
         public DateTime DateReported { get; set; }
