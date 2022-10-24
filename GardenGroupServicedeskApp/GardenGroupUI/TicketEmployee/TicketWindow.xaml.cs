@@ -50,8 +50,7 @@ namespace GardenGroupUI.TicketEmployee
         {
             //fill drop dowms
             //date time selector fill
-            DateTime date = DateTime.Now;
-
+            DatePickerDateTime.SelectedDate = DateTime.Today;
             //fill dropdown whit users
             //ComboBoxUser.Items.Add(user.User.UserName.Value.ToString());
 
@@ -59,6 +58,8 @@ namespace GardenGroupUI.TicketEmployee
             {
                 ComboBoxUser.Items.Add(user.UserName.Value.ToString());
             }
+
+            ComboBoxUser.SelectedItem = ticket.User.UserName.Value.ToString();
 
 
             //fill drop down whit priorities
@@ -262,6 +263,7 @@ namespace GardenGroupUI.TicketEmployee
 
             try
             {
+
                 ticketLogic.CreateTicket(MakeTicket(user.User));
             }
             catch (Exception ex)
@@ -286,14 +288,18 @@ namespace GardenGroupUI.TicketEmployee
         public Ticket MakeTicket(User user)
         {
 
+            if (!ValidateFields())
+            {
+                throw new Exception("not all fields are filled");
+            }
+          
+
             Ticket ticket = new Ticket();
             ObjectId id = this.ticket._id;
             Ticket ticketToReturn = new Ticket()
 
             {
                 _id = (ObjectId)new BsonObjectId(ObjectId.GenerateNewId()),
-
-
 
                 DateReported = (DateTime)DatePickerDateTime.SelectedDate,
 
@@ -351,36 +357,105 @@ namespace GardenGroupUI.TicketEmployee
             return ticketToReturn;
         }
 
-        private void ValidateFields()
+        private bool ValidateFields()
         {
+            bool isValid = true;
             if (DatePickerDateTime.SelectedDate == null)
             {
+                DatePickerDateTime.BorderBrush = Brushes.Red;
+                isValid = false;
+            }
+            else
+            {
+                DatePickerDateTime.BorderBrush = Brushes.Black;
 
             }
-            if (TextBoxSubject.Text == null)
+            if (TextBoxSubject.Text == String.Empty)
             {
+                TextBoxSubject.BorderBrush = Brushes.Red;
+                SubjectIncidentTextBlock.Foreground = Brushes.Red;
+                isValid = false;
 
             }
-            if (TextBoxDescription.Text == null)
+            else
             {
+                TextBoxSubject.BorderBrush = Brushes.Black;
+                SubjectIncidentTextBlock.Foreground = Brushes.Black;
 
             }
             if (ComboBoxIncidentType.SelectedItem == null)
             {
+                ComboBoxIncidentType.Background = Brushes.Black;
+                TypeOfIncidentTextBox.Foreground = Brushes.Red;
+                isValid = false;
+
+            }
+            else
+            {
+                TypeOfIncidentTextBox.Foreground = Brushes.Black;
 
             }
             if (ComboBoxUser.SelectedItem == null)
             {
+                ComboBoxUser.Foreground = Brushes.Black;
+                ReportedTextBlock.Foreground = Brushes.Red;
+                isValid = false;
 
+            }
+            else
+            {
+                ReportedTextBlock.Foreground = Brushes.Black;
+            }
+            if (ComboBoxImpact.SelectedItem == null)
+            {
+                ComboBoxImpact.Foreground = Brushes.Black;
+                ImpactTextBlock.Foreground = Brushes.Red;
+                isValid = false;
+
+            }
+            else
+            {
+                ImpactTextBlock.Foreground = Brushes.Black;
+            }
+            if (ComboBoxUrgency.SelectedItem == null)
+            {
+                ComboBoxUrgency.Foreground = Brushes.Black;
+                UrgencyTextBlock.Foreground = Brushes.Red;
+                isValid = false;
+
+            }
+            else
+            {
+                UrgencyTextBlock.Foreground = Brushes.Black;
             }
             if (DateSelectDeadline.SelectedDate == null)
             {
+                DateSelectDeadline.Foreground = Brushes.Red;
+                DeadlineTekstblock.Foreground = Brushes.Red;
+                isValid = false;
 
             }
-            if (ComboBoxIncidentType.SelectedItem == null)
+            else
             {
+                DeadlineTekstblock.Foreground = Brushes.Black;
+            }
+            if (TextBoxDescription.Text == String.Empty)
+            {
+                TextBoxDescription.BorderBrush = Brushes.Red;
+                DescriptionTekstBlock.Foreground = Brushes.Red;
+                isValid = false;
 
             }
+            else
+            {
+                DescriptionTekstBlock.Foreground = Brushes.Black;
+                DescriptionTekstBlock.Foreground = Brushes.Black;
+
+            }
+
+
+
+            return isValid;
         }
         private void disableFields()
         {
@@ -393,6 +468,10 @@ namespace GardenGroupUI.TicketEmployee
             ComboBoxIncidentType.IsEnabled = false;
 
             ComboBoxUser.IsEnabled = false;
+
+            ComboBoxImpact.IsEnabled = false;
+
+            ComboBoxUrgency.IsEnabled = false;
 
             DateSelectDeadline.IsEnabled = false;
 
@@ -417,7 +496,7 @@ namespace GardenGroupUI.TicketEmployee
 
 
             //ComboBoxUser.Items.Add(ticket.User.UserName.Value.ToString());
-            ComboBoxUser.Items.IndexOf(ticket.User.UserName.Value.ToString());
+           // ComboBoxUser.Items.IndexOf(ticket.User.UserName.Value.ToString());
             ComboBoxUser.SelectedItem = ticket.User.UserName.Value.ToString();
 
 
