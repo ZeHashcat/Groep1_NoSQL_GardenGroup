@@ -24,14 +24,16 @@ namespace GardenGroupUI.TicketEmployee
     {
         TicketLogic ticketLogic = new TicketLogic();
 
+        Page ticketOverviewPage;
         Ticket ticket;
 
         TicketStatus currentStatus = TicketStatus.open;
         UserInstance user = UserInstance.GetUserInstance();
         UserLogic UserLogic = new UserLogic();
 
-        public TicketWindow(CRUDState state, Ticket ticket)
+        public TicketWindow(CRUDState state, Ticket ticket, Page page)
         {
+            this.ticketOverviewPage = page;
             this.ticket = ticket;
 
             InitializeComponent();
@@ -271,9 +273,9 @@ namespace GardenGroupUI.TicketEmployee
         //button events
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
-            AppWindow.GetWindow(this).Close();
+            AppMenuWindow.GetWindow(this).Close();
 
-            //AppWindow.GetWindow(this).IsEnabled = true;
+            AppMenuWindow.GetWindow(ticketOverviewPage).IsEnabled = true;
         }
 
         private void ButtonSubmit_Click(object sender, RoutedEventArgs e)
