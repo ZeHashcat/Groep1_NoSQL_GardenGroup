@@ -298,6 +298,9 @@ namespace GardenGroupUI.TicketEmployee
 
         
             Ticket ticket = new Ticket()
+            ObjectId id = this.ticket._id;
+            //misschien i.p.v == null >> EQUALS(null)
+            if (this.ticket._id == null)
             {
                 _id = (ObjectId)new BsonObjectId(ObjectId.GenerateNewId()),
 

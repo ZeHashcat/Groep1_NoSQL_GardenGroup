@@ -54,8 +54,8 @@ namespace GardenGroupUI
                     //Creating user instance
                     User user = userLogic.GetUser(username);
                     UserInstance.GetUserInstance(user);
-                    //change source of window to AppMainPage.xaml <----------------------------
 
+                    //change source of window to AppMainPage.xaml <----------------------------
                     MessageBox.Show($"Welcome {user.FirstName.Value}");
 
                     AppMenuWindow appWindow = new AppMenuWindow("AppMainServiceDeskEmployeePage.xaml");
@@ -166,7 +166,8 @@ namespace GardenGroupUI
         //New Password will be saved.
         private void LoginForgotLoginButton_Click(object sender, RoutedEventArgs e)
         {
-              
+            AppMenuWindow appWindow = new AppMenuWindow("../Login/LoginPasswordResetPage.xaml");
+            appWindow.Show();
         }
     }
 }
