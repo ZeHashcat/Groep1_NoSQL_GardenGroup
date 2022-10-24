@@ -31,7 +31,7 @@ namespace GardenGroupUI.TicketEmployee
 
         public TicketWindow(CRUDState state, Ticket ticket)
         {
-            this.ticket = ticket;
+            //this.ticket = ticket;
 
             InitializeComponent();
             switch (state)
@@ -56,6 +56,11 @@ namespace GardenGroupUI.TicketEmployee
             //fill drop dowms
             //date time selector fill
             DateTime date = DateTime.Now;
+
+            //fill dropdown whit users
+            ComboBoxUser.Items.Add(user.User.FirstName.Value.ToString());
+
+
             //fill drop down whit priorities
 
             int lengthPriority = Enum.GetNames(typeof(Priority)).Length;
@@ -258,8 +263,8 @@ namespace GardenGroupUI.TicketEmployee
         //button events
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
-            /*            this.Close();
-            */
+            this.Close();
+
         }
 
         private void ButtonSubmit_Click(object sender, RoutedEventArgs e)
@@ -291,14 +296,41 @@ namespace GardenGroupUI.TicketEmployee
         public Ticket MakeTicket(User user)
         {
 
-            ObjectId id = this.ticket._id;
-            if (this.ticket._id == null)
-            {
-                id = (ObjectId)BsonObjectId.GenerateNewId();
-            }
+        
             Ticket ticket = new Ticket()
             {
-                _id = id,
+                _id = (ObjectId)new BsonObjectId(ObjectId.GenerateNewId()),
+
+                DateReported = (DateTime)DatePickerDateTime.SelectedDate,
+
+                Subject = TextBoxSubject.Text.ToString(),
+
+                Description = TextBoxDescription.Text.ToString(),
+
+                Incident = (IncidentType)ComboBoxIncidentType.SelectedIndex,
+
+                User = user,
+
+                Impact = (Priority)ComboBoxImpact.SelectedIndex,
+
+                Urgency = (Priority)ComboBoxUrgency.SelectedIndex,
+
+                DeadLine = (DateTime)DateSelectDeadline.SelectedDate,
+
+                Status = 0
+
+            };
+            return ticket;
+        }
+
+        public Ticket MakeTicket(User user, Ticket ticket)
+        {
+
+            ObjectId id;
+         
+            Ticket ticketToReturn = new Ticket()
+            {
+                _id = this.ticket._id,
 
                 DateReported = (DateTime)DatePickerDateTime.SelectedDate,
 
@@ -319,8 +351,9 @@ namespace GardenGroupUI.TicketEmployee
                 Status = (TicketStatus)ComboBoxIncidentType.SelectedIndex
 
             };
-            return ticket;
+            return ticketToReturn;
         }
+
 
         public void PreFillForm(Ticket ticket)
         {

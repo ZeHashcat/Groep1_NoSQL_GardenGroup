@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using GardenGroupDAL;
 using GardenGroupModel;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.IdGenerators;
 using MongoDB.Driver;
 
@@ -109,6 +110,23 @@ namespace GardenGroupLogic
             //User has entered duplicate values. The user will be asked to enter diferent values
             else
                 return false;
-        }        
+        }
+
+        /// <summary>
+        /// <list type="bullet">
+        /// <item>made by floortje Tjeertes</item>
+        /// </list> 
+        /// </summary>
+        /// <returns>list of users</returns>
+        public List<User> GetAllusers()
+        {
+            List<User> users = new List<User>();
+
+            foreach (BsonDocument userdocument in userDAO.GetUserList())
+            {
+                users.Add(BsonSerializer.Deserialize<User>(userdocument));
+            }
+            return users;
+        }
     }
 }

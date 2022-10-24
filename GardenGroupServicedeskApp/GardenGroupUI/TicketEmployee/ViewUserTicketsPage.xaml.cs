@@ -75,7 +75,7 @@ namespace GardenGroupUI.TicketEmployee
 
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            new TicketWindow(CRUDState.Read, tickets[DataGridTicketOverview.SelectedIndex]).Show();
+            new TicketWindow(CRUDState.Create, tickets[DataGridTicketOverview.SelectedIndex]).Show();
             AppWindow.GetWindow(this).IsEnabled = false;
         }
     }

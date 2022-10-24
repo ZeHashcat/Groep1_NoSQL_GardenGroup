@@ -149,8 +149,8 @@ namespace GardenGroupDAL
             MongoClientInstance mongoClientInstance = MongoClientInstance.GetClientInstance();
             database = mongoClientInstance.Client.GetDatabase(databaseName);
             collection = database.GetCollection<BsonDocument>(collectionName);
-
             var users = collection.Find(new BsonDocument()).ToList();
+
 
             foreach (BsonDocument user in users)
             {
@@ -166,6 +166,17 @@ namespace GardenGroupDAL
             }                          
             return false;
         }
+
+        public List<BsonDocument> GetUserList()
+        {
+            MongoClientInstance mongoClientInstance = MongoClientInstance.GetClientInstance();
+            database = mongoClientInstance.Client.GetDatabase(databaseName);
+            collection = database.GetCollection<BsonDocument>(collectionName);
+            List<BsonDocument> users = collection.Find(new BsonDocument()).ToList();
+
+            return users;
+        }
+
 
         public void AddUser(string username, HashWithSaltResult hashWithSalt, string firstname, string lastname, string email, double phonenumber, string role,  string location)
         {
