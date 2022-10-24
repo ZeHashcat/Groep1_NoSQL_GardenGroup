@@ -115,10 +115,11 @@ namespace GardenGroupUI.UserManagement
 
         private void CancelUserAddButton_Click(object sender, RoutedEventArgs e)
         {
-            
-            //Terug naar usermannagement Window <------- <-------------
-            //to usermanagement
-            
+
+            AppMenuWindow appWindow = new AppMenuWindow("../UserManagement/UserManagementPage.xaml");
+            appWindow.Show();
+            AppWindow.GetWindow(this).Close();
+
         }  
 
         private bool IsNullOrEmpty(string firstname, string lastname, string email, double phoneNumber, string username, string password, string role, string location)

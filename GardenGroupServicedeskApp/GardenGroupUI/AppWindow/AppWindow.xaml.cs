@@ -41,27 +41,21 @@ namespace GardenGroupUI
         }
 
         private void buttonClose_Click(object sender, RoutedEventArgs e)
-        {
-            //CODE: if userInstance != null give option to logout, logout and shutdown, cancel.
-            //CODE: if userInstance == null (else) give option to shutdown or cancel
-        }
-
-        private void Logout()
-        {
-            UserInstance.Logout();
-            frameContent.Source = new Uri("../Login/LoginPage.xaml", UriKind.Relative);
-        }
+        {            
+            //MessageBox.Result
+            var result = MessageBox.Show("You are trying to close this application. Do you want to close the application?", "Close application", MessageBoxButton.YesNo);
+            //User will go back to login page.
+            if (result == MessageBoxResult.Yes)
+            {
+                //The application will be closed.
+                Shutdown();
+            }
+            //Closes messagebox.            
+        }        
 
         private void Shutdown()
         {
             this.Close();
-        }
-      
-        //AddUserTest bestaat niet
-        /*private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            UserLogic logic = new UserLogic();
-            logic.AddUserTest();
-        }*/
+        }        
     }
 }

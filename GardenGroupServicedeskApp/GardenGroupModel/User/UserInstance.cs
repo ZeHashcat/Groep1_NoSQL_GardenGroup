@@ -18,7 +18,8 @@ namespace GardenGroupModel
             this.user = user;
         }
 
-        public User User { get { return user; }}
+        public User User { get { return user; } set {user = value; }  }
+        
 
         //Singleton with parameters
         public static UserInstance GetUserInstance(User? user = null)
@@ -41,6 +42,11 @@ namespace GardenGroupModel
             {
                 throw new Exception($"Something went wrong, user is probably null:\n {ex}");//NOTE: Make this different? <<---`-`/\/\`-`(REMINDER)
             }
+        }
+        
+        public static UserInstance GetInstance()
+        {
+            return instance;
         }
 
         public static void Logout()

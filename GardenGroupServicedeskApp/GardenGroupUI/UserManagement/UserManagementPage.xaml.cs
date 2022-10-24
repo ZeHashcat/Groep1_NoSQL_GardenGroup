@@ -45,19 +45,17 @@ namespace GardenGroupUI.UserManagement
         {
             int id = 1;
             foreach (User user in userLogic.GetAllusers())
-            {
-
-                //ComboBoxUser.Items.Add(user.UserName.Value.ToString());              
-                
+            {                
                 DataGridUserOverview.Items.Add(new { Id = id, Username = user.UserName.Value, FirstName = user.FirstName.Value, LastName = user.LastName.Value, Email = user.Email.Value});
                 id++;
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void AddUserButton_Click(object sender, RoutedEventArgs e)
         {
-            AppMenuWindow appWindow = new AppMenuWindow("../UserManagement/UserManagementPage.xaml");
+            AppMenuWindow appWindow = new AppMenuWindow("../UserManagement/AddUserPage.xaml");
             appWindow.Show();
+            AppWindow.GetWindow(this).Close();
         }
     }
 }

@@ -17,7 +17,7 @@
                 <Frame Source="../TicketEmployee/ViewUserTicketsPage.xaml" Background="#FFE5E5E5"/> 
             </TabItem>
             <TabItem Header="User Management">
-                <Frame Source="../UserManagement/AddUserPage.xaml" Background="#FFE5E5E5"/>
+                <Frame Source="../UserManagement/UserManagementPage.xaml" Background="#FFE5E5E5"/>
             </TabItem>
         </TabControl>
     </Grid>
