@@ -1,21 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using GardenGroupLogic;
 using GardenGroupModel;
+using GardenGroupUI.TicketEmployee;
 
 namespace GardenGroupUI
 {
@@ -62,7 +52,7 @@ namespace GardenGroupUI
 
                     AppMenuWindow appWindow = new AppMenuWindow("AppMainServiceDeskEmployeePage.xaml");
                     appWindow.Show();
-                    //AppWindow..frameContent.Source = new Uri("AppMainServiceDeskEmployeePage.xaml", UriKind.Relative);
+                    AppWindow.GetWindow(this).Close();
                 }
                 else
                 {
@@ -169,7 +159,8 @@ namespace GardenGroupUI
         private void LoginForgotLoginButton_Click(object sender, RoutedEventArgs e)
         {
             AppMenuWindow appWindow = new AppMenuWindow("../Login/LoginPasswordResetPage.xaml");
-            appWindow.Show();            
+            appWindow.Show();
+            AppWindow.GetWindow(this).Close();
         }
     }
 }

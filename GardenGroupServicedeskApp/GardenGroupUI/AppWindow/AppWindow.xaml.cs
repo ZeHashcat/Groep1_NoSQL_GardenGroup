@@ -23,7 +23,7 @@ namespace GardenGroupUI
     {
 
         public AppWindow()
-        {
+        { 
             InitializeComponent();
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             frameContent.Source = new Uri("../Login/LoginPage.xaml", UriKind.Relative);
@@ -55,7 +55,7 @@ namespace GardenGroupUI
         {
             this.Close();
         }
-
+      
         //AddUserTest bestaat niet
         /*private void Button_Click(object sender, RoutedEventArgs e)
         {

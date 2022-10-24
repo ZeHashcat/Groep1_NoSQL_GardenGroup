@@ -5,10 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GardenGroupUI"
         mc:Ignorable="d"
-        Title="Don't forget to replace this Title!" Height="500" Width="400">
+        Title="Don't forget to replace this Title!" Height="450" Width="800" WindowState="Maximized" WindowStyle="None">
     <Grid>
+        <Button x:Name="buttonClose" Content="X" HorizontalAlignment="Right" VerticalAlignment="Top" Background="#FFFF0404" Foreground="#FFFBFBFB" FontFamily="Arial Black" FontSize="14" Height="22" Width="24" Margin="0,3,3,0" Click="buttonClose_Click"/>
         <Frame Name="frameContent" 
            Source="{Binding}"
            NavigationUIVisibility="Hidden"/>
+        <Button Content="AddTestUser" HorizontalAlignment="Left" Margin="313,0,0,0" VerticalAlignment="Top"/>
+        <Label Content="ShrekDesk" HorizontalAlignment="Right" VerticalAlignment="Top" FontFamily="Arial Black" FontSize="24" Margin="0,-7,39,0"/>
+        <Label Content="Licensed to: The Garden Group" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="22" FontFamily="Arial Rounded MT Bold" Width="345" Margin="0,12,0,0"/>
     </Grid>
 </Window>
