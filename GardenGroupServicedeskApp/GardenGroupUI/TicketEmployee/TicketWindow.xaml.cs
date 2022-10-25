@@ -17,13 +17,13 @@ namespace GardenGroupUI.TicketEmployee
         TicketLogic ticketLogic = new TicketLogic();
 
         Page ticketOverviewPage;
-        Ticket ticket;
+        Ticket ?ticket;
 
         TicketStatus currentStatus = TicketStatus.open;
         UserInstance user = UserInstance.GetUserInstance();
         UserLogic UserLogic = new UserLogic();
 
-        public TicketWindow(CRUDState state, Ticket ticket, Page page)
+        public TicketWindow(CRUDState state, Page page, Ticket? ticket)
         {
             this.ticketOverviewPage = page;
             this.ticket = ticket;
@@ -50,8 +50,7 @@ namespace GardenGroupUI.TicketEmployee
         {
             //fill drop dowms
             //date time selector fill
-            DateTime date = DateTime.Now;
-
+            DatePickerDateTime.SelectedDate = DateTime.Today;
             //fill dropdown whit users
             //ComboBoxUser.Items.Add(user.User.UserName.Value.ToString());
 
@@ -59,6 +58,8 @@ namespace GardenGroupUI.TicketEmployee
             {
                 ComboBoxUser.Items.Add(user.UserName.Value.ToString());
             }
+
+            ComboBoxUser.SelectedItem = user.User.UserName;
 
 
             //fill drop down whit priorities
@@ -97,6 +98,13 @@ namespace GardenGroupUI.TicketEmployee
             ButtonSubmit.Background = new SolidColorBrush(Colors.Red);
             ButtonSubmit.Click -= new RoutedEventHandler(ButtonSubmit_Click);
             ButtonSubmit.Click += new RoutedEventHandler(DeleteTicket);
+            Button cancelbutton = new Button();
+            cancelbutton.Content = "Cancel";
+            cancelbutton.Click += new RoutedEventHandler(ButtonCancel_Click);
+            Grid grid = buttonGroup;
+            grid.Children.Add(cancelbutton);
+            Grid.SetRow(cancelbutton,1);
+
 
         }
         public void ReadSetup()
@@ -127,126 +135,9 @@ namespace GardenGroupUI.TicketEmployee
 
 
 
-        //test methods
-        private void ButtonTestRead_Click(object sender, RoutedEventArgs e)
-        {
-            String result = "";
-            List<Ticket> tickets = ticketLogic.ReadTicket();
-
-            foreach (Ticket ticket in tickets)
-            {
-                result += ticket._id.ToString() + "\n"
-                    + ticket.Subject.ToString() + "\n"
-                   + ticket.Description.ToString() + "\n"
-                   + ticket.DateReported.ToString() + "\n"
-                   + ticket.DeadLine.ToString() + "\n";
-            }
-            MessageBox.Show(result);
-        }
-
-        private void ButtonTestDelete_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Ticket tickets = ticketLogic.ReadTicket()[0];
-                MessageBox.Show(ticketLogic.DeleteTicket(tickets).ToString());
-            }
-            catch (Exception ex)
-            {
-
-            }
-        }
-
-        private void ButtonTestCreate_Click(object sender, RoutedEventArgs e)
-        {
-            /*Ticket ticket = new Ticket()
-            {
-                DateReported = DateTime.Today,
-                Subject = "Create Test",
-                Incident = IncidentType.hardware,
-                User = new User(
-                        new BsonKeyValuePair("id", ObjectId.GenerateNewId()),
-                        new BsonKeyValuePair("userName", "Reynard96Blazer"),
-                        new BsonKeyValuePair("password", ""),
-                        new BsonKeyValuePair("firstName", "Jane"),
-                        new BsonKeyValuePair("lastName", "Doe"),
-                        new BsonKeyValuePair("role", "test user"),
-                        new BsonKeyValuePair("email", "Jane.Doe@Test.com"),
-                        new BsonKeyValuePair("phoneNumber", "123456789"),
-                        new BsonKeyValuePair("location", "testlocation")
-
-                        ),
-                Impact = Priority.normal,
-                Urgency = Priority.low,
-                DeadLine = DateTime.Today.AddDays(1),
-                Status = TicketStatus.closed,
-                Description = "Dit is een test message 10 days until total destruction of all human kind. thank you for being alive🙇‍♀️ "
-            };
-            ticketLogic.CreateTicket(ticket);*/
-        }
-
-        private void ButtonTestUpdate_Click(object sender, RoutedEventArgs e)
-        {
-
-            /*//test
-            Ticket ticket = new Ticket()
-            {
-                DateReported = DateTime.Today,
-                Subject = "Create Test",
-                Incident = IncidentType.hardware,
-                User = new User(
-                      new BsonKeyValuePair("id", ObjectId.GenerateNewId()),
-                      new BsonKeyValuePair("userName", "Reynard96Blazer"),
-                      new BsonKeyValuePair("password", ""),
-                      new BsonKeyValuePair("firstName", "Jane"),
-                      new BsonKeyValuePair("lastName", "Doe"),
-                      new BsonKeyValuePair("role", "test user"),
-                      new BsonKeyValuePair("email", "Jane.Doe@Test.com"),
-                      new BsonKeyValuePair("phoneNumber", "123456789"),
-                      new BsonKeyValuePair("location", "testlocation")
-
-                      ),
-                Impact = Priority.normal,
-                Urgency = Priority.low,
-                DeadLine = DateTime.Today.AddDays(1),
-                Status = TicketStatus.closed,
-                Description = "Dit is een test message 10 days until total destruction of all human kind. thank you for being alive🙇‍♀️ "
-            };
+   
 
 
-            //test
-            Ticket update = new Ticket()
-            {
-                DateReported = DateTime.Today,
-                Subject = "update",
-                Incident = IncidentType.hardware,
-                User = new User(
-                        new BsonKeyValuePair("id", ObjectId.GenerateNewId()),
-                        new BsonKeyValuePair("userName", "Reynard96Blazer"),
-                        new BsonKeyValuePair("password", ""),
-                        new BsonKeyValuePair("firstName", "Jane"),
-                        new BsonKeyValuePair("lastName", "Doe"),
-                        new BsonKeyValuePair("role", "test user"),
-                        new BsonKeyValuePair("email", "Jane.Doe@Test.com"),
-                        new BsonKeyValuePair("phoneNumber", "123456789"),
-                        new BsonKeyValuePair("location", "testlocation")
-
-                        ),
-                Impact = Priority.normal,
-                Urgency = Priority.low,
-                DeadLine = DateTime.Today.AddDays(1),
-                Status = TicketStatus.closed,
-                Description = "update"
-            };
-
-
-            try
-            {
-                MessageBox.Show(ticketLogic.UpdateTicket(ticket, update).ToString());
-            }
-
-            catch (Exception ex) { }*/
-        }
 
 
         //button events
@@ -256,12 +147,12 @@ namespace GardenGroupUI.TicketEmployee
 
             AppMenuWindow.GetWindow(ticketOverviewPage).IsEnabled = true;
         }
-
         private void ButtonSubmit_Click(object sender, RoutedEventArgs e)
         {
 
             try
             {
+
                 ticketLogic.CreateTicket(MakeTicket(user.User));
             }
             catch (Exception ex)
@@ -269,7 +160,6 @@ namespace GardenGroupUI.TicketEmployee
                 MessageBox.Show(ex.Message);
             }
         }
-
         private void UpdateTicket(object sender, RoutedEventArgs e)
         {
             UserLogic userLogic = new UserLogic();
@@ -283,8 +173,15 @@ namespace GardenGroupUI.TicketEmployee
             ticketLogic.DeleteTicket(ticket);
         }
         //help methods
+        //make tickets
         public Ticket MakeTicket(User user)
         {
+
+            if (!ValidateFields())
+            {
+                throw new Exception("not all fields are filled");
+            }
+          
 
             Ticket ticket = new Ticket();
             ObjectId id = this.ticket._id;
@@ -292,8 +189,6 @@ namespace GardenGroupUI.TicketEmployee
 
             {
                 _id = (ObjectId)new BsonObjectId(ObjectId.GenerateNewId()),
-
-
 
                 DateReported = (DateTime)DatePickerDateTime.SelectedDate,
 
@@ -317,9 +212,6 @@ namespace GardenGroupUI.TicketEmployee
 
             return ticketToReturn;
         }
-
-
-
         private Ticket MakeTicket(User user, Ticket ticket)
         {
 
@@ -350,38 +242,113 @@ namespace GardenGroupUI.TicketEmployee
             };
             return ticketToReturn;
         }
-
-        private void ValidateFields()
+        /// <summary>
+        /// validates the fields of the form if they are correctly filled in
+        /// </summary>
+        /// <returns></returns>
+        private bool ValidateFields()
         {
+            bool isValid = true;
             if (DatePickerDateTime.SelectedDate == null)
             {
+                DatePickerDateTime.BorderBrush = Brushes.Red;
+                isValid = false;
+            }
+            else
+            {
+                DatePickerDateTime.BorderBrush = Brushes.Black;
 
             }
-            if (TextBoxSubject.Text == null)
+            if (TextBoxSubject.Text == String.Empty)
             {
+                TextBoxSubject.BorderBrush = Brushes.Red;
+                SubjectIncidentTextBlock.Foreground = Brushes.Red;
+                isValid = false;
 
             }
-            if (TextBoxDescription.Text == null)
+            else
             {
+                TextBoxSubject.BorderBrush = Brushes.Black;
+                SubjectIncidentTextBlock.Foreground = Brushes.Black;
 
             }
             if (ComboBoxIncidentType.SelectedItem == null)
             {
+                ComboBoxIncidentType.Background = Brushes.Black;
+                TypeOfIncidentTextBox.Foreground = Brushes.Red;
+                isValid = false;
+
+            }
+            else
+            {
+                TypeOfIncidentTextBox.Foreground = Brushes.Black;
 
             }
             if (ComboBoxUser.SelectedItem == null)
             {
+                ComboBoxUser.Foreground = Brushes.Black;
+                ReportedTextBlock.Foreground = Brushes.Red;
+                isValid = false;
 
+            }
+            else
+            {
+                ReportedTextBlock.Foreground = Brushes.Black;
+            }
+            if (ComboBoxImpact.SelectedItem == null)
+            {
+                ComboBoxImpact.Foreground = Brushes.Black;
+                ImpactTextBlock.Foreground = Brushes.Red;
+                isValid = false;
+
+            }
+            else
+            {
+                ImpactTextBlock.Foreground = Brushes.Black;
+            }
+            if (ComboBoxUrgency.SelectedItem == null)
+            {
+                ComboBoxUrgency.Foreground = Brushes.Black;
+                UrgencyTextBlock.Foreground = Brushes.Red;
+                isValid = false;
+
+            }
+            else
+            {
+                UrgencyTextBlock.Foreground = Brushes.Black;
             }
             if (DateSelectDeadline.SelectedDate == null)
             {
+                DateSelectDeadline.Foreground = Brushes.Red;
+                DeadlineTekstblock.Foreground = Brushes.Red;
+                isValid = false;
 
             }
-            if (ComboBoxIncidentType.SelectedItem == null)
+            else
             {
+                DeadlineTekstblock.Foreground = Brushes.Black;
+            }
+            if (TextBoxDescription.Text == String.Empty)
+            {
+                TextBoxDescription.BorderBrush = Brushes.Red;
+                DescriptionTekstBlock.Foreground = Brushes.Red;
+                isValid = false;
 
             }
+            else
+            {
+                DescriptionTekstBlock.Foreground = Brushes.Black;
+                DescriptionTekstBlock.Foreground = Brushes.Black;
+
+            }
+
+
+
+            return isValid;
         }
+        /// <summary>
+        /// disables all fields to stop interaction
+        /// </summary>
         private void disableFields()
         {
             DatePickerDateTime.IsEnabled = false;
@@ -394,10 +361,18 @@ namespace GardenGroupUI.TicketEmployee
 
             ComboBoxUser.IsEnabled = false;
 
+            ComboBoxImpact.IsEnabled = false;
+
+            ComboBoxUrgency.IsEnabled = false;
+
             DateSelectDeadline.IsEnabled = false;
 
             ComboBoxIncidentType.IsEnabled = false;
         }
+        /// <summary>
+        /// prefills the form whit values from a ticket
+        /// </summary>
+        /// <param name="ticket"></param>
         private void PreFillForm(Ticket ticket)
         {
 
@@ -417,7 +392,7 @@ namespace GardenGroupUI.TicketEmployee
 
 
             //ComboBoxUser.Items.Add(ticket.User.UserName.Value.ToString());
-            ComboBoxUser.Items.IndexOf(ticket.User.UserName.Value.ToString());
+           // ComboBoxUser.Items.IndexOf(ticket.User.UserName.Value.ToString());
             ComboBoxUser.SelectedItem = ticket.User.UserName.Value.ToString();
 
 
