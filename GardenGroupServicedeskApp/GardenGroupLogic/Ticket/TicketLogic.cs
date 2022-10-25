@@ -35,10 +35,10 @@ namespace GardenGroupLogic
             BsonDocument document = TicketDAO.Update(TickettoUpdate, update);
 
 
-            User user = userLogic.GetUser(document.GetElement("UserName").Value.ToString());
+            ///User user = userLogic.GetUser(document.GetElement("UserName").Value.ToString());
 
 
-            Ticket localticket = new Ticket()
+            /*Ticket localticket = new Ticket()
             {
                 _id = document.GetElement("_id").Value.AsObjectId,
                 Subject = document.GetElement("Subject").Value.ToString(),
@@ -53,9 +53,9 @@ namespace GardenGroupLogic
                 Status = (TicketStatus)Enum.Parse(typeof(TicketStatus), document.GetElement("Status").Value.ToString()),
                 Description = document.GetElement("Description").Value.ToString()
             };
-            //ticket = BsonSerializer.Deserialize<Ticket>(document);
             return localticket;
-
+            */
+            return null;
         }
 
         /// <summary>

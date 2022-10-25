@@ -28,6 +28,7 @@ namespace GardenGroupUI.TicketEmployee
             this.ticketOverviewPage = page;
             this.ticket = ticket;
 
+
             InitializeComponent();
             switch (state)
             {
@@ -81,11 +82,19 @@ namespace GardenGroupUI.TicketEmployee
             }
 
             DateSelectDeadline.SelectedDate = DateTime.Today.AddDays(7);
+            
         }
+        public void CreateSetupPriviledged()
+        {
+            CreateSetup();
+            ComboBoxUser.IsEnabled= false;
+
+        }
+
         public void UpdateSetup()
         {
             CreateSetup();
-
+            
             PreFillForm(this.ticket);
 
             //update button
@@ -110,7 +119,7 @@ namespace GardenGroupUI.TicketEmployee
         public void ReadSetup()
         {
             CreateSetup();
-            PreFillForm(ticket);
+            PreFillForm(this.ticket);
 
 
             buttonGroup.Children.Remove(ButtonSubmit);
@@ -119,7 +128,8 @@ namespace GardenGroupUI.TicketEmployee
         }
         public void DeleteSetup()
         {
-            PreFillForm(ticket);
+
+            PreFillForm(this.ticket);
 
 
 
@@ -182,9 +192,8 @@ namespace GardenGroupUI.TicketEmployee
                 throw new Exception("not all fields are filled");
             }
           
-
-            Ticket ticket = new Ticket();
-            ObjectId id = this.ticket._id;
+         
+            //ObjectId id = this.ticket._id;
             Ticket ticketToReturn = new Ticket()
 
             {
