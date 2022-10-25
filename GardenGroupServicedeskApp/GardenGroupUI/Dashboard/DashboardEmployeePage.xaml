@@ -12,6 +12,10 @@
         <StackPanel>
             <Frame Source="DashboardToolbarUserControl.xaml"/>
             <WrapPanel Orientation="Horizontal" x:Name="DashboardWrapPanel"/>
+            <Grid Height="300" HorizontalAlignment="Center" Width="700">
+                <Image HorizontalAlignment="Left" Height="250" Margin="39,30,0,0" VerticalAlignment="Top" Width="250" Source="/Dashboard/graph 1.JPG"/>
+                <Image HorizontalAlignment="Left" Height="250" Margin="320,30,0,0" VerticalAlignment="Top" Width="250" Source="/Dashboard/graph 2.JPG"/>
+            </Grid>
         </StackPanel>
     </ScrollViewer>
 </Page>
