@@ -11,9 +11,9 @@
 
 
     <Grid>
-        <Label Content="User Management" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="27,3,0,0" FontSize="22" FontFamily="Arial Black"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="351" Margin="1,47,0,0" VerticalAlignment="Top" Width="532">
-            <DataGrid x:Name="DataGridUserOverview" AutoGenerateColumns="False" IsReadOnly="True" AlternatingRowBackground="LightGray" SelectionMode="Single">
+        <Label Content="User Management" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,-2,0,0" FontSize="22" FontFamily="Arial Black"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="340" Margin="1,35,0,0" VerticalAlignment="Top" Width="532">
+            <DataGrid x:Name="DataGridUserOverview" AutoGenerateColumns="False" IsReadOnly="True" AlternatingRowBackground="LightGray" SelectionMode="Single" Height="340">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}" Width = "30"/>
                     <DataGridTextColumn Header="Username" Binding="{Binding Path=Username}" Width="100"/>
@@ -23,7 +23,7 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Border>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="46" Margin="567,47,0,0" VerticalAlignment="Top" Width="114">
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="46" Margin="598,35,0,0" VerticalAlignment="Top" Width="114">
             <Button x:Name="AddUserButton" Content="Add user" FontSize="18" FontFamily="Arial Black" Click="AddUserButton_Click"/>
         </Border>
 

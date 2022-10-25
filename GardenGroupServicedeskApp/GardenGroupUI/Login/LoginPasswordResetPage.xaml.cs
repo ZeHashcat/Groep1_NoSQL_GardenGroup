@@ -64,6 +64,7 @@ namespace GardenGroupUI
 
                     //We need the email to stay the same now.
                     resetPasswordEmailTextBox.IsEnabled = false;
+                    ResetPasswordEmailButton.IsEnabled = false;
                     MessageBox.Show("Email has been send to validate.");
                 }
                 else
