@@ -39,7 +39,7 @@
         </ScrollViewer>
         <Button Content="Refresh" x:Name="ButtonRefresh" Height="20" Width="80" Grid.Column="1" Margin="0,0,0,200" Click="ButtonRefresh_Click"/>
         <Button Content="Create" x:Name="ButtonCreate" Height="20" Width="80" Grid.Column="1" Margin="0,200,0,0" Click="ButtonCreate_Click"/>
-        <ComboBox x:Name="ComboBoxStatus" Width="80" Height="20" Grid.Column="1"/>
-        <Label Content="Filter on status" Width="80" Height="30" Grid.Column="1" Margin="94,178,93,252" FontSize="16"/>
+        <ComboBox x:Name="ComboBoxStatus" Width="80" Height="25" Grid.Column="1"/>
+        <Label Content="Filter on status:" HorizontalAlignment="Center" Width="Auto" Height="30" Grid.Column="1" Margin="0,0,0,70" FontSize="16"/>
     </Grid>
 </Page>
