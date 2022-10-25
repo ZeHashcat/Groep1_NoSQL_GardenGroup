@@ -8,7 +8,10 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="DashboardEmployeePage">
 
-    <Grid>
-        
-    </Grid>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" VerticalAlignment="Stretch">
+        <StackPanel>
+            <Frame Source="DashboardToolbarUserControl.xaml"/>
+            <WrapPanel Orientation="Horizontal" x:Name="DashboardWrapPanel"/>
+        </StackPanel>
+    </ScrollViewer>
 </Page>

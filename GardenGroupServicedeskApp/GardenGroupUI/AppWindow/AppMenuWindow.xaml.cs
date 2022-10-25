@@ -26,7 +26,7 @@ namespace GardenGroupUI
             if (userInstance != null)
             {
                 message = "You are trying to close this application. Do you want to go to the Login screen? Yes or No?";
-                var result = MessageBox.Show(message, title, MessageBoxButton.YesNoCancel);
+                MessageBoxResult result = MessageBox.Show(message, title, MessageBoxButton.YesNoCancel);
                 //User will go back to login page.
                 if (result == MessageBoxResult.Yes)
                 {
@@ -49,7 +49,7 @@ namespace GardenGroupUI
                 message = "You are trying to close this application. Do you want to close this application?";
                 
 
-                var result = MessageBox.Show(message, title,MessageBoxButton.YesNo);
+                MessageBoxResult result = MessageBox.Show(message, title,MessageBoxButton.YesNo);
                 //User will go back to login page.
                 if (result == MessageBoxResult.Yes)
                 {

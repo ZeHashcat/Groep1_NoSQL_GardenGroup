@@ -94,8 +94,6 @@ namespace GardenGroupUI.UserManagement
                 {
                     MessageBox.Show("Some fields might not be filled.");
                 }
-
-
             }
             catch (Exception ex)
             {

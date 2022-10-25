@@ -99,6 +99,10 @@ namespace GardenGroupUI
                         resetPasswordConfirmLabel.Foreground = Brushes.Green;
                         resetPasswordConfirmLabel.Content = "Congratulations. Your new password has been saved.";
                         MessageBox.Show("Congratulations. Your new password has been saved.");
+
+                        AppMenuWindow appWindow = new AppMenuWindow("../Login/LoginPage.xaml");
+                        appWindow.Show();
+                        AppWindow.GetWindow(this).Close();
                     }
                     else
                         throw new Exception("Something went wrong, please try again");
@@ -113,6 +117,13 @@ namespace GardenGroupUI
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void ReturnLoginButton_Click(object sender, RoutedEventArgs e)
+        {
+            AppMenuWindow appWindow = new AppMenuWindow("../Login/LoginPage.xaml");
+            appWindow.Show();
+            AppWindow.GetWindow(this).Close();
         }
     }
 }

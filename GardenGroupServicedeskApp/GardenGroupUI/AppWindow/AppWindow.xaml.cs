@@ -32,7 +32,7 @@ namespace GardenGroupUI
         private void buttonClose_Click(object sender, RoutedEventArgs e)
         {            
             //MessageBox.Result
-            var result = MessageBox.Show("You are trying to close this application. Do you want to close the application?", "Close application", MessageBoxButton.YesNo);
+            MessageBoxResult result = MessageBox.Show("You are trying to close this application. Do you want to close the application?", "Close application", MessageBoxButton.YesNo);
             //User will go back to login page.
             if (result == MessageBoxResult.Yes)
             {
@@ -45,13 +45,6 @@ namespace GardenGroupUI
         private void Shutdown()
         {
             this.Close();
-        }
-      
-        //AddUserTest bestaat niet
-        /*private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            UserLogic logic = new UserLogic();
-            logic.AddUserTest();
-        }*/
+        }        
     }
 }

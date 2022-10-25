@@ -38,18 +38,29 @@ namespace GardenGroupUI
             {
                 string username = loginUsernameTextBox.Text;
                 string password = loginPasswordBox.Password;
+                string windowString;
 
                 //Here the username and password will be checked
                 if (userLogic.CheckLogin(username, password))
                 {
                     //Creating user instance
                     User user = userLogic.GetUser(username);
-                    UserInstance.GetUserInstance(user);
+                   UserInstance instance = UserInstance.GetUserInstance(user);
 
                     //change source of window to AppMainPage.xaml <----------------------------
                     MessageBox.Show($"Welcome {user.FirstName.Value}");
 
-                    AppMenuWindow appWindow = new AppMenuWindow("AppMainServiceDeskEmployeePage.xaml");
+                    switch (instance.User.Role.Value.ToString()) {
+                        case "User":
+                            windowString = "AppMainEmployeePage.xaml";
+                            break;
+                        case "Admin":
+                            windowString = "AppMainServiceDeskEmployeePage.xaml";                            
+                            break;
+                        default:
+                            throw new Exception("We cant fetch a role, ");                                 
+                    }
+                    AppMenuWindow appWindow = new AppMenuWindow(windowString);
                     appWindow.Show();
                     AppWindow.GetWindow(this).Close();
                 }

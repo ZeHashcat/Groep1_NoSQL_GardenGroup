@@ -12,6 +12,6 @@
            Source="{Binding}"
            NavigationUIVisibility="Hidden"/>
         <Label Content="ShrekDesk" HorizontalAlignment="Right" VerticalAlignment="Top" FontFamily="Arial Black" FontSize="24" Margin="0,-7,39,0"/>
-        <Label Content="Licensed to: The Garden Group" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="22" FontFamily="Arial Rounded MT Bold" Width="345" Margin="0,12,0,0"/>
+        <Label Content="Licensed to: The Garden Group" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="22" FontFamily="Arial Rounded MT Bold" Width="345" Margin="0,10,39,0"/>
     </Grid>
 </Window>
