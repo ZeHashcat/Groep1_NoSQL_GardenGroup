@@ -12,19 +12,19 @@
 
     <Grid>
         <Label Content="User Management" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,-2,0,0" FontSize="22" FontFamily="Arial Black"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="340" Margin="1,35,0,0" VerticalAlignment="Top" Width="532">
-            <DataGrid x:Name="DataGridUserOverview" AutoGenerateColumns="False" IsReadOnly="True" AlternatingRowBackground="LightGray" SelectionMode="Single" Height="340">
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="340" Margin="1,35,0,0" VerticalAlignment="Top" Width="600">
+            <DataGrid x:Name="DataGridUserOverview" AutoGenerateColumns="False" IsReadOnly="True" AlternatingRowBackground="LightGray" SelectionMode="Single" Height="340" Width="600">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}" Width = "30"/>
-                    <DataGridTextColumn Header="Username" Binding="{Binding Path=Username}" Width="100"/>
-                    <DataGridTextColumn Header="First Name" Binding="{Binding Path=FirstName}" Width="100"/>
+                    <DataGridTextColumn Header="Username" Binding="{Binding Path=Username}" Width="150"/>
+                    <DataGridTextColumn Header="First Name" Binding="{Binding Path=FirstName}" Width="110"/>
                     <DataGridTextColumn Header="Last Name" Binding="{Binding Path=LastName}" Width="100"/>
-                    <DataGridTextColumn Header="E-Mail" Binding="{Binding Path=Email}" Width="190"/>
+                    <DataGridTextColumn Header="E-Mail" Binding="{Binding Path=Email}" Width="201"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Border>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="46" Margin="598,35,0,0" VerticalAlignment="Top" Width="114">
-            <Button x:Name="AddUserButton" Content="Add user" FontSize="18" FontFamily="Arial Black" Click="AddUserButton_Click"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="46" Margin="618,35,0,0" VerticalAlignment="Top" Width="114">
+            <Button x:Name="AddUserButton" Content="Add user" FontSize="18" FontFamily="Arial Black" Click="AddUserButton_Click" Margin="0,1,0,-1"/>
         </Border>
 
 
