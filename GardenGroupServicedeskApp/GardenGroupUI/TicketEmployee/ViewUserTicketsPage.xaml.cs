@@ -26,15 +26,26 @@ namespace GardenGroupUI.TicketEmployee
 
         public void PageLoader()
         {
+            FillTicketsList();
+
+            FillComboBox();
+
+            TicketLoader();
+        }
+
+        public void FillTicketsList()
+        {
             //get logged in user
             userLoggedIn = UserInstance.GetUserInstance().User;
 
             //fill ticketlist from method in logic layer
             tickets = ticketLogic.ReadTicket();
 
-            FillComboBox();
-
-            TicketLoader();
+            //filter list for viewing
+            if (userLoggedIn.Role.Value.ToString() == "User")
+            {
+                tickets = FilterTickets();
+            }
         }
 
         public void FillComboBox()
@@ -76,11 +87,7 @@ namespace GardenGroupUI.TicketEmployee
 
         public void TicketLoader()
         {
-            //filter list for viewing
-            if (userLoggedIn.Role.Value.ToString() == "User")
-            {
-                tickets = FilterTickets();
-            }
+            FillTicketsList();
 
             //make and fill filtered ticketdisplaylist modified for displaying (contains priority)
             List<TicketDisplay> ticketsDisplay = ticketLogic.ListTicketsDisplay(ticketsOnStatus);
@@ -107,6 +114,8 @@ namespace GardenGroupUI.TicketEmployee
 
         private void ButtonRefresh_Click(object sender, RoutedEventArgs e)
         {
+            ticketsOnStatus = FilterOnStatus(ComboBoxStatus.SelectedItem.ToString());
+
             TicketLoader();
         }
 
