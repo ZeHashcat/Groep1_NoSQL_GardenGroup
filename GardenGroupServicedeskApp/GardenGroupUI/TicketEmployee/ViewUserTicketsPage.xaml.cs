@@ -15,6 +15,7 @@ namespace GardenGroupUI.TicketEmployee
         TicketLogic ticketLogic = new TicketLogic();
         User userLoggedIn;
         List<Ticket> tickets;
+        List<Ticket> ticketsOnStatus;
 
         public ViewUserTicketsPage()
         {
@@ -28,31 +29,67 @@ namespace GardenGroupUI.TicketEmployee
             //get logged in user
             userLoggedIn = UserInstance.GetUserInstance().User;
 
+            //fill ticketlist from method in logic layer
+            tickets = ticketLogic.ReadTicket();
+
+            FillComboBox();
+
             TicketLoader();
+        }
+
+        public void FillComboBox()
+        {
+            //add items to combobox
+            ComboBoxStatus.Items.Add("open");
+            ComboBoxStatus.Items.Add("closed");
+            ComboBoxStatus.Items.Add("resolved");
+
+            //select standard box view
+            ComboBoxStatus.SelectedItem = "open";
+            ticketsOnStatus = FilterOnStatus("open");
+
+            ComboBoxStatus.SelectionChanged += ComboBoxClick;
+        }
+
+        private void ComboBoxClick(object sender, SelectionChangedEventArgs e)
+        {
+            ticketsOnStatus = FilterOnStatus(ComboBoxStatus.SelectedItem.ToString());
+
+            TicketLoader();
+        }
+
+        public List<Ticket> FilterOnStatus(string status)
+        {
+            //
+            List<Ticket> filteredTickets = new List<Ticket>();
+
+            //
+            for (int i = 0; i < tickets.Count; i++)
+            {
+                if (tickets[i].Status.ToString() == status)
+                {
+                    filteredTickets.Add(tickets[i]);
+                }
+            }
+            return filteredTickets;
         }
 
         public void TicketLoader()
         {
-            //fill ticketlist from method in logic layer
-            tickets = ticketLogic.ReadTicket();
-
             //filter list for viewing
             if (userLoggedIn.Role.Value.ToString() == "User")
             {
-                //hide create button from regular employee
-                ButtonCreate.Visibility = Visibility.Hidden;
-
-                tickets = FilterTicketsList();
+                tickets = FilterTickets();
             }
 
             //make and fill filtered ticketdisplaylist modified for displaying (contains priority)
-            List<TicketDisplay> ticketsDisplay = ticketLogic.ListTicketsDisplay(tickets);
+            List<TicketDisplay> ticketsDisplay = ticketLogic.ListTicketsDisplay(ticketsOnStatus);
 
             //fill datagrid with displaytickets
             DataGridTicketOverview.ItemsSource = ticketsDisplay;
         }
 
-        public List<Ticket> FilterTicketsList()
+        public List<Ticket> FilterTickets()
         {
             //make list of filtered tickets
             List<Ticket> filteredTickets = new List<Ticket>();
@@ -60,7 +97,7 @@ namespace GardenGroupUI.TicketEmployee
             //fill list
             for (int i = 0; i < tickets.Count; i++)
             {
-                if (tickets[i].User.UserName.Value.ToString() == userLoggedIn.UserName.Value.ToString())
+                if (tickets[i].User.UserName.Value.ToString() == userLoggedIn.UserName.Value.ToString() && tickets[i].Status.ToString() == "open")
                 {
                     filteredTickets.Add(tickets[i]);
                 }
