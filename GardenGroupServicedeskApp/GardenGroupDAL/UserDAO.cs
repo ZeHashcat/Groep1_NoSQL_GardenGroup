@@ -31,14 +31,7 @@ namespace GardenGroupDAL
             {
                 //return password
                 return ReadPassword(document);
-            }
-
-            //Gewenste uitput = password (username is al bekend).
-
-            //Moet ik ook nog een ROLE meegeven? of pas nadat het gevalideerd is. Kan dubbele code vermijden om gewoon meteen op te halen.
-            //ANSWER: Nee, maar nadat het wachtwoord is gevalideerd en voordat het juiste scherm tevoorschijn komt moet eigenlijk een singleton van user("UserInstance.cs" in model) worden geinstantieerd die dan de ingelogde gebruiker representeert.
-            //NOTE: Dus in de bovenstaande stap is dan ook een query vanuit het login gedeelte nodig waarin de User die zojuist is gevalideerd wordt opgehaald uit de DB en in zijn geheel wordt meegegeven aan de initiatie van de van "UserInstance".
-
+            }            
         }
 
         // \/\/Waarschijnlijk niet nodig\/\/ \\
@@ -195,7 +188,7 @@ namespace GardenGroupDAL
             collection.InsertOne(doc);
         }
 
-        public List<ICollectionObject> GetTeam(int? teamNumber = null, string? teamName = null)
+        /*public List<ICollectionObject> GetTeam(int? teamNumber = null, string? teamName = null)
         {
             string databaseName = "TicketSystemDB";
             string collectionName = "User";
@@ -247,20 +240,9 @@ namespace GardenGroupDAL
                     }
                     catch (Exception ex)
                     {
-                        //user mist een team
-                        /*user = new User(
-                                            new BsonKeyValuePair("_id", document.GetValue("_id").ToString()),
-                                            new BsonKeyValuePair("Username", document.GetValue("Username").ToString()),
-                                            new BsonKeyValuePair("Password", document.GetValue("Password").ToString()),
-                                            new BsonKeyValuePair("First Name", document.GetValue("First Name").ToString()),
-                                            new BsonKeyValuePair("Last Name", document.GetValue("Last Name").ToString()),
-                                            new BsonKeyValuePair("Role", document.GetValue("Role").ToString()),
-                                            new BsonKeyValuePair("E-Mail", document.GetValue("E-Mail").ToString()),
-                                            new BsonKeyValuePair("Phone Number", document.GetValue("Phone Number").ToString()),
-                                            new BsonKeyValuePair("Location", document.GetValue("Location").ToString())
-                                            );*/
+                        
                     }
-                    /*users.Add(user);*/
+                    
 
                 }
                 return users;
@@ -269,6 +251,6 @@ namespace GardenGroupDAL
             {
                 throw ex;
             }
-        }        
+        }*/    
     }
 }

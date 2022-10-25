@@ -26,7 +26,7 @@
             this.email = email;
             this.phoneNumber = phoneNumber;
             this.location = location;
-            /*this.teams = teams ?? null;*/
+            
         }
 
 
@@ -40,6 +40,6 @@
         public BsonKeyValuePair Email { get { return this.email; } }
         public BsonKeyValuePair PhoneNumber { get { return this.phoneNumber; } }
         public BsonKeyValuePair Location { get { return this.location; } }
-        /*public BsonKeyValuePair Teams { get { return this.teams; } }*/
+       
     }
 }

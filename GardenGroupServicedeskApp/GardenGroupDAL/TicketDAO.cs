@@ -119,14 +119,8 @@ namespace GardenGroupDAL
 
 
             BsonDocument returnedDocument = collection.FindOneAndUpdate(filter, update);
-            /*  if(!returnedDocument.Equals(updateddocument))
-              {
-
-                  throw new Exception("something went wrong the ticket whas not updated");
-
-              }*/
+           
             return returnedDocument;
-
         }
 
         public BsonDocument Delete(Ticket ticket)
@@ -135,18 +129,10 @@ namespace GardenGroupDAL
             documentToDelete.Remove("User");
             documentToDelete.Set("UserName", BsonValue.Create(ticket.User.UserName.Value));
             FilterDefinition<BsonDocument> FilterToDelete = documentToDelete;
-            BsonDocument documentToValidate = collection.FindOneAndDelete(FilterToDelete);
-
-            /*    if (documentToValidate != documentToDelete)
-                {
-                    throw new Exception("something went wrong the ticket whas not deleted");
-                }*/
+            BsonDocument documentToValidate = collection.FindOneAndDelete(FilterToDelete);           
 
             return documentToValidate;
         }
-
-
-
     }
 }
 

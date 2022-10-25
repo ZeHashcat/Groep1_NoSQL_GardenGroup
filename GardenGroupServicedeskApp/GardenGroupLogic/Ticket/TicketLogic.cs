@@ -146,8 +146,7 @@ namespace GardenGroupLogic
                 Incident = (IncidentType)Enum.Parse(typeof(IncidentType), document.GetElement("Incident").Value.ToString()),
                 User = new User(
                     new BsonKeyValuePair("id", user[0].AsBsonDocument.GetElement("_id").Value),
-                    new BsonKeyValuePair("userName", user[0].AsBsonDocument.GetElement("Username").Value.ToString()),
-                    //Ik heb deze salt toegevoegd om de firstname van de user te verkrijgen. Dit kan beter wel hierin verwerkt blijven.
+                    new BsonKeyValuePair("userName", user[0].AsBsonDocument.GetElement("Username").Value.ToString()),                    
                     new BsonKeyValuePair("Salt", user[0].AsBsonDocument.GetElement("Salt").Value.ToString()),
                     new BsonKeyValuePair("password", user[0].AsBsonDocument.GetElement("Password").Value.ToString()),
                     new BsonKeyValuePair("firstName", user[0].AsBsonDocument.GetElement("First Name").Value.ToString()),
@@ -176,43 +175,7 @@ namespace GardenGroupLogic
         /// </list>
         /// </summary>
         /// <param name="document"></param>
-        /// <returns></returns>
-        /*private Ticket makeTicketWhitoutUser(BsonDocument document)
-        {
-
-
-
-            Ticket localticket = new Ticket()
-            {
-                _id = document.GetElement("_id").Value.AsObjectId,
-                Subject = document.GetElement("Subject").Value.ToString(),
-                DateReported = DateTime.Parse(document.GetElement("DateReported").Value.ToString()),
-                Incident = (IncidentType)Enum.Parse(typeof(IncidentType), document.GetElement("Incident").Value.ToString()),
-                User = new User(
-                    new BsonKeyValuePair("id", user[0].AsBsonDocument.GetElement("_id").Value),
-                    new BsonKeyValuePair("userName", user[0].AsBsonDocument.GetElement("Username").Value.ToString()),
-                    //Ik heb deze salt toegevoegd om de firstname van de user te verkrijgen. Dit kan beter wel hierin verwerkt blijven.
-                    new BsonKeyValuePair("Salt", user[0].AsBsonDocument.GetElement("Salt").Value.ToString()),
-                    new BsonKeyValuePair("password", user[0].AsBsonDocument.GetElement("Password").Value.ToString()),
-                    new BsonKeyValuePair("firstName", user[0].AsBsonDocument.GetElement("First Name").Value.ToString()),
-                    new BsonKeyValuePair("lastName", user[0].AsBsonDocument.GetElement("Last Name").Value.ToString()),
-                    new BsonKeyValuePair("role", user[0].AsBsonDocument.GetElement("Role").Value.ToString()),
-                    new BsonKeyValuePair("email", user[0].AsBsonDocument.GetElement("E-Mail").Value.ToString()),
-                    new BsonKeyValuePair("phoneNumber", user[0].AsBsonDocument.GetElement("Phone Number").Value.ToString()),
-                    new BsonKeyValuePair("location", user[0].AsBsonDocument.GetElement("Location").Value.ToString())
-
-                    ),
-
-
-                Impact = (Priority)Enum.Parse(typeof(Priority), document.GetElement("Impact").Value.ToString()),
-                Urgency = (Priority)Enum.Parse(typeof(Priority), document.GetElement("Urgency").Value.ToString()),
-                DeadLine = DateTime.Parse(document.GetElement("DeadLine").Value.ToString()),
-                Status = (TicketStatus)Enum.Parse(typeof(TicketStatus), document.GetElement("Status").Value.ToString()),
-                Description = document.GetElement("Description").Value.ToString()
-            };
-            return localticket;
-        }*/
-
+        /// <returns></returns>        
 
         public List<TicketDisplay> ListTicketsDisplay(List<Ticket> tickets)
         {
