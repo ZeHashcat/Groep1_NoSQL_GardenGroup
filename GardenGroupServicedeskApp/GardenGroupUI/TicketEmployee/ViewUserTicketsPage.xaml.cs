@@ -153,7 +153,7 @@ namespace GardenGroupUI.TicketEmployee
             Ticket ticket = null;
             if (state != CRUDState.Create)
             {
-                ticket = tickets[DataGridTicketOverview.SelectedIndex];
+                ticket = (Ticket)DataGridTicketOverview.SelectedItem;
             }
             //make window for c.r.u.d.
             TicketWindow ticketWindow = new TicketWindow(state, this, ticket);
