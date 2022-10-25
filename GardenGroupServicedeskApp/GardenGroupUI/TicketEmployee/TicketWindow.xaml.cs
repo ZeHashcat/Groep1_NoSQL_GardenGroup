@@ -204,9 +204,11 @@ namespace GardenGroupUI.TicketEmployee
 
             try
             {
-                Ticket ticket = MakeTicket(UserLogic.GetUser(ComboBoxUser.SelectedItem.ToString()));
-                ticket.Status = TicketStatus.resolved;
-                ticketLogic.CreateTicket(ticket);
+                UserLogic userLogic = new UserLogic();
+                User user = userLogic.GetUser(ComboBoxUser.Text);
+                Ticket updatedticket = MakeTicket(user, ticket);
+                updatedticket.Status = TicketStatus.resolved;
+                ticketLogic.UpdateTicket(this.ticket, updatedticket);
 
                 AppMenuWindow.GetWindow(ticketOverviewPage).IsEnabled = true;
                 AppMenuWindow.GetWindow(ticketOverviewPage).Focus();
@@ -223,7 +225,6 @@ namespace GardenGroupUI.TicketEmployee
         private void UpdateTicket(object sender, RoutedEventArgs e)
         {
             UserLogic userLogic = new UserLogic();
-            //User user = userLogic.GetUser(ComboBoxUser.SelectedValue.ToString());
             User user = userLogic.GetUser(ComboBoxUser.Text);
 
             ticketLogic.UpdateTicket(this.ticket, MakeTicket(user, ticket));
@@ -236,13 +237,26 @@ namespace GardenGroupUI.TicketEmployee
         }
         private void DeleteTicket(object sender, RoutedEventArgs e)
         {
-            ticketLogic.DeleteTicket(ticket);
 
-            AppMenuWindow.GetWindow(ticketOverviewPage).IsEnabled = true;
-            AppMenuWindow.GetWindow(ticketOverviewPage).Focus();
-            ticketsPage.RefreshDataGrid();
-            AppMenuWindow.GetWindow(this).Close();
-            
+              try
+            {
+                UserLogic userLogic = new UserLogic();
+                User user = userLogic.GetUser(ComboBoxUser.Text);
+                Ticket updatedticket = MakeTicket(user, ticket);
+                updatedticket.Status = TicketStatus.closed;
+                ticketLogic.UpdateTicket(this.ticket, updatedticket);
+
+                AppMenuWindow.GetWindow(ticketOverviewPage).IsEnabled = true;
+                AppMenuWindow.GetWindow(ticketOverviewPage).Focus();
+                ticketsPage.RefreshDataGrid();
+                AppMenuWindow.GetWindow(this).Close();
+                
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
         }
         //help methods
