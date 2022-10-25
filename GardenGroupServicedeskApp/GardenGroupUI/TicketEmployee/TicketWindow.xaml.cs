@@ -20,6 +20,7 @@ namespace GardenGroupUI.TicketEmployee
         Ticket ?ticket;
         private UserInstance user = UserInstance.GetUserInstance();
         UserLogic UserLogic = new UserLogic();
+        ViewUserTicketsPage ticketsPage = new ViewUserTicketsPage();
 
         public TicketWindow(CRUDState state, Page page, Ticket? ticket)
         {
@@ -170,14 +171,6 @@ namespace GardenGroupUI.TicketEmployee
             ButtonSubmit.IsEnabled = true;
         }
 
-
-
-
-   
-
-
-
-
         //button events
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
@@ -192,8 +185,14 @@ namespace GardenGroupUI.TicketEmployee
 
             try
             {
+                ticketLogic.CreateTicket(MakeTicket(user.User));
 
-                ticketLogic.CreateTicket(MakeTicket(UserLogic.GetUser(ComboBoxUser.SelectedItem.ToString())));
+                AppMenuWindow.GetWindow(ticketOverviewPage).IsEnabled = true;
+                AppMenuWindow.GetWindow(ticketOverviewPage).Focus();
+                ticketsPage.RefreshDataGrid();
+                AppMenuWindow.GetWindow(this).Close();
+                
+
             }
             catch (Exception ex)
             {
@@ -208,6 +207,13 @@ namespace GardenGroupUI.TicketEmployee
                 Ticket ticket = MakeTicket(UserLogic.GetUser(ComboBoxUser.SelectedItem.ToString()));
                 ticket.Status = TicketStatus.resolved;
                 ticketLogic.CreateTicket(ticket);
+
+                AppMenuWindow.GetWindow(ticketOverviewPage).IsEnabled = true;
+                AppMenuWindow.GetWindow(ticketOverviewPage).Focus();
+                ticketsPage.RefreshDataGrid();
+                AppMenuWindow.GetWindow(this).Close();
+                
+
             }
             catch (Exception ex)
             {
@@ -221,10 +227,23 @@ namespace GardenGroupUI.TicketEmployee
             User user = userLogic.GetUser(ComboBoxUser.Text);
 
             ticketLogic.UpdateTicket(this.ticket, MakeTicket(user, ticket));
+
+            AppMenuWindow.GetWindow(ticketOverviewPage).IsEnabled = true;
+            AppMenuWindow.GetWindow(ticketOverviewPage).Focus();
+            AppMenuWindow.GetWindow(this).Close();
+            ticketsPage.RefreshDataGrid();           
+
         }
         private void DeleteTicket(object sender, RoutedEventArgs e)
         {
             ticketLogic.DeleteTicket(ticket);
+
+            AppMenuWindow.GetWindow(ticketOverviewPage).IsEnabled = true;
+            AppMenuWindow.GetWindow(ticketOverviewPage).Focus();
+            ticketsPage.RefreshDataGrid();
+            AppMenuWindow.GetWindow(this).Close();
+            
+
         }
         //help methods
         //make tickets

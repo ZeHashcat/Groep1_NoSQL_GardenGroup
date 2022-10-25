@@ -113,6 +113,12 @@ namespace GardenGroupUI.TicketEmployee
         }
 
         private void ButtonRefresh_Click(object sender, RoutedEventArgs e)
+        {            
+            RefreshDataGrid();
+            RefreshDataGrid();
+        }
+
+        public void RefreshDataGrid()
         {
             ticketsOnStatus = FilterOnStatus(ComboBoxStatus.SelectedItem.ToString());
 
