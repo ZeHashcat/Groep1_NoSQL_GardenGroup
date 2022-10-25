@@ -193,7 +193,7 @@ namespace GardenGroupUI.TicketEmployee
             try
             {
 
-                ticketLogic.CreateTicket(MakeTicket(user.User));
+                ticketLogic.CreateTicket(MakeTicket(UserLogic.GetUser(ComboBoxUser.SelectedItem.ToString())));
             }
             catch (Exception ex)
             {
