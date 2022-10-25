@@ -54,15 +54,18 @@ namespace GardenGroupUI.TicketEmployee
             DatePickerDateTime.SelectedDate = DateTime.Today;
             //fill dropdown whit users
             //ComboBoxUser.Items.Add(user.User.UserName.Value.ToString());
-
+            
             foreach (User user in UserLogic.GetAllusers())
             {
                 ComboBoxUser.Items.Add(user.UserName.Value.ToString());
             }
 
-            ComboBoxUser.SelectedItem = user.User.UserName;
+            ComboBoxUser.SelectedItem = user.User.UserName.Value.ToString();
 
-
+            if (user.User.Role.Value=="Admin")
+            {
+                ComboBoxUser.IsEnabled = true;
+            }
             //fill drop down whit priorities
 
             int lengthPriority = Enum.GetNames(typeof(Priority)).Length;
@@ -153,9 +156,11 @@ namespace GardenGroupUI.TicketEmployee
         //button events
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
+            AppMenuWindow.GetWindow(ticketOverviewPage).IsEnabled = true;
+            AppMenuWindow.GetWindow(ticketOverviewPage).Focus();
+
             AppMenuWindow.GetWindow(this).Close();
 
-            AppMenuWindow.GetWindow(ticketOverviewPage).IsEnabled = true;
         }
         private void ButtonSubmit_Click(object sender, RoutedEventArgs e)
         {

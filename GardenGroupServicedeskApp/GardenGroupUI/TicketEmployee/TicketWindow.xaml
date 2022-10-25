@@ -47,7 +47,7 @@
                 </LinearGradientBrush>
             </ComboBox.Background>
         </ComboBox>
-        <ComboBox x:Name="ComboBoxUser" Grid.Row="4" Grid.Column="1" Height="20" Width="177"></ComboBox>
+        <ComboBox x:Name="ComboBoxUser" Grid.Row="4" Grid.Column="1" Height="20" Width="177" IsEnabled="False"></ComboBox>
         <ComboBox x:Name="ComboBoxImpact" Grid.Row="5" Grid.Column="1" Height="20" Width="177"></ComboBox>
 
         <ComboBox x:Name="ComboBoxUrgency" Grid.Row="6" Grid.Column="1" Height="20" Width="177"></ComboBox>
