@@ -205,7 +205,7 @@ namespace GardenGroupUI.TicketEmployee
 
             try
             {
-                Ticket ticket =  MakeTicket(user.User);
+                Ticket ticket = MakeTicket(UserLogic.GetUser(ComboBoxUser.SelectedItem.ToString()));
                 ticket.Status = TicketStatus.resolved;
                 ticketLogic.CreateTicket(ticket);
             }
