@@ -18,9 +18,7 @@ namespace GardenGroupUI.TicketEmployee
 
         Page ticketOverviewPage;
         Ticket ?ticket;
-
-        TicketStatus currentStatus = TicketStatus.open;
-        UserInstance user = UserInstance.GetUserInstance();
+        private UserInstance user = UserInstance.GetUserInstance();
         UserLogic UserLogic = new UserLogic();
 
         public TicketWindow(CRUDState state, Page page, Ticket? ticket)
@@ -101,21 +99,48 @@ namespace GardenGroupUI.TicketEmployee
             PreFillForm(this.ticket);
 
             //update button
-            ButtonCancel.Content = "update";
+            ButtonCancel.Content = "Update";
             ButtonCancel.Click -= new RoutedEventHandler(ButtonCancel_Click);
             ButtonCancel.Click += new RoutedEventHandler(UpdateTicket);
+            ButtonCancel.Background = Brushes.Yellow;
 
             //delete button
-            ButtonSubmit.Content = "delete";
+            ButtonSubmit.Content = "Delete";
             ButtonSubmit.Background = new SolidColorBrush(Colors.Red);
             ButtonSubmit.Click -= new RoutedEventHandler(ButtonSubmit_Click);
             ButtonSubmit.Click += new RoutedEventHandler(DeleteTicket);
+            //cancel button
             Button cancelbutton = new Button();
             cancelbutton.Content = "Cancel";
             cancelbutton.Click += new RoutedEventHandler(ButtonCancel_Click);
+
+            //resolve
+            Button resolvebutton = new Button();
+            resolvebutton.Content = "Resolve";
+            resolvebutton.Click += new RoutedEventHandler(ButtonResolve);
+            resolvebutton.Background = new SolidColorBrush(Colors.Green);
+
+            //grid
             Grid grid = buttonGroup;
             grid.Children.Add(cancelbutton);
-            Grid.SetRow(cancelbutton,1);
+            Grid.SetRow(cancelbutton, 1);
+            Grid.SetColumn(cancelbutton, 0);
+
+
+            grid.Children.Add(resolvebutton);
+            Grid.SetRow(resolvebutton, 1);
+            Grid.SetColumn(resolvebutton, 1);
+
+
+            //update button in grid
+            Grid.SetRow(ButtonCancel, 0);
+            Grid.SetColumn(ButtonCancel, 1);
+            //delete button in grid
+            Grid.SetRow(ButtonSubmit, 0);
+            Grid.SetColumn(ButtonSubmit, 0);
+
+
+
 
 
         }
@@ -169,6 +194,20 @@ namespace GardenGroupUI.TicketEmployee
             {
 
                 ticketLogic.CreateTicket(MakeTicket(user.User));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void ButtonResolve(object sender, RoutedEventArgs e)
+        {
+
+            try
+            {
+                Ticket ticket =  MakeTicket(user.User);
+                ticket.Status = TicketStatus.resolved;
+                ticketLogic.CreateTicket(ticket);
             }
             catch (Exception ex)
             {
@@ -229,7 +268,6 @@ namespace GardenGroupUI.TicketEmployee
         private Ticket MakeTicket(User user, Ticket ticket)
         {
 
-            ObjectId id;
 
             Ticket ticketToReturn = new Ticket()
             {

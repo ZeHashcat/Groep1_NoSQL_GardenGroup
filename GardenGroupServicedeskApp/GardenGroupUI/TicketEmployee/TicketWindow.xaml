@@ -56,10 +56,12 @@
         <DatePicker x:Name="DateSelectDeadline" Grid.Row="7" Grid.Column="1" Height="20" Width="177"></DatePicker>
         <TextBox x:Name="TextBoxDescription"  Grid.Row="8" Grid.Column="1" Height="71" Width="177" TextWrapping="Wrap"></TextBox>
         <StackPanel Grid.Row="9" Grid.Column="1" Orientation="Vertical">
-            <Grid x:Name="buttonGroup" HorizontalAlignment="Center" Height="57" Width="177">
+            <Grid x:Name="buttonGroup" HorizontalAlignment="Center" Height="89" Width="177">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="AUTO" />
                     <RowDefinition Height="AUTO" />
+                    <RowDefinition Height="AUTO" />
+
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" MinWidth="75" />
