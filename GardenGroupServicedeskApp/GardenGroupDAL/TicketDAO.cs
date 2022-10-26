@@ -114,6 +114,10 @@ namespace GardenGroupDAL
             documentToUpdate.Set("UserName", BsonValue.Create(ticketToUpdate.User.UserName.Value));
             updateddocument.Set("UserName", BsonValue.Create(Update.User.UserName.Value));
 
+            documentToUpdate.Remove("_t");
+            documentToUpdate.Remove("Priority");
+
+
             FilterDefinition<BsonDocument> filter = documentToUpdate;
             UpdateDefinition<BsonDocument> update = updateddocument;
 
