@@ -27,7 +27,7 @@ namespace GardenGroupUI.TicketEmployee
             this.ticketOverviewPage = page;
             this.ticket = ticket;
 
-
+             
             InitializeComponent();
             switch (state)
             {
